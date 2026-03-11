@@ -1,0 +1,35 @@
+.privacy-container{
+
+max-width:900px;
+margin:auto;
+padding:40px 20px;
+line-height:1.8;
+
+}
+
+.privacy-container h1{
+
+margin-bottom:20px;
+text-align:center;
+
+}
+
+.privacy-container h2{
+
+margin-top:30px;
+margin-bottom:10px;
+
+}
+
+.privacy-container ul{
+
+margin-left:20px;
+
+}
+
+.policy-update{
+
+margin-top:30px;
+color:#64748b;
+
+}

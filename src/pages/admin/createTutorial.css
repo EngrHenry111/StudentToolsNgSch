@@ -1,0 +1,185 @@
+/* Container */
+
+.admin-container{
+  width:100%;
+  max-width:700px;
+  margin:auto;
+  padding:40px 20px;
+  box-sizing:border-box;
+}
+
+/* Heading */
+
+.admin-container h1{
+  margin-bottom:20px;
+  font-size:28px;
+  font-weight:600;
+  color:#0f172a;
+  text-align:left;
+}
+
+/* Form */
+
+.admin-container form{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  width:100%;
+}
+
+/* Inputs */
+
+.admin-container input,
+.admin-container textarea{
+  width:100%;
+  padding:12px 14px;
+  border:1px solid #e5e7eb;
+  border-radius:8px;
+  font-size:15px;
+  outline:none;
+  transition:all 0.25s ease;
+  box-sizing:border-box;
+}
+
+/* Prevent overflow */
+
+.admin-container input,
+.admin-container textarea{
+  word-break:break-word;
+  overflow-wrap:break-word;
+}
+
+/* Input focus */
+
+.admin-container input:focus,
+.admin-container textarea:focus{
+  border-color:#2563eb;
+  box-shadow:0 0 0 2px rgba(37,99,235,0.1);
+}
+
+/* Textarea */
+
+.admin-container textarea{
+  min-height:160px;
+  resize:vertical;
+}
+
+/* Button */
+
+.admin-container button{
+  padding:12px 16px;
+  border:none;
+  background:#0f172a;
+  color:white;
+  border-radius:8px;
+  font-size:15px;
+  font-weight:500;
+  cursor:pointer;
+  transition:all 0.25s ease;
+}
+
+/* Button hover */
+
+.admin-container button:hover{
+  background:#1e293b;
+  transform:translateY(-1px);
+}
+
+/* Button active */
+
+.admin-container button:active{
+  transform:scale(0.98);
+}
+
+/* Editor spacing */
+
+.editor{
+  margin-bottom:20px;
+}
+
+/* React Quill fix */
+
+.ql-container{
+  border-radius:8px;
+}
+
+.ql-editor{
+  min-height:200px;
+  font-size:15px;
+  line-height:1.6;
+}
+
+/* ========================= */
+/* Responsive Styles */
+/* ========================= */
+
+@media (max-width:1024px){
+
+  .admin-container{
+    padding:35px 18px;
+  }
+
+}
+
+@media (max-width:768px){
+
+  .admin-container{
+    padding:30px 16px;
+  }
+
+  .admin-container h1{
+    font-size:24px;
+  }
+
+}
+
+@media (max-width:600px){
+
+  .admin-container{
+    padding:25px 15px;
+  }
+
+  .admin-container input,
+  .admin-container textarea{
+    font-size:14px;
+    padding:11px 12px;
+  }
+
+  .admin-container button{
+    font-size:14px;
+  }
+
+}
+
+@media (max-width:480px){
+
+  .admin-container{
+    padding:20px 14px;
+  }
+
+  .admin-container h1{
+    font-size:22px;
+  }
+
+  .admin-container textarea{
+    min-height:140px;
+  }
+
+}
+
+@media (max-width:360px){
+
+  .admin-container{
+    padding:18px 12px;
+  }
+
+  .admin-container input,
+  .admin-container textarea{
+    font-size:13px;
+  }
+
+  .admin-container button{
+    font-size:13px;
+  }
+
+}

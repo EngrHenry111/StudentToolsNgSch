@@ -1,0 +1,229 @@
+/* Main Container */
+
+.tutorial-details{
+  width:100%;
+  max-width:900px;
+  margin:auto;
+  padding:40px 20px;
+  box-sizing:border-box;
+}
+
+/* Tutorial Title */
+
+.tutorial-details h1{
+  margin-bottom:10px;
+  font-size:32px;
+  font-weight:600;
+  color:#0f172a;
+}
+
+/* Category */
+
+.category{
+  color:#64748b;
+  margin-bottom:25px;
+  font-size:14px;
+}
+
+/* Tutorial Content */
+
+.content{
+  line-height:1.8;
+  font-size:17px;
+  color:#111827;
+  word-break:break-word;
+}
+
+/* Content spacing */
+
+.content p{
+  margin-bottom:16px;
+}
+
+.content h2,
+.content h3{
+  margin-top:25px;
+  margin-bottom:10px;
+  color:#0f172a;
+}
+
+.content ul{
+  padding-left:20px;
+  margin-bottom:16px;
+}
+
+.content li{
+  margin-bottom:6px;
+}
+
+/* Code blocks */
+
+.content pre{
+  background:#0f172a;
+  color:#e5e7eb;
+  padding:16px;
+  border-radius:10px;
+  overflow-x:auto;
+  margin:20px 0;
+}
+
+/* Inline code */
+
+.content code{
+  background:#f1f5f9;
+  padding:3px 6px;
+  border-radius:5px;
+  font-size:14px;
+}
+
+/* ========================= */
+/* AI Assistant Section */
+/* ========================= */
+
+.ai-assistant{
+  margin-top:50px;
+  padding:25px;
+  background:#f8fafc;
+  border-radius:12px;
+  border:1px solid #e5e7eb;
+}
+
+/* AI Title */
+
+.ai-assistant h3{
+  margin-bottom:15px;
+  color:#0f172a;
+}
+
+/* AI Input */
+
+.ai-assistant input{
+  width:100%;
+  padding:12px 14px;
+  border:1px solid #e5e7eb;
+  border-radius:8px;
+  font-size:14px;
+  outline:none;
+  margin-bottom:12px;
+  box-sizing:border-box;
+  transition:all 0.25s ease;
+}
+
+/* Input focus */
+
+.ai-assistant input:focus{
+  border-color:#2563eb;
+  box-shadow:0 0 0 2px rgba(37,99,235,0.1);
+}
+
+/* AI Button */
+
+.ai-assistant button{
+  padding:12px 18px;
+  border:none;
+  background:#0f172a;
+  color:white;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:14px;
+  transition:all 0.25s ease;
+}
+
+/* Hover */
+
+.ai-assistant button:hover{
+  background:#1e293b;
+  transform:translateY(-1px);
+}
+
+/* AI Answer Card */
+
+.ai-answer{
+  margin-top:20px;
+  padding:22px;
+  background:white;
+  border-radius:12px;
+  line-height:1.8;
+  font-size:15px;
+  border:1px solid #e5e7eb;
+  overflow-wrap:break-word;
+}
+
+/* Markdown headings */
+
+.ai-answer h1,
+.ai-answer h2,
+.ai-answer h3{
+  margin-top:20px;
+  margin-bottom:10px;
+}
+
+/* Markdown list */
+
+.ai-answer ul{
+  padding-left:20px;
+}
+
+.ai-answer li{
+  margin-bottom:6px;
+}
+
+/* Code blocks inside AI answer */
+
+.ai-answer pre{
+  border-radius:10px;
+  overflow-x:auto;
+  margin:16px 0;
+}
+
+/* ========================= */
+/* Responsive Design */
+/* ========================= */
+
+@media (max-width:1024px){
+
+  .tutorial-details{
+    padding:35px 18px;
+  }
+
+}
+
+@media (max-width:768px){
+
+  .tutorial-details h1{
+    font-size:26px;
+  }
+
+  .content{
+    font-size:16px;
+  }
+
+}
+
+@media (max-width:600px){
+
+  .ai-assistant{
+    padding:20px;
+  }
+
+}
+
+@media (max-width:480px){
+
+  .tutorial-details{
+    padding:25px 14px;
+  }
+
+  .tutorial-details h1{
+    font-size:22px;
+  }
+
+}
+
+@media (max-width:360px){
+
+  .tutorial-details{
+    padding:20px 12px;
+  }
+
+}

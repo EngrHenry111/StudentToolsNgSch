@@ -1,0 +1,162 @@
+/* Container */
+
+.admin-tutorials-container{
+  width:100%;
+  max-width:1100px;
+  margin:auto;
+  padding:40px 20px;
+  box-sizing:border-box;
+}
+
+/* Title */
+
+.admin-tutorials-container h1{
+  font-size:28px;
+  font-weight:600;
+  margin-bottom:25px;
+  color:#0f172a;
+}
+
+/* Prevent Table Overflow */
+
+.table-wrapper{
+  width:100%;
+  overflow-x:auto;
+}
+
+/* Table */
+
+.tutorial-table{
+  width:100%;
+  border-collapse:collapse;
+  background:white;
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
+
+/* Table Head */
+
+.tutorial-table thead{
+  background:#0f172a;
+  color:white;
+}
+
+.tutorial-table th{
+  padding:14px;
+  text-align:left;
+  font-size:14px;
+}
+
+/* Table Body */
+
+.tutorial-table td{
+  padding:14px;
+  border-bottom:1px solid #e5e7eb;
+  font-size:14px;
+  color:#374151;
+  word-break:break-word;
+}
+
+/* Row Hover */
+
+.tutorial-table tbody tr:hover{
+  background:#f9fafb;
+}
+
+/* Actions */
+
+.actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+/* Edit Button */
+
+.edit-btn{
+  padding:6px 12px;
+  background:#2563eb;
+  color:white;
+  text-decoration:none;
+  border-radius:6px;
+  font-size:13px;
+  transition:all 0.2s ease;
+}
+
+.edit-btn:hover{
+  background:#1d4ed8;
+}
+
+/* Delete Button */
+
+.delete-btn{
+  padding:6px 12px;
+  border:none;
+  background:#ef4444;
+  color:white;
+  border-radius:6px;
+  font-size:13px;
+  cursor:pointer;
+  transition:all 0.2s ease;
+}
+
+.delete-btn:hover{
+  background:#dc2626;
+}
+
+/* ========================= */
+/* Responsive Design */
+/* ========================= */
+
+@media (max-width:1024px){
+
+  .admin-tutorials-container{
+    padding:35px 18px;
+  }
+
+}
+
+@media (max-width:768px){
+
+  .admin-tutorials-container{
+    padding:30px 16px;
+  }
+
+  .admin-tutorials-container h1{
+    font-size:24px;
+  }
+
+}
+
+@media (max-width:600px){
+
+  .tutorial-table th,
+  .tutorial-table td{
+    padding:12px;
+    font-size:13px;
+  }
+
+}
+
+@media (max-width:480px){
+
+  .admin-tutorials-container{
+    padding:25px 14px;
+  }
+
+  .actions{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+}
+
+@media (max-width:360px){
+
+  .tutorial-table th,
+  .tutorial-table td{
+    font-size:12px;
+  }
+
+}

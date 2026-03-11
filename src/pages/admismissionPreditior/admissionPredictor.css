@@ -1,0 +1,145 @@
+/* Main Container */
+
+.predictor{
+  width:100%;
+  max-width:500px;
+  margin:auto;
+  padding:40px 20px;
+  box-sizing:border-box;
+  text-align:center;
+}
+
+/* Title */
+
+.predictor h1{
+  font-size:28px;
+  font-weight:600;
+  margin-bottom:25px;
+  color:#0f172a;
+}
+
+/* Inputs */
+
+.predictor input{
+  width:100%;
+  padding:12px 14px;
+  margin-bottom:15px;
+  border:1px solid #e5e7eb;
+  border-radius:8px;
+  font-size:15px;
+  outline:none;
+  transition:all 0.25s ease;
+  box-sizing:border-box;
+}
+
+/* Prevent overflow */
+
+.predictor input{
+  word-break:break-word;
+  overflow-wrap:break-word;
+}
+
+/* Input focus */
+
+.predictor input:focus{
+  border-color:#2563eb;
+  box-shadow:0 0 0 2px rgba(37,99,235,0.1);
+}
+
+/* Button */
+
+.predictor button{
+  width:100%;
+  padding:12px;
+  border:none;
+  background:#0f172a;
+  color:white;
+  border-radius:8px;
+  font-size:15px;
+  font-weight:500;
+  cursor:pointer;
+  transition:all 0.25s ease;
+}
+
+/* Button hover */
+
+.predictor button:hover{
+  background:#1e293b;
+  transform:translateY(-1px);
+}
+
+/* Button click */
+
+.predictor button:active{
+  transform:scale(0.97);
+}
+
+/* Result */
+
+.predictor h2{
+  margin-top:25px;
+  font-size:20px;
+  font-weight:600;
+  color:#2563eb;
+  word-break:break-word;
+}
+
+/* ========================= */
+/* Responsive Design */
+/* ========================= */
+
+@media (max-width:1024px){
+
+  .predictor{
+    padding:35px 18px;
+  }
+
+}
+
+@media (max-width:768px){
+
+  .predictor{
+    padding:30px 16px;
+  }
+
+  .predictor h1{
+    font-size:24px;
+  }
+
+}
+
+@media (max-width:600px){
+
+  .predictor{
+    padding:25px 15px;
+  }
+
+  .predictor input{
+    font-size:14px;
+  }
+
+}
+
+@media (max-width:480px){
+
+  .predictor{
+    padding:22px 14px;
+  }
+
+  .predictor h1{
+    font-size:22px;
+  }
+
+}
+
+@media (max-width:360px){
+
+  .predictor{
+    padding:20px 12px;
+  }
+
+  .predictor input{
+    font-size:13px;
+  }
+
+}

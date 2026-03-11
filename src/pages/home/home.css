@@ -1,0 +1,284 @@
+/* Main container */
+
+.home{
+  width:100%;
+  padding:40px 20px;
+  box-sizing:border-box;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+  text-align:center;
+  max-width:900px;
+  margin:auto;
+  margin-bottom:80px;
+}
+
+.hero h1{
+  font-size:42px;
+  font-weight:700;
+  color:#0f172a;
+  margin-bottom:15px;
+  line-height:1.2;
+}
+
+.hero p{
+  color:#64748b;
+  font-size:18px;
+  margin-bottom:30px;
+  max-width:650px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/* Hero Buttons */
+
+.hero-buttons{
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.hero-buttons a{
+  padding:12px 20px;
+  background:#0f172a;
+  color:white;
+  border-radius:8px;
+  text-decoration:none;
+  font-size:15px;
+  transition:all 0.25s ease;
+}
+
+.hero-buttons a:hover{
+  background:#1e293b;
+  transform:translateY(-2px);
+}
+
+/* ================= TOOLS ================= */
+
+.tools{
+  max-width:1100px;
+  margin:auto;
+  margin-bottom:80px;
+}
+
+.tools h2{
+  text-align:center;
+  margin-bottom:35px;
+  font-size:28px;
+  color:#0f172a;
+}
+
+/* Tool Grid */
+
+.tool-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:25px;
+}
+
+/* Tool Card */
+
+.tool-card{
+  background:white;
+  padding:25px;
+  border-radius:12px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.08);
+  transition:all 0.25s ease;
+}
+
+.tool-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 12px 30px rgba(0,0,0,0.12);
+}
+
+.tool-card h3{
+  margin-bottom:10px;
+  font-size:18px;
+  color:#0f172a;
+}
+
+.tool-card p{
+  color:#64748b;
+  margin-bottom:15px;
+  font-size:14px;
+}
+
+.tool-card a{
+  font-weight:600;
+  text-decoration:none;
+  color:#2563eb;
+}
+
+/* ================= TUTORIAL PREVIEW ================= */
+
+.tutorial-preview{
+  max-width:1100px;
+  margin:auto;
+  margin-bottom:80px;
+}
+
+.tutorial-preview h2{
+  text-align:center;
+  margin-bottom:35px;
+  font-size:28px;
+  color:#0f172a;
+}
+
+.tutorial-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:25px;
+}
+
+/* Tutorial Card */
+
+.tutorial-card{
+  background:white;
+  padding:25px;
+  border-radius:12px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.08);
+  transition:all 0.25s ease;
+}
+
+.tutorial-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 12px 30px rgba(0,0,0,0.12);
+}
+
+.tutorial-card h3{
+  margin-bottom:10px;
+  font-size:18px;
+}
+
+.tutorial-card p{
+  color:#64748b;
+  margin-bottom:15px;
+  font-size:14px;
+}
+
+.tutorial-card a{
+  font-weight:600;
+  color:#2563eb;
+  text-decoration:none;
+}
+
+/* ================= RESOURCES ================= */
+
+.resources{
+  max-width:900px;
+  margin:auto;
+  margin-bottom:80px;
+  text-align:center;
+}
+
+.resources h2{
+  margin-bottom:20px;
+}
+
+.resources ul{
+  list-style:none;
+  padding:0;
+}
+
+.resources li{
+  margin-bottom:10px;
+}
+
+.resources a{
+  color:#2563eb;
+  text-decoration:none;
+  font-weight:500;
+}
+
+/* ================= SCHOLARSHIPS ================= */
+
+.scholarships{
+  max-width:900px;
+  margin:auto;
+  margin-bottom:80px;
+  text-align:center;
+}
+
+.scholarships h2{
+  margin-bottom:10px;
+}
+
+.scholarships p{
+  color:#64748b;
+  margin-bottom:20px;
+}
+
+.scholarships a{
+  background:#0f172a;
+  color:white;
+  padding:12px 20px;
+  border-radius:8px;
+  text-decoration:none;
+  transition:all 0.25s ease;
+}
+
+.scholarships a:hover{
+  background:#1e293b;
+}
+
+/* ================= CTA ================= */
+
+.cta{
+  text-align:center;
+  background:#0f172a;
+  color:white;
+  padding:50px 20px;
+  border-radius:12px;
+  max-width:1000px;
+  margin:auto;
+}
+
+.cta h2{
+  margin-bottom:20px;
+}
+
+.cta a{
+  background:white;
+  color:#0f172a;
+  padding:12px 20px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:600;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width:1024px){
+
+  .hero h1{
+    font-size:36px;
+  }
+
+}
+
+@media (max-width:768px){
+
+  .hero h1{
+    font-size:30px;
+  }
+
+  .hero p{
+    font-size:16px;
+  }
+
+}
+
+@media (max-width:480px){
+
+  .home{
+    padding:30px 15px;
+  }
+
+  .hero h1{
+    font-size:24px;
+  }
+
+}

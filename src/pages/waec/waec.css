@@ -1,0 +1,218 @@
+/* Main Container */
+
+.waec-container{
+  width:100%;
+  max-width:900px;
+  margin:auto;
+  padding:40px 20px;
+  box-sizing:border-box;
+}
+
+/* Title */
+
+.waec-container h1{
+  text-align:center;
+  margin-bottom:10px;
+  font-size:30px;
+  font-weight:600;
+  color:#0f172a;
+}
+
+/* Subtitle */
+
+.waec-container p{
+  text-align:center;
+  color:#64748b;
+  margin-bottom:30px;
+  font-size:15px;
+}
+
+/* ================= TABLE ================= */
+
+.waec-table{
+  width:100%;
+  border-collapse:collapse;
+  background:white;
+  box-shadow:0 6px 22px rgba(0,0,0,0.08);
+  border-radius:12px;
+  overflow:hidden;
+}
+
+/* Header */
+
+.waec-table th{
+  background:#0f172a;
+  color:white;
+  padding:14px;
+  font-size:14px;
+}
+
+/* Cells */
+
+.waec-table td{
+  padding:12px;
+  text-align:center;
+  border-bottom:1px solid #f1f5f9;
+}
+
+/* Inputs */
+
+.waec-table input{
+  padding:10px 12px;
+  width:95%;
+  border:1px solid #e5e7eb;
+  border-radius:6px;
+  font-size:14px;
+  outline:none;
+  transition:all 0.2s ease;
+  box-sizing:border-box;
+}
+
+/* Focus */
+
+.waec-table input:focus{
+  border-color:#2563eb;
+  box-shadow:0 0 0 2px rgba(37,99,235,0.1);
+}
+
+/* ================= BUTTONS ================= */
+
+.waec-buttons{
+  display:flex;
+  justify-content:center;
+  gap:18px;
+  margin-top:25px;
+  flex-wrap:wrap;
+}
+
+.waec-buttons button{
+  padding:10px 18px;
+  border:none;
+  border-radius:8px;
+  background:#0f172a;
+  color:white;
+  cursor:pointer;
+  font-size:14px;
+  transition:all 0.25s ease;
+}
+
+.waec-buttons button:hover{
+  transform:translateY(-1px);
+  background:#1e293b;
+}
+
+/* Calculate Button */
+
+.calculate-btn{
+  background:#22c55e !important;
+}
+
+.calculate-btn:hover{
+  background:#16a34a !important;
+}
+
+/* Remove Button */
+
+.remove-btn{
+  background:#ef4444;
+  color:white;
+  border:none;
+  padding:6px 12px;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:13px;
+  transition:all 0.2s ease;
+}
+
+.remove-btn:hover{
+  background:#dc2626;
+}
+
+/* ================= RESULTS ================= */
+
+.waec-results{
+  margin-top:40px;
+}
+
+/* Result Title */
+
+.waec-results h2{
+  text-align:center;
+  margin-bottom:20px;
+  color:#0f172a;
+}
+
+/* Result Card */
+
+.result-card{
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  margin-bottom:12px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.08);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.result-card p{
+  margin:0;
+  font-size:14px;
+}
+
+.result-card strong{
+  color:#22c55e;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width:1024px){
+
+  .waec-container{
+    padding:35px 18px;
+  }
+
+}
+
+@media (max-width:768px){
+
+  .waec-container h1{
+    font-size:26px;
+  }
+
+}
+
+@media (max-width:600px){
+
+  .waec-table{
+    display:block;
+    overflow-x:auto;
+  }
+
+  .waec-buttons{
+    gap:12px;
+  }
+
+}
+
+@media (max-width:480px){
+
+  .waec-container{
+    padding:25px 14px;
+  }
+
+  .waec-container h1{
+    font-size:22px;
+  }
+
+}
+
+@media (max-width:360px){
+
+  .waec-container{
+    padding:20px 12px;
+  }
+
+}

@@ -1,0 +1,169 @@
+/* Main Container */
+
+.planner{
+  width:100%;
+  max-width:600px;
+  margin:auto;
+  padding:40px 20px;
+  box-sizing:border-box;
+}
+
+/* Title */
+
+.planner h1{
+  text-align:center;
+  margin-bottom:25px;
+  font-size:28px;
+  font-weight:600;
+  color:#0f172a;
+}
+
+/* Input Section */
+
+.planner-input{
+  display:flex;
+  gap:10px;
+  margin-bottom:25px;
+  flex-wrap:wrap;
+}
+
+/* Input */
+
+.planner-input input{
+  flex:1;
+  padding:12px 14px;
+  border:1px solid #e5e7eb;
+  border-radius:8px;
+  font-size:14px;
+  outline:none;
+  transition:all 0.25s ease;
+  box-sizing:border-box;
+}
+
+/* Prevent overflow */
+
+.planner-input input{
+  min-width:200px;
+}
+
+/* Input Focus */
+
+.planner-input input:focus{
+  border-color:#2563eb;
+  box-shadow:0 0 0 2px rgba(37,99,235,0.1);
+}
+
+/* Add Button */
+
+.planner-input button{
+  padding:12px 20px;
+  border:none;
+  background:#0f172a;
+  color:white;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:14px;
+  transition:all 0.25s ease;
+}
+
+/* Button Hover */
+
+.planner-input button:hover{
+  background:#1e293b;
+  transform:translateY(-1px);
+}
+
+/* Task List */
+
+.planner ul{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+/* Task Item */
+
+.planner li{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:white;
+  padding:14px 16px;
+  margin-bottom:12px;
+  border-radius:10px;
+  box-shadow:0 5px 18px rgba(0,0,0,0.06);
+  font-size:14px;
+  word-break:break-word;
+  gap:10px;
+}
+
+/* Delete Button */
+
+.planner li button{
+  padding:6px 12px;
+  border:none;
+  background:#ef4444;
+  color:white;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:13px;
+  transition:all 0.2s ease;
+}
+
+/* Hover */
+
+.planner li button:hover{
+  background:#dc2626;
+}
+
+/* ========================= */
+/* Responsive Design */
+/* ========================= */
+
+@media (max-width:1024px){
+
+  .planner{
+    padding:35px 18px;
+  }
+
+}
+
+@media (max-width:768px){
+
+  .planner h1{
+    font-size:24px;
+  }
+
+}
+
+@media (max-width:600px){
+
+  .planner-input{
+    flex-direction:column;
+  }
+
+  .planner-input button{
+    width:100%;
+  }
+
+}
+
+@media (max-width:480px){
+
+  .planner{
+    padding:25px 14px;
+  }
+
+  .planner h1{
+    font-size:22px;
+  }
+
+}
+
+@media (max-width:360px){
+
+  .planner{
+    padding:20px 12px;
+  }
+
+}

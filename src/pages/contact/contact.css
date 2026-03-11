@@ -1,0 +1,154 @@
+/* Contact Container */
+
+.contact{
+  width:100%;
+  max-width:600px;
+  margin:auto;
+  padding:40px 20px;
+  box-sizing:border-box;
+}
+
+/* Page Title */
+
+.contact h1{
+  text-align:center;
+  margin-bottom:25px;
+  font-size:28px;
+  font-weight:600;
+  color:#0f172a;
+}
+
+/* Form */
+
+.contact form{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  width:100%;
+}
+
+/* Inputs */
+
+.contact input,
+.contact textarea{
+  width:100%;
+  padding:12px 14px;
+  border:1px solid #e5e7eb;
+  border-radius:8px;
+  font-size:15px;
+  outline:none;
+  transition:all 0.25s ease;
+  box-sizing:border-box;
+}
+
+/* Prevent overflow */
+
+.contact input,
+.contact textarea{
+  word-break:break-word;
+  overflow-wrap:break-word;
+}
+
+/* Input focus */
+
+.contact input:focus,
+.contact textarea:focus{
+  border-color:#2563eb;
+  box-shadow:0 0 0 2px rgba(37,99,235,0.1);
+}
+
+/* Textarea */
+
+.contact textarea{
+  min-height:150px;
+  resize:vertical;
+}
+
+/* Button */
+
+.contact button{
+  padding:12px 16px;
+  border:none;
+  background:#0f172a;
+  color:white;
+  border-radius:8px;
+  font-size:15px;
+  font-weight:500;
+  cursor:pointer;
+  transition:all 0.25s ease;
+}
+
+/* Hover */
+
+.contact button:hover{
+  background:#1e293b;
+  transform:translateY(-1px);
+}
+
+/* Click */
+
+.contact button:active{
+  transform:scale(0.97);
+}
+
+/* ========================= */
+/* Responsive */
+/* ========================= */
+
+@media (max-width:1024px){
+
+  .contact{
+    padding:35px 18px;
+  }
+
+}
+
+@media (max-width:768px){
+
+  .contact{
+    padding:30px 16px;
+  }
+
+  .contact h1{
+    font-size:24px;
+  }
+
+}
+
+@media (max-width:600px){
+
+  .contact{
+    padding:25px 15px;
+  }
+
+  .contact input,
+  .contact textarea{
+    font-size:14px;
+  }
+
+}
+
+@media (max-width:480px){
+
+  .contact{
+    padding:22px 14px;
+  }
+
+  .contact h1{
+    font-size:22px;
+  }
+
+}
+
+@media (max-width:360px){
+
+  .contact{
+    padding:20px 12px;
+  }
+
+  .contact input,
+  .contact textarea{
+    font-size:13px;
+  }
+
+}

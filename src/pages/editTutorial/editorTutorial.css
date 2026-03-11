@@ -1,0 +1,145 @@
+/* Container */
+
+.edit-tutorial-container{
+  width:100%;
+  max-width:700px;
+  margin:auto;
+  padding:40px 20px;
+  box-sizing:border-box;
+}
+
+/* Title */
+
+.edit-tutorial-container h1{
+  font-size:28px;
+  font-weight:600;
+  margin-bottom:25px;
+  color:#0f172a;
+}
+
+/* Inputs */
+
+.edit-tutorial-container input,
+.edit-tutorial-container textarea{
+  width:100%;
+  padding:12px 14px;
+  border:1px solid #e5e7eb;
+  border-radius:8px;
+  font-size:15px;
+  margin-bottom:16px;
+  outline:none;
+  transition:all 0.25s ease;
+  box-sizing:border-box;
+}
+
+/* Prevent overflow */
+
+.edit-tutorial-container input,
+.edit-tutorial-container textarea{
+  word-break:break-word;
+  overflow-wrap:break-word;
+}
+
+/* Focus */
+
+.edit-tutorial-container input:focus,
+.edit-tutorial-container textarea:focus{
+  border-color:#2563eb;
+  box-shadow:0 0 0 2px rgba(37,99,235,0.1);
+}
+
+/* Textarea */
+
+.edit-tutorial-container textarea{
+  min-height:180px;
+  resize:vertical;
+}
+
+/* Button */
+
+.edit-tutorial-container button{
+  padding:12px 18px;
+  border:none;
+  background:#0f172a;
+  color:white;
+  border-radius:8px;
+  font-size:15px;
+  font-weight:500;
+  cursor:pointer;
+  transition:all 0.25s ease;
+}
+
+/* Hover */
+
+.edit-tutorial-container button:hover{
+  background:#1e293b;
+  transform:translateY(-1px);
+}
+
+/* Active */
+
+.edit-tutorial-container button:active{
+  transform:scale(0.97);
+}
+
+/* ========================= */
+/* Responsive */
+/* ========================= */
+
+@media (max-width:1024px){
+
+  .edit-tutorial-container{
+    padding:35px 18px;
+  }
+
+}
+
+@media (max-width:768px){
+
+  .edit-tutorial-container{
+    padding:30px 16px;
+  }
+
+  .edit-tutorial-container h1{
+    font-size:24px;
+  }
+
+}
+
+@media (max-width:600px){
+
+  .edit-tutorial-container{
+    padding:25px 15px;
+  }
+
+  .edit-tutorial-container input,
+  .edit-tutorial-container textarea{
+    font-size:14px;
+  }
+
+}
+
+@media (max-width:480px){
+
+  .edit-tutorial-container{
+    padding:22px 14px;
+  }
+
+  .edit-tutorial-container h1{
+    font-size:22px;
+  }
+
+}
+
+@media (max-width:360px){
+
+  .edit-tutorial-container{
+    padding:20px 12px;
+  }
+
+  .edit-tutorial-container input,
+  .edit-tutorial-container textarea{
+    font-size:13px;
+  }
+
+}

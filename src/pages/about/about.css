@@ -1,0 +1,21 @@
+.about-page{
+
+max-width:900px;
+margin:auto;
+padding:40px 20px;
+line-height:1.7;
+
+}
+
+.about-page h1{
+margin-bottom:20px;
+}
+
+.about-page h2{
+margin-top:30px;
+}
+
+.about-page ul{
+margin-top:10px;
+padding-left:20px;
+}

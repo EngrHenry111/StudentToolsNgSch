@@ -1,0 +1,143 @@
+/* Navbar */
+
+.navbar{
+  background:#0f172a;
+  color:white;
+  padding:16px 0;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+/* Container */
+
+.nav-container{
+  max-width:1200px;
+  margin:auto;
+  padding:0 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+/* Logo */
+
+.logo{
+  font-size:22px;
+  font-weight:700;
+}
+
+/* Menu */
+
+.nav-menu{
+  display:flex;
+  gap:24px;
+  list-style:none;
+}
+
+/* Links */
+
+.nav-menu a{
+  color:white;
+  text-decoration:none;
+  font-weight:500;
+  font-size:14px;
+  transition:color 0.25s ease;
+}
+
+.nav-menu a:hover{
+  color:#38bdf8;
+}
+
+/* ========================= */
+/* Hamburger */
+/* ========================= */
+
+.hamburger{
+  display:none;
+  flex-direction:column;
+  cursor:pointer;
+  gap:5px;
+}
+
+.hamburger span{
+  width:25px;
+  height:3px;
+  background:white;
+  border-radius:3px;
+}
+
+/* Hamburger animation */
+
+.hamburger span{
+  width:25px;
+  height:3px;
+  background:white;
+  border-radius:3px;
+  transition:all 0.3s ease;
+}
+
+/* Animate into X */
+
+.hamburger.active span:nth-child(1){
+  transform:rotate(45deg) translate(5px,5px);
+}
+
+.hamburger.active span:nth-child(2){
+  opacity:0;
+}
+
+.hamburger.active span:nth-child(3){
+  transform:rotate(-45deg) translate(6px,-6px);
+}
+
+/* ========================= */
+/* Responsive */
+/* ========================= */
+
+@media (max-width:900px){
+
+  .hamburger{
+    display:flex;
+  }
+
+  .nav-menu{
+    position:fixed;   /* important fix */
+    top:70px;
+    right:-260px;     /* hide menu off screen */
+
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+
+    background:#0f172a;
+
+    padding:20px 22px;
+
+    border-radius:10px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,0.25);
+
+    width:max-content;
+
+    transition:right 0.3s ease;
+
+    z-index:999;
+  }
+
+  .nav-menu.active{
+    right:7px;   /* slide into view */
+  }
+
+}
+/* @media (max-width:900px){
+
+  .hamburger{
+    display:flex;
+  }
+
+  .nav-menu{
+    position:absolute;
+    top:65px;
+    right:-250px; /* hide menu off screen */
+

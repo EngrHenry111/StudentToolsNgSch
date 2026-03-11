@@ -1,0 +1,133 @@
+/* Login Page Wrapper */
+
+.admin-login-container{
+  width:100%;
+  max-width:420px;
+  margin:100px auto;
+  padding:30px 25px;
+  background:white;
+  border-radius:12px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  box-sizing:border-box;
+}
+
+/* Title */
+
+.admin-login-container h2{
+  text-align:center;
+  margin-bottom:25px;
+  font-size:26px;
+  font-weight:600;
+  color:#0f172a;
+}
+
+/* Form */
+
+.admin-login-form{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  width:100%;
+}
+
+/* Inputs */
+
+.admin-login-form input{
+  width:100%;
+  padding:12px 14px;
+  border:1px solid #e5e7eb;
+  border-radius:8px;
+  font-size:14px;
+  outline:none;
+  transition:all 0.25s ease;
+  box-sizing:border-box;
+}
+
+/* Input Focus */
+
+.admin-login-form input:focus{
+  border-color:#2563eb;
+  box-shadow:0 0 0 2px rgba(37,99,235,0.1);
+}
+
+/* Button */
+
+.admin-login-form button{
+  padding:12px;
+  border:none;
+  background:#0f172a;
+  color:white;
+  border-radius:8px;
+  font-size:15px;
+  font-weight:500;
+  cursor:pointer;
+  transition:all 0.25s ease;
+}
+
+/* Button Hover */
+
+.admin-login-form button:hover{
+  background:#1e293b;
+  transform:translateY(-1px);
+}
+
+/* Button Active */
+
+.admin-login-form button:active{
+  transform:scale(0.97);
+}
+
+/* ========================= */
+/* Responsive Design */
+/* ========================= */
+
+@media (max-width:768px){
+
+  .admin-login-container{
+    margin:80px auto;
+    padding:28px 22px;
+  }
+
+  .admin-login-container h2{
+    font-size:24px;
+  }
+
+}
+
+@media (max-width:600px){
+
+  .admin-login-container{
+    margin:70px auto;
+    padding:25px 20px;
+  }
+
+  .admin-login-form input{
+    font-size:14px;
+  }
+
+}
+
+@media (max-width:480px){
+
+  .admin-login-container{
+    margin:60px 15px;
+    padding:24px 18px;
+  }
+
+  .admin-login-container h2{
+    font-size:22px;
+  }
+
+}
+
+@media (max-width:360px){
+
+  .admin-login-container{
+    padding:20px 15px;
+  }
+
+  .admin-login-form input{
+    font-size:13px;
+  }
+
+}

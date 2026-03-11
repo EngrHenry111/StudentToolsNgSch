@@ -1,0 +1,162 @@
+/* Main Container */
+
+.jamb-container{
+  width:100%;
+  max-width:800px;
+  margin:auto;
+  padding:40px 20px;
+  text-align:center;
+  box-sizing:border-box;
+}
+
+/* Title */
+
+.jamb-container h1{
+  margin-bottom:10px;
+  font-size:28px;
+  font-weight:600;
+  color:#0f172a;
+}
+
+/* Subtitle */
+
+.jamb-container p{
+  color:#64748b;
+  margin-bottom:30px;
+  font-size:15px;
+}
+
+/* Inputs Grid */
+
+.jamb-inputs{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:15px;
+  margin-bottom:25px;
+}
+
+/* Inputs */
+
+.jamb-inputs input{
+  padding:12px 14px;
+  border:1px solid #e5e7eb;
+  border-radius:8px;
+  font-size:14px;
+  outline:none;
+  transition:all 0.25s ease;
+  box-sizing:border-box;
+}
+
+/* Prevent overflow */
+
+.jamb-inputs input{
+  width:100%;
+}
+
+/* Input focus */
+
+.jamb-inputs input:focus{
+  border-color:#2563eb;
+  box-shadow:0 0 0 2px rgba(37,99,235,0.1);
+}
+
+/* Button */
+
+.calculate-btn{
+  padding:12px 22px;
+  background:#0f172a;
+  color:white;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:15px;
+  transition:all 0.25s ease;
+}
+
+/* Button hover */
+
+.calculate-btn:hover{
+  background:#1e293b;
+  transform:translateY(-1px);
+}
+
+/* Button click */
+
+.calculate-btn:active{
+  transform:scale(0.97);
+}
+
+/* Result Card */
+
+.jamb-result{
+  margin-top:30px;
+  background:white;
+  padding:24px;
+  border-radius:12px;
+  box-shadow:0 8px 22px rgba(0,0,0,0.08);
+}
+
+/* Total Score */
+
+.jamb-result h2{
+  margin-bottom:10px;
+  color:#0f172a;
+  font-size:22px;
+}
+
+/* Status */
+
+.status{
+  font-weight:600;
+  font-size:16px;
+  color:#22c55e;
+  word-break:break-word;
+}
+
+/* ========================= */
+/* Responsive Design */
+/* ========================= */
+
+@media (max-width:1024px){
+
+  .jamb-container{
+    padding:35px 18px;
+  }
+
+}
+
+@media (max-width:768px){
+
+  .jamb-container h1{
+    font-size:24px;
+  }
+
+}
+
+@media (max-width:600px){
+
+  .jamb-inputs{
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media (max-width:480px){
+
+  .jamb-container{
+    padding:25px 14px;
+  }
+
+  .jamb-container h1{
+    font-size:22px;
+  }
+
+}
+
+@media (max-width:360px){
+
+  .jamb-container{
+    padding:20px 12px;
+  }
+
+}

@@ -1,0 +1,191 @@
+/* Main Container */
+
+.gpa-container{
+  width:100%;
+  max-width:800px;
+  margin:auto;
+  padding:40px 20px;
+  text-align:center;
+  box-sizing:border-box;
+}
+
+/* Title */
+
+.gpa-container h1{
+  margin-bottom:10px;
+  font-size:28px;
+  font-weight:600;
+  color:#0f172a;
+}
+
+/* Description */
+
+.gpa-container p{
+  color:#64748b;
+  margin-bottom:30px;
+  font-size:15px;
+}
+
+/* Input Section */
+
+.gpa-input{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  margin-bottom:30px;
+  flex-wrap:wrap;
+}
+
+/* Input */
+
+.gpa-input input{
+  padding:12px 14px;
+  border:1px solid #e5e7eb;
+  border-radius:8px;
+  width:200px;
+  font-size:15px;
+  outline:none;
+  transition:all 0.25s ease;
+  box-sizing:border-box;
+}
+
+/* Input focus */
+
+.gpa-input input:focus{
+  border-color:#2563eb;
+  box-shadow:0 0 0 2px rgba(37,99,235,0.1);
+}
+
+/* Button */
+
+.gpa-input button{
+  padding:12px 20px;
+  border:none;
+  background:#0f172a;
+  color:white;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:15px;
+  transition:all 0.25s ease;
+}
+
+/* Button Hover */
+
+.gpa-input button:hover{
+  background:#1e293b;
+  transform:translateY(-1px);
+}
+
+/* Result */
+
+.gpa-result{
+  margin-top:20px;
+  font-size:24px;
+  font-weight:bold;
+  color:#22c55e;
+  word-break:break-word;
+}
+
+/* Grading Table Section */
+
+.grading-table{
+  margin-top:40px;
+}
+
+/* Table */
+
+.grading-table table{
+  width:100%;
+  border-collapse:collapse;
+  background:white;
+  box-shadow:0 6px 20px rgba(0,0,0,0.08);
+  border-radius:10px;
+  overflow:hidden;
+}
+
+/* Table Header */
+
+.grading-table th{
+  background:#0f172a;
+  color:white;
+  padding:14px;
+  font-size:14px;
+}
+
+/* Table Cells */
+
+.grading-table td{
+  padding:14px;
+  border-bottom:1px solid #f1f5f9;
+  font-size:14px;
+}
+
+/* Hover Row */
+
+.grading-table tbody tr:hover{
+  background:#f8fafc;
+}
+
+/* ========================= */
+/* Responsive Design */
+/* ========================= */
+
+@media (max-width:1024px){
+
+  .gpa-container{
+    padding:35px 18px;
+  }
+
+}
+
+@media (max-width:768px){
+
+  .gpa-container h1{
+    font-size:24px;
+  }
+
+}
+
+@media (max-width:600px){
+
+  .gpa-input{
+    flex-direction:column;
+    align-items:center;
+  }
+
+  .gpa-input input{
+    width:100%;
+    max-width:280px;
+  }
+
+  .gpa-input button{
+    width:100%;
+    max-width:280px;
+  }
+
+}
+
+@media (max-width:480px){
+
+  .gpa-container{
+    padding:25px 14px;
+  }
+
+  .gpa-container h1{
+    font-size:22px;
+  }
+
+  .grading-table table{
+    display:block;
+    overflow-x:auto;
+  }
+
+}
+
+@media (max-width:360px){
+
+  .gpa-container{
+    padding:20px 12px;
+  }
+
+}

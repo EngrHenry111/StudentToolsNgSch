@@ -1,0 +1,129 @@
+/* Main Container */
+
+.admin-messages-container{
+  width:100%;
+  max-width:1000px;
+  margin:auto;
+  padding:40px 20px;
+  box-sizing:border-box;
+}
+
+/* Page Title */
+
+.admin-messages-container h1{
+  font-size:28px;
+  font-weight:600;
+  margin-bottom:25px;
+  color:#0f172a;
+}
+
+/* Messages Grid */
+
+.messages-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:20px;
+}
+
+/* Message Card */
+
+.message-card{
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.08);
+  transition:all 0.25s ease;
+  word-break:break-word;
+}
+
+/* Hover Effect */
+
+.message-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 10px 25px rgba(0,0,0,0.12);
+}
+
+/* Name */
+
+.message-card h3{
+  font-size:18px;
+  margin-bottom:5px;
+  color:#0f172a;
+}
+
+/* Email */
+
+.message-card .email{
+  font-size:14px;
+  color:#2563eb;
+  margin-bottom:10px;
+  word-break:break-all;
+}
+
+/* Message Text */
+
+.message-card .message-text{
+  font-size:14px;
+  color:#374151;
+  line-height:1.6;
+}
+
+/* ========================= */
+/* Responsive Design */
+/* ========================= */
+
+@media (max-width:1024px){
+
+  .admin-messages-container{
+    padding:35px 18px;
+  }
+
+}
+
+@media (max-width:768px){
+
+  .admin-messages-container{
+    padding:30px 16px;
+  }
+
+  .admin-messages-container h1{
+    font-size:24px;
+  }
+
+}
+
+@media (max-width:600px){
+
+  .admin-messages-container{
+    padding:25px 15px;
+  }
+
+  .messages-grid{
+    gap:16px;
+  }
+
+}
+
+@media (max-width:480px){
+
+  .admin-messages-container{
+    padding:22px 14px;
+  }
+
+  .admin-messages-container h1{
+    font-size:22px;
+  }
+
+}
+
+@media (max-width:360px){
+
+  .admin-messages-container{
+    padding:20px 12px;
+  }
+
+  .message-card{
+    padding:16px;
+  }
+
+}
