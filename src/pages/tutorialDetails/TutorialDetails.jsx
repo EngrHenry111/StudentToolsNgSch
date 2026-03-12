@@ -74,7 +74,7 @@ const askAI = async ()=>{
  "@type": "Article",
  headline: tutorial.title,
  description: tutorial.excerpt || "",
- image: tutorial.image || "https://studenttoolsng.com/logo.png",
+ image: tutorial.image || "student-toolsngsch.vercel.app/logo.png",
  author: {
   "@type": "Person",
   name: "Engr. Henry Akpan"
@@ -84,7 +84,7 @@ const askAI = async ()=>{
   name: "StudentToolsNG",
   logo: {
    "@type": "ImageObject",
-   url: "https://studenttoolsng.com/logo.png"
+   url: "student-toolsngsch.vercel.app/logo.png"
   }
  },
  datePublished: tutorial.createdAt,

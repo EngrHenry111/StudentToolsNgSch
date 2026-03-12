@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet";
+import authorImg from "../../assets/images/Focused coder at work.png"
 import "./author.css";
 
 const Author = () => {
@@ -18,7 +19,7 @@ const Author = () => {
 
  </Helmet>
 
- <img src="/author.jpg" alt="Henry Akpan" className="author-photo"/>
+ <img src={authorImg} alt="Henry Akpan" className="author-photo"/>
 
  <h1>Engr. Henry Akpan</h1>
 

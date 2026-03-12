@@ -1,4 +1,4 @@
-import authorImg from "../assets/Focused coder at work.png" 
+import authorImg from "../assets/images/Focused coder at work.png" 
 import "./authorCard.css";
 import { Link } from "react-router-dom";
 const AuthorCard = () => {

@@ -1,0 +1,104 @@
+/* Main Page Container */
+
+.author-page{
+  max-width:900px;
+  margin:auto;
+  padding:60px 20px;
+  text-align:center;
+  box-sizing:border-box;
+}
+
+/* Author Image */
+
+.author-photo{
+  width:180px;
+  height:180px;
+  object-fit:cover;
+  border-radius:50%;
+  margin-bottom:25px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.12);
+}
+
+/* Author Name */
+
+.author-page h1{
+  font-size:32px;
+  color:#0f172a;
+  margin-bottom:15px;
+}
+
+/* Description */
+
+.author-page p{
+  font-size:17px;
+  line-height:1.7;
+  color:#475569;
+  margin-bottom:15px;
+  max-width:650px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/* ================= DESKTOP IMPROVEMENT ================= */
+
+@media (min-width:1024px){
+
+  .author-page{
+    padding:80px 20px;
+  }
+
+  .author-photo{
+    width:200px;
+    height:200px;
+  }
+
+  .author-page h1{
+    font-size:36px;
+  }
+
+  .author-page p{
+    font-size:18px;
+  }
+
+}
+
+/* ================= TABLET ================= */
+
+@media (max-width:768px){
+
+  .author-page{
+    padding:50px 18px;
+  }
+
+  .author-page h1{
+    font-size:28px;
+  }
+
+  .author-page p{
+    font-size:16px;
+  }
+
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width:480px){
+
+  .author-page{
+    padding:40px 15px;
+  }
+
+  .author-photo{
+    width:150px;
+    height:150px;
+  }
+
+  .author-page h1{
+    font-size:24px;
+  }
+
+  .author-page p{
+    font-size:15px;
+  }
+
+}
