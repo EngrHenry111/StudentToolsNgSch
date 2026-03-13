@@ -3,21 +3,42 @@ import "./about.css";
 
 const About = () => {
 
+   
  return(
 
  <div className="about-page">
+<Helmet>
 
- <Helmet>
+<title>About StudentToolsNG</title>
 
- <title>About StudentToolsNG</title>
+<meta property="og:title" content="About StudentToolsNG" />
 
- <meta
- name="description"
- content="StudentToolsNG provides free academic tools and tutorials for Nigerian students including CGPA calculators, WAEC grade calculators, JAMB score calculators and study resources."
- />
+<meta
+ property="og:description"
+ content="StudentToolsNG provides academic tools and tutorials for Nigerian students."
+/>
 
- </Helmet>
+<meta
+ property="og:image"
+ content="https://studenttoolsng.com/logo.png"
+/>
 
+<script type="application/ld+json">
+{JSON.stringify({
+ "@context": "https://schema.org",
+ "@type": "Organization",
+ name: "StudentToolsNG",
+ url: "https://student-toolsngsch.vercel.app",
+ logo: "https://student-toolsngsch.vercel.app/logo.png",
+ description: "Free academic tools and tutorials for Nigerian students.",
+ founder: {
+  "@type": "Person",
+  name: "Henry Akpan"
+ }
+})}
+</script>
+
+</Helmet>
  <h1>About StudentToolsNG</h1>
 
  <p>

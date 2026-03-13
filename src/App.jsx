@@ -31,6 +31,7 @@ import PrivacyPolicy from "./pages/privacy/PrivacyPolicy";
 import About from "./pages/about/About";
 import Terms from "./pages/terms/Terms";
 import Author from "./pages/author/Author";
+import SeoPage from "./pages/seo/SeoPage";
 function App() {
 
  return (
@@ -68,7 +69,7 @@ function App() {
     
 
     <Route path="/contact" element={<Contact />} />
-    <Route path="/studyplanner" element={<StudyPlanner />} />
+    <Route path="/study-planner" element={<StudyPlanner />} />
     <Route path="/scholarships" element={<Scholarships />} />
     <Route path="/admission-predictor" element={<AdmissionPredictor />} />
     
@@ -91,6 +92,8 @@ function App() {
     <Route path="/about" element={<About/>} />
     <Route path="/terms" element={<Terms />} />
     <Route path="/author" element={<Author/>}/>
+
+    <Route path="/:slug" element={<SeoPage/>}/>
     
 
    </Routes>

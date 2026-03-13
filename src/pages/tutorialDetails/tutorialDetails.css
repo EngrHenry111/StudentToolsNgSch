@@ -76,6 +76,23 @@
   font-size:14px;
 }
 
+.reading-time{
+color:#64748b;
+margin-bottom:20px;
+
+}
+
+.reading-progress{
+position:fixed;
+top:0;
+left:0;
+height:4px;
+background:#2563eb;
+z-index:9999;
+transition:width 0.1s;
+
+}
+
 /* ========================= */
 /* AI Assistant Section */
 /* ========================= */
@@ -176,6 +193,142 @@
   margin:16px 0;
 }
 
+.related-grid{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+margin-top:30px;
+
+}
+
+.related-card{
+
+background:#f8fafc;
+padding:20px;
+border-radius:10px;
+
+}
+
+.toc{
+
+background:#f8fafc;
+padding:20px;
+border-radius:10px;
+margin-bottom:30px;
+
+}
+
+.toc ul{
+
+list-style:none;
+padding:0;
+
+}
+
+.toc li{
+
+margin-bottom:8px;
+
+}
+
+.toc a{
+
+text-decoration:none;
+color:#2563eb;
+
+}
+
+.toc a:hover{
+
+text-decoration:underline;
+
+}
+
+
+/* trending */
+.tutorial-layout{
+
+display:grid;
+grid-template-columns:3fr 1fr;
+gap:40px;
+
+}
+
+.tutorial-main{
+
+width:100%;
+
+}
+
+.tutorial-sidebar{
+
+position:sticky;
+top:80px;
+height:fit-content;
+
+}
+
+.sidebar-card{
+
+background:#f8fafc;
+padding:12px;
+border-radius:8px;
+margin-bottom:10px;
+
+}
+
+.sidebar-card a{
+
+text-decoration:none;
+color:#0f172a;
+font-weight:500;
+
+}
+
+.sidebar-links{
+
+list-style:none;
+padding:0;
+
+}
+
+.sidebar-links li{
+
+margin-bottom:10px;
+
+}
+
+.sidebar-links a{
+
+text-decoration:none;
+color:#2563eb;
+
+}
+
+.ad-box{
+
+margin-top:20px;
+padding:20px;
+background:#e2e8f0;
+text-align:center;
+border-radius:8px;
+
+}
+
+.internal-link{
+
+color:#2563eb;
+text-decoration:underline;
+font-weight:500;
+
+}
+
+.internal-link:hover{
+
+color:#1d4ed8;
+
+}
 /* ========================= */
 /* Responsive Design */
 /* ========================= */
@@ -185,6 +338,7 @@
   .tutorial-details{
     padding:35px 18px;
   }
+  
 
 }
 
@@ -225,5 +379,21 @@
   .tutorial-details{
     padding:20px 12px;
   }
+
+}
+
+@media(max-width:900px){
+
+.tutorial-layout{
+
+grid-template-columns:1fr;
+
+}
+
+.tutorial-sidebar{
+
+position:relative;
+
+}
 
 }

@@ -19,12 +19,20 @@ import "./home.css";
 const Home = () => {
 
  const [tutorials,setTutorials] = useState([]);
+ const [trending,setTrending] = useState([]);
+
+//  useEffect(()=>{
+
+//   fetchTutorials();
+
+//  },[]);
 
  useEffect(()=>{
 
-  fetchTutorials();
+ fetchTutorials();
+ fetchTrending();
 
- },[]);
+},[]);
 
  const fetchTutorials = async ()=>{
 
@@ -42,25 +50,74 @@ const Home = () => {
 
  };
 
+ const fetchTrending = async ()=>{
+
+ try{
+
+  const res = await API.get("/tutorials/trending");
+
+  setTrending(res.data);
+
+ }catch(error){
+
+  console.log(error);
+
+ }
+
+};
+
  return(
 
  <div className="home">
 
+    
+
  {/* SEO */}
 
- <Helmet>
+ 
+<Helmet>
 
- <title>
- StudentToolsNG | CGPA, WAEC & JAMB Calculators
- </title>
+<title>StudentToolsNG | Free CGPA, WAEC & JAMB Calculators</title>
 
- <meta
+<meta
  name="description"
  content="Free academic tools for Nigerian students including CGPA calculator, WAEC grade calculator, JAMB score calculator and study tutorials."
- />
+/>
 
- </Helmet>
+<meta property="og:title" content="StudentToolsNG" />
 
+<meta
+ property="og:description"
+ content="Free academic tools for Nigerian students including CGPA calculator, WAEC grade calculator, JAMB score calculator."
+/>
+
+<meta
+ property="og:image"
+ content="student-toolsngsch.vercel.app/logo.png"
+/>
+
+<meta property="og:url" content="student-toolsngsch.vercel.app" />
+
+<meta property="og:type" content="website" />
+
+<meta name="twitter:card" content="summary_large_image" />
+
+
+    <script type="application/ld+json">
+{JSON.stringify({
+ "@context": "https://schema.org",
+ "@type": "WebSite",
+ name: "StudentToolsNG",
+ url: "student-toolsngsch.vercel.app",
+ potentialAction: {
+  "@type": "SearchAction",
+  target: "student-toolsngsch.vercel.app/search?q={search_term_string}",
+  "query-input": "required name=search_term_string"
+ }
+})}
+</script>
+
+</Helmet>
  {/* HERO SECTION */}
 
  <section className="hero">
@@ -189,6 +246,82 @@ const Home = () => {
 
  </section>
 
+<section className="student-guides">
+
+<h2>Student Guides</h2>
+
+<div className="guides-grid">
+
+<a href="/how-to-calculate-cgpa" className="guide-card">
+
+<h3>How to Calculate CGPA</h3>
+
+<p>
+Learn the step-by-step method to calculate CGPA in Nigerian universities.
+</p>
+
+</a>
+
+<a href="/cgpa-calculator-nigeria" className="guide-card">
+
+<h3>CGPA Calculator Nigeria</h3>
+
+<p>
+Use our simple CGPA calculator designed for Nigerian students.
+</p>
+
+</a>
+
+<a href="/waec-grading-system" className="guide-card">
+
+<h3>WAEC Grading System</h3>
+
+<p>
+Understand WAEC grading from A1 to F9.
+</p>
+
+</a>
+
+<a href="/jamb-score-calculator-nigeria" className="guide-card">
+
+<h3>JAMB Score Calculator</h3>
+
+<p>
+Learn how JAMB scores are calculated and how to estimate your score.
+</p>
+
+</a>
+
+</div>
+
+</section>
+
+<section className="trending-section">
+
+<h2>Trending Tutorials</h2>
+
+{/* <p>{tutorial.views} views</p> */}
+<div className="trending-grid">
+
+{trending.map((tutorial)=>(
+ 
+<div key={tutorial._id} className="trending-card">
+
+<h3>{tutorial.title}</h3>
+
+<p>{tutorial.excerpt}</p>
+
+<Link to={`/tutorial/${tutorial.slug}`}>
+Read Tutorial →
+</Link>
+
+</div>
+
+))}
+
+</div>
+
+</section>
  {/* SCHOLARSHIPS */}
 
  <section className="scholarships">
@@ -204,6 +337,9 @@ const Home = () => {
  </Link>
 
  </section>
+
+
+
 
  {/* CALL TO ACTION */}
 
