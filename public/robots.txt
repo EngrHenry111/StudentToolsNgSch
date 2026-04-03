@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: student-toolsngsch.vercel.app/sitemap.xml
+Sitemap: https://studenttoolsng.com/sitemap.xml

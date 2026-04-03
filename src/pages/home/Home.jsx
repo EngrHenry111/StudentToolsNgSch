@@ -111,7 +111,7 @@ const Home = () => {
  url: "student-toolsngsch.vercel.app",
  potentialAction: {
   "@type": "SearchAction",
-  target: "student-toolsngsch.vercel.app/search?q={search_term_string}",
+  target: "https://studenttoolsng.com/search?q={search_term_string}",
   "query-input": "required name=search_term_string"
  }
 })}

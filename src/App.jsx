@@ -75,7 +75,7 @@ function App() {
     
     
     <Route path="/admin/create-tutorial" element={<CreateTutorial />} />
-    <Route path="/search" element={<Search />} />
+    {/* <Route path="/search" element={<Search />} /> */}
 
     <Route path="/ai-tutor" element={<AITutor/>}/>
 

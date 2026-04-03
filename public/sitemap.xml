@@ -3,23 +3,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
- <loc>student-toolsngsch.vercel.app</loc>
+ <loc>https://studenttoolsng.com</loc>
 </url>
 
 <url>
- <loc>student-toolsngsch.vercel.app/tutorials</loc>
+ <loc>https://studenttoolsng.com/tutorials</loc>
 </url>
 
 <url>
- <loc>student-toolsngsch.vercel.app/cgpa-calculator</loc>
+ <loc>https://studenttoolsng.com/cgpa-calculator</loc>
 </url>
 
 <url>
- <loc>student-toolsngsch.vercel.app/jamb-score-calculator</loc>
+ <loc>https://studenttoolsng.com/jamb-score-calculator</loc>
 </url>
 
 <url>
-<loc>student-toolsngsch.vercel.app/contact</loc>
+<loc>https://studenttoolsng.com/contact</loc>
 </url>
 </urlset>
 

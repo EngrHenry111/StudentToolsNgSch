@@ -1,10 +1,53 @@
-import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./navbar.css";
 
 const Navbar = () => {
+  
 
  const [menuOpen,setMenuOpen] = useState(false);
+  const [query,setQuery] = useState("");
+  const [suggestions,setSuggestions] = useState([]);
+  const navigate = useNavigate();
+
+  const handleSearch = (e)=>{
+  e.preventDefault();
+  navigate(`/search?q=${query}`);
+
+  };
+
+
+  const fetchSuggestions = async (text)=>{
+
+ try{
+
+  const res = await API.get(`/tutorials/suggest?q=${text}`);
+
+  setSuggestions(res.data);
+
+ }catch(err){
+
+  console.log(err);
+
+ }
+
+};
+
+
+const handleChange = (e)=>{
+
+ const value = e.target.value;
+
+ setQuery(value);
+
+ if(value.length > 1){
+  fetchSuggestions(value);
+ }else{
+  setSuggestions([]);
+ }
+
+};
 
  const toggleMenu = () =>{
   setMenuOpen(!menuOpen);
@@ -17,6 +60,7 @@ const Navbar = () => {
  return (
 
   <nav className="navbar">
+    
 
     <div className="nav-container">
 
@@ -34,6 +78,41 @@ const Navbar = () => {
       </div>
 
       <ul className={`nav-menu ${menuOpen ? "active" : ""}`}>
+
+        <form onSubmit={handleSearch} className="search-bar">
+
+        {/* <input
+        type="text"
+        placeholder="Search tutorials..."
+        value={query}
+        onChange={handleChange}
+        /> */}
+
+
+          {suggestions.length > 0 && (
+
+          <div className="suggestions">
+
+          {suggestions.map((item)=>(
+            
+          <Link
+          key={item._id}
+          to={`/tutorial/${item.slug}`}
+          className="suggestion-item"
+          >
+
+          {item.title}
+
+          </Link>
+
+          ))}
+
+          </div>
+
+          )}
+        {/* <button type="submit">Search</button> */}
+
+        </form>
 
         <li><Link to="/" onClick={closeMenu}>Home</Link></li>
         <li><Link to="/cgpa-calculator" onClick={closeMenu}>CGPA</Link></li>
