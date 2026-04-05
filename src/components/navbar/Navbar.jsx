@@ -122,7 +122,7 @@ const handleChange = (e)=>{
         <li><Link to="/tutorials" onClick={closeMenu}>Tutorials</Link></li>
         <li><Link to="/ai-tutor" onClick={closeMenu}>AI Tutor</Link></li>
         <li><Link to="/admission-predictor" onClick={closeMenu}>Admission</Link></li>
-        <li><Link to="/studyplanner" onClick={closeMenu}>Planner</Link></li>
+        <li><Link to="/study-planner" onClick={closeMenu}>Planner</Link></li>
         <li><Link to="/scholarships" onClick={closeMenu}>Scholarships</Link></li>
         <li><Link to="/contact" onClick={closeMenu}>Contact</Link></li>
 

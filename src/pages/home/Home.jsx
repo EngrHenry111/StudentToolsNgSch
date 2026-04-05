@@ -166,7 +166,7 @@ const Home = () => {
 
  <p>Understand WAEC grading system easily.</p>
 
- <Link to="/waec-calculator">
+ <Link to="/waec-grade-calculator">
  Open Tool
  </Link>
 
@@ -178,7 +178,7 @@ const Home = () => {
 
  <p>Calculate your JAMB total score.</p>
 
- <Link to="/jamb-calculator">
+ <Link to="/jamb-score-calculator">
  Open Tool
  </Link>
 
