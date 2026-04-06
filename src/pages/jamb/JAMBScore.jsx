@@ -78,6 +78,11 @@ const JAMBScore = () => {
  content="JAMB calculator, UTME calculator, calculate JAMB score, Nigerian admission score"
 />
 
+<link
+    rel="canonical"
+    href="https://studenttoolsng.com/jamb-score-calculator"
+  />
+
 </Helmet>
 
    <h1>JAMB Score Calculator</h1>

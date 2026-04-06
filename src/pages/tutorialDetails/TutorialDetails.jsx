@@ -275,7 +275,7 @@ const generateFAQ = (content)=>{
  headline: tutorial.title,
  description: tutorial.excerpt || "",
 //  image: tutorial.image || "student-toolsngsch.vercel.app/logo.png",
- image: tutorial.image || "https://student-toolsngsch.vercel.app/logoH.png",
+ image: tutorial.image || "https://studenttoolsng.com/logoH.png",
  author: {
   "@type": "Person",
   name: "Engr. Henry Akpan"
@@ -285,7 +285,7 @@ const generateFAQ = (content)=>{
   name: "StudentToolsNG",
   logo: {
    "@type": "ImageObject",
-   url: "https://student-toolsngsch.vercel.app/logoH.png"
+   url: "https://studenttools.com/logoH.png"
   }
  },
  datePublished: tutorial.createdAt,
@@ -314,12 +314,12 @@ const generateFAQ = (content)=>{
 
 <meta
  property="og:image"
- content={tutorial.image || "https://student-toolsngsch.vercel.app/logo.png"}
+ content={tutorial.image || "https://studenttoolsng.com/logo.png"}
 />
 
 <meta
  property="og:url"
- content={`https://student-toolsngsch.vercel.app/tutorial/${tutorial.slug}`}
+ content={`https://studenttoolsng.com/tutorial/${tutorial.slug}`}
 />
 
 <meta property="og:type" content="article" />
@@ -335,7 +335,7 @@ const generateFAQ = (content)=>{
 
 <meta
  name="twitter:image"
- content={tutorial.image || "https://student-toolsngsch.vercel.app/logo.png"}
+ content={tutorial.image || "https://studenttoolsng.com/logo.png"}
 />
 
 <script type="application/ld+json">
@@ -363,19 +363,19 @@ const generateFAQ = (content)=>{
    "@type": "ListItem",
    position: 1,
    name: "Home",
-   item: "https://student-toolsngsch.vercel.app"
+   item: "https://studenttoolsng.com"
   },
   {
    "@type": "ListItem",
    position: 2,
    name: "Tutorials",
-   item: "https://student-toolsngsch.vercel.app/tutorials"
+   item: "https://studenttoolsng.com/tutorials"
   },
   {
    "@type": "ListItem",
    position: 3,
    name: tutorial.title,
-   item: `https://student-toolsngsch.vercel.app/tutorial/${tutorial.slug}`
+   item: `https://studenttoolsng.com/tutorial/${tutorial.slug}`
   }
  ]
 })}
@@ -385,6 +385,12 @@ const generateFAQ = (content)=>{
 <script type="application/ld+json">
 {JSON.stringify(schemaData)}
 </script>
+
+
+<link
+    rel="canonical"
+    href="https://studenttoolsng.com/tutorial/:slug"
+  />
 
 </Helmet>
 

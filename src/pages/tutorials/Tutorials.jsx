@@ -69,6 +69,11 @@ const fetchTutorials = async ()=>{
  content="Educational tutorials covering CGPA calculation, WAEC grading system, JAMB score calculation and study tips for students."
 />
 
+
+<link
+    rel="canonical"
+    href="https://studenttoolsng.com/tutorials"
+  />
 </Helmet>
 
    <h1>Study Tutorials</h1>

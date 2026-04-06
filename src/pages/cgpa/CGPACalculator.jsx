@@ -115,6 +115,12 @@ const CGPACalculator = () => {
  content="CGPA calculator Nigeria, university CGPA calculator, GPA calculator Nigeria, calculate CGPA online"
 />
 
+<link
+    rel="canonical"
+    href="https://studenttoolsng.com/cgpa-calculator"
+  />
+
+
 </Helmet>
    <h1>Advanced CGPA Calculator</h1>
 

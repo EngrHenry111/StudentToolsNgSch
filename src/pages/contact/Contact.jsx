@@ -53,6 +53,11 @@ const Contact = () => {
     content="Contact StudentToolsNG for questions, feedback or academic support."
     />
 
+    <link
+    rel="canonical"
+    href="https://studenttoolsng.com/contact"
+  />
+
     </Helmet>
 
    <h1>Contact Us</h1>

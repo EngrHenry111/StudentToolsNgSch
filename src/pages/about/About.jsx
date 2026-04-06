@@ -18,6 +18,11 @@ const About = () => {
  content="StudentToolsNG provides academic tools and tutorials for Nigerian students."
 />
 
+<link
+    rel="canonical"
+    href="https://studenttoolsng.com/about"
+  />
+
 <meta
  property="og:image"
  content="https://studenttoolsng.com/logo.png"

@@ -17,6 +17,12 @@ name="description"
 content="Learn how StudentToolsNG protects user data and privacy while providing academic tools and tutorials for Nigerian students."
 />
 
+<link
+    rel="canonical"
+    href="https://studenttoolsng.com/privacy-policy"
+  />
+
+
 </Helmet>
 
 <h1>Privacy Policy</h1>

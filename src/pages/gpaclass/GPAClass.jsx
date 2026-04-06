@@ -56,6 +56,11 @@ const GPAClass = () => {
  content="GPA class calculator, degree classification Nigeria, first class CGPA"
 />
 
+<link
+    rel="canonical"
+    href="https://studenttoolsng.com/gpa-class-calculator"
+  />
+
 </Helmet>
 
    <h1>GPA to Degree Class Converter</h1>

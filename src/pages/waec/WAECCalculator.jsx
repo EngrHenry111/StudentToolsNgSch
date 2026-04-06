@@ -72,6 +72,25 @@ const WAECCalculator = () => {
 
   <div className="waec-container">
 
+    
+ <Helmet>
+
+ <title>Terms and Conditions | StudentToolsNG</title>
+
+ <meta
+ name="description"
+ content="Terms and conditions for using StudentToolsNG academic tools and tutorials."
+ />
+
+ 
+<link
+    rel="canonical"
+    href="https://studenttoolsng.com/waec-grade-calculator"
+  />
+
+ </Helmet>
+
+
    <h1>WAEC Grade Calculator</h1>
 
    <p>Convert WAEC scores into official grades</p>

@@ -84,6 +84,8 @@ const Home = () => {
  content="Free academic tools for Nigerian students including CGPA calculator, WAEC grade calculator, JAMB score calculator and study tutorials."
 />
 
+<link rel="canonical" href="https://studenttoolsng.com/" /> 
+
 <meta property="og:title" content="StudentToolsNG" />
 
 <meta

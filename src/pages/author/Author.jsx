@@ -17,6 +17,12 @@ const Author = () => {
  content="Engr. Henry Akpan is the founder of StudentToolsNG and a Full-Stack Web Developer helping students with academic tools and tutorials."
  />
 
+ <link
+    rel="canonical"
+    href="https://studenttoolsng.com/author"
+  />
+
+
  </Helmet>
 
  <img src={authorImg} alt="Henry Akpan" className="author-photo"/>

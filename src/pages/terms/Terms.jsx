@@ -16,6 +16,12 @@ const Terms = () => {
  content="Terms and conditions for using StudentToolsNG academic tools and tutorials."
  />
 
+ 
+<link
+    rel="canonical"
+    href="https://studenttoolsng.com/terms"
+  />
+
  </Helmet>
 
  <h1>Terms and Conditions</h1>
