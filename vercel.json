@@ -8,7 +8,7 @@
           "value": "student-toolsngsch.vercel.app"
         }
       ],
-      "destination": "https://studenttools.com/$1",
+      "destination": "https://studenttoolsng.com/$1",
       "permanent": true
     }
   ],
