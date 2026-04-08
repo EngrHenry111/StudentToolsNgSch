@@ -33,8 +33,8 @@ const About = () => {
  "@context": "https://schema.org",
  "@type": "Organization",
  name: "StudentToolsNG",
- url: "https://student-toolsngsch.vercel.app",
- logo: "https://student-toolsngsch.vercel.app/logo.png",
+ url: "https://studenttoolsng.com",
+ logo: "https://studenttoolsng.com/logo.png",
  description: "Free academic tools and tutorials for Nigerian students.",
  founder: {
   "@type": "Person",

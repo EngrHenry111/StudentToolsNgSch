@@ -1,142 +1,173 @@
-/* Main Container */
-
-.planner{
-  width:100%;
-  max-width:600px;
-  margin:auto;
-  padding:40px 20px;
+/* ================= GLOBAL SAFETY ================= */
+*,
+*::before,
+*::after{
   box-sizing:border-box;
 }
 
-/* Title */
-
-.planner h1{
-  text-align:center;
-  margin-bottom:25px;
-  font-size:28px;
-  font-weight:600;
-  color:#0f172a;
+html,body{
+  overflow-x:hidden;
 }
 
-/* Input Section */
+/* ================= CONTAINER ================= */
+.planner{
+  width:100%;
+  max-width:700px;
+  margin:auto;
+  padding:60px 20px;
+  color:#e2e8f0;
+}
 
+/* ================= TITLE ================= */
+.planner h1{
+  text-align:center;
+  font-size:34px;
+  margin-bottom:30px;
+
+  background:linear-gradient(90deg,#00f5ff,#7b2ff7);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+/* ================= INPUT SECTION ================= */
 .planner-input{
   display:flex;
-  gap:10px;
-  margin-bottom:25px;
+  gap:12px;
+  margin-bottom:30px;
   flex-wrap:wrap;
 }
 
-/* Input */
-
+/* INPUT */
 .planner-input input{
   flex:1;
-  padding:12px 14px;
-  border:1px solid #e5e7eb;
-  border-radius:8px;
-  font-size:14px;
-  outline:none;
-  transition:all 0.25s ease;
-  box-sizing:border-box;
-}
-
-/* Prevent overflow */
-
-.planner-input input{
   min-width:200px;
+  padding:14px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.05);
+  color:#e2e8f0;
+  font-size:15px;
+  outline:none;
 }
 
-/* Input Focus */
-
+/* focus */
 .planner-input input:focus{
-  border-color:#2563eb;
-  box-shadow:0 0 0 2px rgba(37,99,235,0.1);
+  border-color:#00f5ff;
+  box-shadow:0 0 10px rgba(0,245,255,0.3);
 }
 
-/* Add Button */
-
+/* ADD BUTTON */
 .planner-input button{
-  padding:12px 20px;
+  padding:14px 22px;
   border:none;
-  background:#0f172a;
+  border-radius:30px;
+  background:linear-gradient(90deg,#00f5ff,#7b2ff7);
   color:white;
-  border-radius:8px;
   cursor:pointer;
   font-size:14px;
-  transition:all 0.25s ease;
+  transition:0.3s ease;
 }
 
-/* Button Hover */
-
+/* hover */
 .planner-input button:hover{
-  background:#1e293b;
-  transform:translateY(-1px);
+  transform:translateY(-2px);
+  box-shadow:0 0 15px #00f5ff,0 0 30px #7b2ff7;
 }
 
-/* Task List */
-
+/* ================= TASK LIST ================= */
 .planner ul{
   list-style:none;
   padding:0;
   margin:0;
 }
 
-/* Task Item */
-
+/* ================= TASK ITEM ================= */
 .planner li{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  background:white;
-  padding:14px 16px;
-  margin-bottom:12px;
-  border-radius:10px;
-  box-shadow:0 5px 18px rgba(0,0,0,0.06);
+  gap:12px;
+
+  padding:16px 18px;
+  margin-bottom:15px;
+  border-radius:16px;
+
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(14px);
+
+  position:relative;
+  transition:0.3s ease;
+}
+
+/* glow border */
+.planner li::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:16px;
+  padding:1px;
+  background:linear-gradient(120deg,#00f5ff,#7b2ff7);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  pointer-events:none;
+}
+
+/* hover */
+.planner li:hover{
+  transform:translateY(-4px);
+  box-shadow:
+    0 0 15px rgba(0,245,255,0.2),
+    0 0 30px rgba(123,47,247,0.15);
+}
+
+/* TASK TEXT */
+.planner li{
   font-size:14px;
   word-break:break-word;
-  gap:10px;
 }
 
-/* Delete Button */
-
+/* DELETE BUTTON */
 .planner li button{
-  padding:6px 12px;
+  padding:8px 14px;
   border:none;
-  background:#ef4444;
+  border-radius:20px;
+  background:linear-gradient(90deg,#ef4444,#dc2626);
   color:white;
-  border-radius:6px;
+  font-size:12px;
   cursor:pointer;
-  font-size:13px;
-  transition:all 0.2s ease;
+  transition:0.3s ease;
 }
 
-/* Hover */
-
+/* hover */
 .planner li button:hover{
-  background:#dc2626;
+  transform:scale(1.05);
+  box-shadow:0 0 10px rgba(239,68,68,0.5);
 }
 
-/* ========================= */
-/* Responsive Design */
-/* ========================= */
+/* ================= EMPTY STATE ================= */
+.planner ul:empty::after{
+  content:"No tasks yet. Add your first study task 🚀";
+  display:block;
+  text-align:center;
+  margin-top:20px;
+  color:#94a3b8;
+}
 
-@media (max-width:1024px){
+/* ================= RESPONSIVE ================= */
+
+/* 📱 Mobile */
+@media (max-width:600px){
 
   .planner{
-    padding:35px 18px;
+    padding:30px 15px;
   }
-
-}
-
-@media (max-width:768px){
 
   .planner h1{
     font-size:24px;
   }
-
-}
-
-@media (max-width:600px){
 
   .planner-input{
     flex-direction:column;
@@ -148,22 +179,33 @@
 
 }
 
-@media (max-width:480px){
-
-  .planner{
-    padding:25px 14px;
-  }
+/* 📱 Tablet */
+@media (max-width:768px){
 
   .planner h1{
-    font-size:22px;
+    font-size:28px;
   }
 
 }
 
-@media (max-width:360px){
+/* 💻 Small laptop */
+@media (max-width:1024px){
 
   .planner{
-    padding:20px 12px;
+    padding:40px 18px;
+  }
+
+}
+
+/* 🖥 Large screens */
+@media (min-width:1400px){
+
+  .planner{
+    max-width:800px;
+  }
+
+  .planner h1{
+    font-size:42px;
   }
 
 }

@@ -1,191 +1,232 @@
-/* Main Container */
-
-.gpa-container{
-  width:100%;
-  max-width:800px;
-  margin:auto;
-  padding:40px 20px;
-  text-align:center;
+/* ================= GLOBAL SAFETY ================= */
+*,
+*::before,
+*::after{
   box-sizing:border-box;
 }
 
-/* Title */
-
-.gpa-container h1{
-  margin-bottom:10px;
-  font-size:28px;
-  font-weight:600;
-  color:#0f172a;
+html,body{
+  overflow-x:hidden;
 }
 
-/* Description */
+/* ================= CONTAINER ================= */
+.gpa-container{
+  width:100%;
+  max-width:900px;
+  margin:auto;
+  padding:60px 20px;
+  text-align:center;
+  color:#e2e8f0;
+}
+
+/* ================= TITLE ================= */
+.gpa-container h1{
+  font-size:36px;
+  margin-bottom:10px;
+
+  background:linear-gradient(90deg,#00f5ff,#7b2ff7);
+  -webkit-background-clip:text;
+  color:transparent;
+}
 
 .gpa-container p{
-  color:#64748b;
+  color:#94a3b8;
   margin-bottom:30px;
-  font-size:15px;
 }
 
-/* Input Section */
-
+/* ================= INPUT SECTION ================= */
 .gpa-input{
   display:flex;
   justify-content:center;
   gap:12px;
-  margin-bottom:30px;
   flex-wrap:wrap;
+  margin-bottom:30px;
 }
 
-/* Input */
-
+/* INPUT */
 .gpa-input input{
-  padding:12px 14px;
-  border:1px solid #e5e7eb;
-  border-radius:8px;
-  width:200px;
+  width:220px;
+  padding:14px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.05);
+  color:#e2e8f0;
   font-size:15px;
   outline:none;
-  transition:all 0.25s ease;
-  box-sizing:border-box;
 }
 
-/* Input focus */
-
+/* focus */
 .gpa-input input:focus{
-  border-color:#2563eb;
-  box-shadow:0 0 0 2px rgba(37,99,235,0.1);
+  border-color:#00f5ff;
+  box-shadow:0 0 10px rgba(0,245,255,0.3);
 }
 
-/* Button */
-
+/* BUTTON */
 .gpa-input button{
-  padding:12px 20px;
+  padding:14px 22px;
   border:none;
-  background:#0f172a;
+  border-radius:30px;
+  background:linear-gradient(90deg,#00f5ff,#7b2ff7);
   color:white;
-  border-radius:8px;
   cursor:pointer;
   font-size:15px;
-  transition:all 0.25s ease;
+  transition:0.3s ease;
 }
-
-/* Button Hover */
 
 .gpa-input button:hover{
-  background:#1e293b;
-  transform:translateY(-1px);
+  transform:translateY(-3px);
+  box-shadow:0 0 15px #00f5ff,0 0 30px #7b2ff7;
 }
 
-/* Result */
-
+/* ================= RESULT ================= */
 .gpa-result{
-  margin-top:20px;
+  margin-top:25px;
+  padding:20px;
+  border-radius:16px;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(14px);
+  position:relative;
+}
+
+/* glow border */
+.gpa-result::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:16px;
+  padding:1px;
+  background:linear-gradient(120deg,#00f5ff,#7b2ff7);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  pointer-events:none;
+}
+
+.gpa-result h2{
   font-size:24px;
-  font-weight:bold;
-  color:#22c55e;
-  word-break:break-word;
+  color:#00f5ff;
 }
 
-/* Grading Table Section */
-
+/* ================= TABLE SECTION ================= */
 .grading-table{
-  margin-top:40px;
+  margin-top:50px;
 }
 
-/* Table */
+/* TITLE */
+.grading-table h3{
+  margin-bottom:15px;
+  font-size:22px;
 
+  background:linear-gradient(90deg,#00f5ff,#7b2ff7);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+/* TABLE */
 .grading-table table{
   width:100%;
-  border-collapse:collapse;
-  background:white;
-  box-shadow:0 6px 20px rgba(0,0,0,0.08);
-  border-radius:10px;
+  border-collapse:separate;
+  border-spacing:0;
+  border-radius:18px;
   overflow:hidden;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(14px);
+  position:relative;
 }
 
-/* Table Header */
+/* glow border */
+.grading-table table::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:18px;
+  padding:1px;
+  background:linear-gradient(120deg,#00f5ff,#7b2ff7);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  pointer-events:none;
+}
 
+/* HEAD */
 .grading-table th{
-  background:#0f172a;
-  color:white;
   padding:14px;
+  color:#00f5ff;
   font-size:14px;
 }
 
-/* Table Cells */
-
+/* BODY */
 .grading-table td{
   padding:14px;
-  border-bottom:1px solid #f1f5f9;
-  font-size:14px;
+  border-bottom:1px solid rgba(255,255,255,0.05);
 }
 
-/* Hover Row */
+/* ================= RESPONSIVE ================= */
 
-.grading-table tbody tr:hover{
-  background:#f8fafc;
-}
-
-/* ========================= */
-/* Responsive Design */
-/* ========================= */
-
-@media (max-width:1024px){
+/* 📱 Mobile */
+@media (max-width:600px){
 
   .gpa-container{
-    padding:35px 18px;
+    padding:30px 15px;
   }
-
-}
-
-@media (max-width:768px){
 
   .gpa-container h1{
     font-size:24px;
   }
 
-}
-
-@media (max-width:600px){
-
   .gpa-input{
     flex-direction:column;
-    align-items:center;
   }
 
-  .gpa-input input{
-    width:100%;
-    max-width:280px;
-  }
-
+  .gpa-input input,
   .gpa-input button{
     width:100%;
-    max-width:280px;
   }
 
-}
-
-@media (max-width:480px){
-
-  .gpa-container{
-    padding:25px 14px;
-  }
-
-  .gpa-container h1{
-    font-size:22px;
-  }
-
+  /* table scroll */
   .grading-table table{
     display:block;
     overflow-x:auto;
   }
 
+  .grading-table th,
+  .grading-table td{
+    min-width:150px;
+  }
+
 }
 
-@media (max-width:360px){
+/* 📱 Tablet */
+@media (max-width:768px){
+
+  .gpa-container h1{
+    font-size:28px;
+  }
+
+}
+
+/* 💻 Small laptop */
+@media (max-width:1024px){
 
   .gpa-container{
-    padding:20px 12px;
+    padding:40px 18px;
+  }
+
+}
+
+/* 🖥 Large screens */
+@media (min-width:1400px){
+
+  .gpa-container{
+    max-width:1000px;
+  }
+
+  .gpa-container h1{
+    font-size:44px;
   }
 
 }

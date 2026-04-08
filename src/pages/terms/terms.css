@@ -1,16 +1,143 @@
+/* ================= GLOBAL SAFETY ================= */
+*,
+*::before,
+*::after{
+  box-sizing:border-box;
+}
+
+html,body{
+  overflow-x:hidden;
+}
+
+/* ================= CONTAINER ================= */
 .terms-page{
-
-max-width:900px;
-margin:auto;
-padding:40px 20px;
-line-height:1.7;
-
+  width:100%;
+  max-width:1000px;
+  margin:auto;
+  padding:60px 20px;
+  line-height:1.8;
+  color:#e2e8f0;
 }
 
+/* ================= MAIN TITLE ================= */
 .terms-page h1{
-margin-bottom:20px;
+  text-align:center;
+  font-size:38px;
+  margin-bottom:30px;
+
+  background:linear-gradient(90deg,#00f5ff,#7b2ff7);
+  -webkit-background-clip:text;
+  color:transparent;
 }
 
+/* ================= SECTION HEADINGS ================= */
 .terms-page h2{
-margin-top:25px;
+  margin-top:40px;
+  margin-bottom:12px;
+  font-size:24px;
+
+  background:linear-gradient(90deg,#00f5ff,#7b2ff7);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+/* ================= TEXT BLOCKS ================= */
+.terms-page p{
+  margin-bottom:18px;
+  color:#94a3b8;
+
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(12px);
+  padding:18px;
+  border-radius:16px;
+  position:relative;
+  transition:0.3s ease;
+}
+
+/* glow border */
+.terms-page p::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:16px;
+  padding:1px;
+  background:linear-gradient(120deg,#00f5ff,#7b2ff7);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  pointer-events:none;
+}
+
+/* hover */
+.terms-page p:hover{
+  transform:translateY(-4px);
+  box-shadow:
+    0 0 15px rgba(0,245,255,0.2),
+    0 0 30px rgba(123,47,247,0.15);
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* 📱 Mobile */
+@media (max-width:480px){
+
+  .terms-page{
+    padding:30px 15px;
+  }
+
+  .terms-page h1{
+    font-size:26px;
+  }
+
+  .terms-page h2{
+    font-size:20px;
+  }
+
+  .terms-page p{
+    padding:14px;
+    font-size:14px;
+    border-radius:14px;
+  }
+
+}
+
+/* 📱 Tablet */
+@media (max-width:768px){
+
+  .terms-page{
+    padding:40px 18px;
+  }
+
+  .terms-page h1{
+    font-size:30px;
+  }
+
+  .terms-page h2{
+    font-size:22px;
+  }
+
+}
+
+/* 💻 Small laptop */
+@media (max-width:1024px){
+
+  .terms-page{
+    padding:45px 18px;
+  }
+
+}
+
+/* 🖥 Large screens */
+@media (min-width:1400px){
+
+  .terms-page{
+    max-width:1100px;
+  }
+
+  .terms-page h1{
+    font-size:44px;
+  }
+
 }

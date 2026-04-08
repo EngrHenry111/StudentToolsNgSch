@@ -9,7 +9,7 @@ Features:
 
 import { useState } from "react";
 import "./waec.css";
-
+import { Helmet } from "react-helmet";
 const WAECCalculator = () => {
 
  const [subjects,setSubjects] = useState([

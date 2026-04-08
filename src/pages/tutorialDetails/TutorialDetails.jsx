@@ -285,7 +285,7 @@ const generateFAQ = (content)=>{
   name: "StudentToolsNG",
   logo: {
    "@type": "ImageObject",
-   url: "https://studenttools.com/logoH.png"
+   url: "https://studenttoolsng.com/logoH.png"
   }
  },
  datePublished: tutorial.createdAt,
