@@ -95,10 +95,10 @@ const Home = () => {
 
 <meta
  property="og:image"
- content="student-toolsngsch.vercel.app/logo.png"
+ content="studenttoolsng.com/logo.png"
 />
 
-<meta property="og:url" content="student-toolsngsch.vercel.app" />
+<meta property="og:url" content="studenttoolsng.com" />
 
 <meta property="og:type" content="website" />
 
@@ -110,7 +110,7 @@ const Home = () => {
  "@context": "https://schema.org",
  "@type": "WebSite",
  name: "StudentToolsNG",
- url: "student-toolsngsch.vercel.app",
+ url: "studenttoolsng.com",
  potentialAction: {
   "@type": "SearchAction",
   target: "https://studenttoolsng.com/search?q={search_term_string}",
