@@ -12,17 +12,14 @@
       "permanent": true
     }
   ],
-  
-  "routes": [
+  "rewrites": [
     {
-      "src": "/sitemap.xml",
-      "dest": "https://studenttoolsserver.onrender.com/api/sitemap"
+      "source": "/sitemap.xml",
+      "destination": "https://studenttoolsserver.onrender.com/api/sitemap"
     },
-   
     {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
-
 }
