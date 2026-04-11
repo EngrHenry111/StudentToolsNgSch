@@ -1,17 +1,7 @@
-/*
-Professional Homepage for StudentToolsNG
-
-Sections:
-1. Hero
-2. Search tools
-3. Popular tools
-4. Tutorials preview
-*/
-
 
 
 import { useEffect, useState } from "react";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import API from "../../services/api";
 import "./home.css";
@@ -74,43 +64,74 @@ const Home = () => {
 
  {/* SEO */}
 
- 
 <Helmet>
 
-<title>StudentToolsNG | Free CGPA, WAEC & JAMB Calculators</title>
+{/* Primary SEO */}
+<title>
+StudentToolsNG - Free CGPA, WAEC & JAMB Calculators for Nigerian Students
+</title>
 
 <meta
  name="description"
- content="Free academic tools for Nigerian students including CGPA calculator, WAEC grade calculator, JAMB score calculator and study tutorials."
+ content="Free academic tools for Nigerian students including CGPA calculator, WAEC grade calculator, JAMB score calculator, GPA class converter, and study tutorials."
 />
 
-<link rel="canonical" href="https://studenttoolsng.com/" /> 
+<meta
+ name="keywords"
+ content="CGPA calculator Nigeria, WAEC calculator, JAMB score calculator, GPA calculator Nigeria, student tools Nigeria"
+/>
 
-<meta property="og:title" content="StudentToolsNG" />
+{/* Canonical */}
+<link rel="canonical" href="https://studenttoolsng.com/" />
+
+{/* Open Graph */}
+<meta property="og:type" content="website" />
+
+<meta
+ property="og:title"
+ content="StudentToolsNG - Free Academic Tools for Nigerian Students"
+/>
 
 <meta
  property="og:description"
- content="Free academic tools for Nigerian students including CGPA calculator, WAEC grade calculator, JAMB score calculator."
+ content="Use free CGPA, WAEC and JAMB calculators. Access tutorials and student resources designed for Nigerian students."
 />
 
 <meta
  property="og:image"
- content="studenttoolsng.com/logo.png"
+ content="https://studenttoolsng.com/logo.png"
 />
 
-<meta property="og:url" content="studenttoolsng.com" />
+<meta
+ property="og:url"
+ content="https://studenttoolsng.com/"
+/>
 
-<meta property="og:type" content="website" />
-
+{/* Twitter */}
 <meta name="twitter:card" content="summary_large_image" />
 
+<meta
+ name="twitter:title"
+ content="StudentToolsNG - Free Academic Tools"
+/>
 
-    <script type="application/ld+json">
+<meta
+ name="twitter:description"
+ content="Free CGPA, WAEC, JAMB calculators and tutorials for Nigerian students."
+/>
+
+<meta
+ name="twitter:image"
+ content="https://studenttoolsng.com/logo.png"
+/>
+
+{/* Structured Data */}
+<script type="application/ld+json">
 {JSON.stringify({
  "@context": "https://schema.org",
  "@type": "WebSite",
  name: "StudentToolsNG",
- url: "studenttoolsng.com",
+ url: "https://studenttoolsng.com",
  potentialAction: {
   "@type": "SearchAction",
   target: "https://studenttoolsng.com/search?q={search_term_string}",
@@ -119,8 +140,7 @@ const Home = () => {
 })}
 </script>
 
-</Helmet>
- {/* HERO SECTION */}
+</Helmet> {/* HERO SECTION */}
 
  <section className="hero">
 

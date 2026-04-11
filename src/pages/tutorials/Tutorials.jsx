@@ -9,7 +9,7 @@ Supports search
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import API from "../../services/api";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import "./tutorials.css";
 
 const Tutorials = () => {
@@ -60,22 +60,88 @@ const fetchTutorials = async ()=>{
 
   <div className="tutorials-container">
 
-    <Helmet>
+<Helmet>
 
-<title>Study Tutorials | StudentToolsNG</title>
+{/* Primary SEO */}
+<title>
+Study Tutorials for Nigerian Students | CGPA, WAEC, JAMB Guides
+</title>
 
 <meta
  name="description"
- content="Educational tutorials covering CGPA calculation, WAEC grading system, JAMB score calculation and study tips for students."
+ content="Explore educational tutorials for Nigerian students including CGPA calculation, WAEC grading system, JAMB score guides, and study tips."
 />
 
+<meta
+ name="keywords"
+ content="study tutorials Nigeria, CGPA tutorials, WAEC grading system guide, JAMB tutorials, student education Nigeria"
+/>
 
+{/* Canonical */}
 <link
-    rel="canonical"
-    href="https://studenttoolsng.com/tutorials"
-  />
-</Helmet>
+ rel="canonical"
+ href="https://studenttoolsng.com/tutorials"
+/>
 
+{/* Open Graph */}
+<meta property="og:type" content="website" />
+
+<meta
+ property="og:title"
+ content="Study Tutorials for Nigerian Students"
+/>
+
+<meta
+ property="og:description"
+ content="Learn CGPA calculation, WAEC grading system, JAMB scoring and more with our student tutorials."
+/>
+
+<meta
+ property="og:image"
+ content="https://studenttoolsng.com/logo.png"
+/>
+
+<meta
+ property="og:url"
+ content="https://studenttoolsng.com/tutorials"
+/>
+
+<meta property="og:site_name" content="StudentToolsNG" />
+
+{/* Twitter */}
+<meta name="twitter:card" content="summary_large_image" />
+
+<meta
+ name="twitter:title"
+ content="Student Tutorials - CGPA, WAEC, JAMB Guides"
+/>
+
+<meta
+ name="twitter:description"
+ content="Free tutorials for Nigerian students covering CGPA, WAEC, JAMB and study strategies."
+/>
+
+<meta
+ name="twitter:image"
+ content="https://studenttoolsng.com/logo.png"
+/>
+
+{/* Structured Data (ItemList - VERY IMPORTANT) */}
+<script type="application/ld+json">
+{JSON.stringify({
+ "@context": "https://schema.org",
+ "@type": "CollectionPage",
+ name: "Study Tutorials",
+ url: "https://studenttoolsng.com/tutorials",
+ description: "Educational tutorials for Nigerian students including CGPA, WAEC and JAMB guides.",
+ publisher: {
+   "@type": "Organization",
+   name: "StudentToolsNG"
+ }
+})}
+</script>
+
+</Helmet>
    <h1>Study Tutorials</h1>
 
    <div className="tutorial-search">

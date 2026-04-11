@@ -9,7 +9,7 @@ Features:
 
 import { useState } from "react";
 import "./waec.css";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 const WAECCalculator = () => {
 
  const [subjects,setSubjects] = useState([
@@ -72,23 +72,91 @@ const WAECCalculator = () => {
 
   <div className="waec-container">
 
-    
- <Helmet>
+    <Helmet>
 
- <title>Terms and Conditions | StudentToolsNG</title>
+{/* Primary SEO */}
+<title>
+WAEC Grade Calculator Nigeria | Convert WAEC Scores to Grades
+</title>
 
- <meta
+<meta
  name="description"
- content="Terms and conditions for using StudentToolsNG academic tools and tutorials."
- />
+ content="Free WAEC grade calculator for Nigerian students. Convert your WAEC scores to grades (A1–F9) instantly and understand the WAEC grading system."
+/>
 
- 
+<meta
+ name="keywords"
+ content="WAEC grade calculator Nigeria, WAEC grading system, WAEC score to grade, WAEC calculator online"
+/>
+
+{/* Canonical */}
 <link
-    rel="canonical"
-    href="https://studenttoolsng.com/waec-grade-calculator"
-  />
+ rel="canonical"
+ href="https://studenttoolsng.com/waec-grade-calculator"
+/>
 
- </Helmet>
+{/* Open Graph */}
+<meta property="og:type" content="website" />
+
+<meta
+ property="og:title"
+ content="WAEC Grade Calculator Nigeria"
+/>
+
+<meta
+ property="og:description"
+ content="Convert WAEC scores to grades (A1–F9) instantly using our free calculator."
+/>
+
+<meta
+ property="og:image"
+ content="https://studenttoolsng.com/logo.png"
+/>
+
+<meta
+ property="og:url"
+ content="https://studenttoolsng.com/waec-grade-calculator"
+/>
+
+<meta property="og:site_name" content="StudentToolsNG" />
+
+{/* Twitter */}
+<meta name="twitter:card" content="summary_large_image" />
+
+<meta
+ name="twitter:title"
+ content="WAEC Grade Calculator"
+/>
+
+<meta
+ name="twitter:description"
+ content="Convert WAEC scores into official grades instantly."
+/>
+
+<meta
+ name="twitter:image"
+ content="https://studenttoolsng.com/logo.png"
+/>
+
+{/* Structured Data (Tool) */}
+<script type="application/ld+json">
+{JSON.stringify({
+ "@context": "https://schema.org",
+ "@type": "WebApplication",
+ name: "WAEC Grade Calculator",
+ url: "https://studenttoolsng.com/waec-grade-calculator",
+ applicationCategory: "EducationalApplication",
+ operatingSystem: "All",
+ description: "Convert WAEC scores into grades (A1–F9) instantly.",
+ offers: {
+   "@type": "Offer",
+   price: "0",
+   priceCurrency: "NGN"
+ }
+})}
+</script>
+
+</Helmet>
 
 
    <h1>WAEC Grade Calculator</h1>

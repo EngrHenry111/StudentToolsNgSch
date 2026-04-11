@@ -5,7 +5,7 @@ import API from "../../services/api";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import AuthorCard from "../../components/AuthorCard";
 import "./tutorialDetails.css";
 
@@ -298,12 +298,27 @@ const generateFAQ = (content)=>{
 
 <Helmet>
 
+{/* Primary SEO */}
 <title>{tutorial.title} | StudentToolsNG</title>
 
 <meta
  name="description"
  content={tutorial.excerpt || tutorial.content.slice(0,150)}
 />
+
+<meta
+ name="keywords"
+ content={`${tutorial.title}, student tutorials Nigeria, academic tutorials, ${tutorial.category}`}
+/>
+
+{/* Canonical (FIXED ✅) */}
+<link
+ rel="canonical"
+ href={`https://studenttoolsng.com/tutorial/${tutorial.slug}`}
+/>
+
+{/* Open Graph */}
+<meta property="og:type" content="article" />
 
 <meta property="og:title" content={tutorial.title} />
 
@@ -322,8 +337,25 @@ const generateFAQ = (content)=>{
  content={`https://studenttoolsng.com/tutorial/${tutorial.slug}`}
 />
 
-<meta property="og:type" content="article" />
+<meta property="og:site_name" content="StudentToolsNG" />
 
+{/* Article meta (VERY IMPORTANT) */}
+<meta
+ property="article:published_time"
+ content={tutorial.createdAt}
+/>
+
+<meta
+ property="article:modified_time"
+ content={tutorial.updatedAt}
+/>
+
+<meta
+ property="article:author"
+ content="Henry Akpan"
+/>
+
+{/* Twitter */}
 <meta name="twitter:card" content="summary_large_image" />
 
 <meta name="twitter:title" content={tutorial.title} />
@@ -338,6 +370,7 @@ const generateFAQ = (content)=>{
  content={tutorial.image || "https://studenttoolsng.com/logo.png"}
 />
 
+{/* FAQ Schema */}
 <script type="application/ld+json">
 {JSON.stringify({
  "@context":"https://schema.org",
@@ -386,14 +419,7 @@ const generateFAQ = (content)=>{
 {JSON.stringify(schemaData)}
 </script>
 
-
-<link
-    rel="canonical"
-    href="https://studenttoolsng.com/tutorial/:slug"
-  />
-
 </Helmet>
-
 <div
  className="reading-progress"
  style={{width:`${scrollProgress}%`}}>

@@ -1,12 +1,5 @@
-/*
-GPA Class Converter
-
-This tool converts CGPA into degree classification
-based on the Nigerian university grading system.
-*/
-
 import { useState } from "react";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async"; // ✅ FIXED
 import "./gpaclass.css";
 
 const GPAClass = () => {
@@ -39,29 +32,59 @@ const GPAClass = () => {
 
  };
 
+ const url = "https://studenttoolsng.com/gpa-class-calculator";
+ const title = "GPA Class Calculator | Nigerian Degree Classification";
+ const description = "Convert your CGPA to degree classification in Nigeria. Instantly know if you have First Class, Second Class Upper or Lower using our free GPA class calculator.";
+ const image = "https://studenttoolsng.com/logo.png";
+
  return(
 
   <div className="gpa-container">
+
     <Helmet>
 
-<title>GPA Class Calculator | Nigerian Degree Classification</title>
+    {/* Primary SEO */}
+    <title>{title}</title>
 
-<meta
- name="description"
- content="Check your university degree class using your CGPA. Find out if you have First Class, Second Class Upper or Lower in Nigeria."
-/>
+    <meta name="description" content={description} />
 
-<meta
- name="keywords"
- content="GPA class calculator, degree classification Nigeria, first class CGPA"
-/>
+    <meta name="keywords" content="GPA class calculator Nigeria, degree classification Nigeria, first class CGPA Nigeria, convert CGPA to class" />
 
-<link
-    rel="canonical"
-    href="https://studenttoolsng.com/gpa-class-calculator"
-  />
+    {/* Canonical */}
+    <link rel="canonical" href={url} />
 
-</Helmet>
+    {/* Open Graph */}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:url" content={url} />
+
+    {/* Twitter */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+
+    {/* Structured Data (Tool Optimization) */}
+    <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      name: "GPA Class Calculator",
+      url: url,
+      applicationCategory: "EducationalApplication",
+      operatingSystem: "All",
+      description: description,
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "NGN"
+      }
+    })}
+    </script>
+
+    </Helmet>
 
    <h1>GPA to Degree Class Converter</h1>
 
@@ -85,14 +108,10 @@ const GPAClass = () => {
    {result && (
 
     <div className="gpa-result">
-
      <h2>{result}</h2>
-
     </div>
 
    )}
-
-   {/* Grading System Table */}
 
    <div className="grading-table">
 
@@ -101,12 +120,10 @@ const GPAClass = () => {
     <table>
 
      <thead>
-
       <tr>
        <th>CGPA Range</th>
        <th>Degree Class</th>
       </tr>
-
      </thead>
 
      <tbody>

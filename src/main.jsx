@@ -1,15 +1,20 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import { AuthProvider } from "./context/AuthContext"
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import { AuthProvider } from "./context/AuthContext";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+// ✅ ADD THIS
+import { HelmetProvider } from "react-helmet-async";
 
- <AuthProvider>
-   <App />
- </AuthProvider>
-
-)
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <HelmetProvider>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </HelmetProvider>
+  </React.StrictMode>
+);
 
 
 

@@ -1,14 +1,5 @@
-/*
-JAMB Score Calculator
-
-Features:
-- Input 4 UTME subjects
-- Automatic total calculation
-- Displays admission readiness
-*/
-
 import { useState } from "react";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async"; // ✅ FIXED
 import "./jamb.css";
 
 const JAMBScore = () => {
@@ -24,16 +15,13 @@ const JAMBScore = () => {
  const [status,setStatus] = useState("");
 
  const handleChange = (subject,value)=>{
-
   setSubjects({
    ...subjects,
    [subject]:value
   });
-
  };
 
  const calculateScore = ()=>{
-
   const sum =
    Number(subjects.english) +
    Number(subjects.subject2) +
@@ -42,7 +30,6 @@ const JAMBScore = () => {
 
   setTotal(sum);
 
-  // Admission readiness indicator
   if(sum >= 300){
    setStatus("Excellent Score");
   }
@@ -58,32 +45,61 @@ const JAMBScore = () => {
   else{
    setStatus("Low Admission Chances");
   }
-
  };
+
+ const url = "https://studenttoolsng.com/jamb-score-calculator";
+ const title = "JAMB Score Calculator | Calculate Your UTME Score Online";
+ const description = "Free JAMB score calculator for Nigerian students. Enter your UTME subject scores and instantly calculate your total score and admission chances.";
+ const image = "https://studenttoolsng.com/logo.png";
 
  return(
 
   <div className="jamb-container">
+
    <Helmet>
 
-<title>JAMB Score Calculator | Calculate Your UTME Score Online</title>
+    {/* Primary SEO */}
+    <title>{title}</title>
 
-<meta
- name="description"
- content="Free JAMB score calculator for Nigerian students. Enter your UTME subject scores and instantly know your total score."
-/>
+    <meta name="description" content={description} />
 
-<meta
- name="keywords"
- content="JAMB calculator, UTME calculator, calculate JAMB score, Nigerian admission score"
-/>
+    <meta name="keywords" content="JAMB calculator Nigeria, UTME score calculator, calculate JAMB score online, admission score Nigeria" />
 
-<link
-    rel="canonical"
-    href="https://studenttoolsng.com/jamb-score-calculator"
-  />
+    {/* Canonical */}
+    <link rel="canonical" href={url} />
 
-</Helmet>
+    {/* Open Graph */}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:url" content={url} />
+
+    {/* Twitter */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+
+    {/* Structured Data (Tool) */}
+    <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      name: "JAMB Score Calculator",
+      url: url,
+      applicationCategory: "EducationalApplication",
+      operatingSystem: "All",
+      description: description,
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "NGN"
+      }
+    })}
+    </script>
+
+   </Helmet>
 
    <h1>JAMB Score Calculator</h1>
 
@@ -124,11 +140,8 @@ const JAMBScore = () => {
    {total > 0 && (
 
     <div className="jamb-result">
-
      <h2>Total Score: {total}</h2>
-
      <p className="status">{status}</p>
-
     </div>
 
    )}

@@ -1,8 +1,13 @@
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async"; // ✅ FIXED
 
 import "./privacyPolicy.css";
 
 const PrivacyPolicy = () => {
+
+const url = "https://studenttoolsng.com/privacy-policy";
+const title = "Privacy Policy | StudentToolsNG";
+const description = "Learn how StudentToolsNG collects, uses, and protects your personal data while providing academic tools and educational resources.";
+const image = "https://studenttoolsng.com/logo.png";
 
 return (
 
@@ -10,18 +15,43 @@ return (
 
 <Helmet>
 
-<title>Privacy Policy | StudentToolsNG</title>
+{/* Primary SEO */}
+<title>{title}</title>
 
-<meta
-name="description"
-content="Learn how StudentToolsNG protects user data and privacy while providing academic tools and tutorials for Nigerian students."
-/>
+<meta name="description" content={description} />
 
-<link
-    rel="canonical"
-    href="https://studenttoolsng.com/privacy-policy"
-  />
+<meta name="keywords" content="privacy policy StudentToolsNG, data protection Nigeria, student tools privacy policy" />
 
+{/* Canonical */}
+<link rel="canonical" href={url} />
+
+{/* Open Graph */}
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={image} />
+<meta property="og:url" content={url} />
+
+{/* Twitter */}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={image} />
+
+{/* Structured Data */}
+<script type="application/ld+json">
+{JSON.stringify({
+ "@context": "https://schema.org",
+ "@type": "WebPage",
+ name: "Privacy Policy",
+ url: url,
+ description: description,
+ publisher: {
+   "@type": "Organization",
+   name: "StudentToolsNG"
+ }
+})}
+</script>
 
 </Helmet>
 
