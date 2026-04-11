@@ -16,7 +16,7 @@ import Tutorials from "./pages/tutorials/Tutorials";
 import TutorialDetails from "./pages/tutorialDetails/TutorialDetails";
 import Contact from "./pages/contact/Contact";
 import CreateTutorial from "./pages/admin/CreateTutorial";
-import Search from "./pages/search/Search";
+// import Search from "./pages/search/Search";
 import AITutor from "./pages/aiTutor/AITutor";
 
 import AdminLogin from "./pages/adminLogin/adminLogin";
@@ -31,7 +31,7 @@ import PrivacyPolicy from "./pages/privacy/PrivacyPolicy";
 import About from "./pages/about/About";
 import Terms from "./pages/terms/Terms";
 import Author from "./pages/author/Author";
-import SeoPage from "./pages/seo/SeoPage";
+// import SeoPage from "./pages/seo/SeoPage";
 function App() {
 
  return (
@@ -93,7 +93,7 @@ function App() {
     <Route path="/terms" element={<Terms />} />
     <Route path="/author" element={<Author/>}/>
 
-    <Route path="/:slug" element={<SeoPage/>}/>
+    {/* <Route path="/:slug" element={<SeoPage/>}/> */}
     
 
    </Routes>

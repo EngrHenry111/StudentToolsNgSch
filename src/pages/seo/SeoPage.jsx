@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const seoContent = {
 
@@ -43,15 +43,35 @@ const SeoPage = ()=>{
   return <h2>Page not found</h2>;
  }
 
+ const url = `https://studenttoolsng.com/${slug}`;
+ const image = "https://studenttoolsng.com/logo.png";
+
  return(
 
  <div style={{padding:"40px",maxWidth:"900px",margin:"auto"}}>
 
  <Helmet>
 
+ {/* Basic SEO */}
  <title>{page.title}</title>
 
  <meta name="description" content={page.description}/>
+
+ {/* Canonical */}
+ <link rel="canonical" href={url} />
+
+ {/* Open Graph (light) */}
+ <meta property="og:title" content={page.title} />
+ <meta property="og:description" content={page.description} />
+ <meta property="og:image" content={image} />
+ <meta property="og:url" content={url} />
+ <meta property="og:type" content="article" />
+
+ {/* Twitter */}
+ <meta name="twitter:card" content="summary_large_image" />
+ <meta name="twitter:title" content={page.title} />
+ <meta name="twitter:description" content={page.description} />
+ <meta name="twitter:image" content={image} />
 
  </Helmet>
 
