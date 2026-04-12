@@ -146,7 +146,7 @@ html,body{
   backdrop-filter:blur(14px);
 }
 
-.ai-assistant::before{
+/* .ai-assistant::before{
   content:"";
   position:absolute;
   inset:0;
@@ -160,7 +160,7 @@ html,body{
    z-index: 0; 
 
   pointer-events:none; /* ✅ FIX */
-}
+/* } */
 
 /* ensure content stays above */
 .ai-assistant > *{
