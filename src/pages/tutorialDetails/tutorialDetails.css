@@ -138,6 +138,8 @@ html,body{
   background:rgba(255,255,255,0.05);
   backdrop-filter:blur(14px);
   position:relative;
+  position: relative;
+  z-index: 1;
 }
 
 .ai-assistant::before{
@@ -151,9 +153,17 @@ html,body{
     linear-gradient(#fff 0 0) content-box,
     linear-gradient(#fff 0 0);
   -webkit-mask-composite:xor;
+   z-index: 0; 
 
   pointer-events:none; /* ✅ FIX */
 }
+
+/* ensure content stays above */
+.ai-assistant > *{
+  position:relative;
+  z-index:2;
+}
+
 /* input */
 .ai-assistant input{
   width:100%;
