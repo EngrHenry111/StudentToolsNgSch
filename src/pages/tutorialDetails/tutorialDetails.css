@@ -135,11 +135,15 @@ html,body{
   margin-top:50px;
   padding:25px;
   border-radius:18px;
-  background:rgba(255,255,255,0.05);
+
+  /* 🔥 THIS LINE FIXES EVERYTHING */
+  background:
+    linear-gradient(#0f172a, #0f172a) padding-box,
+    linear-gradient(120deg,#00f5ff,#7b2ff7) border-box;
+
+  border:1px solid transparent;
+
   backdrop-filter:blur(14px);
-  position:relative;
-  position: relative;
-  z-index: 1;
 }
 
 .ai-assistant::before{
@@ -312,6 +316,29 @@ html,body{
 
   .content{
     font-size:15px;
+  }
+
+}
+
+@media (max-width: 600px){
+
+  .ai-assistant{
+    padding:18px;
+    border-radius:14px;
+  }
+
+  .ai-assistant h3{
+    font-size:16px;
+  }
+
+  .ai-assistant input{
+    font-size:14px;
+    padding:12px;
+  }
+
+  .ai-assistant button{
+    width:100%;            /* ✅ full width button */
+    padding:12px;
   }
 
 }
