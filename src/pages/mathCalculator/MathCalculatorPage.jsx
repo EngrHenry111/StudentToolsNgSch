@@ -20,7 +20,8 @@ const MathCalculatorPage = () => {
         {result && <MathResultCard result={result} />}
       </div>
 
-      <HistoryPanel />
+      {/* <HistoryPanel /> */}
+      <HistoryPanel onSelect={(problem) => solve(problem)} />
 
     </div>
   );
