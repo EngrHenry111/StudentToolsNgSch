@@ -70,7 +70,7 @@ const Footer = () => {
      {/* WhatsApp direct chat */}
 
      <a
-      href="https://wa.me/09028361165"
+      href="https://wa.me/2349028361165"
       target="_blank"
       rel="noopener noreferrer"
       aria-label="WhatsApp"

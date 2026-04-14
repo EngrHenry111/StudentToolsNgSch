@@ -31,6 +31,7 @@ import PrivacyPolicy from "./pages/privacy/PrivacyPolicy";
 import About from "./pages/about/About";
 import Terms from "./pages/terms/Terms";
 import Author from "./pages/author/Author";
+import MathCalculatorPage from "./pages/mathCalculator/MathCalculatorPage";
 // import SeoPage from "./pages/seo/SeoPage";
 function App() {
 
@@ -94,7 +95,8 @@ function App() {
     <Route path="/author" element={<Author/>}/>
 
     {/* <Route path="/:slug" element={<SeoPage/>}/> */}
-    
+
+<Route path="/tutorials/math-calculator" element={<MathCalculatorPage />} />    
 
    </Routes>
 
