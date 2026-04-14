@@ -1,55 +1,140 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
+
 
 const suggestions = [
-  "20% of 150",
-  "2x + 4 = 10",
-  "divide 100 in ratio 2:3",
-  "1/2 + 3/4",
+  {
+    title: "Percentage",
+    items: [
+      "20% of 150",
+      "increase 200 by 10%",
+      "decrease 500 by 20%",
+      "what percent of 50 is 10",
+      "find original if 20% is 40"
+    ]
+  },
+  {
+    title: "Algebra",
+    items: [
+      "2x + 4 = 10",
+      "3x - 5 = 16",
+      "5x = 25",
+      "x/2 + 3 = 7"
+    ]
+  },
+  {
+    title: "Fractions",
+    items: [
+      "1/2 + 3/4",
+      "5/6 - 1/3",
+      "2/3 × 4/5",
+      "3/4 ÷ 2/5"
+    ]
+  },
+  {
+    title: "Ratio",
+    items: [
+      "divide 100 in ratio 2:3",
+      "share 200 in ratio 1:4",
+      "divide 500 in ratio 3:2"
+    ]
+  },
+  {
+    title: "Simple Interest",
+    items: [
+      "p=1000 r=5 t=2",
+      "p=5000 r=10 t=3",
+      "find simple interest p=2000 r=4 t=5"
+    ]
+  },
+  {
+    title: "Set Theory",
+    items: [
+      "n(A)=20, n(B)=15, n(A∩B)=5",
+      "n(U)=100, n(A)=40",
+      "n(A)=30, n(B)=25, n(C)=20, n(A∩B)=5, n(A∩C)=4, n(B∩C)=3, n(A∩B∩C)=2"
+    ]
+  }
 ];
+
 
 const MathSolverForm = ({ onSolve, loading }) => {
   const [input, setInput] = useState("");
+  const [selectedTopic, setSelectedTopic] = useState(null);
 
   const handleSubmit = () => {
     if (!input.trim()) return;
     onSolve(input);
   };
 
+  const typeText = (text) => {
+    let i = 0;
+    setInput("");
+    const interval = setInterval(() => {
+      setInput((prev) => prev + text[i]);
+      i++;
+      if (i >= text.length) clearInterval(interval);
+    }, 20);
+  };
+
   return (
     <div className="solver-box elite">
 
-      {/* INPUT + SUGGESTIONS GROUP */}
-      <div className="input-group">
+      <input
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        placeholder="Solve anything... (e.g. 2x + 4 = 10)"
+        className="ai-input"
+      />
 
-        <input
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Type a math problem..."
-          onKeyDown={(e) => {
-            if (e.key === "Enter") handleSubmit();
-          }}
-        />
-
-        {/* Suggestions BELOW input */}
-        <div className="suggestions">
-          {suggestions.map((s, i) => (
-            <span
+      {/* ================= TOPICS VIEW ================= */}
+      {!selectedTopic && (
+        <div className="topic-grid">
+          {suggestions.map((group, i) => (
+            <motion.div
               key={i}
-              onClick={() => {
-                setInput(s);
-                onSolve(s); // 🔥 instant solve (premium UX)
-              }}
+              className="topic-card"
+              whileHover={{ scale: 1.05 }}
+              onClick={() => setSelectedTopic(group)}
             >
-              {s}
-            </span>
+              {group.title}
+            </motion.div>
           ))}
         </div>
+      )}
 
-      </div>
+      {/* ================= ITEMS VIEW ================= */}
+      {selectedTopic && (
+        <div className="topic-details">
 
-      {/* BUTTON */}
-      <button onClick={handleSubmit}>
-        {loading ? "Solving..." : "Solve"}
+          <div className="topic-header">
+            <button onClick={() => setSelectedTopic(null)}>
+              ← Back
+            </button>
+            <h3>{selectedTopic.title}</h3>
+          </div>
+
+          <div className="math-suggestions">
+            {selectedTopic.items.map((item, i) => (
+              <motion.span
+                key={i}
+                className="chip"
+                whileHover={{ scale: 1.05 }}
+                onClick={() => {
+                  typeText(item);
+                  onSolve(item);
+                }}
+              >
+                {item}
+              </motion.span>
+            ))}
+          </div>
+
+        </div>
+      )}
+
+      <button className="solve-btn" onClick={handleSubmit}>
+        {loading ? "⚡ Solving..." : "🚀 Solve"}
       </button>
 
     </div>
@@ -57,6 +142,265 @@ const MathSolverForm = ({ onSolve, loading }) => {
 };
 
 export default MathSolverForm;
+
+
+
+// import { useState, useEffect } from "react";
+// import { motion } from "framer-motion";
+
+// // const suggestions = [
+// //   "20% of 150",
+// //   "2x + 4 = 10",
+// //   "divide 100 in ratio 2:3",
+// //   "1/2 + 3/4",
+// // ];
+
+
+
+// const suggestions = [
+//   {
+//     title: "Percentage",
+//     items: [
+//       "20% of 150",
+//       "increase 200 by 10%",
+//       "decrease 500 by 20%",
+//       "what percent of 50 is 10",
+//       "find original if 20% is 40"
+//     ]
+//   },
+//   {
+//     title: "Algebra",
+//     items: [
+//       "2x + 4 = 10",
+//       "3x - 5 = 16",
+//       "5x = 25",
+//       "x/2 + 3 = 7"
+//     ]
+//   },
+//   {
+//     title: "Fractions",
+//     items: [
+//       "1/2 + 3/4",
+//       "5/6 - 1/3",
+//       "2/3 × 4/5",
+//       "3/4 ÷ 2/5"
+//     ]
+//   },
+//   {
+//     title: "Ratio",
+//     items: [
+//       "divide 100 in ratio 2:3",
+//       "share 200 in ratio 1:4",
+//       "divide 500 in ratio 3:2"
+//     ]
+//   },
+//   {
+//     title: "Simple Interest",
+//     items: [
+//       "p=1000 r=5 t=2",
+//       "p=5000 r=10 t=3",
+//       "find simple interest p=2000 r=4 t=5"
+//     ]
+//   },
+//   {
+//     title: "Set Theory",
+//     items: [
+//       "n(A)=20, n(B)=15, n(A∩B)=5",
+//       "n(U)=100, n(A)=40",
+//       "n(A)=30, n(B)=25, n(C)=20, n(A∩B)=5, n(A∩C)=4, n(B∩C)=3, n(A∩B∩C)=2"
+//     ]
+//   }
+// ];
+
+// const MathSolverForm = ({ onSolve, loading }) => {
+//   const [input, setInput] = useState("");
+//   const [activeIndex, setActiveIndex] = useState(-1);
+
+//   // 🔥 typing animation when suggestion clicked
+//   const typeText = (text) => {
+//     let i = 0;
+//     setInput("");
+//     const interval = setInterval(() => {
+//       setInput((prev) => prev + text[i]);
+//       i++;
+//       if (i >= text.length) clearInterval(interval);
+//     }, 20);
+//   };
+
+//   const handleSubmit = () => {
+//     if (!input.trim()) return;
+//     onSolve(input);
+//   };
+
+//   // 🔥 keyboard navigation
+//   useEffect(() => {
+//     const handleKey = (e) => {
+//       if (e.key === "ArrowDown") {
+//         setActiveIndex((prev) =>
+//           prev < suggestions.length - 1 ? prev + 1 : 0
+//         );
+//       }
+
+//       if (e.key === "ArrowUp") {
+//         setActiveIndex((prev) =>
+//           prev > 0 ? prev - 1 : suggestions.length - 1
+//         );
+//       }
+
+//       if (e.key === "Enter") {
+//         if (activeIndex >= 0) {
+//           typeText(suggestions[activeIndex]);
+//           onSolve(suggestions[activeIndex]);
+//         } else {
+//           handleSubmit();
+//         }
+//       }
+//     };
+
+//     window.addEventListener("keydown", handleKey);
+//     return () => window.removeEventListener("keydown", handleKey);
+//   }, [activeIndex, input]);
+
+//   return (
+//     <div className="solver-box elite">
+
+//       <div className="input-group">
+
+//         <input
+//           value={input}
+//           onChange={(e) => setInput(e.target.value)}
+//           placeholder="Solve anything... (e.g. 2x + 4 = 10)"
+//           className="ai-input"
+//         />
+
+//         {/* 🔥 INSANE SUGGESTIONS */}
+//         {/* <div className="math-suggestions">
+
+//           {suggestions.map((s, i) => (
+//             <motion.span
+//               key={i}
+//               className={`chip ${activeIndex === i ? "active" : ""}`}
+//               initial={{ opacity: 0, y: 15 }}
+//               animate={{ opacity: 1, y: 0 }}
+//               transition={{ delay: i * 0.08 }}
+//               whileHover={{ scale: 1.08 }}
+//               whileTap={{ scale: 0.95 }}
+//               onClick={() => {
+//                 typeText(s);
+//                 onSolve(s);
+//               }}
+//             >
+//               {s}
+//             </motion.span>
+//           ))}
+
+//         </div> */}
+
+//         <div className="math-suggestions">
+
+//   {suggestions.map((group, i) => (
+//     <div key={i} className="suggestion-group">
+
+//       <h4 className="group-title">{group.title}</h4>
+
+//       <div className="group-items">
+
+//         {group.items.map((item, j) => (
+//           <motion.span
+//             key={j}
+//             className="chip"
+//             initial={{ opacity: 0, y: 15 }}
+//             animate={{ opacity: 1, y: 0 }}
+//             transition={{ delay: j * 0.05 }}
+//             whileHover={{ scale: 1.08 }}
+//             whileTap={{ scale: 0.95 }}
+//             onClick={() => {
+//               typeText(item);
+//               onSolve(item);
+//             }}
+//           >
+//             {item}
+//           </motion.span>
+//         ))}
+
+//       </div>
+
+//     </div>
+//   ))}
+
+// </div>
+
+//       </div>
+
+//       <button className="solve-btn" onClick={handleSubmit}>
+//         {loading ? "⚡ Solving..." : "🚀 Solve"}
+//       </button>
+
+//     </div>
+//   );
+// };
+
+// export default MathSolverForm;
+
+// import { useState } from "react";
+
+// const suggestions = [
+//   "20% of 150",
+//   "2x + 4 = 10",
+//   "divide 100 in ratio 2:3",
+//   "1/2 + 3/4",
+// ];
+
+// const MathSolverForm = ({ onSolve, loading }) => {
+//   const [input, setInput] = useState("");
+
+//   const handleSubmit = () => {
+//     if (!input.trim()) return;
+//     onSolve(input);
+//   };
+
+//   return (
+//     <div className="solver-box elite">
+
+//       {/* INPUT + SUGGESTIONS GROUP */}
+//       <div className="input-group">
+
+//         <input
+//           value={input}
+//           onChange={(e) => setInput(e.target.value)}
+//           placeholder="Type a math problem..."
+//           onKeyDown={(e) => {
+//             if (e.key === "Enter") handleSubmit();
+//           }}
+//         />
+
+//         {/* Suggestions BELOW input */}
+//         <div className="suggestions">
+//           {suggestions.map((s, i) => (
+//             <span
+//               key={i}
+//               onClick={() => {
+//                 setInput(s);
+//                 onSolve(s); // 🔥 instant solve (premium UX)
+//               }}
+//             >
+//               {s}
+//             </span>
+//           ))}
+//         </div>
+
+//       </div>
+
+//       {/* BUTTON */}
+//       <button onClick={handleSubmit}>
+//         {loading ? "Solving..." : "Solve"}
+//       </button>
+
+//     </div>
+//   );
+// };
+
+// export default MathSolverForm;
 
 
 
