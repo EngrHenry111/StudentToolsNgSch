@@ -32,6 +32,7 @@ import About from "./pages/about/About";
 import Terms from "./pages/terms/Terms";
 import Author from "./pages/author/Author";
 import MathCalculatorPage from "./pages/mathCalculator/MathCalculatorPage";
+import QuizPage from "./pages/quiz/QuizPage";
 // import SeoPage from "./pages/seo/SeoPage";
 function App() {
 
@@ -97,6 +98,7 @@ function App() {
     {/* <Route path="/:slug" element={<SeoPage/>}/> */}
 
 <Route path="/tutorials/math-calculator" element={<MathCalculatorPage />} />    
+<Route path="/quiz" element={<QuizPage />} />    
 
    </Routes>
 
