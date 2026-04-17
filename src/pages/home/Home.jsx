@@ -171,39 +171,42 @@ StudentToolsNG - Free CGPA, WAEC & JAMB Calculators for Nigerian Students
  <div className="tool-grid">
 
  <div className="tool-card">
-
  <h3>CGPA Calculator</h3>
-
  <p>Calculate your university CGPA instantly.</p>
-
  <Link to="/cgpa-calculator">
  Open Tool
  </Link>
-
  </div>
 
  <div className="tool-card">
-
  <h3>WAEC Grade Calculator</h3>
-
  <p>Understand WAEC grading system easily.</p>
-
  <Link to="/waec-grade-calculator">
  Open Tool
  </Link>
-
  </div>
 
  <div className="tool-card">
-
  <h3>JAMB Score Calculator</h3>
-
  <p>Calculate your JAMB total score.</p>
-
  <Link to="/jamb-score-calculator">
  Open Tool
  </Link>
+ </div>
 
+ <div className="tool-card">
+ <h3>Maths Calculator</h3>
+ <p> Calculate 
+    Percentage, 
+    Algebra, 
+    Fractions, 
+    Ratio, 
+    Simple Interest and
+    Set Theory
+    </p>
+ <Link to="/tutorials/math-calculator">
+ Open Tool
+ </Link>
  </div>
 
  </div>
