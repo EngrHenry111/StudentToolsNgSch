@@ -26,16 +26,16 @@ html,body{
 
 /* ================= IMAGE ================= */
 .author-photo{
-  width:180px;
-  height:180px;
-  object-fit:cover;
-  border-radius:50%;
+  width:300px;
+  height:300px;
+  /* object-fit:cover; */
+  border-radius:60%;
   margin-bottom:25px;
 
   /* glow effect */
   border:3px solid transparent;
   background:linear-gradient(#0a0a0f,#0a0a0f) padding-box,
-             linear-gradient(120deg,#00f5ff,#7b2ff7) border-box;
+  linear-gradient(120deg,#00f5ff,#7b2ff7) border-box;
 
   box-shadow:
     0 0 20px rgba(0,245,255,0.3),
@@ -65,7 +65,7 @@ html,body{
 .author-page p{
   font-size:17px;
   line-height:1.8;
-  color:#94a3b8;
+  color:#f8f9fa;
   margin-bottom:18px;
   max-width:650px;
   margin-left:auto;
@@ -103,6 +103,518 @@ html,body{
     0 0 30px rgba(123,47,247,0.15);
 }
 
+/* ================= AUTHOR SECTION ================= */
+
+.auth{
+  max-width:850px;
+  margin:50px auto;
+  padding:30px 25px;
+
+  background:linear-gradient(
+    135deg,
+    rgba(15,23,42,0.7),
+    rgba(30,41,59,0.6)
+  );
+
+  border-radius:16px;
+
+  backdrop-filter:blur(14px);
+  border:1px solid rgba(56,189,248,0.15);
+
+  line-height:1.8;
+  color:#e2e8f0;
+
+  position:relative;
+}
+
+/* glowing border */
+
+.auth::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:16px;
+  padding:1px;
+
+  background:linear-gradient(120deg,#00f5ff,#7b2ff7);
+
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+
+  opacity:0.25;
+}
+
+/* ================= HEADINGS ================= */
+
+.auth h2{
+  font-size:22px;
+  margin-top:28px;
+  margin-bottom:12px;
+
+  color:#22d3ee;
+  position:relative;
+}
+
+/* underline glow */
+
+.auth h2::after{
+  content:"";
+  display:block;
+  width:50px;
+  height:3px;
+  margin-top:6px;
+
+  background:linear-gradient(90deg,#00f5ff,#7b2ff7);
+  border-radius:10px;
+}
+
+/* ================= TEXT ================= */
+
+.auth p{
+  font-size:15.5px;
+  color:#cbd5f5;
+  margin-bottom:15px;
+}
+
+/* ================= LIST ================= */
+
+.auth ul{
+  padding-left:20px;
+  margin-top:10px;
+}
+
+.auth li{
+  margin-bottom:10px;
+  font-size:15px;
+  color:#e2e8f0;
+}
+
+/* bullet styling */
+
+.auth li::marker{
+  color:#22d3ee;
+}
+
+/* ================= TOOL LINKS CTA ================= */
+
+.auth p:last-child{
+  margin-top:30px;
+  padding:18px 20px;
+
+  background:linear-gradient(
+    135deg,
+    rgba(37,99,235,0.08),
+    rgba(123,47,247,0.06)
+  );
+
+  border-left:4px solid #38bdf8;
+  border-radius:12px;
+
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+}
+
+/* links */
+
+.auth p:last-child a{
+  color:#38bdf8;
+  font-weight:600;
+  text-decoration:none;
+  margin:0 4px;
+
+  position:relative;
+  transition:all 0.25s ease;
+}
+
+/* underline animation */
+
+.auth p:last-child a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-2px;
+  width:0%;
+  height:2px;
+
+  background:linear-gradient(90deg,#00f5ff,#7b2ff7);
+  transition:width 0.3s ease;
+}
+
+.auth p:last-child a:hover::after{
+  width:100%;
+}
+
+/* hover glow */
+
+.auth p:last-child a:hover{
+  color:#7dd3fc;
+}
+
+/* ================= HOVER EFFECT ================= */
+
+.auth:hover{
+  box-shadow:
+    0 0 30px rgba(0,245,255,0.12),
+    0 0 50px rgba(123,47,247,0.08);
+}
+
+
+/* ================= ARTICLES SECTION ================= */
+
+.arti{
+  margin-top:40px;
+}
+
+/* Title */
+
+.arti h2{
+  margin-bottom:15px;
+  font-size:22px;
+  color:#00f5ff;
+}
+
+/* Remove default list style */
+
+.arti ul{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+/* Each item */
+
+.arti li{
+  margin-bottom:12px;
+}
+
+/* Link card */
+
+.arti li a{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  padding:14px 16px;
+
+  background:#f8fafc;
+  border:1px solid #e5e7eb;
+
+  border-radius:10px;
+
+  text-decoration:none;
+  color:#0f172a;
+  font-weight:500;
+  font-size:15px;
+
+  transition:all 0.25s ease;
+}
+
+/* Arrow */
+
+.arti li a::after{
+  content:"→";
+  color:#2563eb;
+  font-size:14px;
+  transition:transform 0.25s ease;
+}
+
+/* Hover */
+
+.arti li a:hover{
+  background:#eff6ff;
+  border-color:#2563eb;
+  transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+.arti li a:hover::after{
+  transform:translateX(5px);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width:768px){
+
+  .arti h2{
+    font-size:20px;
+  }
+
+  .arti li a{
+    font-size:14px;
+    padding:12px 14px;
+  }
+
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width:1024px){
+
+  .auth{
+    margin:40px auto;
+    padding:25px 20px;
+  }
+
+}
+
+@media (max-width:768px){
+
+  .auth{
+    padding:22px 18px;
+  }
+
+  .auth h2{
+    font-size:20px;
+  }
+
+  .auth p,
+  .auth li{
+    font-size:14.5px;
+  }
+
+}
+
+@media (max-width:480px){
+
+  .auth{
+    padding:20px 16px;
+    border-radius:12px;
+  }
+
+  .auth h2{
+    font-size:18px;
+  }
+
+  .auth p:last-child{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+}
+
+@media (max-width:360px){
+
+  .auth{
+    padding:18px 14px;
+  }
+
+}
+/* ================= AUTHOR SECTION ================= */
+
+.auth{
+  max-width:850px;
+  margin:50px auto;
+  padding:30px 25px;
+
+  background:linear-gradient(
+    135deg,
+    rgba(15,23,42,0.7),
+    rgba(30,41,59,0.6)
+  );
+
+  border-radius:16px;
+
+  backdrop-filter:blur(14px);
+  border:1px solid rgba(56,189,248,0.15);
+
+  line-height:1.8;
+  color:#e2e8f0;
+
+  position:relative;
+}
+
+/* glowing border */
+
+.auth::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:16px;
+  padding:1px;
+
+  background:linear-gradient(120deg,#00f5ff,#7b2ff7);
+
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+
+  opacity:0.25;
+}
+
+/* ================= HEADINGS ================= */
+
+.auth h2{
+  font-size:22px;
+  margin-top:28px;
+  margin-bottom:12px;
+
+  color:#22d3ee;
+  position:relative;
+}
+
+/* underline glow */
+
+.auth h2::after{
+  content:"";
+  display:block;
+  width:50px;
+  height:3px;
+  margin-top:6px;
+
+  background:linear-gradient(90deg,#00f5ff,#7b2ff7);
+  border-radius:10px;
+}
+
+/* ================= TEXT ================= */
+
+.auth p{
+  font-size:15.5px;
+  color:#cbd5f5;
+  margin-bottom:15px;
+}
+
+/* ================= LIST ================= */
+
+.auth ul{
+  padding-left:20px;
+  margin-top:10px;
+}
+
+.auth li{
+  margin-bottom:10px;
+  font-size:15px;
+  color:#e2e8f0;
+}
+
+/* bullet styling */
+
+.auth li::marker{
+  color:#22d3ee;
+}
+
+/* ================= TOOL LINKS CTA ================= */
+
+.auth p:last-child{
+  margin-top:30px;
+  padding:18px 20px;
+
+  background:linear-gradient(
+    135deg,
+    rgba(37,99,235,0.08),
+    rgba(123,47,247,0.06)
+  );
+
+  border-left:4px solid #38bdf8;
+  border-radius:12px;
+
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+}
+
+/* links */
+
+.auth p:last-child a{
+  color:#38bdf8;
+  font-weight:600;
+  text-decoration:none;
+  margin:0 4px;
+
+  position:relative;
+  transition:all 0.25s ease;
+}
+
+/* underline animation */
+
+.auth p:last-child a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-2px;
+  width:0%;
+  height:2px;
+
+  background:linear-gradient(90deg,#00f5ff,#7b2ff7);
+  transition:width 0.3s ease;
+}
+
+.auth p:last-child a:hover::after{
+  width:100%;
+}
+
+/* hover glow */
+
+.auth p:last-child a:hover{
+  color:#7dd3fc;
+}
+
+/* ================= HOVER EFFECT ================= */
+
+.auth:hover{
+  box-shadow:
+    0 0 30px rgba(0,245,255,0.12),
+    0 0 50px rgba(123,47,247,0.08);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width:1024px){
+
+  .auth{
+    margin:40px auto;
+    padding:25px 20px;
+  }
+
+}
+
+@media (max-width:768px){
+
+  .auth{
+    padding:22px 18px;
+  }
+
+  .auth h2{
+    font-size:20px;
+  }
+
+  .auth p,
+  .auth li{
+    font-size:14.5px;
+  }
+
+}
+
+@media (max-width:480px){
+
+  .auth{
+    padding:20px 16px;
+    border-radius:12px;
+  }
+
+  .auth h2{
+    font-size:18px;
+  }
+
+  .auth p:last-child{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+}
+
+@media (max-width:360px){
+
+  .auth{
+    padding:18px 14px;
+  }
+
+}
 /* ================= RESPONSIVE ================= */
 
 /* 📱 Mobile */
@@ -113,9 +625,11 @@ html,body{
   }
 
   .author-photo{
-    width:140px;
-    height:140px;
+    width:200px;
+    height:200px;
   }
+
+  
 
   .author-page h1{
     font-size:24px;
@@ -169,5 +683,7 @@ html,body{
     width:200px;
     height:200px;
   }
+
+  
 
 }

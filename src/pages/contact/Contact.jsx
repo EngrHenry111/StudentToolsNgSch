@@ -99,7 +99,7 @@ const Contact = () => {
     />
 
     <input
-     placeholder="Email"
+    type="email" placeholder="Email" required
      value={email}
      onChange={(e)=>setEmail(e.target.value)}
     />
@@ -115,6 +115,38 @@ const Contact = () => {
     </button>
 
    </form>
+
+
+   <section className="contact-content">
+
+  <h2>Get in Touch with StudentToolsNG</h2>
+  <p>
+    Do you have questions about our CGPA calculator, WAEC grading system, 
+    or JAMB score tools? We are here to help Nigerian students succeed academically.
+  </p>
+
+  <h2>Why Contact Us?</h2>
+  <ul>
+    <li>Get help using our academic tools</li>
+    <li>Report bugs or issues</li>
+    <li>Request new features</li>
+    <li>Partnership and collaboration enquiries</li>
+  </ul>
+
+  <h2>Support for Nigerian Students</h2>
+  <p>
+    StudentToolsNG provides free tools and tutorials designed specifically 
+    for Nigerian universities, WAEC, and JAMB students.
+  </p> 
+  
+  <p>
+  You can also explore our 
+  <a href="/cgpa-calculator">CGPA Calculator</a>, 
+  <a href="/waec-grade-calculator">WAEC Calculator</a>, and 
+  <a href="/jamb-score-calculator">JAMB Calculator</a>.
+</p>  
+
+</section>
 
   </div>
 

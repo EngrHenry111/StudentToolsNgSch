@@ -196,6 +196,53 @@ const CGPACalculator = () => {
     </div>
    </div>
 
+   <section className="cgpa-content">
+
+  <h2>What is CGPA?</h2>
+  <p>
+    CGPA (Cumulative Grade Point Average) is a system used by Nigerian universities
+    to measure a student's academic performance...
+  </p>
+
+  <h2>How to Calculate CGPA in Nigeria</h2>
+  <p>
+    To calculate CGPA, multiply each course unit by its grade point...
+  </p>
+
+  <h2>CGPA Calculation Example</h2>
+  <p>
+    For example, if you score A in a 3-unit course...
+  </p>
+
+  <h2>CGPA Grading System in Nigeria</h2>
+  <ul>
+    <li>A = 5 points</li>
+    <li>B = 4 points</li>
+    <li>C = 3 points</li>
+    <li>D = 2 points</li>
+    <li>E = 1 point</li>
+    <li>F = 0 point</li>
+  </ul>
+
+  <h2>Frequently Asked Questions</h2>
+
+  <p><strong>What is a good CGPA in Nigeria?</strong><br />
+  A CGPA of 3.5 and above is considered very good.</p>
+
+  <p><strong>Can I calculate CGPA manually?</strong><br />
+  Yes, but using this calculator is faster and more accurate.</p>
+
+<p className="cgpa-links">
+  <strong>Explore more tools:</strong>{" "}
+  You can also check our{" "}
+  <a href="/waec-grade-calculator">WAEC Calculator</a>{" "}
+  and{" "}
+  <a href="/jamb-score-calculator">JAMB Calculator</a>.
+</p>
+</section>
+
+
+
   </div>
  );
 };

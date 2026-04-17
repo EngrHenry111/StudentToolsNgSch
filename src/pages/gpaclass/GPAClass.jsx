@@ -86,7 +86,7 @@ const GPAClass = () => {
 
     </Helmet>
 
-   <h1>GPA to Degree Class Converter</h1>
+<h1>GPA Class Calculator Nigeria</h1>
 
    <p>Enter your CGPA to know your degree classification</p>
 
@@ -95,6 +95,7 @@ const GPAClass = () => {
     <input
      type="number"
      step="0.01"
+     
      placeholder="Enter CGPA"
      onChange={(e)=>setCgpa(e.target.value)}
     />
@@ -158,7 +159,46 @@ const GPAClass = () => {
     </table>
 
    </div>
+<section className="gpa-content">
 
+  <h2>What is Degree Classification in Nigeria?</h2>
+  <p>
+    Degree classification in Nigeria is based on a student's CGPA and determines
+    the class of degree awarded upon graduation.
+  </p>
+
+  <h2>How to Convert CGPA to Degree Class</h2>
+  <p>
+    Nigerian universities use a 5.0 grading scale. Your CGPA determines your
+    degree class as shown in the table above.
+  </p>
+
+  <h2>Examples</h2>
+  <p>
+    If your CGPA is 4.70, you will graduate with a First Class degree.  
+    If your CGPA is 3.80, you will have a Second Class Upper.
+  </p>
+
+  <h2>Why Degree Classification Matters</h2>
+  <ul>
+    <li>Important for job opportunities</li>
+    <li>Required for postgraduate studies</li>
+    <li>Used for scholarships and internships</li>
+  </ul>
+
+  <h2>Frequently Asked Questions</h2>
+
+  <p><strong>What CGPA is First Class?</strong><br/>
+  4.50 and above.</p>
+
+  <p><strong>Can I graduate with Second Class Upper?</strong><br/>
+  Yes, with a CGPA between 3.50 and 4.49.</p>    <p>
+You can also calculate your 
+<a href="/cgpa-calculator"> {" "}CGPA</a> or check your 
+<a href="/jamb-score-calculator"> {" "} JAMB Score</a>.
+</p> 
+
+</section>
   </div>
 
  );

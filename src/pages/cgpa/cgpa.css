@@ -195,6 +195,196 @@ html,body{
   color:#00f5ff;
 }
 
+
+/* ================= CGPA CONTENT ================= */
+
+.cgpa-content{
+  max-width:850px;
+  margin:50px auto;
+  padding:30px 25px;
+
+  background:rgba(255,255,255,0.03);
+  border-radius:16px;
+
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,0.05);
+
+  line-height:1.8;
+  color:#e2e8f0;
+}
+
+/* Headings */
+
+.cgpa-content h2{
+  font-size:22px;
+  margin-top:28px;
+  margin-bottom:10px;
+
+  color:#38bdf8;
+  position:relative;
+}
+
+/* glowing underline effect */
+
+.cgpa-content h2::after{
+  content:"";
+  display:block;
+  width:40px;
+  height:3px;
+  margin-top:6px;
+
+  background:linear-gradient(90deg,#00f5ff,#7b2ff7);
+  border-radius:10px;
+}
+
+/* Paragraph */
+
+.cgpa-content p{
+  font-size:15.5px;
+  color:#cbd5f5;
+  margin-bottom:15px;
+}
+
+/* List */
+
+.cgpa-content ul{
+  padding-left:20px;
+  margin-top:10px;
+}
+
+.cgpa-content li{
+  margin-bottom:8px;
+  font-size:15px;
+  color:#e2e8f0;
+
+  position:relative;
+}
+
+/* bullet upgrade */
+
+.cgpa-content li::marker{
+  color:#38bdf8;
+}
+
+/* ================= FAQ STYLE ================= */
+
+.cgpa-content p strong{
+  display:block;
+  margin-top:18px;
+  margin-bottom:4px;
+
+  color:#00f5ff;
+  font-weight:600;
+}
+
+/* ================= HOVER MICRO EFFECT ================= */
+
+.cgpa-content:hover{
+  box-shadow:
+    0 0 25px rgba(0,245,255,0.08),
+    0 0 40px rgba(123,47,247,0.05);
+}
+
+
+/* ================= INTERNAL LINKS SECTION ================= */
+
+.cgpa-links{
+  margin-top:25px;
+  padding:16px 18px;
+
+  background:rgba(0,245,255,0.05);
+  border-left:4px solid #00f5ff;
+
+  border-radius:10px;
+  font-size:15px;
+}
+
+/* links */
+
+.cgpa-links a{
+  color:#38bdf8;
+  font-weight:600;
+  text-decoration:none;
+
+  position:relative;
+  transition:0.3s;
+}
+
+/* underline animation */
+
+.cgpa-links a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-2px;
+
+  width:0%;
+  height:2px;
+
+  background:linear-gradient(90deg,#00f5ff,#7b2ff7);
+  transition:0.3s;
+}
+
+.cgpa-links a:hover::after{
+  width:100%;
+}
+
+/* hover glow */
+
+.cgpa-links a:hover{
+  color:#00f5ff;
+
+  text-shadow:
+    0 0 6px rgba(0,245,255,0.5),
+    0 0 12px rgba(123,47,247,0.3);
+}
+
+.cgpa-links a{
+  margin:0 6px;   /* 🔥 spacing between links */
+}
+/* links */
+
+.cgpa-links a{
+  color:#38bdf8;
+  font-weight:600;
+  text-decoration:none;
+
+  position:relative;
+  transition:0.3s;
+}
+
+/* underline animation */
+
+.cgpa-links a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-2px;
+
+  width:0%;
+  height:2px;
+
+  background:linear-gradient(90deg,#00f5ff,#7b2ff7);
+  transition:0.3s;
+}
+
+.cgpa-links a:hover::after{
+  width:100%;
+}
+
+/* hover glow */
+
+.cgpa-links a:hover{
+  color:#00f5ff;
+
+  text-shadow:
+    0 0 6px rgba(0,245,255,0.5),
+    0 0 12px rgba(123,47,247,0.3);
+}
+
+.cgpa-links a{
+  margin:0 6px;   /* 🔥 spacing between links */
+}
 /* ================= RESPONSIVE ================= */
 
 /* 📱 Mobile */
@@ -263,3 +453,63 @@ html,body{
   }
 
 }
+
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width:1024px){
+
+  .cgpa-content{
+    margin:40px auto;
+    padding:25px 20px;
+  }
+/* ================= RESPONSIVE ================= */
+
+@media (max-width:1024px){
+
+  .cgpa-content{
+    margin:40px auto;
+    padding:25px 20px;
+  }
+
+}
+
+@media (max-width:768px){
+
+  .cgpa-content{
+    padding:22px 18px;
+  }
+
+  .cgpa-content h2{
+    font-size:20px;
+  }
+
+  .cgpa-content p,
+  .cgpa-content li{
+    font-size:14.5px;
+  }
+
+}
+
+@media (max-width:480px){
+
+  .cgpa-content{
+    padding:20px 16px;
+    border-radius:12px;
+  }
+
+  .cgpa-content h2{
+    font-size:18px;
+  }
+
+}
+
+@media (max-width:360px){
+
+  .cgpa-content{
+    padding:18px 14px;
+  }
+
+}
+

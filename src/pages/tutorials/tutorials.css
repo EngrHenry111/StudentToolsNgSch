@@ -207,6 +207,199 @@ html,body{
   color:white;
 }
 
+
+
+/* ================= TUTORIAL INTRO SECTION ================= */
+
+.tutorial-intro{
+  margin-top:25px;
+  padding:18px 20px;
+
+  background:rgba(59,130,246,0.06);
+  border-left:4px solid #3b82f6;
+
+  border-radius:10px;
+
+  font-size:15.5px;
+  line-height:1.8;
+  color:#cbd5f5;
+}
+
+/* ================= LEARNING LIST ================= */
+
+.tutorial-intro + h2,
+.tutorial-content h2{
+  font-size:22px;
+  margin-top:30px;
+  margin-bottom:12px;
+
+  color:#38bdf8;
+  position:relative;
+}
+
+/* underline glow */
+
+.tutorial-content h2::after{
+  content:"";
+  display:block;
+  width:45px;
+  height:3px;
+  margin-top:6px;
+
+  background:linear-gradient(90deg,#00f5ff,#7b2ff7);
+  border-radius:10px;
+}
+
+/* ================= LIST ================= */
+
+.tutorial-content ul{
+  padding-left:20px;
+  margin-top:10px;
+}
+
+.tutorial-content li{
+  margin-bottom:10px;
+  font-size:15px;
+  color:#e2e8f0;
+
+  position:relative;
+}
+
+/* bullet upgrade */
+
+.tutorial-content li::marker{
+  color:#38bdf8;
+}
+
+/* ================= CARD STYLE (OPTIONAL WRAP) ================= */
+
+/* If you wrap everything inside .tutorial-content */
+.tutorial-content{
+  max-width:850px;
+  margin:50px auto;
+  padding:30px 25px;
+
+  background:rgba(255,255,255,0.03);
+  border-radius:16px;
+
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,0.05);
+
+  line-height:1.8;
+  color:#e2e8f0;
+}
+
+/* hover glow */
+
+.tutorial-content:hover{
+  box-shadow:
+    0 0 25px rgba(0,245,255,0.08),
+    0 0 40px rgba(123,47,247,0.05);
+}
+
+
+/* ================= TOOL LINK CTA (PLINK) ================= */
+
+.plink{
+  margin-top:30px;
+  padding:18px 20px;
+
+  background:linear-gradient(
+    135deg,
+    rgba(37,99,235,0.08),
+    rgba(123,47,247,0.06)
+  );
+
+  border:1px solid rgba(255,255,255,0.08);
+  border-left:4px solid #3b82f6;
+
+  border-radius:12px;
+
+  font-size:15.5px;
+  line-height:1.7;
+  color:#cbd5f5;
+
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:6px;
+}
+
+/* ICON */
+
+.plink::before{
+  content:"🚀";
+  margin-right:6px;
+}
+
+/* ================= LINKS ================= */
+
+.plink a{
+  color:#38bdf8;
+  font-weight:600;
+  text-decoration:none;
+
+  padding:4px 8px;
+  border-radius:6px;
+
+  position:relative;
+  transition:all 0.25s ease;
+}
+
+/* hover background */
+
+.plink a:hover{
+  background:rgba(56,189,248,0.1);
+  color:#7dd3fc;
+}
+
+/* animated underline */
+
+.plink a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-2px;
+  width:0%;
+  height:2px;
+
+  background:linear-gradient(90deg,#00f5ff,#7b2ff7);
+  transition:width 0.3s ease;
+}
+
+.plink a:hover::after{
+  width:100%;
+}
+
+/* ================= HOVER EFFECT ================= */
+
+.plink:hover{
+  box-shadow:
+    0 0 25px rgba(0,245,255,0.08),
+    0 0 40px rgba(123,47,247,0.05);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width:600px){
+
+  .plink{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:8px;
+    font-size:14.5px;
+  }
+
+}
+
+@media (max-width:480px){
+
+  .plink{
+    padding:15px;
+    font-size:14px;
+  }
+
+}
 /* ================= RESPONSIVE ================= */
 
 /* 📱 Mobile */
@@ -260,6 +453,61 @@ html,body{
 
   .tutorials-container h1{
     font-size:44px;
+  }
+
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width:1024px){
+
+  .tutorial-content{
+    margin:40px auto;
+    padding:25px 20px;
+  }
+
+}
+
+@media (max-width:768px){
+
+  .tutorial-content{
+    padding:22px 18px;
+  }
+
+  .tutorial-content h2{
+    font-size:20px;
+  }
+
+  .tutorial-content li,
+  .tutorial-intro{
+    font-size:14.5px;
+  }
+
+}
+
+@media (max-width:480px){
+
+  .tutorial-content{
+    padding:20px 16px;
+    border-radius:12px;
+  }
+
+  .tutorial-content h2{
+    font-size:18px;
+  }
+
+  .tutorial-intro{
+    padding:14px;
+    font-size:14px;
+  }
+
+}
+
+@media (max-width:360px){
+
+  .tutorial-content{
+    padding:18px 14px;
   }
 
 }

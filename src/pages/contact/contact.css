@@ -124,6 +124,136 @@ html,body{
   pointer-events:none;
 }
 
+
+
+/* ================= CONTACT CONTENT ================= */
+
+.contact-content{
+  max-width:850px;
+  margin:50px auto;
+  padding:30px 25px;
+
+  background:rgba(255,255,255,0.03);
+  border-radius:16px;
+
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,0.05);
+
+  line-height:1.8;
+  color:#e2e8f0;
+}
+
+/* ================= HEADINGS ================= */
+
+.contact-content h2{
+  font-size:22px;
+  margin-top:28px;
+  margin-bottom:10px;
+
+  color:#38bdf8;
+  position:relative;
+}
+
+/* glowing underline */
+
+.contact-content h2::after{
+  content:"";
+  display:block;
+  width:45px;
+  height:3px;
+  margin-top:6px;
+
+  background:linear-gradient(90deg,#00f5ff,#7b2ff7);
+  border-radius:10px;
+}
+
+/* ================= PARAGRAPH ================= */
+
+.contact-content p{
+  font-size:15.5px;
+  color:#cbd5f5;
+  margin-bottom:15px;
+}
+
+/* ================= LIST ================= */
+
+.contact-content ul{
+  padding-left:20px;
+  margin-top:10px;
+}
+
+.contact-content li{
+  margin-bottom:8px;
+  font-size:15px;
+  color:#e2e8f0;
+}
+
+/* bullet color */
+
+.contact-content li::marker{
+  color:#38bdf8;
+}
+
+/* ================= LINK BOX (TOOLS) ================= */
+
+.contact-content p:last-child{
+  margin-top:20px;
+  padding:16px 18px;
+
+  background:rgba(0,245,255,0.05);
+  border-left:4px solid #00f5ff;
+  border-radius:10px;
+}
+
+/* links styling */
+
+.contact-content a{
+  color:#38bdf8;
+  font-weight:600;
+  text-decoration:none;
+  margin:0 5px;
+
+  position:relative;
+  transition:0.3s;
+}
+
+/* underline animation */
+
+.contact-content a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-2px;
+
+  width:0%;
+  height:2px;
+
+  background:linear-gradient(90deg,#00f5ff,#7b2ff7);
+  transition:0.3s;
+}
+
+.contact-content a:hover::after{
+  width:100%;
+}
+
+/* glow hover */
+
+.contact-content a:hover{
+  color:#00f5ff;
+
+  text-shadow:
+    0 0 6px rgba(0,245,255,0.5),
+    0 0 12px rgba(123,47,247,0.3);
+}
+
+/* ================= HOVER EFFECT ================= */
+
+.contact-content:hover{
+  box-shadow:
+    0 0 25px rgba(0,245,255,0.08),
+    0 0 40px rgba(123,47,247,0.05);
+}
+
 /* ================= RESPONSIVE ================= */
 
 /* 📱 Mobile */
@@ -184,6 +314,56 @@ html,body{
 
   .contact h1{
     font-size:42px;
+  }
+
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width:1024px){
+
+  .contact-content{
+    margin:40px auto;
+    padding:25px 20px;
+  }
+
+}
+
+@media (max-width:768px){
+
+  .contact-content{
+    padding:22px 18px;
+  }
+
+  .contact-content h2{
+    font-size:20px;
+  }
+
+  .contact-content p,
+  .contact-content li{
+    font-size:14.5px;
+  }
+
+}
+
+@media (max-width:480px){
+
+  .contact-content{
+    padding:20px 16px;
+    border-radius:12px;
+  }
+
+  .contact-content h2{
+    font-size:18px;
+  }
+
+}
+
+@media (max-width:360px){
+
+  .contact-content{
+    padding:18px 14px;
   }
 
 }

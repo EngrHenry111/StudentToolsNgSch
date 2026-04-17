@@ -24,6 +24,7 @@ html,body{
   width:100%;
 }
 
+
 /* ================= TITLE ================= */
 .tutorial-main h1{
   font-size:36px;
@@ -131,13 +132,14 @@ html,body{
 }
 
 /* ================= AI ================= */
+
 .ai-assistant{
   margin-top:50px;
   padding:25px;
   border-radius:18px;
 
   /* 🔥 THIS LINE FIXES EVERYTHING */
-  background:
+    background:
     linear-gradient(#0f172a, #0f172a) padding-box,
     linear-gradient(120deg,#00f5ff,#7b2ff7) border-box;
 
@@ -146,21 +148,6 @@ html,body{
   backdrop-filter:blur(14px);
 }
 
-/* .ai-assistant::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:18px;
-  padding:1px;
-  background:linear-gradient(120deg,#00f5ff,#7b2ff7);
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite:xor;
-   z-index: 0; 
-
-  pointer-events:none; /* ✅ FIX */
-/* } */
 
 /* ensure content stays above */
 .ai-assistant > *{
@@ -190,13 +177,89 @@ html,body{
 }
 
 /* answer */
+/* ================= AI ANSWER FIX ================= */
+
 .ai-answer{
   margin-top:20px;
-  padding:20px;
-  border-radius:14px;
-  background:rgba(255,255,255,0.05);
+  padding:22px;
+
+  background:white;
+  border-radius:12px;
+
+  line-height:1.8;
+  font-size:15px;
+
+  border:1px solid #e5e7eb;
+
+  width:100%;
+  max-width:100%;
+
+  box-sizing:border-box;
+
+  /* 🔥 CRITICAL FIXES */
+  overflow-wrap:anywhere;
+  word-break:break-word;
+  white-space:normal;
 }
 
+/* Prevent ANY child overflow */
+
+.ai-answer *{
+  max-width:100%;
+  box-sizing:border-box;
+  word-break:break-word;
+}
+
+/* ================= CODE BLOCK FIX ================= */
+
+.ai-answer pre{
+  width:100%;
+  max-width:100%;
+
+  overflow-x:auto;   /* scroll instead of breaking layout */
+
+  padding:14px;
+  border-radius:10px;
+
+  margin:16px 0;
+
+  background:#0f172a;
+
+  /* prevent overflow */
+  white-space:pre;
+}
+
+/* Fix SyntaxHighlighter overflow */
+
+.ai-answer pre div{
+  max-width:100%;
+  overflow-x:auto;
+}
+
+/* Inline code */
+
+.ai-answer code{
+  background:#1e293b;
+  color:#e2e8f0;
+  padding:4px 6px;
+  border-radius:6px;
+
+  word-break:break-word;
+}
+
+/* ================= PARAGRAPH FIX ================= */
+
+.ai-answer p{
+  margin-bottom:14px;
+}
+
+/* ================= LIST FIX ================= */
+
+.ai-answer ul,
+.ai-answer ol{
+  padding-left:20px;
+  margin-bottom:14px;
+}
 /* ================= FAQ ================= */
 .faq-section{
   margin-top:40px;
@@ -339,6 +402,18 @@ html,body{
   .ai-assistant button{
     width:100%;            /* ✅ full width button */
     padding:12px;
+  }
+
+}
+
+
+/* ================= MOBILE EXTRA FIX ================= */
+
+@media (max-width:480px){
+
+  .ai-answer{
+    padding:16px;
+    font-size:14px;
   }
 
 }

@@ -115,7 +115,7 @@ const handleChange = (e)=>{
         </form>
 
         <li><Link to="/" onClick={closeMenu}>Home</Link></li>
-        <li><Link to="/tutorials/math-calculator" onClick={closeMenu}>Math Calculator</Link></li>
+        <li><Link to="/tutorials/math-calculator" onClick={closeMenu}>Math Engine</Link></li>
         <li><Link to="/cgpa-calculator" onClick={closeMenu}>CGPA</Link></li>
         <li><Link to="/gpa-class-calculator" onClick={closeMenu}>GPA</Link></li>
         <li><Link to="/waec-grade-calculator" onClick={closeMenu}>WAEC</Link></li>

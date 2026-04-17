@@ -101,7 +101,7 @@ const JAMBScore = () => {
 
    </Helmet>
 
-   <h1>JAMB Score Calculator</h1>
+   <h1>JAMB Score Calculator Nigeria</h1>
 
    <p>Enter your UTME subject scores to calculate total</p>
 
@@ -146,6 +146,54 @@ const JAMBScore = () => {
 
    )}
 
+
+<section className="jamb-content">
+
+  <h2>What is JAMB Score?</h2>
+  <p>
+    JAMB (Joint Admissions and Matriculation Board) score is the total score 
+    obtained in the UTME examination by Nigerian students seeking admission 
+    into universities, polytechnics, and colleges of education.
+  </p>
+
+  <h2>How to Calculate JAMB Score</h2>
+  <p>
+    JAMB score is calculated by adding the scores of four subjects:
+    English (compulsory) and three other subjects related to your course.
+  </p>
+
+  <h2>JAMB Score Example</h2>
+  <p>
+    If you score 70 in English, 65 in Mathematics, 60 in Physics, 
+    and 55 in Chemistry:
+  </p>
+  <p><strong>Total = 70 + 65 + 60 + 55 = 250</strong></p>
+
+  <h2>What is a Good JAMB Score?</h2>
+  <ul>
+    <li>300+ → Excellent</li>
+    <li>250–299 → Very Competitive</li>
+    <li>200–249 → Good</li>
+    <li>180–199 → Minimum Admission Range</li>
+    <li>Below 180 → Low Chances</li>
+  </ul>
+
+  <h2>Frequently Asked Questions</h2>
+
+  <p><strong>What is the cut-off mark for JAMB?</strong><br />
+  The general cut-off mark is 180, but universities may require higher scores.</p>
+
+  <p><strong>Can I gain admission with 200?</strong><br />
+  Yes, depending on your course and institution.</p>
+
+
+  <p className="calculators">
+  You can also calculate your 
+  <a href="/cgpa-calculator">CGPA</a> or check the 
+  <a href="/waec-grade-calculator">WAEC grading system</a>.
+</p>
+
+</section>
   </div>
 
  );

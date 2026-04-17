@@ -146,11 +146,6 @@ const addInternalLinks = async (html) => {
     regex,
     `<a href="/tutorial/${t.slug}" class="internal-link">${t.title}</a>`
     );
-  //  updatedHTML = updatedHTML.replace(
-  //   regex,
-  //   `<a href="/tutorial/${t.slug}" class="internal-link">${t.title}</a>`
-  //  );
-
   });
 
   return updatedHTML;
@@ -197,7 +192,7 @@ const addInternalLinks = async (html) => {
  const items = [];
  headings.forEach((heading,index)=>{
   const id = `section-${index}`;
-  heading.id = id;
+ heading.setAttribute("id", id); // ✅ important fix
   items.push({
    text: heading.innerText,
    id:id
@@ -207,6 +202,7 @@ const addInternalLinks = async (html) => {
 
  setToc(items);
 
+ return doc.body.innerHTML; // ✅ return updated HTML
 };
 
 
@@ -291,6 +287,10 @@ const generateFAQ = (content)=>{
  datePublished: tutorial.createdAt,
  dateModified: tutorial.updatedAt
 };
+
+// const cleanText = tutorial.content.replace(/<[^>]*>/g, "");
+// const shortDesc = cleanText.slice(0, 150);
+
  return(
 
   <div className="tutorial-layout">
@@ -464,7 +464,7 @@ const generateFAQ = (content)=>{
     )}
 
   <div className="ai-assistant">
-    <h3>Ask AI about this tutorial</h3>
+<h3>Ask AI Questions About This Topic</h3>
 
     <input
     placeholder="Ask a question..."
@@ -496,6 +496,7 @@ const generateFAQ = (content)=>{
       ) : (
       <code className={className}>{children}</code>
       );
+      
     }
     }}
     >
@@ -506,13 +507,7 @@ const generateFAQ = (content)=>{
     )}
     </div>
 
-  {/* <div
-  className="tutorial-content"
-  dangerouslySetInnerHTML={{__html:tutorial.content}}>
-  </div> */}
-
-
-  <h2>Related Tutorials</h2>
+<h2>Related Tutorials</h2>
 
 <div className="related-grid">
 
@@ -535,6 +530,7 @@ Read Tutorial
 </div>
 
 
+
 <div className="tutorial-sidebar">
 
 <h3>Trending Tutorials</h3>
@@ -547,10 +543,14 @@ Read Tutorial
 {t.title}
 </Link>
 
+
 </div>
 
 ))}
 
+<p className="last-updated">
+Last updated: {new Date(tutorial.updatedAt).toDateString()}
+</p>
 <h3>Study Resources</h3>
 
 <ul className="sidebar-links">

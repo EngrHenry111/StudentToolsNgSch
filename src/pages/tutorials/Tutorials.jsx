@@ -129,15 +129,14 @@ Study Tutorials for Nigerian Students | CGPA, WAEC, JAMB Guides
 {/* Structured Data (ItemList - VERY IMPORTANT) */}
 <script type="application/ld+json">
 {JSON.stringify({
- "@context": "https://schema.org",
- "@type": "CollectionPage",
- name: "Study Tutorials",
- url: "https://studenttoolsng.com/tutorials",
- description: "Educational tutorials for Nigerian students including CGPA, WAEC and JAMB guides.",
- publisher: {
-   "@type": "Organization",
-   name: "StudentToolsNG"
- }
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  itemListElement: tutorials.map((t, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    url: `https://studenttoolsng.com/tutorial/${t.slug}`,
+    name: t.title
+  }))
 })}
 </script>
 
@@ -234,7 +233,27 @@ Study Tutorials for Nigerian Students | CGPA, WAEC, JAMB Guides
 
 </div>
 
+<h2>What You Will Learn</h2>
+<ul>
+  <li>How to calculate CGPA in Nigerian universities</li>
+  <li>Understanding WAEC grading system</li>
+  <li>JAMB score calculation and admission tips</li>
+  <li>Effective study techniques</li>
+</ul>               
 
+<p className="tutorial-intro"> 
+  Explore a wide range of educational tutorials designed for Nigerian students. 
+  Learn how to calculate CGPA, understand WAEC grading system, improve your JAMB score, 
+  and discover effective study strategies to excel academically.
+</p>    
+
+<p className="plink">
+  Use our 
+  <a href="/cgpa-calculator">CGPA Calculator</a>, 
+  <a href="/waec-grade-calculator">WAEC Calculator</a>, and 
+  <a href="/jamb-score-calculator">JAMB Calculator</a> 
+  alongside these tutorials.
+</p>
   </div>
 
  );

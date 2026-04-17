@@ -159,7 +159,7 @@ WAEC Grade Calculator Nigeria | Convert WAEC Scores to Grades
 </Helmet>
 
 
-   <h1>WAEC Grade Calculator</h1>
+<h1>WAEC Grade Calculator Nigeria</h1>
 
    <p>Convert WAEC scores into official grades</p>
 
@@ -251,6 +251,8 @@ WAEC Grade Calculator Nigeria | Convert WAEC Scores to Grades
 
        <p>Grade: <strong>{r.grade}</strong></p>
 
+       
+
       </div>
 
      ))}
@@ -259,6 +261,49 @@ WAEC Grade Calculator Nigeria | Convert WAEC Scores to Grades
 
    )}
 
+<section className="waec-content">
+
+  <h2>What is WAEC Grading System?</h2>
+  <p>
+    The WAEC grading system is used to evaluate student performance in the West African Senior School Certificate Examination (WASSCE). Grades range from A1 (Excellent) to F9 (Fail).
+  </p>
+
+  <h2>WAEC Grade Breakdown</h2>
+  <ul>
+    <li>A1: 75 – 100 (Excellent)</li>
+    <li>B2: 70 – 74 (Very Good)</li>
+    <li>B3: 65 – 69 (Good)</li>
+    <li>C4: 60 – 64 (Credit)</li>
+    <li>C5: 55 – 59 (Credit)</li>
+    <li>C6: 50 – 54 (Credit)</li>
+    <li>D7: 45 – 49 (Pass)</li>
+    <li>E8: 40 – 44 (Pass)</li>
+    <li>F9: 0 – 39 (Fail)</li>
+  </ul>
+
+  <h2>How to Calculate WAEC Grades</h2>
+  <p>
+    To calculate your WAEC grade, simply input your subject scores into the calculator above. The system automatically converts each score into the corresponding grade.
+  </p>
+
+  <h2>Example of WAEC Grade Calculation</h2>
+  <p>
+    If you score 78 in Mathematics, your grade will be A1. If you score 62 in English, your grade will be C4.
+  </p>
+
+  <h2>Frequently Asked Questions</h2>
+
+  <p><strong>What is the best WAEC grade?</strong><br />
+  A1 is the highest and best grade.</p>
+
+  <p><strong>What is the minimum passing grade?</strong><br />
+  The minimum passing grade is D7 or E8 depending on requirements.</p>         <p>
+  You can also calculate your 
+  <a href="/cgpa-calculator"> {""} CGPA</a> or check your 
+  <a href="/jamb-score-calculator">{""} JAMB Score</a>.
+</p> 
+
+</section>
   </div>
 
  );

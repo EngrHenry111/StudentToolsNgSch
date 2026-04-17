@@ -165,6 +165,143 @@ html,body{
   border-bottom:1px solid rgba(255,255,255,0.05);
 }
 
+/* ================= GPA CONTENT ================= */
+
+.gpa-content{
+  max-width:900px;
+  margin:40px auto;
+  padding:30px 24px;
+
+  background:#ffffff;
+  border-radius:14px;
+
+  box-shadow:0 10px 30px rgba(0,0,0,0.06);
+
+  line-height:1.8;
+  box-sizing:border-box;
+}
+
+/* Headings */
+
+.gpa-content h2{
+  margin-top:28px;
+  margin-bottom:10px;
+
+  font-size:20px;
+  font-weight:600;
+  color:#0f172a;
+
+  position:relative;
+}
+
+/* Blue accent line */
+
+.gpa-content h2::before{
+  content:"";
+  position:absolute;
+  left:-12px;
+  top:6px;
+
+  width:4px;
+  height:18px;
+  background:#2563eb;
+
+  border-radius:3px;
+}
+
+/* Paragraphs */
+
+.gpa-content p{
+  color:#475569;
+  font-size:15px;
+  margin-bottom:16px;
+}
+
+/* Lists */
+
+.gpa-content ul{
+  padding-left:20px;
+  margin-bottom:16px;
+}
+
+.gpa-content li{
+  margin-bottom:8px;
+  color:#334155;
+  font-size:15px;
+}
+
+/* FAQ style */
+
+.gpa-content p strong{
+  color:#0f172a;
+}
+
+/* Bottom link section */
+
+.gpa-content p:last-child{
+  margin-top:25px;
+  padding:16px;
+
+  background:#f1f5f9;
+  border-left:4px solid #2563eb;
+
+  border-radius:8px;
+}
+
+/* Links */
+
+.gpa-content a{
+  color:#2563eb;
+  font-weight:500;
+  text-decoration:none;
+  transition:all 0.25s ease;
+}
+
+.gpa-content a:hover{
+  text-decoration:underline;
+  color:#1d4ed8;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width:768px){
+
+  .gpa-content{
+    padding:25px 18px;
+  }
+
+  .gpa-content h2{
+    font-size:18px;
+  }
+
+}
+
+@media (max-width:480px){
+
+  .gpa-content{
+    padding:22px 15px;
+    margin:30px 12px;
+  }
+
+  .gpa-content h2{
+    font-size:17px;
+  }
+
+  .gpa-content p,
+  .gpa-content li{
+    font-size:14px;
+  }
+
+}
+
+@media (max-width:360px){
+
+  .gpa-content{
+    padding:20px 12px;
+  }
+
+}
+
 /* ================= RESPONSIVE ================= */
 
 /* 📱 Mobile */

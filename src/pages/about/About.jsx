@@ -95,6 +95,37 @@ const About = () => {
         If you have questions, suggestions, or feedback, feel free to reach out through our
         contact page.
       </p>
+
+      <section className="us-section">
+        <h2>Who We Are</h2>
+
+<p>
+StudentToolsNG was created to solve real problems faced by Nigerian students 
+when calculating CGPA, understanding WAEC grading, and preparing for JAMB.
+</p>
+
+<p>
+We understand the challenges students face, and we are committed to providing 
+simple, accurate, and reliable academic tools.
+</p>
+
+<p>
+You can explore our 
+<a href="/cgpa-calculator">CGPA Calculator</a>, 
+<a href="/waec-grade-calculator">WAEC Calculator</a>, and 
+<a href="/jamb-score-calculator">JAMB Calculator</a> 
+to get started.
+</p>
+
+<h2>Why Choose StudentToolsNG?</h2>
+
+<ul>
+  <li>100% Free academic tools</li>
+  <li>Designed specifically for Nigerian students</li>
+  <li>Simple and easy to use</li>
+  <li>Accurate and reliable calculations</li>
+</ul>
+      </section>
     </div>
   );
 };

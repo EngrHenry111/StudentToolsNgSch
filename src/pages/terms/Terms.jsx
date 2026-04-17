@@ -55,7 +55,7 @@ const Terms = () => {
 
  </Helmet>
 
- <h1>Terms and Conditions</h1>
+<h1>Terms and Conditions for StudentToolsNG</h1>
 
  <p>
  Welcome to StudentToolsNG. By accessing and using this website, you agree to comply with the following terms and conditions.
@@ -104,6 +104,13 @@ const Terms = () => {
  <p>
  If you have questions about these Terms and Conditions, please contact us through the contact page.
  </p>
+
+  <p className="planLink"> 
+  You can also use our 
+  <a href="/cgpa-calculator">CGPA Calculator</a> 
+  and 
+  <a href="/jamb-score-calculator">JAMB Score Calculator</a>.
+</p>
 
  </div>
 

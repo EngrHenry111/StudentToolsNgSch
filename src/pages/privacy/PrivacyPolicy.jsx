@@ -142,6 +142,13 @@ please contact us through the contact page.
 <p className="policy-update">
 Last updated: {new Date().getFullYear()}
 </p>
+<p className="cgpa-links">
+  <strong>Explore more tools:</strong>{" "}
+  You can also check our{" "}
+  <a href="/waec-grade-calculator">WAEC Calculator</a>{" "}
+  and{" "}
+  <a href="/jamb-score-calculator">JAMB Calculator</a>.
+</p>
 
 </div>
 

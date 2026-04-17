@@ -1,5 +1,3 @@
-
-
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
@@ -266,6 +264,12 @@ StudentToolsNG - Free CGPA, WAEC & JAMB Calculators for Nigerian Students
  </Link>
  </li>
 
+ <li>
+ <Link to="/admission-predictor">
+ Academic Tutorials
+ </Link>
+ </li>
+
  </ul>
 
  </section>
@@ -386,139 +390,4 @@ Read Tutorial →
 };
 
 export default Home;
-
-
-// import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
-// import { Helmet } from "react-helmet";
-// import ToolCard from "../../components/toolCard/ToolCard";
-// import "./home.css";
-
-// const Home = () => {
-
-//  const [query,setQuery] = useState("");
-//  const navigate = useNavigate();
-
-
-// const handleSearch = () => {
-
-//  if(query.trim()){
-//   navigate(`/search?q=${query}`);
-//  }
-
-// };
-
-//  return(
-
-//   <div className="home">
-
-//   <Helmet>
-
-// <title>
-// StudentToolsNG | Free CGPA, WAEC & JAMB Calculators
-// </title>
-
-// <meta
-//  name="description"
-//  content="StudentToolsNG provides free academic tools for Nigerian students including CGPA calculator, WAEC grade calculator, JAMB score calculator and study tutorials."
-// />
-
-// </Helmet>
-
-//    {/* HERO SECTION */}
-
-//    <section className="hero">
-
-//     <h1>Academic Tools for Nigerian Students</h1>
-
-//     <p>
-//      Calculate CGPA, check WAEC grades, predict admission,
-//      and access study tutorials.
-//     </p>
-
-//     <div className="search-bar">
-
-//      <input
-//       placeholder="Search tutorials or tools..."
-//       onChange={(e)=>setQuery(e.target.value)}
-//      />
-
-//      <button onClick={handleSearch}>
-//       Search
-//      </button>
-
-//     </div>
-
-//    </section>
-
-//    {/* POPULAR TOOLS */}
-
-//    <section className="tools-section">
-
-//     <h2>Popular Student Tools</h2>
-
-//     <div className="tools-grid">
-
-//      <ToolCard
-//       title="CGPA Calculator"
-//       description="Calculate your university CGPA instantly"
-//       link="/cgpa-calculator"
-//      />
-
-//      <ToolCard
-//       title="WAEC Grade Calculator"
-//       description="Convert WAEC scores to grades"
-//       link="/waec-grade-calculator"
-//      />
-
-//      <ToolCard
-//       title="JAMB Score Calculator"
-//       description="Calculate your JAMB UTME score"
-//       link="/jamb-score-calculator"
-//      />
-
-//      <ToolCard
-//       title="GPA Class Calculator"
-//       description="Know your degree classification"
-//       link="/gpa-class-calculator"
-//      />
-
-//     </div>
-
-//    </section>
-
-//    {/* STUDY RESOURCES */}
-
-//    <section className="resources">
-
-//     <h2>Student Resources</h2>
-
-//     <div className="resource-grid">
-
-//      <div className="resource-card">
-//       <h3>Study Planner</h3>
-//       <p>Plan your study schedule effectively.</p>
-//      </div>
-
-//      <div className="resource-card">
-//       <h3>Scholarship Finder</h3>
-//       <p>Find available scholarships in Nigeria.</p>
-//      </div>
-
-//      <div className="resource-card">
-//       <h3>Admission Predictor</h3>
-//       <p>Estimate your admission chances.</p>
-//      </div>
-
-//     </div>
-
-//    </section>
-
-//   </div>
-
-//  );
-
-// };
-
-// export default Home;
 

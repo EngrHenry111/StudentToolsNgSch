@@ -84,6 +84,185 @@
   word-break:break-word;
 }
 
+
+/* ================= ADMISSION PREDICTOR ================= */
+
+.predictor-content{
+  max-width:900px;
+  margin:40px auto;
+  padding:30px 24px;
+
+  background:#ffffff;
+  border-radius:14px;
+
+  box-shadow:0 10px 30px rgba(0,0,0,0.06);
+
+  line-height:1.8;
+  box-sizing:border-box;
+}
+
+/* Headings */
+
+.predictor-content h2{
+  margin-top:28px;
+  margin-bottom:10px;
+
+  font-size:20px;
+  font-weight:600;
+  color:#0f172a;
+
+  position:relative;
+}
+
+/* Accent line */
+
+.predictor-content h2::before{
+  content:"";
+  position:absolute;
+  left:-12px;
+  top:6px;
+
+  width:4px;
+  height:18px;
+  background:#22c55e; /* green for prediction theme */
+
+  border-radius:3px;
+}
+
+/* Paragraph */
+
+.predictor-content p{
+  color:#475569;
+  font-size:15px;
+  margin-bottom:16px;
+}
+
+/* Lists */
+
+.predictor-content ul{
+  padding-left:20px;
+  margin-bottom:16px;
+}
+
+.predictor-content li{
+  margin-bottom:8px;
+  font-size:15px;
+  color:#334155;
+}
+
+/* ================= FORMULA BOX ================= */
+
+.predictor-content p strong{
+  display:block;
+  margin-top:10px;
+
+  padding:14px;
+
+  background:#f0fdf4;
+  border-left:4px solid #22c55e;
+
+  border-radius:8px;
+
+  font-size:16px;
+  color:#065f46;
+}
+
+/* ================= RESULT GUIDE ================= */
+
+.predictor-content li{
+  position:relative;
+  padding-left:6px;
+}
+
+/* Optional: highlight guide ranges */
+
+.predictor-content li:nth-child(1){
+  color:#16a34a; /* high */
+}
+
+.predictor-content li:nth-child(2){
+  color:#ca8a04; /* moderate */
+}
+
+.predictor-content li:nth-child(3){
+  color:#dc2626; /* low */
+}
+
+/* ================= NOTE BOX ================= */
+
+.predictor-content h2:last-of-type + p{
+  padding:16px;
+  background:#fef9c3;
+  border-left:4px solid #eab308;
+  border-radius:8px;
+}
+
+/* ================= LINK BOX ================= */
+
+.predictor-content p:last-child{
+  margin-top:25px;
+  padding:16px;
+
+  background:#eff6ff;
+  border-left:4px solid #2563eb;
+
+  border-radius:8px;
+}
+
+/* Links */
+
+.predictor-content a{
+  color:#2563eb;
+  font-weight:500;
+  text-decoration:none;
+  transition:all 0.25s ease;
+}
+
+.predictor-content a:hover{
+  text-decoration:underline;
+  color:#1d4ed8;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width:768px){
+
+  .predictor-content{
+    padding:25px 18px;
+  }
+
+  .predictor-content h2{
+    font-size:18px;
+  }
+
+}
+
+@media (max-width:480px){
+
+  .predictor-content{
+    margin:30px 12px;
+    padding:22px 15px;
+  }
+
+  .predictor-content h2{
+    font-size:17px;
+  }
+
+  .predictor-content p,
+  .predictor-content li{
+    font-size:14px;
+  }
+
+}
+
+@media (max-width:360px){
+
+  .predictor-content{
+    padding:20px 12px;
+  }
+
+}
+
 /* ========================= */
 /* Responsive Design */
 /* ========================= */
