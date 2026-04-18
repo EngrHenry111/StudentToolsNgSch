@@ -112,6 +112,11 @@ const Footer = () => {
       Conditions
      </Link>
 
+     <Link to="/author">
+      Author
+     </Link>
+
+
     </div>
 
     {/* Copyright */}
