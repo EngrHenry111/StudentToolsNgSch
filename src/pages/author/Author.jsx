@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 // import authorImg from "../../assets/images/Focused coder at work.png";
-import profile from "../../../public/profile.png"
+import profile from "../../assets/images/profile.png"
 import "./author.css";
 
 const Author = () => {

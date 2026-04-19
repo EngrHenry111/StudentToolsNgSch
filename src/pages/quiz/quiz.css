@@ -1,0 +1,30 @@
+.quiz-page {
+  padding: 40px;
+  color: white;
+  background: #020617;
+  min-height: 100vh;
+}
+
+.quiz-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.quiz-card {
+  background: rgba(255,255,255,0.05);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.quiz-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+.quiz-sidebar {
+  background: rgba(255,255,255,0.05);
+  padding: 15px;
+  border-radius: 12px;
+}

@@ -18,18 +18,20 @@ export const getMathHistoryApi = async () => {
   return res.data;
 };
 
-// export const solveMathApi = async (problem) => {
-//     const res = await axios.post(
-//   `${BASE_URL}/api/math/solve`,
-//   { problem },
-//   { timeout: 10000 } // 🔥 add this
-// );
-// //   const res = await axios.post(`${BASE_URL}/api/math/solve`, { problem });
-//   return res.data;
-// };
+export const getQuizQuestionApi = async (topic, difficulty) => {
+  const res = await axios.get(
+    `${BASE_URL}/api/quiz/question?topic=${topic}&difficulty=${difficulty}`
+  );
+  return res.data;
+};
 
+export const submitQuizApi = async (payload) => {
+  const res = await axios.post(`${BASE_URL}/api/quiz/submit`, payload);
+  return res.data;
+};
 
-// export const getMathHistoryApi = async () => {
-//   const res = await axios.get(`${BASE_URL}/api/math/history`);
-//   return res.data;
-// };
+export const getLeaderboardApi = async () => {
+  const res = await axios.get(`${BASE_URL}/api/quiz/leaderboard`);
+  return res.data;
+};
+

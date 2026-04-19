@@ -269,7 +269,7 @@ StudentToolsNG - Free CGPA, WAEC & JAMB Calculators for Nigerian Students
 
  <li>
  <Link to="/admission-predictor">
- Academic Tutorials
+ Admission Predictor
  </Link>
  </li>
 
