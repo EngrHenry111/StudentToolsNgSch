@@ -156,6 +156,7 @@ StudentToolsNG - Free CGPA, WAEC & JAMB Calculators for Nigerian Students
 
  <Link to="/cgpa-calculator">Calculate CGPA</Link>
  <Link to="/tutorials/math-calculator">Mathmatics Calculator</Link>
+ <Link to="/quiz">Quiz</Link>
 
 
  </div>
