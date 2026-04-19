@@ -1,44 +1,157 @@
-.leaderboard {
-  background: rgba(255,255,255,0.05);
-  padding: 20px;
-  border-radius: 15px;
+/* =========================
+   LEADERBOARD CONTAINER
+========================= */
+
+.leaderboard{
+  width:100%;
+  max-width:600px;
+  margin:40px auto;
+  padding:25px 20px;
+  background:#020617;
+  border-radius:16px;
+  box-shadow:0 10px 40px rgba(0,0,0,0.35);
+  color:white;
+  box-sizing:border-box;
 }
 
-.leaderboard h3 {
-  margin-bottom: 15px;
+/* Title */
+
+.leaderboard h3{
+  text-align:center;
+  margin-bottom:20px;
+  font-size:20px;
+  font-weight:600;
+  color:#38bdf8;
 }
 
-.leaderboard-item {
-  display: grid;
-  grid-template-columns: 40px 1fr auto auto;
-  align-items: center;
-  padding: 10px;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  transition: 0.2s;
+.leaderboard{
+  width:100%;
+  max-width:100%;   /* 👈 VERY IMPORTANT */
+  box-sizing:border-box;
 }
 
-.leaderboard-item:hover {
-  background: rgba(255,255,255,0.05);
-  transform: scale(1.02);
+.leaderboard-item{
+  width:100%;
+  box-sizing:border-box;
+}
+/* Empty state */
+
+.empty{
+  text-align:center;
+  color:#94a3b8;
+  font-size:14px;
 }
 
-.rank {
-  font-weight: bold;
+/* =========================
+   ITEM CARD
+========================= */
+
+.leaderboard-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  background:#0f172a;
+  padding:14px 16px;
+  border-radius:12px;
+
+  margin-bottom:12px;
+
+  transition:all 0.25s ease;
+  border:1px solid rgba(255,255,255,0.05);
 }
 
-.name {
-  font-weight: 500;
+/* Hover effect */
+
+.leaderboard-item:hover{
+  transform:translateY(-2px);
+  background:#1e293b;
 }
 
-.score {
-  color: #22c55e;
-  margin-right: 10px;
+/* =========================
+   ELEMENTS
+========================= */
+
+.rank{
+  font-size:18px;
+  width:40px;
 }
 
-.streak {
-  color: orange;
+.name{
+  flex:1;
+  font-weight:500;
+  font-size:14px;
+  color:#e2e8f0;
 }
 
-.empty {
-  opacity: 0.6;
+.score{
+  font-size:13px;
+  color:#22c55e;
+  font-weight:600;
+  margin-right:10px;
+}
+
+.streak{
+  font-size:13px;
+  color:#f97316;
+}
+
+/* =========================
+   TOP 3 SPECIAL STYLING
+========================= */
+
+.leaderboard-item:nth-child(2){
+  border-left:4px solid gold;
+}
+
+.leaderboard-item:nth-child(3){
+  border-left:4px solid silver;
+}
+
+.leaderboard-item:nth-child(4){
+  border-left:4px solid #cd7f32; /* bronze */
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width:768px){
+
+  /* .leaderboard{
+    margin:30px 15px;
+    padding:20px 15px;
+    width: 100%;
+  } */
+
+  .leaderboard-item{
+    flex-wrap:wrap;
+    gap:6px;
+    padding:12px;
+  }
+
+  .name{
+    width:100%;
+    font-size:14px;
+  }
+
+  .score,
+  .streak{
+    font-size:12px;
+  }
+
+}
+
+/* Extra small devices */
+
+@media (max-width:480px){
+
+  .leaderboard h3{
+    font-size:18px;
+  }
+
+  .rank{
+    font-size:16px;
+  }
+
 }

@@ -34,4 +34,3 @@ export const getLeaderboardApi = async () => {
   const res = await axios.get(`${BASE_URL}/api/quiz/leaderboard`);
   return res.data;
 };
-

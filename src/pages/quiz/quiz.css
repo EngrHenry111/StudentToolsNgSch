@@ -1,30 +1,394 @@
-.quiz-page {
-  padding: 40px;
-  color: white;
-  background: #020617;
-  min-height: 100vh;
+/* =========================
+   PAGE LAYOUT
+========================= */
+
+.quiz-page{
+  width:100%;
+  padding:30px 20px;
+  box-sizing:border-box;
 }
 
-.quiz-controls {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+.quiz-layout{
+  display:flex;
+  gap:30px;
+  max-width:1200px;
+  margin:auto;
+  align-items:flex-start;
+  overflow:hidden;
 }
 
-.quiz-card {
-  background: rgba(255,255,255,0.05);
-  padding: 20px;
-  border-radius: 12px;
+
+
+/* LEFT MAIN */
+
+.quiz-main{
+  flex:2;
 }
 
-.quiz-layout {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 20px;
+/* RIGHT SIDEBAR */
+
+.quiz-sidebar{
+  flex:1;
+  max-width:320px;   /* 👈 prevents overflow */
+  width:100%;
+  position:sticky;
+  top:90px;
 }
 
-.quiz-sidebar {
-  background: rgba(255,255,255,0.05);
-  padding: 15px;
-  border-radius: 12px;
+/* =========================
+   HEADER
+========================= */
+
+.quiz-main h2{
+  font-size:24px;
+  margin-bottom:10px;
+  color:#d308e6;
+}
+
+.quiz-main p{
+  margin:4px 0;
+  color:#f39509;
+  font-size:14px;
+}
+
+/* =========================
+   CONTROLS
+========================= */
+
+.quiz-controls{
+  display:flex;
+  gap:10px;
+  margin:20px 0;
+  flex-wrap:wrap;
+}
+
+.quiz-controls select{
+  padding:8px 10px;
+  border-radius:6px;
+  border:1px solid #ddd;
+  font-size:14px;
+  outline:none;
+}
+
+.quiz-controls button{
+  padding:8px 14px;
+  background:#2563eb;
+  color:white;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.quiz-controls button:hover{
+  background:#1d4ed8;
+}
+
+/* =========================
+   QUESTION CARD
+========================= */
+
+.quiz-card{
+  background:white;
+  padding:25px;
+  border-radius:14px;
+  box-shadow:0 8px 30px rgba(0,0,0,0.08);
+  margin-top:15px;
+}
+
+.quiz-card{
+  background:#0f172a;
+  padding:25px;
+  border-radius:14px;
+
+  box-shadow:0 10px 40px rgba(0,0,0,0.4);
+
+  border:1px solid rgba(255,255,255,0.05);
+}
+
+.quiz-card h3{
+  margin:15px 0;
+  font-size:20px;
+  color:#0f172a;
+}
+
+.quiz-card h3{
+  color:#f8fafc;
+}
+
+/* INPUT */
+
+.quiz-card input{
+  width:100%;
+  padding:12px;
+  border:1px solid #e5e7eb;
+  border-radius:8px;
+  margin-top:10px;
+  margin-bottom:12px;
+  font-size:15px;
+  outline:none;
+  transition:0.2s;
+}
+
+.quiz-card p{
+  color:#94a3b8;
+}
+
+.quiz-card input:focus{
+  border-color:#2563eb;
+  box-shadow:0 0 0 2px rgba(37,99,235,0.1);
+}
+
+/* BUTTONS */
+
+.quiz-card button{
+  padding:10px 16px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:14px;
+  margin-right:8px;
+  margin-top:5px;
+  transition:0.2s;
+}
+
+/* Submit */
+
+
+/* Submit */
+.quiz-card button:first-of-type{
+  background:#22c55e;
+  color:white;
+}
+
+/* Next */
+.quiz-card button:last-of-type{
+  background:#1e293b;
+  color:#e2e8f0;
+}
+
+.quiz-card button:first-of-type:hover{
+  background:#16a34a;
+}
+
+/* Next */
+.quiz-card button:last-of-type{
+  background:#0f172a;
+  color:white;
+}
+
+.quiz-card button:last-of-type:hover{
+  background:#1e293b;
+}
+
+/* =========================
+   FEEDBACK
+========================= */
+
+.quiz-card p{
+  margin-top:10px;
+  font-weight:500;
+}
+
+
+
+.quiz-card p:last-of-type{
+  color:#facc15;
+}
+
+/* =========================
+   SOLUTION BOX
+========================= */
+
+.solution-box{
+  margin-top:20px;
+  padding:15px;
+  background:#f1f5f9;
+  border-radius:10px;
+  border-left:4px solid #38bdf8;
+}
+
+.solution-box{
+  background:#020617;
+  border-left:4px solid #38bdf8;
+  color:#cbd5f5;
+}
+
+.solution-box h4{
+  color:#38bdf8;
+}
+
+
+.solution-box h4{
+  margin-bottom:10px;
+  color:#2065f0;
+}
+
+.solution-box ul{
+  padding-left:18px;
+}
+
+.solution-box li{
+  margin-bottom:6px;
+  font-size:14px;
+
+}
+
+.quiz-sidebar{
+  margin-top:20px;
+}
+
+.quiz-page{
+  padding:30px 16px;  /* reduce side padding */
+}
+
+.quiz-seo {
+  margin-top: 60px;
+  padding: 28px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  color: #e5e7eb;
+  max-width: 900px;
+}
+
+/* Headings */
+.quiz-seo h2 {
+  font-size: 22px;
+  color: #38bdf8;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.quiz-seo h3 {
+  font-size: 18px;
+  margin-top: 22px;
+  margin-bottom: 10px;
+  color: #a5b4fc;
+}
+
+/* Paragraphs */
+.quiz-seo p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #cbd5e1;
+  margin-bottom: 14px;
+}
+
+/* Lists */
+.quiz-seo ul {
+  margin: 12px 0 18px 20px;
+  padding: 0;
+}
+
+.quiz-seo li {
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 8px;
+  color: #e2e8f0;
+  position: relative;
+}
+
+.quiz-seo li::before {
+  content: "✔";
+  color: #22c55e;
+  margin-right: 8px;
+}
+
+/* Links */
+.quiz-seo a {
+  color: #38bdf8;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.25s ease;
+}
+
+.quiz-seo a:hover {
+  color: #0ea5e9;
+  text-decoration: underline;
+}
+
+/* ===================== */
+/* Responsive Fix */
+/* ===================== */
+
+@media (max-width: 768px) {
+  .quiz-seo {
+    padding: 18px;
+    border-radius: 12px;
+  }
+
+  .quiz-seo h2 {
+    font-size: 18px;
+  }
+
+  .quiz-seo h3 {
+    font-size: 16px;
+  }
+
+  .quiz-seo p,
+  .quiz-seo li {
+    font-size: 14px;
+  }
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width:1024px){
+
+  .quiz-layout{
+    flex-direction:column;
+  }
+
+  .quiz-sidebar{
+    position:static;
+    width:100%;
+  }
+
+}
+
+/* MOBILE */
+
+@media (max-width:600px){
+
+  .quiz-page{
+    padding:20px 12px;
+  }
+
+  .quiz-card{
+    padding:18px;
+  }
+
+  .quiz-card h3{
+    font-size:18px;
+  }
+
+  .quiz-controls{
+    flex-direction:column;
+    gap:8px;
+  }
+
+  .quiz-controls select,
+  .quiz-controls button{
+    width:100%;
+  }
+
+}
+
+@media (max-width:1024px){
+
+  .quiz-layout{
+    flex-direction:column;
+  }
+
+  .quiz-sidebar{
+    position:static;
+    max-width:100%;
+    width:100%;
+  }
+
 }

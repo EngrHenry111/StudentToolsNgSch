@@ -58,7 +58,7 @@ const image = "https://studenttoolsng.com/logo.png";
 
       {/* <HistoryPanel /> */}
       <HistoryPanel onSelect={(problem) => solve(problem)} />
-
+        
     </div>
   );
 };
