@@ -409,11 +409,43 @@ html,body{
 
 /* ================= MOBILE EXTRA FIX ================= */
 
-@media (max-width:480px){
+@media (max-width: 768px) {
 
-  .ai-answer{
-    padding:16px;
-    font-size:14px;
+  .ai-answer {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    padding: 14px;
+    border-radius: 10px;
+  }
+
+  /* Prevent text overflow */
+  .ai-answer p,
+  .ai-answer span,
+  .ai-answer div {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  /* Fix code blocks */
+  .ai-answer pre {
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: pre;
+    border-radius: 8px;
+  }
+
+  /* Inline code */
+  .ai-answer code {
+    word-break: break-word;
+  }
+
+  /* Fix tables if AI returns them */
+  .ai-answer table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
   }
 
 }

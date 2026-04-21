@@ -24,3 +24,4 @@ const MathResultCard = ({ result }) => {
 };
 
 export default MathResultCard;
+

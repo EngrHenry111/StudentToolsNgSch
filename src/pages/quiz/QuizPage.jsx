@@ -173,7 +173,12 @@ const QuizPage = () => {
               <option value="ratio">Ratio</option>
               <option value="interest">Simple Interest</option>
               <option value="set">Set Theory</option>
-            </select>
+
+              <option value="average">Average</option>
+              <option value="speed_distance">Speed & Distance</option>
+              <option value="indices">Indices</option>
+              <option value="simultaneous">Simultaneous Equations</option>
+              </select>
 
             <select value={difficulty} onChange={(e) => setDifficulty(e.target.value)}>
               <option value="easy">Easy</option>

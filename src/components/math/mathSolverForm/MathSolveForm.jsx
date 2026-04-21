@@ -54,7 +54,49 @@ const suggestions = [
       "n(U)=100, n(A)=40",
       "n(A)=30, n(B)=25, n(C)=20, n(A∩B)=5, n(A∩C)=4, n(B∩C)=3, n(A∩B∩C)=2"
     ]
-  }
+  },
+
+  {
+  title: "Average",
+  items: ["average of 10 20 30", "find average 5 15 25"]
+},
+{
+  title: "Speed",
+  items: ["60 km for 2 hours", "speed 50 time 3"]
+},
+{
+  title: "Indices",
+  items: ["2^3", "5^2"]
+},
+
+{
+  title: "Geometry",
+  items: [
+    "find area length 10 width 5",
+    "perimeter of rectangle 6 and 4"
+  ]
+},
+{
+  title: "Age",
+  items: [
+    "John is 5 years older than Mary who is 10",
+    "find age difference if father is 30 and son is 10"
+  ]
+},
+{
+  title: "Physics",
+  items: [
+    "mass 10 acceleration 2",
+    "force when mass is 5 and acceleration is 3"
+  ]
+},
+{
+  title: "Mixture",
+  items: [
+    "10% of 50 mixed with 20% of 30",
+    "mix 5 liters 10% and 5 liters 20%"
+  ]
+}
 ];
 
 
