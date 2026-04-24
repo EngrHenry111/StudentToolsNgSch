@@ -76,6 +76,7 @@ const suggestions = [
     "perimeter of rectangle 6 and 4"
   ]
 },
+
 {
   title: "Age",
   items: [
@@ -83,6 +84,7 @@ const suggestions = [
     "find age difference if father is 30 and son is 10"
   ]
 },
+
 {
   title: "Physics",
   items: [
@@ -99,20 +101,17 @@ const suggestions = [
     "10% of 50 mixed with 20% of 30",
     "mix 5 liters 10% and 5 liters 20%"
   ]
-}
-,
+},
 
 {
   title: "simultaneous",
   items: [
-"2x + y = 5 and x - y = 1",
+  "2x + y = 5 and x - y = 1",
   "x + y = 10, x - y = 2",
   "3x + 2y = 12 and x + y = 5",
   "2x + 3y = 13 and x = y + 1"
 ]
 },
-
-
 
 {
   title: "Speed",
