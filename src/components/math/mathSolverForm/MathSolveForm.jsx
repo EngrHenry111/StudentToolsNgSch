@@ -86,9 +86,12 @@ const suggestions = [
 {
   title: "Physics",
   items: [
-    "mass 10 acceleration 2",
-    "force when mass is 5 and acceleration is 3"
-  ]
+  "mass 10 acceleration 2",
+  "force when mass is 5 and acceleration is 3",
+  "find force m=8 a=4",
+  "calculate force if mass is 20 and acceleration is 5",
+  "m 15 a 2 find force"
+]
 },
 {
   title: "Mixture",
@@ -97,6 +100,45 @@ const suggestions = [
     "mix 5 liters 10% and 5 liters 20%"
   ]
 }
+,
+
+{
+  title: "simultaneous",
+  items: [
+"2x + y = 5 and x - y = 1",
+  "x + y = 10, x - y = 2",
+  "3x + 2y = 12 and x + y = 5",
+  "2x + 3y = 13 and x = y + 1"
+]
+},
+
+
+
+{
+  title: "Speed",
+  items: [
+  "speed 60 time 2",
+  "distance when speed is 50 and time is 3",
+  "a car travels at 80 km/h for 2 hours",
+  "find time if distance is 100 and speed is 20",
+  "distance 120 speed 40"
+]
+},
+
+
+
+{
+  title: "profit Loss",
+  items: [
+  "cost price 500 selling price 650",
+  "profit when cost is 200 and selling is 260",
+  "loss when cost price is 1000 and selling price is 800",
+  "find profit percent cp 400 sp 500",
+  "a trader bought for 300 and sold for 360"
+]
+},
+
+
 ];
 
 
