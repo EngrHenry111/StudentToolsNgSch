@@ -21,6 +21,8 @@ const [related,setRelated] = useState([]);
 const [toc,setToc] = useState([]);
 const [readingTime,setReadingTime] = useState(0);
 const [scrollProgress,setScrollProgress] = useState(0);
+const [trending,setTrending] = useState([]);
+
 // fetch tutorial
 // load tutorial
 useEffect(()=>{
@@ -31,6 +33,9 @@ useEffect(()=>{
 
 },[slug]);
 
+useEffect(()=>{
+ fetchTrending();
+},[]);
 
 // load related tutorials
 useEffect(()=>{
@@ -40,6 +45,22 @@ useEffect(()=>{
  }
 
 },[tutorial]);
+
+const fetchTrending = async ()=>{
+
+ try{
+
+  const res = await API.get("/tutorials/trending");
+
+  setTrending(res.data);
+
+ }catch(err){
+
+  console.log(err);
+
+ }
+
+};
 
 
 useEffect(()=>{
@@ -294,6 +315,28 @@ const generateFAQ = (content)=>{
  return(
 
   <div className="tutorial-layout">
+    <div className="breadcrumb">
+
+<Link to="/">Home</Link>
+
+{" > "}
+<Link to="/tutorials">Tutorials</Link>
+
+{" > "}
+<Link to={`/${tutorial.category}`}>
+ {tutorial.category}
+</Link>
+
+{" > "}
+<Link to={`/${tutorial.category}/${tutorial.topic}`}>
+ {tutorial.topic}
+</Link>
+
+{" > "}
+<span>{tutorial.title}</span>
+
+</div>
+
   <div className="tutorial-main">
 
 <Helmet>
@@ -532,17 +575,16 @@ Read Tutorial
 
 
 <div className="tutorial-sidebar">
-
+  
 <h3>Trending Tutorials</h3>
 
-{related.slice(0,3).map((t)=>(
-  
+{trending.map((t)=>(
+
 <div key={t._id} className="sidebar-card">
 
 <Link to={`/tutorial/${t.slug}`}>
-{t.title}
+ {t.title}
 </Link>
-
 
 </div>
 

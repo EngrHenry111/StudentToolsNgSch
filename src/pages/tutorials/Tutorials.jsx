@@ -1,13 +1,8 @@
-/*
-Tutorials Page
 
-Fetches tutorials from backend API
-Displays tutorial list
-Supports search
-*/
+
 
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams,useNavigate } from "react-router-dom";
 import API from "../../services/api";
 import { Helmet } from "react-helmet-async";
 import "./tutorials.css";
@@ -17,210 +12,309 @@ const Tutorials = () => {
  const [tutorials,setTutorials] = useState([]);
  const [search,setSearch] = useState("");
  const [page,setPage] = useState(1);
-const [totalPages,setTotalPages] = useState(1);
+ const [totalPages,setTotalPages] = useState(1);
+const navigate = useNavigate();
 
+ // FILTER STATES
+ const [category,setCategory] = useState("");
+ const [topic,setTopic] = useState("");
+ const [subtopic,setSubtopic] = useState("");
+
+ const [topics,setTopics] = useState([]);
+ const [subtopics,setSubtopics] = useState([]);
+
+const { category:paramCategory, topic:paramTopic, subtopic:paramSubtopic } = useParams();
+useEffect(()=>{
+
+ if(paramCategory){
+  setCategory(paramCategory);
+ }
+
+ if(paramTopic){
+  setTopic(paramTopic);
+ }
+
+ if(paramSubtopic){
+  setSubtopic(paramSubtopic);
+ }
+
+},[paramCategory,paramTopic,paramSubtopic]);
+
+ // 🔥 FETCH TUTORIALS
  useEffect(()=>{
+  fetchTutorials();
+ },[page,category,topic,subtopic]);
 
- fetchTutorials();
+ // 🔥 FETCH TOPICS
+ useEffect(()=>{
+  if(category){
+   fetchTopics();
+   setTopic("");
+   setSubtopic("");
+  }
+ },[category]);
 
-},[page]);
-const fetchTutorials = async ()=>{
+ // 🔥 FETCH SUBTOPICS
+ useEffect(()=>{
+  if(category && topic){
+   fetchSubtopics();
+   setSubtopic("");
+  }
+ },[topic]);
 
- try{
+ const fetchTutorials = async () => {
+ try {
 
-  const res = await API.get(`/tutorials?page=${page}`);
+  let url = `/tutorials?page=${page}`;
+
+  if (category) {
+   url += `&category=${category}`;
+  }
+
+  if (topic) {
+   url += `&topic=${topic}`;
+  }
+
+  const res = await API.get(url);
 
   setTutorials(res.data.tutorials);
   setTotalPages(res.data.totalPages);
 
- }catch(err){
-
+ } catch (err) {
   console.log(err);
-
  }
-
 };
+
+
+ const fetchTopics = async ()=>{
+
+  try{
+   const res = await API.get(`/tutorials/topics/${category}`);
+   setTopics(res.data);
+  }catch(err){
+   console.log(err);
+  }
+
+ };
+
+ const fetchSubtopics = async ()=>{
+
+  try{
+   const res = await API.get(
+    `/tutorials/subtopics?category=${category}&topic=${topic}`
+   );
+
+   setSubtopics(res.data);
+  }catch(err){
+   console.log(err);
+  }
+
+ };
+
+ // 🔥 SEARCH
  const handleSearch = async ()=>{
 
   try{
-
    const res = await API.get(`/tutorials/search?q=${search}`);
-
    setTutorials(res.data);
-
+   setTotalPages(1);
   }catch(err){
-
    console.log(err);
-
   }
 
  };
 
  return(
 
-  <div className="tutorials-container">
+ <div className="tutorials-container">
 
-<Helmet>
+ <Helmet>
+  <title>
+   Study Tutorials | StudentToolsNG
+  </title>
 
-{/* Primary SEO */}
-<title>
-Study Tutorials for Nigerian Students | CGPA, WAEC, JAMB Guides
-</title>
+  <meta
+   name="description"
+   content="Explore tutorials by subject, topic, and subtopic. Learn faster with structured academic content."
+  />
 
-<meta
- name="description"
- content="Explore educational tutorials for Nigerian students including CGPA calculation, WAEC grading system, JAMB score guides, and study tips."
-/>
+  <link
+   rel="canonical"
+   href="https://studenttoolsng.com/tutorials"
+  />
 
-<meta
- name="keywords"
- content="study tutorials Nigeria, CGPA tutorials, WAEC grading system guide, JAMB tutorials, student education Nigeria"
-/>
-
-{/* Canonical */}
-<link
- rel="canonical"
- href="https://studenttoolsng.com/tutorials"
-/>
-
-{/* Open Graph */}
-<meta property="og:type" content="website" />
-
-<meta
- property="og:title"
- content="Study Tutorials for Nigerian Students"
-/>
-
-<meta
- property="og:description"
- content="Learn CGPA calculation, WAEC grading system, JAMB scoring and more with our student tutorials."
-/>
-
-<meta
- property="og:image"
- content="https://studenttoolsng.com/logo.png"
-/>
-
-<meta
- property="og:url"
- content="https://studenttoolsng.com/tutorials"
-/>
-
-<meta property="og:site_name" content="StudentToolsNG" />
-
-{/* Twitter */}
-<meta name="twitter:card" content="summary_large_image" />
-
-<meta
- name="twitter:title"
- content="Student Tutorials - CGPA, WAEC, JAMB Guides"
-/>
-
-<meta
- name="twitter:description"
- content="Free tutorials for Nigerian students covering CGPA, WAEC, JAMB and study strategies."
-/>
-
-<meta
- name="twitter:image"
- content="https://studenttoolsng.com/logo.png"
-/>
-
-{/* Structured Data (ItemList - VERY IMPORTANT) */}
-<script type="application/ld+json">
+  {/* <script type="application/ld+json">
+   {JSON.stringify({
+    "@context":"https://schema.org",
+    "@type":"ItemList",
+    itemListElement: tutorials.map((t,index)=>({
+     "@type":"ListItem",
+     position:index+1,
+     url:`https://studenttoolsng.com/tutorial/${t.slug}`,
+     name:t.title
+    }))
+   })}
+  </script> */}
+  <script type="application/ld+json">
 {JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "ItemList",
-  itemListElement: tutorials.map((t, index) => ({
-    "@type": "ListItem",
-    position: index + 1,
-    url: `https://studenttoolsng.com/tutorial/${t.slug}`,
-    name: t.title
-  }))
+ "@context":"https://schema.org",
+ "@type":"BreadcrumbList",
+ itemListElement:[
+  { "@type":"ListItem", position:1, name:"Home", item:"https://studenttoolsng.com" },
+  category && { "@type":"ListItem", position:2, name:category, item:`https://studenttoolsng.com/${category}` },
+  topic && { "@type":"ListItem", position:3, name:topic, item:`https://studenttoolsng.com/${category}/${topic}` },
+  subtopic && { "@type":"ListItem", position:4, name:subtopic, item:`https://studenttoolsng.com/${category}/${topic}/${subtopic}` }
+ ].filter(Boolean)
 })}
 </script>
+ </Helmet>
 
-</Helmet>
-   <h1>Study Tutorials</h1>
+ <h1>Study Tutorials</h1>
+ 
+ <div className="breadcrumb">
+ <Link to="/">Home</Link> / 
+ <Link to="/tutorials">Tutorials</Link>
 
-   <div className="tutorial-search">
+ {category && (
+  <> / <Link to={`/tutorials/${category}`}>{category}</Link></>
+ )}
 
-    <input
-     placeholder="Search tutorial..."
-     onChange={(e)=>setSearch(e.target.value)}
-    />
+ {topic && (
+  <> / <span>{topic}</span></>
+ )}
+</div>
 
-    <button onClick={handleSearch}>
-     Search
-    </button>
 
-   </div>
+ {/* SEARCH */}
+ <div className="tutorial-search">
+  <input
+   placeholder="Search tutorial..."
+   value={search}
+   onChange={(e)=>setSearch(e.target.value)}
+  />
 
-  <div className="tutorial-grid">
+  <button onClick={handleSearch}>
+   Search
+  </button>
+ </div>
+
+ {/* CATEGORY */}
+ <select
+  value={category}
+  onChange={(e)=>{
+ const value = e.target.value;
+ setCategory(value);
+ setTopic("");
+ setSubtopic("");
+ setPage(1);
+
+ if(value){
+  navigate(`/${value}`);
+ }else{
+  navigate("/tutorials");
+ }
+ 
+}}
+ >
+  <option value="">All Subjects</option>
+  <option value="physics">Physics</option>
+  <option value="mathematics">Mathematics</option>
+  <option value="chemistry">Chemistry</option>
+  <option value="biology">Biology</option>
+  <option value="programming">Programming</option>
+ </select>
+
+ {/* TOPIC */}
+ {category && (
+ <select
+  value={topic}
+  onChange={(e)=>{
+ const value = e.target.value;
+ setTopic(value);
+ setSubtopic("");
+ setPage(1);
+
+ navigate(`/${category}/${value}`);
+}}
+ >
+  <option value="">All Topics</option>
+  {topics.map((t)=>(
+   <option key={t} value={t}>
+    {t}
+   </option>
+  ))}
+ </select>
+ )}
+
+ {/* SUBTOPIC */}
+ {topic && (
+ <select
+  value={subtopic}
+  onChange={(e)=>{
+ const value = e.target.value;
+ setSubtopic(value);
+ setPage(1);
+
+ navigate(`/${category}/${topic}/${value}`);
+}}
+
+ >
+  <option value="">All Subtopics</option>
+  {subtopics.map((s)=>(
+   <option key={s} value={s}>
+    {s}
+   </option>
+  ))}
+ </select>
+ )}
+
+ {/* GRID */}
+ <div className="tutorial-grid">
 
  {Array.isArray(tutorials) && tutorials.map((t)=>(
 
-    <Link
-    
-    key={t._id}
-    to={`/tutorial/${t.slug}`}
-    className="tutorial-card"
-    >
+ <Link
+  key={t._id}
+  to={`/tutorial/${t.slug}`}
+  className="tutorial-card"
+ >
 
-      <div className="tutorial-image">
+ <div className="tutorial-image">
 
  {t.image ? (
-
-  <img
-   src={t.image}
-   alt={t.title}
-  />
-
+  <img src={t.image} alt={t.title}/>
  ) : (
-
   <div className="tutorial-gradient">
-
    <h3>{t.title}</h3>
-
    <span>{t.category}</span>
-
   </div>
-
  )}
 
-</div>
-{/* 
-   <div className="tutorial-image">
-    <img
-     src={t.image || "https://via.placeholder.com/400"}
-     alt={t.title}
-    />
-   </div> */}
+ </div>
 
-   <div className="tutorial-content">
+ <div className="tutorial-content">
 
-    <h3>{t.title}</h3>
+ <h3>{t.title}</h3>
 
-    <p className="excerpt">
-     {t.excerpt || t.content.slice(0,120)+"..."}
-    </p>
+ <p className="excerpt">
+  {t.excerpt || t.content.slice(0,120)+"..."}
+ </p>
 
-    <span className="read-more">
-     Read More →
-    </span>
+ <span className="read-more">
+  Read More →
+ </span>
 
-   </div>
+ </div>
 
-  </Link>
+ </Link>
 
  ))}
 
-</div>
+ </div>
 
-   <div className="pagination">
-
+ {/* PAGINATION */}
+ <div className="pagination">
  {[...Array(totalPages)].map((_,index)=>(
-  
   <button
    key={index}
    onClick={()=>setPage(index+1)}
@@ -228,11 +322,11 @@ Study Tutorials for Nigerian Students | CGPA, WAEC, JAMB Guides
   >
    {index+1}
   </button>
-
  ))}
+ </div>
 
-</div>
-
+ {/* SEO CONTENT */}
+ 
 <h2>What You Will Learn</h2>
 <ul>
   <li>How to calculate CGPA in Nigerian universities</li>
@@ -254,10 +348,19 @@ Study Tutorials for Nigerian Students | CGPA, WAEC, JAMB Guides
   <a href="/jamb-score-calculator">JAMB Calculator</a> 
   alongside these tutorials.
 </p>
-  </div>
+ </div>
 
  );
 
 };
 
 export default Tutorials;
+
+
+
+
+
+
+
+
+

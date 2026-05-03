@@ -2,7 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "katex/dist/katex.min.css";
-import { AuthProvider } from "./context/AuthContext";
+// import { AuthProvider } from "./context/AuthContext";
+import { AuthProvider } from "./contextQuiz/AuthContext";
+
 
 // ✅ ADD THIS
 import { HelmetProvider } from "react-helmet-async";

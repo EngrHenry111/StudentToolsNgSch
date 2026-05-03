@@ -6,7 +6,8 @@ export const MathProvider = ({ children }) => {
   const [history, setHistory] = useState([]);
 
   return (
-    <MathContext.Provider value={{ history, setHistory }}>
+    <MathCo
+    ntext.Provider value={{ history, setHistory }}>
       {children}
     </MathContext.Provider>
   );
