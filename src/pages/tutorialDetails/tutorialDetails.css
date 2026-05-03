@@ -181,7 +181,7 @@ html,body{
 
 .ai-answer{
   margin-top:20px;
-  padding:22px;
+  padding:0;
 
   background:white;
   border-radius:12px;
