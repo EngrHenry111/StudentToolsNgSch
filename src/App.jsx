@@ -63,7 +63,6 @@ function App() {
    <Routes>
    <Route element={<PublicLayout />}>
 
-
     <Route path="/admin/login" element={<AdminLogin />} />
        <Route
         path="/admin"
@@ -73,6 +72,16 @@ function App() {
         </AdminProtectedRoute>
         }
         />
+
+    <Route path="/admin/tutorials" element={<AdminTutorials />} />
+
+    <Route path="/admin/edit/:id" element={<EditTutorial />} />
+
+    <Route path="/admin/messages" element={<AdminMessages />} />
+    <Route path="/admin/create-tutorial" element={<CreateTutorial />} />
+    <Route path="/tutorial-preview/:id" element={<PreviewPage/>} />
+
+    
 
     <Route path="/" element={<Home />} />
 
@@ -96,23 +105,8 @@ function App() {
     <Route path="/study-planner" element={<StudyPlanner />} />
     <Route path="/scholarships" element={<Scholarships />} />
     <Route path="/admission-predictor" element={<AdmissionPredictor />} />
-    
-    
-    <Route path="/admin/create-tutorial" element={<CreateTutorial />} />
-    {/* <Route path="/search" element={<Search />} /> */}
-
+        
     <Route path="/ai-tutor" element={<AITutor/>}/>
-
-
-    <Route path="/admin" element={<AdminDashboard />} />
-
-    <Route path="/admin/tutorials" element={<AdminTutorials />} />
-
-    <Route path="/admin/edit/:id" element={<EditTutorial />} />
-
-    <Route path="/admin/messages" element={<AdminMessages />} />
-
-    <Route path="/tutorial-preview/:id" element={<PreviewPage/>} />
 
     <Route path="/privacy-policy" element={<PrivacyPolicy/>} />
     <Route path="/about" element={<About/>} />
