@@ -124,6 +124,11 @@ useEffect(()=>{
 
  };
 
+ const stripHTML = (html) => {
+  if (!html) return "";
+  return html.replace(/<[^>]+>/g, "");
+};
+
  return(
 
  <div className="tutorials-container">
@@ -296,9 +301,12 @@ useEffect(()=>{
 
  <h3>{t.title}</h3>
 
- <p className="excerpt">
+ {/* <p className="excerpt">
   {t.excerpt || t.content.slice(0,120)+"..."}
- </p>
+ </p> */}
+ <p className="excerpt">
+  {t.excerpt || stripHTML(t.content).slice(0,120) + "..."}
+</p>
 
  <span className="read-more">
   Read More →

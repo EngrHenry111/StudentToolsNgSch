@@ -4,7 +4,7 @@
 
 .quiz-page{
   width:100%;
-  padding:30px 20px;
+  padding:30px 16px; /* unified padding */
   box-sizing:border-box;
 }
 
@@ -17,8 +17,6 @@
   overflow:hidden;
 }
 
-
-
 /* LEFT MAIN */
 
 .quiz-main{
@@ -29,10 +27,11 @@
 
 .quiz-sidebar{
   flex:1;
-  max-width:320px;   /* 👈 prevents overflow */
+  max-width:320px;
   width:100%;
   position:sticky;
   top:90px;
+  margin-top:20px;
 }
 
 /* =========================
@@ -85,35 +84,30 @@
 }
 
 /* =========================
-   QUESTION CARD
+   QUESTION CARD (MERGED)
 ========================= */
-
-.quiz-card{
-  background:white;
-  padding:25px;
-  border-radius:14px;
-  box-shadow:0 8px 30px rgba(0,0,0,0.08);
-  margin-top:15px;
-}
 
 .quiz-card{
   background:#0f172a;
   padding:25px;
   border-radius:14px;
-
   box-shadow:0 10px 40px rgba(0,0,0,0.4);
-
   border:1px solid rgba(255,255,255,0.05);
+  margin-top:15px;
 }
+
+/* TEXT */
 
 .quiz-card h3{
   margin:15px 0;
   font-size:20px;
-  color:#0f172a;
+  color:#f8fafc;
 }
 
-.quiz-card h3{
-  color:#f8fafc;
+.quiz-card p{
+  color:#94a3b8;
+  margin-top:10px;
+  font-weight:500;
 }
 
 /* INPUT */
@@ -128,10 +122,6 @@
   font-size:15px;
   outline:none;
   transition:0.2s;
-}
-
-.quiz-card p{
-  color:#94a3b8;
 }
 
 .quiz-card input:focus{
@@ -154,17 +144,9 @@
 
 /* Submit */
 
-
-/* Submit */
 .quiz-card button:first-of-type{
   background:#22c55e;
   color:white;
-}
-
-/* Next */
-.quiz-card button:last-of-type{
-  background:#1e293b;
-  color:#e2e8f0;
 }
 
 .quiz-card button:first-of-type:hover{
@@ -172,6 +154,7 @@
 }
 
 /* Next */
+
 .quiz-card button:last-of-type{
   background:#0f172a;
   color:white;
@@ -181,43 +164,24 @@
   background:#1e293b;
 }
 
-/* =========================
-   FEEDBACK
-========================= */
-
-.quiz-card p{
-  margin-top:10px;
-  font-weight:500;
-}
-
-
+/* FEEDBACK */
 
 .quiz-card p:last-of-type{
   color:#facc15;
 }
 
 /* =========================
-   SOLUTION BOX
+   SOLUTION BOX (MERGED)
 ========================= */
 
 .solution-box{
   margin-top:20px;
   padding:15px;
-  background:#f1f5f9;
-  border-radius:10px;
-  border-left:4px solid #38bdf8;
-}
-
-.solution-box{
   background:#020617;
+  border-radius:10px;
   border-left:4px solid #38bdf8;
   color:#cbd5f5;
 }
-
-.solution-box h4{
-  color:#38bdf8;
-}
-
 
 .solution-box h4{
   margin-bottom:10px;
@@ -231,16 +195,11 @@
 .solution-box li{
   margin-bottom:6px;
   font-size:14px;
-
 }
 
-.quiz-sidebar{
-  margin-top:20px;
-}
-
-.quiz-page{
-  padding:30px 16px;  /* reduce side padding */
-}
+/* =========================
+   SEO SECTION
+========================= */
 
 .quiz-seo {
   margin-top: 60px;
@@ -253,7 +212,6 @@
   max-width: 900px;
 }
 
-/* Headings */
 .quiz-seo h2 {
   font-size: 22px;
   color: #38bdf8;
@@ -268,7 +226,6 @@
   color: #a5b4fc;
 }
 
-/* Paragraphs */
 .quiz-seo p {
   font-size: 15px;
   line-height: 1.7;
@@ -276,7 +233,6 @@
   margin-bottom: 14px;
 }
 
-/* Lists */
 .quiz-seo ul {
   margin: 12px 0 18px 20px;
   padding: 0;
@@ -296,7 +252,6 @@
   margin-right: 8px;
 }
 
-/* Links */
 .quiz-seo a {
   color: #38bdf8;
   text-decoration: none;
@@ -309,11 +264,27 @@
   text-decoration: underline;
 }
 
-/* ===================== */
-/* Responsive Fix */
-/* ===================== */
+/* =========================
+   RESPONSIVE
+========================= */
 
-@media (max-width: 768px) {
+@media (max-width:1024px){
+
+  .quiz-layout{
+    flex-direction:column;
+  }
+
+  .quiz-sidebar{
+    position:static;
+    max-width:100%;
+    width:100%;
+  }
+
+}
+
+/* MOBILE */
+
+@media (max-width:768px) {
   .quiz-seo {
     padding: 18px;
     border-radius: 12px;
@@ -332,26 +303,6 @@
     font-size: 14px;
   }
 }
-
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media (max-width:1024px){
-
-  .quiz-layout{
-    flex-direction:column;
-  }
-
-  .quiz-sidebar{
-    position:static;
-    width:100%;
-  }
-
-}
-
-/* MOBILE */
 
 @media (max-width:600px){
 
@@ -374,20 +325,6 @@
 
   .quiz-controls select,
   .quiz-controls button{
-    width:100%;
-  }
-
-}
-
-@media (max-width:1024px){
-
-  .quiz-layout{
-    flex-direction:column;
-  }
-
-  .quiz-sidebar{
-    position:static;
-    max-width:100%;
     width:100%;
   }
 
