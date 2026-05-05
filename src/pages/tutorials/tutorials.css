@@ -1,4 +1,5 @@
 /* ================= GLOBAL SAFETY ================= */
+
 *,
 *::before,
 *::after{
@@ -10,6 +11,7 @@ html,body{
 }
 
 /* ================= CONTAINER ================= */
+
 .tutorials-container{
   width:100%;
   max-width:1100px;
@@ -19,17 +21,18 @@ html,body{
 }
 
 /* ================= TITLE ================= */
+
 .tutorials-container h1{
   text-align:center;
   font-size:36px;
   margin-bottom:35px;
-
   background:linear-gradient(90deg,#00f5ff,#7b2ff7);
   -webkit-background-clip:text;
   color:transparent;
 }
 
 /* ================= SEARCH ================= */
+
 .tutorial-search{
   display:flex;
   justify-content:center;
@@ -38,7 +41,6 @@ html,body{
   flex-wrap:wrap;
 }
 
-/* input */
 .tutorial-search input{
   width:260px;
   padding:14px;
@@ -49,13 +51,11 @@ html,body{
   outline:none;
 }
 
-/* focus */
 .tutorial-search input:focus{
   border-color:#00f5ff;
   box-shadow:0 0 10px rgba(0,245,255,0.3);
 }
 
-/* button */
 .tutorial-search button{
   padding:14px 20px;
   border:none;
@@ -72,6 +72,7 @@ html,body{
 }
 
 /* ================= GRID ================= */
+
 .tutorial-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -79,6 +80,7 @@ html,body{
 }
 
 /* ================= CARD ================= */
+
 .tutorial-card{
   display:block;
   border-radius:18px;
@@ -91,7 +93,6 @@ html,body{
   transition:0.3s ease;
 }
 
-/* glow border */
 .tutorial-card::before{
   content:"";
   position:absolute;
@@ -107,15 +108,14 @@ html,body{
   pointer-events:none;
 }
 
-/* hover */
 .tutorial-card:hover{
   transform:translateY(-8px);
-  box-shadow:
-    0 0 20px rgba(0,245,255,0.25),
-    0 0 35px rgba(123,47,247,0.2);
+  box-shadow:0 0 20px rgba(0,245,255,0.25),
+              0 0 35px rgba(123,47,247,0.2);
 }
 
 /* ================= IMAGE ================= */
+
 .tutorial-image img{
   width:100%;
   height:200px;
@@ -124,6 +124,7 @@ html,body{
 }
 
 /* fallback */
+
 .tutorial-gradient{
   height:200px;
   display:flex;
@@ -147,97 +148,33 @@ html,body{
 }
 
 /* ================= CONTENT ================= */
+
 .tutorial-content{
-  padding:20px;
-}
-
-.tutorial-content h3{
-  margin-bottom:10px;
-  color:#ffffff;
-}
-
-/* excerpt */
-.excerpt{
-  color:#94a3b8;
-  font-size:14px;
-  margin-bottom:12px;
-
-  /* prevent overflow */
-  overflow:hidden;
-  display:-webkit-box;
-  -webkit-line-clamp:3;
-  -webkit-box-orient:vertical;
-}
-
-/* read more */
-.read-more{
-  font-weight:600;
-  font-size:14px;
-  color:#00f5ff;
-}
-
-/* ================= PAGINATION ================= */
-.pagination{
-  display:flex;
-  justify-content:center;
-  margin-top:40px;
-  gap:8px;
-  flex-wrap:wrap;
-}
-
-.pagination button{
-  padding:10px 14px;
-  border:none;
-  border-radius:8px;
-  background:rgba(255,255,255,0.05);
-  color:#e2e8f0;
-  cursor:pointer;
-  transition:0.3s ease;
-}
-
-/* hover */
-.pagination button:hover{
-  background:#00f5ff;
-  color:#000;
-}
-
-/* active */
-.pagination button.active{
-  background:linear-gradient(90deg,#00f5ff,#7b2ff7);
-  color:white;
-}
-
-
-
-/* ================= TUTORIAL INTRO SECTION ================= */
-
-.tutorial-intro{
-  margin-top:25px;
-  padding:18px 20px;
-
-  background:rgba(59,130,246,0.06);
-  border-left:4px solid #3b82f6;
-
-  border-radius:10px;
-
-  font-size:15.5px;
+  max-width:850px;
+  margin:50px auto;
+  padding:30px 25px;
+  background:rgba(255,255,255,0.03);
+  border-radius:16px;
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,0.05);
   line-height:1.8;
-  color:#cbd5f5;
+  color:#e2e8f0;
 }
 
-/* ================= LEARNING LIST ================= */
+.tutorial-content:hover{
+  box-shadow:0 0 25px rgba(0,245,255,0.08),
+             0 0 40px rgba(123,47,247,0.05);
+}
 
-.tutorial-intro + h2,
+/* headings */
+
 .tutorial-content h2{
   font-size:22px;
   margin-top:30px;
   margin-bottom:12px;
-
   color:#38bdf8;
   position:relative;
 }
-
-/* underline glow */
 
 .tutorial-content h2::after{
   content:"";
@@ -245,12 +182,18 @@ html,body{
   width:45px;
   height:3px;
   margin-top:6px;
-
   background:linear-gradient(90deg,#00f5ff,#7b2ff7);
   border-radius:10px;
 }
 
-/* ================= LIST ================= */
+/* text */
+
+.tutorial-content p{
+  color:#94a3b8;
+  font-size:15px;
+}
+
+/* lists */
 
 .tutorial-content ul{
   padding-left:20px;
@@ -261,99 +204,53 @@ html,body{
   margin-bottom:10px;
   font-size:15px;
   color:#e2e8f0;
-
-  position:relative;
 }
-
-/* bullet upgrade */
 
 .tutorial-content li::marker{
   color:#38bdf8;
 }
 
-/* ================= CARD STYLE (OPTIONAL WRAP) ================= */
+/* ================= INTRO ================= */
 
-/* If you wrap everything inside .tutorial-content */
-.tutorial-content{
-  max-width:850px;
-  margin:50px auto;
-  padding:30px 25px;
-
-  background:rgba(255,255,255,0.03);
-  border-radius:16px;
-
-  backdrop-filter:blur(12px);
-  border:1px solid rgba(255,255,255,0.05);
-
+.tutorial-intro{
+  margin-top:25px;
+  padding:18px 20px;
+  background:rgba(59,130,246,0.06);
+  border-left:4px solid #3b82f6;
+  border-radius:10px;
+  font-size:15px;
   line-height:1.8;
-  color:#e2e8f0;
+  color:#cbd5f5;
 }
 
-/* hover glow */
-
-.tutorial-content:hover{
-  box-shadow:
-    0 0 25px rgba(0,245,255,0.08),
-    0 0 40px rgba(123,47,247,0.05);
-}
-
-
-/* ================= TOOL LINK CTA (PLINK) ================= */
+/* ================= PLINK CTA ================= */
 
 .plink{
   margin-top:30px;
   padding:18px 20px;
-
-  background:linear-gradient(
-    135deg,
-    rgba(37,99,235,0.08),
-    rgba(123,47,247,0.06)
-  );
-
-  border:1px solid rgba(255,255,255,0.08);
+  background:linear-gradient(135deg,rgba(37,99,235,0.08),rgba(123,47,247,0.06));
   border-left:4px solid #3b82f6;
-
   border-radius:12px;
-
-  font-size:15.5px;
+  font-size:15px;
   line-height:1.7;
   color:#cbd5f5;
-
   display:flex;
   flex-wrap:wrap;
   align-items:center;
   gap:6px;
 }
 
-/* ICON */
-
 .plink::before{
   content:"🚀";
-  margin-right:6px;
 }
-
-/* ================= LINKS ================= */
 
 .plink a{
   color:#38bdf8;
   font-weight:600;
   text-decoration:none;
-
-  padding:4px 8px;
-  border-radius:6px;
-
   position:relative;
-  transition:all 0.25s ease;
+  transition:0.3s;
 }
-
-/* hover background */
-
-.plink a:hover{
-  background:rgba(56,189,248,0.1);
-  color:#7dd3fc;
-}
-
-/* animated underline */
 
 .plink a::after{
   content:"";
@@ -362,63 +259,191 @@ html,body{
   bottom:-2px;
   width:0%;
   height:2px;
-
   background:linear-gradient(90deg,#00f5ff,#7b2ff7);
-  transition:width 0.3s ease;
+  transition:0.3s;
 }
 
 .plink a:hover::after{
   width:100%;
 }
 
-/* ================= HOVER EFFECT ================= */
-
-.plink:hover{
-  box-shadow:
-    0 0 25px rgba(0,245,255,0.08),
-    0 0 40px rgba(123,47,247,0.05);
+.plink a:hover{
+  color:#00f5ff;
 }
 
+/* ================= BREADCRUMB ================= */
+
 .breadcrumb{
- font-size:14px;
- margin-bottom:15px;
- color:#555;
+  font-size:14px;
+  margin-bottom:15px;
+  color:#94a3b8;
 }
 
 .breadcrumb a{
- color:#007bff;
- text-decoration:none;
+  color:#38bdf8;
+  text-decoration:none;
 }
 
 .breadcrumb a:hover{
- text-decoration:underline;
+  text-decoration:underline;
 }
-/* ================= RESPONSIVE ================= */
+
+/* ================= FILTER CONTROLS ================= */
+
+.tutorial-filters{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:25px;
+}
+
+.tutorial-filters select{
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.05);
+  color:#e2e8f0;
+  font-size:14px;
+  outline:none;
+  cursor:pointer;
+  transition:0.25s;
+}
+
+.tutorial-filters select:focus{
+  border-color:#00f5ff;
+  box-shadow:0 0 10px rgba(0,245,255,0.25);
+}
+
+/* ================= BREADCRUMB UPGRADE ================= */
+
+.breadcrumb{
+  font-size:14px;
+  margin-bottom:15px;
+  color:#94a3b8;
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  align-items:center;
+}
+
+.breadcrumb a{
+  color:#38bdf8;
+  text-decoration:none;
+  transition:0.2s;
+}
+
+.breadcrumb a:hover{
+  color:#00f5ff;
+  text-decoration:underline;
+}
+
+.breadcrumb span{
+  color:#e2e8f0;
+}
+
+/* ================= SEO SECTION GROUP ================= */
+
+.tutorial-intro,
+.plink,
+.tutorials-container h2,
+.tutorials-container ul{
+  max-width:850px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/* heading spacing fix */
+.tutorials-container h2{
+  margin-top:35px;
+}
+
+/* list spacing polish */
+.tutorials-container ul{
+  margin-top:10px;
+  padding-left:22px;
+}
+
+/* ================= PAGINATION IMPROVEMENT ================= */
+
+.pagination{
+  margin-top:45px;
+}
+
+.pagination button{
+  min-width:28px;
+  height: 22px;
+  font-weight:500;
+  background:linear-gradient(90deg,#00f5ff,#136af5);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor:pointer;
+
+}
+
+.pagination button.active{
+  box-shadow:0 0 22px rgba(0,245,255,0.3);
+}
+
+/* ================= MOBILE FIX FOR FILTERS ================= */
 
 @media (max-width:600px){
 
-  .plink{
+  .tutorial-filters{
     flex-direction:column;
-    align-items:flex-start;
-    gap:8px;
+    align-items:center;
+  }
+
+  .tutorial-filters select{
+    width:100%;
+    max-width:320px;
+  }
+}
+
+/* ================= RESPONSIVE (CLEANED ORDER) ================= */
+
+/* Large */
+@media (min-width:1400px){
+  .tutorials-container{
+    max-width:1200px;
+  }
+
+  .tutorials-container h1{
+    font-size:44px;
+  }
+}
+
+/* Desktop */
+@media (max-width:1024px){
+  .tutorials-container{
+    padding:40px 18px;
+  }
+
+  .tutorial-content{
+    margin:40px auto;
+    padding:25px 20px;
+  }
+}
+
+/* Tablet */
+@media (max-width:768px){
+  .tutorials-container h1{
+    font-size:28px;
+  }
+
+  .tutorial-content h2{
+    font-size:20px;
+  }
+
+  .tutorial-content p,
+  .tutorial-content li{
     font-size:14.5px;
   }
-
 }
 
-@media (max-width:480px){
-
-  .plink{
-    padding:15px;
-    font-size:14px;
-  }
-
-}
-/* ================= RESPONSIVE ================= */
-
-/* 📱 Mobile */
+/* Mobile */
 @media (max-width:600px){
-
   .tutorials-container{
     padding:30px 15px;
   }
@@ -438,90 +463,31 @@ html,body{
     max-width:320px;
   }
 
+  .plink{
+    flex-direction:column;
+    align-items:flex-start;
+  }
 }
 
-/* 📱 Tablet */
-@media (max-width:768px){
-
-  .tutorials-container h1{
-    font-size:28px;
-  }
-
-}
-
-/* 💻 Small laptop */
-@media (max-width:1024px){
-
-  .tutorials-container{
-    padding:40px 18px;
-  }
-
-}
-
-/* 🖥 Large screens */
-@media (min-width:1400px){
-
-  .tutorials-container{
-    max-width:1200px;
-  }
-
-  .tutorials-container h1{
-    font-size:44px;
-  }
-
-}
-
-
-/* ================= RESPONSIVE ================= */
-
-@media (max-width:1024px){
-
-  .tutorial-content{
-    margin:40px auto;
-    padding:25px 20px;
-  }
-
-}
-
-@media (max-width:768px){
-
-  .tutorial-content{
-    padding:22px 18px;
-  }
-
-  .tutorial-content h2{
-    font-size:20px;
-  }
-
-  .tutorial-content li,
-  .tutorial-intro{
-    font-size:14.5px;
-  }
-
-}
-
+/* Small mobile */
 @media (max-width:480px){
-
   .tutorial-content{
     padding:20px 16px;
     border-radius:12px;
   }
 
+  .tutorial-intro{
+    padding:14px;
+  }
+
   .tutorial-content h2{
     font-size:18px;
   }
-
-  .tutorial-intro{
-    padding:14px;
-    font-size:14px;
-  }
-
 }
 
+/* Extra small */
 @media (max-width:360px){
-
   .tutorial-content{
     padding:18px 14px;
   }
-
 }

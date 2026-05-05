@@ -1,148 +1,161 @@
-/* Container */
+/* ================= GLOBAL SAFETY ================= */
+*,
+*::before,
+*::after{
+  box-sizing:border-box;
+}
 
+html,body{
+  overflow-x:hidden;
+}
+
+/* ================= CONTAINER ================= */
 .admin-tutorials-container{
   width:100%;
   max-width:1100px;
   margin:auto;
-  padding:40px 20px;
-  box-sizing:border-box;
+  padding:60px 20px;
+  color:#e2e8f0;
 }
 
-/* Title */
-
+/* ================= TITLE ================= */
 .admin-tutorials-container h1{
-  font-size:28px;
-  font-weight:600;
-  margin-bottom:25px;
-  color:#0f172a;
+  text-align:center;
+  font-size:36px;
+  margin-bottom:40px;
+
+  background:linear-gradient(90deg,#00f5ff,#7b2ff7);
+  -webkit-background-clip:text;
+  color:transparent;
+
+  text-shadow:0 0 20px rgba(0,245,255,0.25);
 }
 
-/* Prevent Table Overflow */
-
+/* ================= TABLE WRAPPER ================= */
 .table-wrapper{
   width:100%;
-  overflow-x:auto;
+  overflow-x:auto; /* 🔥 CRITICAL for production desktop */
+  border-radius:18px;
+
+  background:rgba(255,255,255,0.03);
+  backdrop-filter:blur(12px);
+
+  border:1px solid rgba(255,255,255,0.05);
 }
 
-/* Table */
-
+/* ================= TABLE ================= */
 .tutorial-table{
   width:100%;
   border-collapse:collapse;
-  background:white;
-  border-radius:10px;
-  overflow:hidden;
-  box-shadow:0 5px 20px rgba(0,0,0,0.08);
+  min-width:600px; /* 🔥 prevents collapse on desktop */
 }
 
-/* Table Head */
-
+/* ================= HEADER ================= */
 .tutorial-table thead{
-  background:#0f172a;
-  color:white;
+  background:rgba(255,255,255,0.05);
 }
 
 .tutorial-table th{
-  padding:14px;
+  padding:16px;
   text-align:left;
-  font-size:14px;
+  font-size:15px;
+  color:#38bdf8;
+  font-weight:600;
 }
 
-/* Table Body */
-
+/* ================= ROWS ================= */
 .tutorial-table td{
-  padding:14px;
-  border-bottom:1px solid #e5e7eb;
-  font-size:14px;
-  color:#374151;
-  word-break:break-word;
+  padding:14px 16px;
+  font-size:14.5px;
+  color:#cbd5f5;
+
+  border-top:1px solid rgba(255,255,255,0.05);
 }
 
-/* Row Hover */
-
+/* hover row */
 .tutorial-table tbody tr:hover{
-  background:#f9fafb;
+  background:rgba(0,245,255,0.05);
 }
 
-/* Actions */
-
+/* ================= ACTIONS ================= */
 .actions{
   display:flex;
   gap:10px;
   flex-wrap:wrap;
 }
 
-/* Edit Button */
-
-.edit-btn{
-  padding:6px 12px;
-  background:#2563eb;
-  color:white;
-  text-decoration:none;
-  border-radius:6px;
+/* ================= BUTTON BASE ================= */
+.edit-btn,
+.delete-btn{
+  padding:8px 14px;
+  border-radius:20px;
   font-size:13px;
-  transition:all 0.2s ease;
+  text-decoration:none;
+  border:none;
+  cursor:pointer;
+
+  transition:all 0.25s ease;
+}
+
+/* ================= EDIT BUTTON ================= */
+.edit-btn{
+  background:linear-gradient(90deg,#00f5ff,#7b2ff7);
+  color:white;
 }
 
 .edit-btn:hover{
-  background:#1d4ed8;
+  transform:translateY(-2px);
+  box-shadow:
+    0 0 10px rgba(0,245,255,0.5),
+    0 0 20px rgba(123,47,247,0.4);
 }
 
-/* Delete Button */
-
+/* ================= DELETE BUTTON ================= */
 .delete-btn{
-  padding:6px 12px;
-  border:none;
-  background:#ef4444;
-  color:white;
-  border-radius:6px;
-  font-size:13px;
-  cursor:pointer;
-  transition:all 0.2s ease;
+  background:rgba(239,68,68,0.15);
+  color:#ef4444;
+  border:1px solid rgba(239,68,68,0.4);
 }
 
 .delete-btn:hover{
-  background:#dc2626;
+  background:#ef4444;
+  color:white;
+
+  box-shadow:
+    0 0 10px rgba(239,68,68,0.6),
+    0 0 20px rgba(239,68,68,0.4);
 }
 
-/* ========================= */
-/* Responsive Design */
-/* ========================= */
+/* ================= RESPONSIVE ================= */
 
-@media (max-width:1024px){
-
-  .admin-tutorials-container{
-    padding:35px 18px;
-  }
-
-}
-
+/* tablet */
 @media (max-width:768px){
 
   .admin-tutorials-container{
-    padding:30px 16px;
+    padding:40px 18px;
   }
 
   .admin-tutorials-container h1{
-    font-size:24px;
+    font-size:28px;
   }
-
-}
-
-@media (max-width:600px){
 
   .tutorial-table th,
   .tutorial-table td{
     padding:12px;
-    font-size:13px;
+    font-size:13.5px;
   }
 
 }
 
+/* mobile */
 @media (max-width:480px){
 
   .admin-tutorials-container{
-    padding:25px 14px;
+    padding:30px 15px;
+  }
+
+  .admin-tutorials-container h1{
+    font-size:24px;
   }
 
   .actions{
@@ -150,13 +163,23 @@
     align-items:flex-start;
   }
 
+  .edit-btn,
+  .delete-btn{
+    width:100%;
+    text-align:center;
+  }
+
 }
 
-@media (max-width:360px){
+/* large screens */
+@media (min-width:1400px){
 
-  .tutorial-table th,
-  .tutorial-table td{
-    font-size:12px;
+  .admin-tutorials-container{
+    max-width:1200px;
+  }
+
+  .admin-tutorials-container h1{
+    font-size:44px;
   }
 
 }

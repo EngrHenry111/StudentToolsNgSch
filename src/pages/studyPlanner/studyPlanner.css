@@ -9,10 +9,10 @@ html,body{
   overflow-x:hidden;
 }
 
-/* ================= CONTAINER ================= */
+/* ================= MAIN CONTAINER ================= */
 .planner{
   width:100%;
-  max-width:700px;
+  max-width:720px;
   margin:auto;
   padding:60px 20px;
   color:#e2e8f0;
@@ -37,17 +37,22 @@ html,body{
   flex-wrap:wrap;
 }
 
-/* INPUT */
+/* input */
 .planner-input input{
   flex:1;
   min-width:200px;
+
   padding:14px;
   border-radius:14px;
+
   border:1px solid rgba(255,255,255,0.1);
   background:rgba(255,255,255,0.05);
+
   color:#e2e8f0;
   font-size:15px;
   outline:none;
+
+  transition:0.3s ease;
 }
 
 /* focus */
@@ -56,19 +61,20 @@ html,body{
   box-shadow:0 0 10px rgba(0,245,255,0.3);
 }
 
-/* ADD BUTTON */
+/* button */
 .planner-input button{
   padding:14px 22px;
   border:none;
   border-radius:30px;
+
   background:linear-gradient(90deg,#00f5ff,#7b2ff7);
   color:white;
+
   cursor:pointer;
   font-size:14px;
   transition:0.3s ease;
 }
 
-/* hover */
 .planner-input button:hover{
   transform:translateY(-2px);
   box-shadow:0 0 15px #00f5ff,0 0 30px #7b2ff7;
@@ -81,7 +87,7 @@ html,body{
   margin:0;
 }
 
-/* ================= TASK ITEM ================= */
+/* ================= TASK ITEM (FIXED STRUCTURE) ================= */
 .planner li{
   display:flex;
   justify-content:space-between;
@@ -97,6 +103,9 @@ html,body{
 
   position:relative;
   transition:0.3s ease;
+
+  font-size:14px;
+  word-break:break-word;
 }
 
 /* glow border */
@@ -106,12 +115,16 @@ html,body{
   inset:0;
   border-radius:16px;
   padding:1px;
+
   background:linear-gradient(120deg,#00f5ff,#7b2ff7);
+
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
     linear-gradient(#fff 0 0);
+
   -webkit-mask-composite:xor;
   mask-composite:exclude;
+
   pointer-events:none;
 }
 
@@ -123,31 +136,28 @@ html,body{
     0 0 30px rgba(123,47,247,0.15);
 }
 
-/* TASK TEXT */
-.planner li{
-  font-size:14px;
-  word-break:break-word;
-}
-
-/* DELETE BUTTON */
+/* delete button */
 .planner li button{
+  flex-shrink:0;
+
   padding:8px 14px;
   border:none;
   border-radius:20px;
+
   background:linear-gradient(90deg,#ef4444,#dc2626);
   color:white;
+
   font-size:12px;
   cursor:pointer;
   transition:0.3s ease;
 }
 
-/* hover */
 .planner li button:hover{
   transform:scale(1.05);
   box-shadow:0 0 10px rgba(239,68,68,0.5);
 }
 
-/* ================= EMPTY STATE ================= */
+/* ================= EMPTY STATE FIX ================= */
 .planner ul:empty::after{
   content:"No tasks yet. Add your first study task 🚀";
   display:block;
@@ -156,9 +166,7 @@ html,body{
   color:#94a3b8;
 }
 
-
-/* ================= PLANNER CONTENT ================= */
-
+/* ================= CONTENT SECTION ================= */
 .planner-content{
   max-width:850px;
   margin:50px auto;
@@ -174,8 +182,7 @@ html,body{
   color:#e2e8f0;
 }
 
-/* ================= HEADINGS ================= */
-
+/* headings */
 .planner-content h2{
   font-size:22px;
   margin-top:28px;
@@ -184,8 +191,6 @@ html,body{
   color:#38bdf8;
   position:relative;
 }
-
-/* glowing underline */
 
 .planner-content h2::after{
   content:"";
@@ -198,16 +203,14 @@ html,body{
   border-radius:10px;
 }
 
-/* ================= TEXT ================= */
-
+/* text */
 .planner-content p{
   font-size:15.5px;
   color:#cbd5f5;
   margin-bottom:15px;
 }
 
-/* ================= LIST ================= */
-
+/* list */
 .planner-content ul{
   padding-left:20px;
   margin-top:10px;
@@ -219,14 +222,11 @@ html,body{
   color:#e2e8f0;
 }
 
-/* bullet styling */
-
 .planner-content li::marker{
   color:#38bdf8;
 }
 
-/* ================= CTA LINK BOX ================= */
-
+/* ================= LINK BOX ================= */
 .planLink{
   margin-top:30px;
   padding:16px 18px;
@@ -239,8 +239,6 @@ html,body{
   line-height:1.7;
 }
 
-/* links */
-
 .planLink a{
   color:#38bdf8;
   font-weight:600;
@@ -248,8 +246,6 @@ html,body{
   margin:0 4px;
   position:relative;
 }
-
-/* animated underline */
 
 .planLink a::after{
   content:"";
@@ -267,14 +263,11 @@ html,body{
   width:100%;
 }
 
-/* hover glow */
-
 .planLink a:hover{
   color:#7dd3fc;
 }
 
-/* ================= HOVER EFFECT ================= */
-
+/* hover effect */
 .planner-content:hover{
   box-shadow:
     0 0 25px rgba(0,245,255,0.08),
@@ -283,15 +276,31 @@ html,body{
 
 /* ================= RESPONSIVE ================= */
 
-/* 📱 Mobile */
+/* tablet */
+@media (max-width:768px){
+
+  .planner{
+    padding:40px 18px;
+  }
+
+  .planner h1{
+    font-size:28px;
+  }
+
+  .planner-content{
+    padding:22px 18px;
+  }
+
+  .planner-content h2{
+    font-size:20px;
+  }
+}
+
+/* mobile */
 @media (max-width:600px){
 
   .planner{
     padding:30px 15px;
-  }
-
-  .planner h1{
-    font-size:24px;
   }
 
   .planner-input{
@@ -301,92 +310,21 @@ html,body{
   .planner-input button{
     width:100%;
   }
-
 }
 
-/* 📱 Tablet */
-@media (max-width:768px){
-
-  .planner h1{
-    font-size:28px;
-  }
-
-}
-
-/* 💻 Small laptop */
-@media (max-width:1024px){
-
-  .planner{
-    padding:40px 18px;
-  }
-
-}
-
-/* 🖥 Large screens */
-@media (min-width:1400px){
-
-  .planner{
-    max-width:800px;
-  }
-
-  .planner h1{
-    font-size:42px;
-  }
-
-}
-
-
-
-/* ================= RESPONSIVE ================= */
-
-@media (max-width:1024px){
-
-  .planner-content{
-    margin:40px auto;
-    padding:25px 20px;
-  }
-
-}
-
-@media (max-width:768px){
-
-  .planner-content{
-    padding:22px 18px;
-  }
-
-  .planner-content h2{
-    font-size:20px;
-  }
-
-  .planner-content p,
-  .planner-content li{
-    font-size:14.5px;
-  }
-
-}
-
+/* small mobile */
 @media (max-width:480px){
+
+  .planner h1{
+    font-size:24px;
+  }
 
   .planner-content{
     padding:20px 16px;
-    border-radius:12px;
-  }
-
-  .planner-content h2{
-    font-size:18px;
   }
 
   .planLink{
     padding:14px;
     font-size:14px;
   }
-
-}
-
-@media (max-width:360px){
-
-  .planner-content{
-    padding:18px 14px;
-  }
-
 }

@@ -1,4 +1,5 @@
 /* ================= GLOBAL SAFETY ================= */
+
 *,
 *::before,
 *::after{
@@ -10,6 +11,7 @@ html,body{
 }
 
 /* ================= CONTAINER ================= */
+
 .gpa-container{
   width:100%;
   max-width:900px;
@@ -20,10 +22,10 @@ html,body{
 }
 
 /* ================= TITLE ================= */
+
 .gpa-container h1{
   font-size:36px;
   margin-bottom:10px;
-
   background:linear-gradient(90deg,#00f5ff,#7b2ff7);
   -webkit-background-clip:text;
   color:transparent;
@@ -35,6 +37,7 @@ html,body{
 }
 
 /* ================= INPUT SECTION ================= */
+
 .gpa-input{
   display:flex;
   justify-content:center;
@@ -43,7 +46,6 @@ html,body{
   margin-bottom:30px;
 }
 
-/* INPUT */
 .gpa-input input{
   width:220px;
   padding:14px;
@@ -55,13 +57,11 @@ html,body{
   outline:none;
 }
 
-/* focus */
 .gpa-input input:focus{
   border-color:#00f5ff;
   box-shadow:0 0 10px rgba(0,245,255,0.3);
 }
 
-/* BUTTON */
 .gpa-input button{
   padding:14px 22px;
   border:none;
@@ -79,6 +79,7 @@ html,body{
 }
 
 /* ================= RESULT ================= */
+
 .gpa-result{
   margin-top:25px;
   padding:20px;
@@ -88,7 +89,6 @@ html,body{
   position:relative;
 }
 
-/* glow border */
 .gpa-result::before{
   content:"";
   position:absolute;
@@ -110,21 +110,19 @@ html,body{
 }
 
 /* ================= TABLE SECTION ================= */
+
 .grading-table{
   margin-top:50px;
 }
 
-/* TITLE */
 .grading-table h3{
   margin-bottom:15px;
   font-size:22px;
-
   background:linear-gradient(90deg,#00f5ff,#7b2ff7);
   -webkit-background-clip:text;
   color:transparent;
 }
 
-/* TABLE */
 .grading-table table{
   width:100%;
   border-collapse:separate;
@@ -136,7 +134,6 @@ html,body{
   position:relative;
 }
 
-/* glow border */
 .grading-table table::before{
   content:"";
   position:absolute;
@@ -152,14 +149,12 @@ html,body{
   pointer-events:none;
 }
 
-/* HEAD */
 .grading-table th{
   padding:14px;
   color:#00f5ff;
   font-size:14px;
 }
 
-/* BODY */
 .grading-table td{
   padding:14px;
   border-bottom:1px solid rgba(255,255,255,0.05);
@@ -171,53 +166,37 @@ html,body{
   max-width:900px;
   margin:40px auto;
   padding:30px 24px;
-
   background:#ffffff;
   border-radius:14px;
-
   box-shadow:0 10px 30px rgba(0,0,0,0.06);
-
   line-height:1.8;
-  box-sizing:border-box;
 }
-
-/* Headings */
 
 .gpa-content h2{
   margin-top:28px;
   margin-bottom:10px;
-
   font-size:20px;
   font-weight:600;
   color:#0f172a;
-
   position:relative;
 }
-
-/* Blue accent line */
 
 .gpa-content h2::before{
   content:"";
   position:absolute;
   left:-12px;
   top:6px;
-
   width:4px;
   height:18px;
   background:#2563eb;
-
   border-radius:3px;
 }
-
-/* Paragraphs */
 
 .gpa-content p{
   color:#475569;
   font-size:15px;
   margin-bottom:16px;
 }
-
-/* Lists */
 
 .gpa-content ul{
   padding-left:20px;
@@ -230,25 +209,17 @@ html,body{
   font-size:15px;
 }
 
-/* FAQ style */
-
 .gpa-content p strong{
   color:#0f172a;
 }
 
-/* Bottom link section */
-
 .gpa-content p:last-child{
   margin-top:25px;
   padding:16px;
-
   background:#f1f5f9;
   border-left:4px solid #2563eb;
-
   border-radius:8px;
 }
-
-/* Links */
 
 .gpa-content a{
   color:#2563eb;
@@ -262,9 +233,21 @@ html,body{
   color:#1d4ed8;
 }
 
-/* ================= RESPONSIVE ================= */
+/* ================= RESPONSIVE (MERGED CLEANLY) ================= */
 
+/* Tablet */
+@media (max-width:1024px){
+  .gpa-container{
+    padding:40px 18px;
+  }
+}
+
+/* Tablet small */
 @media (max-width:768px){
+
+  .gpa-container h1{
+    font-size:28px;
+  }
 
   .gpa-content{
     padding:25px 18px;
@@ -273,38 +256,9 @@ html,body{
   .gpa-content h2{
     font-size:18px;
   }
-
 }
 
-@media (max-width:480px){
-
-  .gpa-content{
-    padding:22px 15px;
-    margin:30px 12px;
-  }
-
-  .gpa-content h2{
-    font-size:17px;
-  }
-
-  .gpa-content p,
-  .gpa-content li{
-    font-size:14px;
-  }
-
-}
-
-@media (max-width:360px){
-
-  .gpa-content{
-    padding:20px 12px;
-  }
-
-}
-
-/* ================= RESPONSIVE ================= */
-
-/* 📱 Mobile */
+/* Mobile */
 @media (max-width:600px){
 
   .gpa-container{
@@ -324,7 +278,6 @@ html,body{
     width:100%;
   }
 
-  /* table scroll */
   .grading-table table{
     display:block;
     overflow-x:auto;
@@ -334,30 +287,35 @@ html,body{
   .grading-table td{
     min-width:150px;
   }
-
 }
 
-/* 📱 Tablet */
-@media (max-width:768px){
+/* Small mobile */
+@media (max-width:480px){
 
-  .gpa-container h1{
-    font-size:28px;
+  .gpa-content{
+    padding:22px 15px;
+    margin:30px 12px;
   }
 
-}
-
-/* 💻 Small laptop */
-@media (max-width:1024px){
-
-  .gpa-container{
-    padding:40px 18px;
+  .gpa-content h2{
+    font-size:17px;
   }
 
+  .gpa-content p,
+  .gpa-content li{
+    font-size:14px;
+  }
 }
 
-/* 🖥 Large screens */
+/* Extra small */
+@media (max-width:360px){
+  .gpa-content{
+    padding:20px 12px;
+  }
+}
+
+/* Large screens */
 @media (min-width:1400px){
-
   .gpa-container{
     max-width:1000px;
   }
@@ -365,5 +323,4 @@ html,body{
   .gpa-container h1{
     font-size:44px;
   }
-
 }

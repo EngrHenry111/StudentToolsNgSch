@@ -1,0 +1,226 @@
+/* ================= GLOBAL SAFETY ================= */
+*,
+*::before,
+*::after{
+  box-sizing:border-box;
+}
+
+html,body{
+  overflow-x:hidden;
+}
+
+/* ================= CONTAINER ================= */
+.admin-container{
+  width:100%;
+  max-width:900px;
+  margin:auto;
+  padding:60px 20px;
+  color:#e2e8f0;
+}
+
+/* ================= TITLE ================= */
+.admin-container h1{
+  text-align:center;
+  font-size:34px;
+  margin-bottom:30px;
+
+  background:linear-gradient(90deg,#00f5ff,#7b2ff7);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+/* ================= FORM ================= */
+.admin-container form{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+
+  background:rgba(255,255,255,0.05);
+  padding:25px;
+  border-radius:18px;
+
+  backdrop-filter:blur(14px);
+  position:relative;
+}
+
+/* glowing border */
+.admin-container form::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:18px;
+  padding:1px;
+
+  background:linear-gradient(120deg,#00f5ff,#7b2ff7);
+
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+
+  pointer-events:none;
+}
+
+/* ================= INPUTS ================= */
+.admin-container input,
+.admin-container select,
+.admin-container textarea{
+  width:100%;
+  padding:14px 16px;
+
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.1);
+
+  background:rgba(255,255,255,0.05);
+  color:#e2e8f0;
+
+  outline:none;
+  font-size:14px;
+
+  transition:0.3s ease;
+}
+
+/* prevent overflow */
+.admin-container textarea{
+  min-height:120px;
+  resize:vertical;
+  overflow-wrap:break-word;
+}
+
+/* focus glow */
+.admin-container input:focus,
+.admin-container select:focus,
+.admin-container textarea:focus{
+  border-color:#00f5ff;
+
+  box-shadow:
+    0 0 10px rgba(0,245,255,0.4),
+    0 0 20px rgba(123,47,247,0.3);
+}
+
+/* ================= REACT QUILL ================= */
+.ql-toolbar{
+  border-radius:14px 14px 0 0;
+  border:1px solid rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.05);
+}
+
+.ql-container{
+  border-radius:0 0 14px 14px;
+  border:1px solid rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.05);
+  color:#e2e8f0;
+  min-height:200px;
+}
+
+/* ================= BUTTONS ================= */
+.admin-container button{
+  padding:12px 20px;
+
+  border:none;
+  border-radius:12px;
+
+  background:linear-gradient(90deg,#00f5ff,#7b2ff7);
+  color:white;
+
+  font-weight:500;
+  cursor:pointer;
+
+  transition:0.3s ease;
+}
+
+/* hover */
+.admin-container button:hover{
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 0 15px rgba(0,245,255,0.5),
+    0 0 25px rgba(123,47,247,0.3);
+}
+
+/* click */
+.admin-container button:active{
+  transform:scale(0.95);
+}
+
+/* ================= ACTION BUTTON GROUP ================= */
+.admin-container form > div{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+/* preview button */
+.admin-container button[type="button"]{
+  background:linear-gradient(90deg,#38bdf8,#6366f1);
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* 📱 Mobile */
+@media (max-width:480px){
+
+  .admin-container{
+    padding:30px 15px;
+  }
+
+  .admin-container h1{
+    font-size:24px;
+  }
+
+  .admin-container form{
+    padding:18px;
+  }
+
+  .admin-container input,
+  .admin-container select,
+  .admin-container textarea{
+    font-size:13px;
+    padding:12px;
+  }
+
+  .admin-container button{
+    width:100%;
+  }
+
+  .admin-container form > div{
+    flex-direction:column;
+  }
+
+}
+
+/* 📱 Tablet */
+@media (max-width:768px){
+
+  .admin-container{
+    padding:40px 18px;
+  }
+
+  .admin-container h1{
+    font-size:28px;
+  }
+
+}
+
+/* 💻 Small laptop */
+@media (max-width:1024px){
+
+  .admin-container{
+    padding:45px 18px;
+  }
+
+}
+
+/* 🖥 Large screens */
+@media (min-width:1400px){
+
+  .admin-container{
+    max-width:1000px;
+  }
+
+  .admin-container h1{
+    font-size:40px;
+  }
+
+}

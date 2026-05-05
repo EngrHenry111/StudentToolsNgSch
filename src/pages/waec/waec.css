@@ -1,4 +1,5 @@
 /* ================= GLOBAL ================= */
+
 *,
 *::before,
 *::after{
@@ -10,6 +11,7 @@ html,body{
 }
 
 /* ================= CONTAINER ================= */
+
 .waec-container{
   width:100%;
   max-width:1000px;
@@ -19,11 +21,11 @@ html,body{
 }
 
 /* ================= TITLE ================= */
+
 .waec-container h1{
   text-align:center;
   font-size:36px;
   margin-bottom:10px;
-
   background:linear-gradient(90deg,#00f5ff,#7b2ff7);
   -webkit-background-clip:text;
   color:transparent;
@@ -36,6 +38,7 @@ html,body{
 }
 
 /* ================= TABLE ================= */
+
 .waec-table{
   width:100%;
   border-collapse:collapse;
@@ -45,7 +48,6 @@ html,body{
   backdrop-filter:blur(14px);
 }
 
-/* header */
 .waec-table th{
   padding:16px;
   font-size:14px;
@@ -53,14 +55,12 @@ html,body{
   border-bottom:1px solid rgba(255,255,255,0.1);
 }
 
-/* cells */
 .waec-table td{
   padding:14px;
   text-align:center;
   border-bottom:1px solid rgba(255,255,255,0.05);
 }
 
-/* inputs */
 .waec-table input{
   width:100%;
   padding:12px;
@@ -71,13 +71,13 @@ html,body{
   outline:none;
 }
 
-/* focus */
 .waec-table input:focus{
   border-color:#00f5ff;
   box-shadow:0 0 10px rgba(0,245,255,0.3);
 }
 
 /* ================= BUTTONS ================= */
+
 .waec-buttons{
   display:flex;
   justify-content:center;
@@ -86,7 +86,6 @@ html,body{
   flex-wrap:wrap;
 }
 
-/* general */
 .waec-buttons button{
   padding:14px 20px;
   border:none;
@@ -97,13 +96,13 @@ html,body{
   transition:0.3s ease;
 }
 
-/* hover */
 .waec-buttons button:hover{
   transform:translateY(-2px);
   box-shadow:0 0 15px #00f5ff,0 0 30px #7b2ff7;
 }
 
 /* remove button */
+
 .remove-btn{
   background:linear-gradient(90deg,#ef4444,#dc2626);
   padding:8px 14px;
@@ -116,78 +115,63 @@ html,body{
 }
 
 /* ================= RESULTS ================= */
+
 .waec-results{
   margin-top:40px;
 }
 
-/* title */
 .waec-results h2{
   text-align:center;
   margin-bottom:20px;
   color:#00f5ff;
 }
 
-/* result card */
 .result-card{
   padding:18px;
   border-radius:16px;
   margin-bottom:15px;
-
   background:rgba(255,255,255,0.05);
   backdrop-filter:blur(14px);
-
   display:flex;
   justify-content:space-between;
   flex-wrap:wrap;
   gap:10px;
-
   transition:0.3s ease;
 }
 
-/* hover */
 .result-card:hover{
   transform:translateY(-4px);
 }
 
-/* text */
 .result-card p{
   margin:0;
 }
 
-/* grade highlight */
 .result-card strong{
   color:#22c55e;
 }
 
-/* ================= WAEC CONTENT ================= */
+/* ================= CONTENT ================= */
 
 .waec-content{
   max-width:850px;
   margin:50px auto;
   padding:30px 25px;
-
   background:rgba(255,255,255,0.03);
   border-radius:16px;
-
   backdrop-filter:blur(12px);
   border:1px solid rgba(255,255,255,0.05);
-
   line-height:1.8;
   color:#e2e8f0;
 }
-
-/* ================= HEADINGS ================= */
 
 .waec-content h2{
   font-size:22px;
   margin-top:28px;
   margin-bottom:10px;
-
   color:#38bdf8;
   position:relative;
 }
-
-/* glow underline */
 
 .waec-content h2::after{
   content:"";
@@ -195,26 +179,21 @@ html,body{
   width:45px;
   height:3px;
   margin-top:6px;
-
   background:linear-gradient(90deg,#00f5ff,#7b2ff7);
   border-radius:10px;
 }
 
-/* ================= TEXT ================= */
-
 .waec-content p{
-  font-size:15
+  font-size:15px;
 }
 
 /* ================= RESPONSIVE ================= */
 
 /* tablet */
 @media (max-width:768px){
-
   .waec-container h1{
     font-size:26px;
   }
-
 }
 
 /* mobile */
@@ -224,7 +203,6 @@ html,body{
     padding:30px 15px;
   }
 
-  /* table scroll FIX */
   .waec-table{
     display:block;
     overflow-x:auto;
@@ -239,14 +217,11 @@ html,body{
     width:100%;
     max-width:320px;
   }
-
 }
 
 /* small mobile */
 @media (max-width:480px){
-
   .waec-container h1{
     font-size:22px;
   }
-
 }

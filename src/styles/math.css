@@ -46,6 +46,18 @@ html,body{
   backdrop-filter:blur(14px);
 
   margin-bottom:25px;
+
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+}
+
+/* input group */
+.input-group{
+  display:flex;
+  flex-direction:column;
+  gap:13px;
+  position:static !important;
 }
 
 /* input */
@@ -60,7 +72,6 @@ html,body{
   color:#fff;
 
   outline:none;
-  margin-bottom:12px;
 }
 
 /* focus */
@@ -94,25 +105,48 @@ html,body{
 
 /* ================= SUGGESTIONS ================= */
 .suggestions{
-  margin-top:12px;
   display:flex;
   flex-wrap:wrap;
   gap:8px;
+
+  margin-top:10px;
+  position:static !important;
+  width:100%;
 }
 
-.suggestions span{
-  padding:6px 12px;
+/* chip */
+.chip{
+  flex-shrink:0;
+
+  padding:8px 14px;
   border-radius:20px;
 
   background:rgba(255,255,255,0.05);
-  cursor:pointer;
+  color:#cbd5f5;
   font-size:13px;
 
-  transition:0.25s;
+  cursor:pointer;
+  transition:all 0.3s ease;
+
+  backdrop-filter:blur(12px);
 }
 
-.suggestions span:hover{
-  background:rgba(0,245,255,0.2);
+/* hover */
+.chip:hover{
+  transform:translateY(-2px);
+
+  background:linear-gradient(90deg,#00f5ff,#7b2ff7);
+  color:white;
+
+  box-shadow:
+    0 0 10px rgba(0,245,255,0.5),
+    0 0 20px rgba(123,47,247,0.4);
+}
+
+/* active */
+.chip.active{
+  background:linear-gradient(90deg,#00f5ff,#7b2ff7);
+  color:white;
 }
 
 /* ================= RESULT CARD ================= */
@@ -171,24 +205,6 @@ html,body{
   text-align:center;
 }
 
-/* related */
-.related-topics{
-  margin-top:20px;
-}
-
-.tags{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-}
-
-.tag{
-  padding:6px 12px;
-  border-radius:20px;
-
-  background:rgba(255,255,255,0.05);
-}
-
 /* ================= HISTORY ================= */
 .history-panel{
   padding:20px;
@@ -211,85 +227,19 @@ html,body{
   background:rgba(0,245,255,0.1);
 }
 
-.input-group{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-
-.suggestions{
+/* ================= RELATED TAGS ================= */
+.tags{
   display:flex;
   flex-wrap:wrap;
   gap:8px;
 }
 
-.solver-box{
-  display:flex;
-  flex-direction:column;
-  gap:24px;
-}
-
-.input-group{
-  display:flex;
-  flex-direction:column;
-  gap:13px;
-
-  position:static !important; /* 💥 prevents overlay */
-}
-
-.suggestions{
-  position:static !important;   /* 💥 REMOVE floating */
-  margin-top:0 !important;
-
-  display:flex;
-  flex-wrap:wrap;
-  gap:6px;
-
-  width:100%;
-}
-
-
-
-/* ================= SUGGESTIONS ================= */
-.math-suggestions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-top:6px;
-}
-
-/* chip */
-.chip{
-  padding:7px 14px;
+.tag{
+  padding:6px 12px;
   border-radius:20px;
 
   background:rgba(255,255,255,0.05);
-  color:#cbd5f5;
-  font-size:13px;
-
-  cursor:pointer;
-  transition:all 0.25s ease;
-
-  backdrop-filter:blur(10px);
 }
-
-/* hover glow */
-.chip:hover{
-  transform:translateY(-2px);
-
-  background:linear-gradient(90deg,#00f5ff,#7b2ff7);
-  color:white;
-
-  box-shadow:
-    0 0 10px rgba(0,245,255,0.4),
-    0 0 20px rgba(123,47,247,0.3);
-}
-
-/* click feel */
-.chip:active{
-  transform:scale(0.95);
-}
-
 
 /* ================= INPUT ================= */
 .ai-input{
@@ -307,10 +257,9 @@ html,body{
   transition:0.3s;
 }
 
-/* glow focus */
+/* focus */
 .ai-input:focus{
   border-color:#00f5ff;
-
   box-shadow:
     0 0 10px rgba(0,245,255,0.4),
     0 0 20px rgba(123,47,247,0.3);
@@ -318,52 +267,7 @@ html,body{
   background:rgba(255,255,255,0.08);
 }
 
-/* ================= SUGGESTIONS ================= */
-
-.math-suggestions{
-  display:flex;
-  gap:10px;
-  margin-top:10px;
-
-  overflow-x:auto;
-  padding-bottom:5px;
-}
-
-/* chip */
-.chip{
-  flex-shrink:0;
-
-  padding:8px 14px;
-  border-radius:20px;
-
-  background:rgba(255,255,255,0.05);
-  color:#cbd5f5;
-
-  font-size:13px;
-  cursor:pointer;
-
-  transition:all 0.3s ease;
-  backdrop-filter:blur(12px);
-}
-
-/* hover */
-.chip:hover{
-  background:linear-gradient(90deg,#00f5ff,#7b2ff7);
-  color:white;
-
-  box-shadow:
-    0 0 10px rgba(0,245,255,0.5),
-    0 0 20px rgba(123,47,247,0.4);
-}
-
-/* active (keyboard nav) */
-.chip.active{
-  background:linear-gradient(90deg,#00f5ff,#7b2ff7);
-  color:white;
-}
-
-/* ================= BUTTON ================= */
-
+/* ================= SOLVE BUTTON ================= */
 .solve-btn{
   margin-top:14px;
   width:100%;
@@ -382,25 +286,19 @@ html,body{
   transition:0.3s;
 }
 
-/* hover glow */
 .solve-btn:hover{
   transform:translateY(-2px);
-
   box-shadow:
     0 0 15px rgba(0,245,255,0.6),
     0 0 30px rgba(123,47,247,0.4);
 }
 
-/* click */
 .solve-btn:active{
   transform:scale(0.96);
 }
 
-
-
 /* ================= MOBILE ================= */
 @media (max-width:600px){
-
   .math-title{
     font-size:24px;
   }
@@ -408,6 +306,4 @@ html,body{
   .solver-box button{
     font-size:14px;
   }
-
 }
-

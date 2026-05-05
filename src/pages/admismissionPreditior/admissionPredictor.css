@@ -1,82 +1,87 @@
-/* Main Container */
-
-.predictor{
-  width:100%;
-  max-width:500px;
-  margin:auto;
-  padding:40px 20px;
+/* ================= GLOBAL SAFETY ================= */
+*,
+*::before,
+*::after{
   box-sizing:border-box;
-  text-align:center;
 }
 
-/* Title */
+html,body{
+  overflow-x:hidden;
+}
 
+/* ================= MAIN CONTAINER ================= */
+.predictor{
+  width:100%;
+  max-width:520px;
+  margin:auto;
+  padding:40px 20px;
+  text-align:center;
+  color:#e2e8f0;
+}
+
+/* ================= TITLE ================= */
 .predictor h1{
   font-size:28px;
   font-weight:600;
   margin-bottom:25px;
-  color:#0f172a;
-  color: white;
+  color:white;
 }
 
-/* Inputs */
-
+/* ================= INPUTS ================= */
 .predictor input{
   width:100%;
-  padding:12px 14px;
+  padding:14px;
   margin-bottom:15px;
-  border:1px solid #e5e7eb;
-  border-radius:8px;
+
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:10px;
+
   font-size:15px;
   outline:none;
+
+  background:rgba(255,255,255,0.05);
+  color:#e2e8f0;
+
   transition:all 0.25s ease;
-  box-sizing:border-box;
-}
 
-/* Prevent overflow */
-
-.predictor input{
   word-break:break-word;
   overflow-wrap:break-word;
 }
 
-/* Input focus */
-
+/* focus */
 .predictor input:focus{
   border-color:#2563eb;
-  box-shadow:0 0 0 2px rgba(37,99,235,0.1);
+  box-shadow:0 0 10px rgba(37,99,235,0.25);
 }
 
-/* Button */
-
+/* ================= BUTTON ================= */
 .predictor button{
   width:100%;
-  padding:12px;
+  padding:14px;
+
   border:none;
+  border-radius:10px;
+
   background:#0f172a;
   color:white;
-  border-radius:8px;
+
   font-size:15px;
   font-weight:500;
+
   cursor:pointer;
   transition:all 0.25s ease;
 }
 
-/* Button hover */
-
 .predictor button:hover{
   background:#1e293b;
-  transform:translateY(-1px);
+  transform:translateY(-2px);
 }
-
-/* Button click */
 
 .predictor button:active{
   transform:scale(0.97);
 }
 
-/* Result */
-
+/* ================= RESULT ================= */
 .predictor h2{
   margin-top:25px;
   font-size:20px;
@@ -85,25 +90,23 @@
   word-break:break-word;
 }
 
-
-/* ================= ADMISSION PREDICTOR ================= */
-
+/* ================= CONTENT SECTION ================= */
 .predictor-content{
   max-width:900px;
   margin:40px auto;
   padding:30px 24px;
 
-  background:#ffffff;
-  border-radius:14px;
+  background:rgba(255,255,255,0.03);
+  border-radius:16px;
 
-  box-shadow:0 10px 30px rgba(0,0,0,0.06);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,0.05);
 
   line-height:1.8;
-  box-sizing:border-box;
+  color:#e2e8f0;
 }
 
-/* Headings */
-
+/* headings */
 .predictor-content h2{
   margin-top:28px;
   margin-bottom:10px;
@@ -115,31 +118,27 @@
   position:relative;
 }
 
-/* Accent line */
-
+/* accent line */
 .predictor-content h2::before{
   content:"";
   position:absolute;
-  left:-12px;
+  left:-10px;
   top:6px;
 
   width:4px;
   height:18px;
-  background:#22c55e; /* green for prediction theme */
-
+  background:#22c55e;
   border-radius:3px;
 }
 
-/* Paragraph */
-
+/* paragraph */
 .predictor-content p{
-  color:#475569;
+  color:#cbd5f5;
   font-size:15px;
   margin-bottom:16px;
 }
 
-/* Lists */
-
+/* list */
 .predictor-content ul{
   padding-left:20px;
   margin-bottom:16px;
@@ -148,75 +147,61 @@
 .predictor-content li{
   margin-bottom:8px;
   font-size:15px;
-  color:#334155;
+  color:#e2e8f0;
 }
 
 /* ================= FORMULA BOX ================= */
-
 .predictor-content p strong{
   display:block;
   margin-top:10px;
 
   padding:14px;
 
-  background:#f0fdf4;
+  background:rgba(34,197,94,0.08);
   border-left:4px solid #22c55e;
 
   border-radius:8px;
 
-  font-size:16px;
-  color:#065f46;
+  font-size:15px;
+  color:#22c55e;
 }
 
-/* ================= RESULT GUIDE ================= */
-
-.predictor-content li{
-  position:relative;
-  padding-left:6px;
-}
-
-/* Optional: highlight guide ranges */
-
+/* ================= LIST COLOR GUIDE ================= */
 .predictor-content li:nth-child(1){
-  color:#16a34a; /* high */
+  color:#16a34a;
 }
 
 .predictor-content li:nth-child(2){
-  color:#ca8a04; /* moderate */
+  color:#ca8a04;
 }
 
 .predictor-content li:nth-child(3){
-  color:#dc2626; /* low */
+  color:#dc2626;
 }
 
 /* ================= NOTE BOX ================= */
-
 .predictor-content h2:last-of-type + p{
   padding:16px;
-  background:#fef9c3;
+  background:rgba(234,179,8,0.08);
   border-left:4px solid #eab308;
   border-radius:8px;
 }
 
 /* ================= LINK BOX ================= */
-
 .predictor-content p:last-child{
   margin-top:25px;
   padding:16px;
 
-  background:#eff6ff;
+  background:rgba(37,99,235,0.08);
   border-left:4px solid #2563eb;
 
   border-radius:8px;
 }
 
-/* Links */
-
 .predictor-content a{
   color:#2563eb;
   font-weight:500;
   text-decoration:none;
-  transition:all 0.25s ease;
 }
 
 .predictor-content a:hover{
@@ -226,56 +211,7 @@
 
 /* ================= RESPONSIVE ================= */
 
-@media (max-width:768px){
-
-  .predictor-content{
-    padding:25px 18px;
-  }
-
-  .predictor-content h2{
-    font-size:18px;
-  }
-
-}
-
-@media (max-width:480px){
-
-  .predictor-content{
-    margin:30px 12px;
-    padding:22px 15px;
-  }
-
-  .predictor-content h2{
-    font-size:17px;
-  }
-
-  .predictor-content p,
-  .predictor-content li{
-    font-size:14px;
-  }
-
-}
-
-@media (max-width:360px){
-
-  .predictor-content{
-    padding:20px 12px;
-  }
-
-}
-
-/* ========================= */
-/* Responsive Design */
-/* ========================= */
-
-@media (max-width:1024px){
-
-  .predictor{
-    padding:35px 18px;
-  }
-
-}
-
+/* tablet */
 @media (max-width:768px){
 
   .predictor{
@@ -286,20 +222,16 @@
     font-size:24px;
   }
 
-}
-
-@media (max-width:600px){
-
-  .predictor{
-    padding:25px 15px;
+  .predictor-content{
+    padding:25px 18px;
   }
 
-  .predictor input{
-    font-size:14px;
+  .predictor-content h2{
+    font-size:18px;
   }
-
 }
 
+/* mobile */
 @media (max-width:480px){
 
   .predictor{
@@ -310,8 +242,26 @@
     font-size:22px;
   }
 
+  .predictor input{
+    font-size:14px;
+  }
+
+  .predictor-content{
+    margin:30px 12px;
+    padding:20px 15px;
+  }
+
+  .predictor-content h2{
+    font-size:17px;
+  }
+
+  .predictor-content p,
+  .predictor-content li{
+    font-size:14px;
+  }
 }
 
+/* small mobile */
 @media (max-width:360px){
 
   .predictor{
@@ -322,4 +272,7 @@
     font-size:13px;
   }
 
+  .predictor-content{
+    padding:18px 12px;
+  }
 }

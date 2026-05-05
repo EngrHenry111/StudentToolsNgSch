@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import API from "../../services/api";
+import "./preview.css"
 
 const PreviewPage = () => {
 

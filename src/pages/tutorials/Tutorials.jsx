@@ -304,8 +304,11 @@ useEffect(()=>{
  {/* <p className="excerpt">
   {t.excerpt || t.content.slice(0,120)+"..."}
  </p> */}
- <p className="excerpt">
+ {/* <p className="excerpt">
   {t.excerpt || stripHTML(t.content).slice(0,120) + "..."}
+</p> */}
+<p className="excerpt">
+  {stripHTML(t.excerpt || t.content).slice(0,120) + "..."}
 </p>
 
  <span className="read-more">
