@@ -10,7 +10,7 @@ html,body{
 }
 
 /* ================= CONTAINER ================= */
-.admin-login-container{
+.admin-login{
   min-height:100vh;
 
   display:flex;
@@ -58,7 +58,7 @@ html,body{
 }
 
 /* ================= TITLE ================= */
-.admin-login-container h2{
+.admin-login h2{
   position:absolute;
   top:20%;
   text-align:center;
@@ -138,11 +138,11 @@ html,body{
 /* tablet */
 @media (max-width:768px){
 
-  .admin-login-container{
+  .admin-login{
     padding:30px 18px;
   }
 
-  .admin-login-container h2{
+  .admin-login h2{
     font-size:26px;
     top:15%;
   }
@@ -152,11 +152,11 @@ html,body{
 /* mobile */
 @media (max-width:480px){
 
-  .admin-login-container{
+  .admin-login{
     padding:25px 15px;
   }
 
-  .admin-login-container h2{
+  .admin-login h2{
     font-size:22px;
     top:12%;
   }
@@ -179,7 +179,7 @@ html,body{
 /* large screens */
 @media (min-width:1400px){
 
-  .admin-login-container h2{
+  .admin-login h2{
     font-size:40px;
   }
 

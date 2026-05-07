@@ -35,7 +35,7 @@ const AdminLogin = () => {
 
  return(
 
-<div className="admin-login-container">
+<div className="admin-login">
 
    <h2>Admin Login</h2>
 
