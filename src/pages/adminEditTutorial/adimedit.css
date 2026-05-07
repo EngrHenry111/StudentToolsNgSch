@@ -10,7 +10,7 @@ html,body{
 }
 
 /* ================= CONTAINER ================= */
-.admin-container{
+.admin-edit{
   width:100%;
   max-width:900px;
   margin:auto;
@@ -19,7 +19,7 @@ html,body{
 }
 
 /* ================= TITLE ================= */
-.admin-container h1{
+.admin-edit h1{
   text-align:center;
   font-size:34px;
   margin-bottom:30px;
@@ -30,7 +30,7 @@ html,body{
 }
 
 /* ================= FORM ================= */
-.admin-container form{
+.admin-edit form{
   display:flex;
   flex-direction:column;
   gap:18px;
@@ -44,7 +44,7 @@ html,body{
 }
 
 /* glowing border */
-.admin-container form::before{
+.admin-edit form::before{
   content:"";
   position:absolute;
   inset:0;
@@ -63,9 +63,9 @@ html,body{
 }
 
 /* ================= INPUTS ================= */
-.admin-container input,
-.admin-container select,
-.admin-container textarea{
+.admin-edit input,
+.admin-edit select,
+.admin-edit textarea{
   width:100%;
   padding:14px 16px;
 
@@ -82,16 +82,16 @@ html,body{
 }
 
 /* prevent overflow */
-.admin-container textarea{
+.admin-edit textarea{
   min-height:120px;
   resize:vertical;
   overflow-wrap:break-word;
 }
 
 /* focus glow */
-.admin-container input:focus,
-.admin-container select:focus,
-.admin-container textarea:focus{
+.admin-edit input:focus,
+.admin-edit select:focus,
+.admin-edit textarea:focus{
   border-color:#00f5ff;
 
   box-shadow:
@@ -115,7 +115,7 @@ html,body{
 }
 
 /* ================= BUTTONS ================= */
-.admin-container button{
+.admin-edit button{
   padding:12px 20px;
 
   border:none;
@@ -131,7 +131,7 @@ html,body{
 }
 
 /* hover */
-.admin-container button:hover{
+.admin-edit button:hover{
   transform:translateY(-2px);
 
   box-shadow:
@@ -140,19 +140,19 @@ html,body{
 }
 
 /* click */
-.admin-container button:active{
+.admin-edit button:active{
   transform:scale(0.95);
 }
 
 /* ================= ACTION BUTTON GROUP ================= */
-.admin-container form > div{
+.admin-edit form > div{
   display:flex;
   gap:12px;
   flex-wrap:wrap;
 }
 
 /* preview button */
-.admin-container button[type="button"]{
+.admin-edit button[type="button"]{
   background:linear-gradient(90deg,#38bdf8,#6366f1);
 }
 
@@ -165,26 +165,26 @@ html,body{
     padding:30px 15px;
   }
 
-  .admin-container h1{
+  .admin-edit h1{
     font-size:24px;
   }
 
-  .admin-container form{
+  .admin-edit form{
     padding:18px;
   }
 
-  .admin-container input,
-  .admin-container select,
-  .admin-container textarea{
+  .admin-edit input,
+  .admin-edit select,
+  .admin-edit textarea{
     font-size:13px;
     padding:12px;
   }
 
-  .admin-container button{
+  .admin-edit button{
     width:100%;
   }
 
-  .admin-container form > div{
+  .admin-edit form > div{
     flex-direction:column;
   }
 
@@ -193,11 +193,11 @@ html,body{
 /* 📱 Tablet */
 @media (max-width:768px){
 
-  .admin-container{
+  .admin-edit{
     padding:40px 18px;
   }
 
-  .admin-container h1{
+  .admin-edit h1{
     font-size:28px;
   }
 
@@ -206,7 +206,7 @@ html,body{
 /* 💻 Small laptop */
 @media (max-width:1024px){
 
-  .admin-container{
+  .admin-edit{
     padding:45px 18px;
   }
 
@@ -215,11 +215,11 @@ html,body{
 /* 🖥 Large screens */
 @media (min-width:1400px){
 
-  .admin-container{
+  .admin-edit{
     max-width:1000px;
   }
 
-  .admin-container h1{
+  .admin-edit h1{
     font-size:40px;
   }
 

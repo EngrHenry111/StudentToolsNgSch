@@ -28,7 +28,7 @@ const description = "Use our AI tutor to ask academic questions, solve problems,
 const image = "https://studenttoolsng.com/logo.png";
 
  return(
-<div className="ai-tutor-container">
+<div className="ai-tutor">
 
    <Helmet>
   <title>{title}</title>

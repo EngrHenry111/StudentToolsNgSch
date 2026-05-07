@@ -39,7 +39,7 @@ const GPAClass = () => {
 
  return(
 
-  <div className="gpa-container">
+  <div className="gpa-class">
 
     <Helmet>
 

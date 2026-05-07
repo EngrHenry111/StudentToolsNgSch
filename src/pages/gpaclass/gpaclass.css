@@ -12,7 +12,7 @@ html,body{
 
 /* ================= CONTAINER ================= */
 
-.gpa-container{
+.gpa-class{
   width:100%;
   max-width:900px;
   margin:auto;
@@ -23,7 +23,7 @@ html,body{
 
 /* ================= TITLE ================= */
 
-.gpa-container h1{
+.gpa-class h1{
   font-size:36px;
   margin-bottom:10px;
   background:linear-gradient(90deg,#00f5ff,#7b2ff7);
@@ -31,7 +31,7 @@ html,body{
   color:transparent;
 }
 
-.gpa-container p{
+.gpa-class p{
   color:#94a3b8;
   margin-bottom:30px;
 }
@@ -245,7 +245,7 @@ html,body{
 /* Tablet small */
 @media (max-width:768px){
 
-  .gpa-container h1{
+  .gpa-class h1{
     font-size:28px;
   }
 
@@ -261,11 +261,11 @@ html,body{
 /* Mobile */
 @media (max-width:600px){
 
-  .gpa-container{
+  .gpa-class{
     padding:30px 15px;
   }
 
-  .gpa-container h1{
+  .gpa-class h1{
     font-size:24px;
   }
 
@@ -316,11 +316,11 @@ html,body{
 
 /* Large screens */
 @media (min-width:1400px){
-  .gpa-container{
+  .gpa-class{
     max-width:1000px;
   }
 
-  .gpa-container h1{
+  .gpa-class h1{
     font-size:44px;
   }
 }

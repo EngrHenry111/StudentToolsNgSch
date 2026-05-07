@@ -24,7 +24,7 @@ const Register = ()=>{
 
  return(
 
-  <div className="auth-container">
+  <div className="auth-student">
 
    <h2>Create Account</h2>
 

@@ -26,7 +26,7 @@ const AdminMessages = () => {
 
  return(
 
-  <div className="admin-messages-container">
+  <div className="admin-messages">
 
    <h1>Contact Messages</h1>
 

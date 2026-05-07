@@ -87,7 +87,7 @@ const EditTutorial = () => {
  if (loading) return <p>Loading...</p>;
 
  return (
-  <div className="edit-tutorial-container">
+  <div className="edit-tutorial-kit">
 
    <h1>Edit Tutorial</h1>
 

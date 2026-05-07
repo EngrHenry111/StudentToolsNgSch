@@ -11,7 +11,7 @@ const image = "https://studenttoolsng.com/logo.png";
 
 return (
 
-<div className="privacy-container">
+<div className="privacy-condition">
 
 <Helmet>
 

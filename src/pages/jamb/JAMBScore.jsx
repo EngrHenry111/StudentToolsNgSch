@@ -54,7 +54,7 @@ const JAMBScore = () => {
 
  return(
 
-  <div className="jamb-container">
+  <div className="jamb-tool">
 
    <Helmet>
 

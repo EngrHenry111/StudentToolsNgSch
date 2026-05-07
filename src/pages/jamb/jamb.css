@@ -12,7 +12,7 @@ html,body{
 
 /* ================= CONTAINER ================= */
 
-.jamb-container{
+.jamb-tool{
   width:100%;
   max-width:900px;
   margin:auto;
@@ -23,7 +23,7 @@ html,body{
 
 /* ================= TITLE ================= */
 
-.jamb-container h1{
+.jamb-tool h1{
   font-size:36px;
   margin-bottom:10px;
   background:linear-gradient(90deg,#00f5ff,#7b2ff7);
@@ -31,7 +31,7 @@ html,body{
   color:transparent;
 }
 
-.jamb-container p{
+.jamb-tool p{
   color:#94a3b8;
   margin-bottom:30px;
 }
@@ -244,11 +244,11 @@ html,body{
 
 /* Large screens */
 @media (min-width:1400px){
-  .jamb-container{
+  .jamb-tool{
     max-width:1000px;
   }
 
-  .jamb-container h1{
+  .jamb-tool h1{
     font-size:44px;
   }
 }
@@ -285,7 +285,7 @@ html,body{
 /* Mobile */
 @media (max-width:600px){
 
-  .jamb-container{
+  .jamb-tool{
     padding:30px 15px;
   }
 

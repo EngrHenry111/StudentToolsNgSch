@@ -12,7 +12,7 @@ html,body{
 
 /* ================= CONTAINER ================= */
 
-.waec-container{
+.waec-cal{
   width:100%;
   max-width:1000px;
   margin:auto;
@@ -22,7 +22,7 @@ html,body{
 
 /* ================= TITLE ================= */
 
-.waec-container h1{
+.waec-cal h1{
   text-align:center;
   font-size:36px;
   margin-bottom:10px;
@@ -191,7 +191,7 @@ html,body{
 
 /* tablet */
 @media (max-width:768px){
-  .waec-container h1{
+  .waec-cal h1{
     font-size:26px;
   }
 }
@@ -199,7 +199,7 @@ html,body{
 /* mobile */
 @media (max-width:600px){
 
-  .waec-container{
+  .waec-cal{
     padding:30px 15px;
   }
 
@@ -221,7 +221,7 @@ html,body{
 
 /* small mobile */
 @media (max-width:480px){
-  .waec-container h1{
+  .waec-cal h1{
     font-size:22px;
   }
 }

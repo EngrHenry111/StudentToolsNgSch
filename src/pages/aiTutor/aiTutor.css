@@ -10,7 +10,7 @@ html, body {
 }
 
 /* ================= CONTAINER ================= */
-.ai-tutor-container {
+.ai-tutor {
   width: 100%;
   max-width: 900px;
   margin: auto;
@@ -19,7 +19,7 @@ html, body {
 }
 
 /* ================= TITLE ================= */
-.ai-tutor-container h1 {
+.ai-tutor h1 {
   font-size: 38px;
   text-align: center;
   margin-bottom: 30px;
@@ -31,7 +31,7 @@ html, body {
 }
 
 /* ================= TEXTAREA ================= */
-.ai-tutor-container textarea {
+.ai-tutor textarea {
   width: 100%;
   min-height: 150px;
   padding: 16px 18px;
@@ -47,13 +47,13 @@ html, body {
   transition: 0.3s ease;
 }
 
-.ai-tutor-container textarea:focus {
+.ai-tutor textarea:focus {
   border-color: #00f5ff;
   box-shadow: 0 0 10px rgba(0,245,255,0.4);
 }
 
 /* ================= BUTTON ================= */
-.ai-tutor-container button {
+.ai-tutor button {
   width: fit-content;
   padding: 12px 25px;
   border: none;
@@ -65,12 +65,12 @@ html, body {
   transition: 0.3s ease;
 }
 
-.ai-tutor-container button:hover {
+.ai-tutor button:hover {
   transform: translateY(-3px) scale(1.05);
   box-shadow: 0 0 15px #00f5ff, 0 0 30px #7b2ff7;
 }
 
-.ai-tutor-container button:active {
+.ai-tutor button:active {
   transform: scale(0.96);
 }
 
@@ -315,7 +315,7 @@ html, body {
 }
 
 @media (max-width: 480px) {
-  .ai-tutor-container {
+  .ai-tutor {
     padding: 30px 15px;
   }
 

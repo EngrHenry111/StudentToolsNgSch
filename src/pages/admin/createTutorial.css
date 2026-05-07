@@ -10,7 +10,7 @@ html,body{
 }
 
 /* ================= CONTAINER ================= */
-.admin-container{
+.admin-create{
   width:100%;
   max-width:950px;
   margin:auto;
@@ -19,7 +19,7 @@ html,body{
 }
 
 /* ================= TITLE ================= */
-.admin-container h1{
+.admin-create h1{
   text-align:center;
   font-size:34px;
   margin-bottom:25px;
@@ -62,7 +62,7 @@ html,body{
 }
 
 /* ================= FORM ================= */
-.admin-container form{
+.admin-create form{
   display:flex;
   flex-direction:column;
   gap:18px;
@@ -76,7 +76,7 @@ html,body{
 }
 
 /* glowing border */
-.admin-container form::before{
+.admin-create form::before{
   content:"";
   position:absolute;
   inset:0;
@@ -95,9 +95,9 @@ html,body{
 }
 
 /* ================= INPUTS ================= */
-.admin-container input,
-.admin-container select,
-.admin-container textarea{
+.admin-create input,
+.admin-create select,
+.admin-create textarea{
   width:100%;
   padding:14px 16px;
 
@@ -114,16 +114,16 @@ html,body{
 }
 
 /* textarea */
-.admin-container textarea{
+.admin-create textarea{
   min-height:120px;
   resize:vertical;
   overflow-wrap:break-word;
 }
 
 /* focus */
-.admin-container input:focus,
-.admin-container select:focus,
-.admin-container textarea:focus{
+.admin-create input:focus,
+.admin-create select:focus,
+.admin-create textarea:focus{
   border-color:#00f5ff;
 
   box-shadow:
@@ -147,7 +147,7 @@ html,body{
 }
 
 /* ================= SUBMIT BUTTON ================= */
-.admin-container form button{
+.admin-create form button{
   margin-top:10px;
 
   padding:14px;
@@ -164,7 +164,7 @@ html,body{
 }
 
 /* hover */
-.admin-container form button:hover{
+.admin-create form button:hover{
   transform:translateY(-2px);
 
   box-shadow:
@@ -173,7 +173,7 @@ html,body{
 }
 
 /* disabled */
-.admin-container form button:disabled{
+.admin-create form button:disabled{
   opacity:0.6;
   cursor:not-allowed;
 }
@@ -247,15 +247,15 @@ html,body{
 /* 📱 Mobile */
 @media (max-width:480px){
 
-  .admin-container{
+  .admin-create{
     padding:30px 15px;
   }
 
-  .admin-container h1{
+  .admin-create h1{
     font-size:24px;
   }
 
-  .admin-container form{
+  .admin-create form{
     padding:18px;
   }
 
@@ -272,11 +272,11 @@ html,body{
 /* 📱 Tablet */
 @media (max-width:768px){
 
-  .admin-container{
+  .admin-create{
     padding:40px 18px;
   }
 
-  .admin-container h1{
+  .admin-create h1{
     font-size:28px;
   }
 
@@ -285,7 +285,7 @@ html,body{
 /* 💻 Small laptop */
 @media (max-width:1024px){
 
-  .admin-container{
+  .admin-create{
     padding:45px 18px;
   }
 
@@ -294,11 +294,11 @@ html,body{
 /* 🖥 Large screens */
 @media (min-width:1400px){
 
-  .admin-container{
+  .admin-create{
     max-width:1050px;
   }
 
-  .admin-container h1{
+  .admin-create h1{
     font-size:40px;
   }
 

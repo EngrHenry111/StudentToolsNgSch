@@ -11,7 +11,7 @@ const Terms = () => {
 
  return(
 
- <div className="terms-page">
+ <div className="terms-mean">
 
  <Helmet>
 

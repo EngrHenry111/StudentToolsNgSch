@@ -70,7 +70,7 @@ const WAECCalculator = () => {
 
  return(
 
-  <div className="waec-container">
+  <div className="waec-cal">
 
     <Helmet>
 

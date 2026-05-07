@@ -137,7 +137,7 @@ const stripHTML = (html) => {
 };
  return(
 
- <div className="tutorials-container">
+ <div className="tutorials-holder">
 
  <Helmet>
   {/* <title>

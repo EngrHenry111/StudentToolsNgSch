@@ -12,7 +12,7 @@ html,body{
 
 /* ================= CONTAINER ================= */
 
-.tutorials-container{
+.tutorials-holder{
   width:100%;
   max-width:1100px;
   margin:auto;
@@ -22,7 +22,7 @@ html,body{
 
 /* ================= TITLE ================= */
 
-.tutorials-container h1{
+.tutorials-holder h1{
   text-align:center;
   font-size:36px;
   margin-bottom:35px;
@@ -346,20 +346,20 @@ html,body{
 
 .tutorial-intro,
 .plink,
-.tutorials-container h2,
-.tutorials-container ul{
+.tutorials-holder h2,
+.tutorials-holder ul{
   max-width:850px;
   margin-left:auto;
   margin-right:auto;
 }
 
 /* heading spacing fix */
-.tutorials-container h2{
+.tutorials-holder h2{
   margin-top:35px;
 }
 
 /* list spacing polish */
-.tutorials-container ul{
+.tutorials-holder ul{
   margin-top:10px;
   padding-left:22px;
 }
@@ -406,18 +406,18 @@ html,body{
 
 /* Large */
 @media (min-width:1400px){
-  .tutorials-container{
+  .tutorials-holder{
     max-width:1200px;
   }
 
-  .tutorials-container h1{
+  .tutorials-holder h1{
     font-size:44px;
   }
 }
 
 /* Desktop */
 @media (max-width:1024px){
-  .tutorials-container{
+  .tutorials-holder{
     padding:40px 18px;
   }
 
@@ -429,7 +429,7 @@ html,body{
 
 /* Tablet */
 @media (max-width:768px){
-  .tutorials-container h1{
+  .tutorials-holder h1{
     font-size:28px;
   }
 
@@ -445,11 +445,11 @@ html,body{
 
 /* Mobile */
 @media (max-width:600px){
-  .tutorials-container{
+  .tutorials-holder{
     padding:30px 15px;
   }
 
-  .tutorials-container h1{
+  .tutorials-holder h1{
     font-size:24px;
   }
 

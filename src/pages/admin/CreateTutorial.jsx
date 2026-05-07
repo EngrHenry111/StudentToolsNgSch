@@ -99,7 +99,7 @@ const CreateTutorial = () => {
  };
 
  return (
-  <div className="admin-container">
+  <div className="admin-create">
 
    <h1>Create Tutorial</h1>
 
@@ -143,52 +143,6 @@ const CreateTutorial = () => {
 
     {/* TOPIC */}
     {category && (
-    //  <select
-    //   value={topic}
-    //   onChange={(e) => setTopic(e.target.value)}
-    //  >
-    //   <option value="">Select Topic</option>
-
-    //   {category === "physics" && (
-    //    <>
-    //     <option value="mechanics">Mechanics</option>
-    //     <option value="electricity">Electricity</option>
-    //     <option value="waves">Waves</option>
-    //    </>
-    //   )}
-
-    //   {category === "mathematics" && (
-    //    <>
-    //     <option value="algebra">Algebra</option>
-    //     <option value="calculus">Calculus</option>
-    //     <option value="statistics">Statistics</option>
-    //    </>
-    //   )}
-
-    //   {category === "chemistry" && (
-    //    <>
-    //     <option value="organic">Organic Chemistry</option>
-    //     <option value="inorganic">Inorganic Chemistry</option>
-    //    </>
-    //   )}
-
-    //   {category === "biology" && (
-    //    <>
-    //     <option value="genetics">Genetics</option>
-    //     <option value="ecology">Ecology</option>
-    //    </>
-    //   )}
-
-    //   {category === "programming" && (
-    //    <>
-    //     <option value="javascript">JavaScript</option>
-    //     <option value="react">React</option>
-    //     <option value="nodejs">Node.js</option>
-    //    </>
-    //   )}
-
-    //  </select>
-
     <input
     placeholder="Topic (e.g. mechanics, algebra, javascript)"
     value={topic}

@@ -2,7 +2,7 @@
    PAGE LAYOUT
 ========================= */
 
-.quiz-page{
+.quiz-math{
   width:100%;
   padding:30px 16px; /* unified padding */
   box-sizing:border-box;
@@ -306,7 +306,7 @@
 
 @media (max-width:600px){
 
-  .quiz-page{
+  .quiz-math{
     padding:20px 12px;
   }
 

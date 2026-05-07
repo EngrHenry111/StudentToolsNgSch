@@ -112,7 +112,7 @@ const QuizPage = () => {
   };
 
   return (
-    <div className="quiz-page">
+    <div className="quiz-math">
 
       <Helmet>
 

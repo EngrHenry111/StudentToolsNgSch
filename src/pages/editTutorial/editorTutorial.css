@@ -1,6 +1,6 @@
 /* Container */
 
-.edit-tutorial-container{
+.edit-tutorial-kit{
   width:100%;
   max-width:700px;
   margin:auto;
@@ -10,7 +10,7 @@
 
 /* Title */
 
-.edit-tutorial-container h1{
+.edit-tutorial-kit h1{
   font-size:28px;
   font-weight:600;
   margin-bottom:25px;
@@ -19,8 +19,8 @@
 
 /* Inputs */
 
-.edit-tutorial-container input,
-.edit-tutorial-container textarea{
+.edit-tutorial-kit input,
+.edit-tutorial-kit textarea{
   width:100%;
   padding:12px 14px;
   border:1px solid #e5e7eb;
@@ -34,30 +34,30 @@
 
 /* Prevent overflow */
 
-.edit-tutorial-container input,
-.edit-tutorial-container textarea{
+.edit-tutorial-kit input,
+.edit-tutorial-kit textarea{
   word-break:break-word;
   overflow-wrap:break-word;
 }
 
 /* Focus */
 
-.edit-tutorial-container input:focus,
-.edit-tutorial-container textarea:focus{
+.edit-tutorial-kit input:focus,
+.edit-tutorial-kit textarea:focus{
   border-color:#2563eb;
   box-shadow:0 0 0 2px rgba(37,99,235,0.1);
 }
 
 /* Textarea */
 
-.edit-tutorial-container textarea{
+.edit-tutorial-kit textarea{
   min-height:180px;
   resize:vertical;
 }
 
 /* Button */
 
-.edit-tutorial-container button{
+.edit-tutorial-kit button{
   padding:12px 18px;
   border:none;
   background:#0f172a;
@@ -71,14 +71,14 @@
 
 /* Hover */
 
-.edit-tutorial-container button:hover{
+.edit-tutorial-kit button:hover{
   background:#1e293b;
   transform:translateY(-1px);
 }
 
 /* Active */
 
-.edit-tutorial-container button:active{
+.edit-tutorial-kit button:active{
   transform:scale(0.97);
 }
 
@@ -88,7 +88,7 @@
 
 @media (max-width:1024px){
 
-  .edit-tutorial-container{
+  .edit-tutorial-kit{
     padding:35px 18px;
   }
 
@@ -96,11 +96,11 @@
 
 @media (max-width:768px){
 
-  .edit-tutorial-container{
+  .edit-tutorial-kit{
     padding:30px 16px;
   }
 
-  .edit-tutorial-container h1{
+  .edit-tutorial-kit h1{
     font-size:24px;
   }
 
@@ -108,12 +108,12 @@
 
 @media (max-width:600px){
 
-  .edit-tutorial-container{
+  .edit-tutorial-kit{
     padding:25px 15px;
   }
 
-  .edit-tutorial-container input,
-  .edit-tutorial-container textarea{
+  .edit-tutorial-kit input,
+  .edit-tutorial-kit textarea{
     font-size:14px;
   }
 
@@ -121,11 +121,11 @@
 
 @media (max-width:480px){
 
-  .edit-tutorial-container{
+  .edit-tutorial-kit{
     padding:22px 14px;
   }
 
-  .edit-tutorial-container h1{
+  .edit-tutorial-kit h1{
     font-size:22px;
   }
 
@@ -133,12 +133,12 @@
 
 @media (max-width:360px){
 
-  .edit-tutorial-container{
+  .edit-tutorial-kit{
     padding:20px 12px;
   }
 
-  .edit-tutorial-container input,
-  .edit-tutorial-container textarea{
+  .edit-tutorial-kit input,
+  .edit-tutorial-kit textarea{
     font-size:13px;
   }
 
