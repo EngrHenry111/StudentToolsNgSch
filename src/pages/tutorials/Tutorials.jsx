@@ -2,9 +2,10 @@
 
 
 import { useEffect, useState } from "react";
-import { Link, useParams,useNavigate } from "react-router-dom";
+import { Link, useParams,useNavigate, useLocation } from "react-router-dom";
 import API from "../../services/api";
 import { Helmet } from "react-helmet-async";
+import { decode } from "html-entities";
 import "./tutorials.css";
 
 const Tutorials = () => {
@@ -14,6 +15,7 @@ const Tutorials = () => {
  const [page,setPage] = useState(1);
  const [totalPages,setTotalPages] = useState(1);
 const navigate = useNavigate();
+const location = useLocation();
 
  // FILTER STATES
  const [category,setCategory] = useState("");
@@ -123,44 +125,48 @@ useEffect(()=>{
   }
 
  };
+ 
 
- const stripHTML = (html) => {
-  if (!html) return "";
-  return html.replace(/<[^>]+>/g, "");
+
+const stripHTML = (html) => {
+ if (!html) return "";
+
+ const decoded = decode(html);
+
+ return decoded.replace(/<[^>]+>/g, "");
 };
-
  return(
 
  <div className="tutorials-container">
 
  <Helmet>
-  <title>
+  {/* <title>
    Study Tutorials | StudentToolsNG
-  </title>
+  </title> */}
+  <title>
+{
+ subtopic
+ ? `${subtopic} Tutorials | StudentToolsNG`
+ : topic
+ ? `${topic} Tutorials | StudentToolsNG`
+ : category
+ ? `${category} Tutorials | StudentToolsNG`
+ : "Study Tutorials | StudentToolsNG"
+}
+</title>
 
   <meta
    name="description"
    content="Explore tutorials by subject, topic, and subtopic. Learn faster with structured academic content."
   />
-
   <link
-   rel="canonical"
-   href="https://studenttoolsng.com/tutorials"
-  />
+  rel="canonical"
+  href={`https://studenttoolsng.com${
+    location.pathname
+  }`}
+/>
 
-  {/* <script type="application/ld+json">
-   {JSON.stringify({
-    "@context":"https://schema.org",
-    "@type":"ItemList",
-    itemListElement: tutorials.map((t,index)=>({
-     "@type":"ListItem",
-     position:index+1,
-     url:`https://studenttoolsng.com/tutorial/${t.slug}`,
-     name:t.title
-    }))
-   })}
-  </script> */}
-  <script type="application/ld+json">
+<script type="application/ld+json">
 {JSON.stringify({
  "@context":"https://schema.org",
  "@type":"BreadcrumbList",

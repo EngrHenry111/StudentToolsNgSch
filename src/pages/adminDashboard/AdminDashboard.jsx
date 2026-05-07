@@ -17,7 +17,6 @@ const AdminDashboard = () => {
  const [loading, setLoading] = useState(true);
  const [error, setError] = useState("");
 
- // ✅ FETCH STATS (correct place)
  useEffect(() => {
   fetchStats();
  }, []);
@@ -43,7 +42,6 @@ const AdminDashboard = () => {
   }
  };
 
- // ✅ LOGOUT (clean)
  const handleLogout = () => {
   localStorage.removeItem("adminToken");
   navigate("/admin/login");
@@ -55,13 +53,10 @@ const AdminDashboard = () => {
 
    <h1>Admin Dashboard</h1>
 
-   {/* ✅ LOADING */}
-   {loading && <p>Loading dashboard...</p>}
+   {loading && <p className="admin-loading">Loading dashboard...</p>}
 
-   {/* ✅ ERROR */}
-   {error && <p className="error">{error}</p>}
+   {error && <p className="admin-error">{error}</p>}
 
-   {/* ✅ STATS */}
    {!loading && !error && (
     <div className="admin-stats">
 
@@ -88,12 +83,10 @@ const AdminDashboard = () => {
     </div>
    )}
 
-   {/* ✅ ACTION BUTTON */}
    <button onClick={handleLogout} className="logout-btn">
     Logout
    </button>
 
-   {/* ✅ NAVIGATION */}
    <div className="admin-grid">
 
     <Link to="/admin/tutorials" className="admin-card">

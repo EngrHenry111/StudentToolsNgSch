@@ -73,6 +73,8 @@ const CreateTutorial = () => {
     tags: tags.split(",").map(tag => tag.trim()),
     image
    });
+   
+   
 
    alert("Tutorial created successfully");
 

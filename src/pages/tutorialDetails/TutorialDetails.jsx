@@ -7,6 +7,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { Helmet } from "react-helmet-async";
 import AuthorCard from "../../components/AuthorCard";
+import { decode } from "html-entities";
 import "./tutorialDetails.css";
 
 const TutorialDetails = ()=>{
@@ -183,10 +184,12 @@ const addInternalLinks = async (html) => {
 
 
  const fetchTutorial = async ()=>{
+  // console.log(tutorial.content);
 
  try{
 
   const res = await API.get(`/tutorials/${slug}`);
+  
 
   const htmlWithLinks = await addInternalLinks(res.data.content);
 
@@ -194,6 +197,7 @@ const addInternalLinks = async (html) => {
    ...res.data,
    content: htmlWithLinks
   });
+  // console.log(tutorial.content);
 
   generateTOC(htmlWithLinks);
   calculateReadingTime(htmlWithLinks);
@@ -489,10 +493,18 @@ const generateFAQ = (content)=>{
     ⏱ {readingTime} min read
    </p>
 
-   <div
+   {/* <div
     className="content"
     dangerouslySetInnerHTML={{__html: tutorial.content}}>
-    </div>
+      
+    </div> */}
+    <div
+ className="content"
+ dangerouslySetInnerHTML={{
+  __html: decode(tutorial.content)
+  }}
+  >
+  </div>
 
         {faqData.length > 0 && (
     <div className="faq-section">

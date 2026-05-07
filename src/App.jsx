@@ -79,9 +79,7 @@ function App() {
 
     <Route path="/admin/messages" element={<AdminMessages />} />
     <Route path="/admin/create-tutorial" element={<CreateTutorial />} />
-    <Route path="/tutorial-preview/:id" element={<PreviewPage/>} />
-
-    
+    <Route path="/tutorial-preview/:id" element={<PreviewPage/>} />    
 
     <Route path="/" element={<Home />} />
 
@@ -98,8 +96,6 @@ function App() {
     <Route path="/:category" element={<Tutorials />} />
     <Route path="/:category/:topic" element={<Tutorials />} />
     <Route path="/:category/:topic/:subtopic" element={<Tutorials />} />
-
-    
 
     <Route path="/contact" element={<Contact />} />
     <Route path="/study-planner" element={<StudyPlanner />} />
