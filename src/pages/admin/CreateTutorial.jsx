@@ -71,7 +71,8 @@ const CreateTutorial = () => {
     topic: topic.toLowerCase(),
     excerpt,
     tags: tags.split(",").map(tag => tag.trim()),
-    image
+    image,
+    status: "published"
    });
    
    

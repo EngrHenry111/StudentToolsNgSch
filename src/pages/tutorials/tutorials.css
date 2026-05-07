@@ -372,13 +372,14 @@ html,body{
 
 .pagination button{
   min-width:28px;
-  height: 22px;
+  height: 28px;
   font-weight:500;
   background:linear-gradient(90deg,#00f5ff,#136af5);
   border: none;
   border-radius: 5px;
   color: white;
   cursor:pointer;
+  margin: 4px;
 
 }
 

@@ -49,6 +49,7 @@ import AuthLayout from "./layouts/AuthLayout";
 import ProtectedRoute from "./componentsQuiz/ProtectedRoute";
 import Dashboard from "./pageQuiz/Dashboard";
 import PreviewPage from "./pages/adminPreview/PreviewPage";
+import AdminLayout from "./layouts/AdminLayout";
 
 // import SeoPage from "./pages/seo/SeoPage";
 function App() {
@@ -61,25 +62,25 @@ function App() {
    {/* <Navbar /> */}
 
    <Routes>
+  <Route path="/admin/login" element={<AdminLogin />} />
+
+    <Route path="/admin" element={<AdminLayout />}>
+
+  <Route index element={<AdminDashboard />} />
+
+  <Route path="tutorials" element={<AdminTutorials />} />
+
+  <Route path="edit/:id" element={<EditTutorial />} />
+
+  <Route path="messages" element={<AdminMessages />} />
+
+  <Route path="create-tutorial" element={<CreateTutorial />} />
+
+  <Route path="tutorial-preview/:id" element={<PreviewPage />} />
+
+</Route>
+
    <Route element={<PublicLayout />}>
-
-    <Route path="/admin/login" element={<AdminLogin />} />
-       <Route
-        path="/admin"
-        element={
-        <AdminProtectedRoute>
-        <AdminDashboard />
-        </AdminProtectedRoute>
-        }
-        />
-
-    <Route path="/admin/tutorials" element={<AdminTutorials />} />
-
-    <Route path="/admin/edit/:id" element={<EditTutorial />} />
-
-    <Route path="/admin/messages" element={<AdminMessages />} />
-    <Route path="/admin/create-tutorial" element={<CreateTutorial />} />
-    <Route path="/tutorial-preview/:id" element={<PreviewPage/>} />    
 
     <Route path="/" element={<Home />} />
 
@@ -111,8 +112,8 @@ function App() {
 
     {/* <Route path="/:slug" element={<SeoPage/>}/> */}
 
-<Route path="/tutorials/math-calculator" element={<MathCalculatorPage />} />    
-<Route path="/quiz" element={<QuizPage />} />    
+    <Route path="/tutorials/math-calculator" element={<MathCalculatorPage />} />    
+    <Route path="/quiz" element={<QuizPage />} />    
 
    </Route>
 

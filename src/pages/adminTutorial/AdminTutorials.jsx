@@ -6,16 +6,16 @@ import "./adminTutrials.css"
 const AdminTutorials = () => {
 
  const [tutorials,setTutorials] = useState([]);
- const [stats, setStats] = useState({});
+//  const [stats, setStats] = useState({});
 
 useEffect(()=>{
  fetchStats();
 },[]);
 
-const fetchStats = async ()=>{
- const res = await API.get("/admin/stats");
- setStats(res.data);
-};
+// const fetchStats = async ()=>{
+//  const res = await API.get("/admin/stats");
+//  setStats(res.data);
+// };
 
  useEffect(()=>{
 
