@@ -3,8 +3,8 @@ Scholarship Opportunities
 Displays available scholarships
 */
 
-import "./scholarships.css";
 import { Helmet } from "react-helmet-async";
+import "./scholarships.css";
 
 const Scholarships = () => {
 

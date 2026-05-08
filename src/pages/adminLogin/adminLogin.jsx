@@ -1,7 +1,7 @@
 import { useState } from "react";
 import API from "../../services/api";
 import { useNavigate } from "react-router-dom";
-import './login.css'
+import './adminlogin.css'
 
 const AdminLogin = () => {
 

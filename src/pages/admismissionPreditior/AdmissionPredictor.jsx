@@ -113,8 +113,8 @@ const image = "https://studenttoolsng.com/logo.png";
   </p>
 
   <p>
-  You can also calculate your 
-  <a href="/jamb-score-calculator">JAMB Score</a> and 
+  You can also calculate your {""}
+  <a href="/jamb-score-calculator">JAMB Score</a> and {""}
   <a href="/cgpa-calculator">CGPA</a>.
 </p>
 

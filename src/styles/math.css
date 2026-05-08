@@ -20,12 +20,7 @@ html,body{
   padding:40px 20px;
 }
 
-/* mobile */
-@media (max-width:900px){
-  .math-layout{
-    grid-template-columns:1fr;
-  }
-}
+
 
 /* ================= TITLE ================= */
 .math-title{
@@ -411,3 +406,9 @@ html,body{
 
 }
 
+/* mobile */
+@media (max-width:900px){
+  .math-layout{
+    grid-template-columns:1fr;
+  }
+}

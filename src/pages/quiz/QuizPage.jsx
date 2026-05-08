@@ -7,8 +7,9 @@ import {
 
 import { Helmet } from "react-helmet-async";
 
-import "./quiz.css";
 import Leaderboard from "../quizLeader/LeaderBoard";
+
+import "./quiz.css";
 
 const QuizPage = () => {
   const [question, setQuestion] = useState(null);

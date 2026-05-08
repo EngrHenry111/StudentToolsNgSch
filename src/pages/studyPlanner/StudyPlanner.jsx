@@ -4,8 +4,9 @@ Allows students plan daily study tasks
 */
 
 import { useState } from "react";
-import "./studyPlanner.css";
 import { Helmet } from "react-helmet-async";
+import "./studyPlanner.css";
+
 const StudyPlanner = () => {
 
  const [task,setTask] = useState("");
