@@ -10,7 +10,7 @@ html,body{
 }
 
 /* ================= CONTAINER ================= */
-.contact{
+.contact-con{
   width:100%;
   max-width:700px;
   margin:auto;
@@ -19,7 +19,7 @@ html,body{
 }
 
 /* ================= TITLE ================= */
-.contact h1{
+.contact-con h1{
   text-align:center;
   font-size:36px;
   margin-bottom:30px;
@@ -32,7 +32,7 @@ html,body{
 }
 
 /* ================= FORM ================= */
-.contact form{
+.contact-con form{
   display:flex;
   flex-direction:column;
   gap:18px;
@@ -45,7 +45,7 @@ html,body{
 }
 
 /* glowing border */
-.contact form::before{
+.contact-con form::before{
   content:"";
   position:absolute;
   inset:0;
@@ -62,8 +62,8 @@ html,body{
 }
 
 /* ================= INPUTS ================= */
-.contact input,
-.contact textarea{
+.contact-con input,
+.contact-con textarea{
   width:100%;
   padding:14px 16px;
   border-radius:14px;
@@ -80,20 +80,20 @@ html,body{
 }
 
 /* focus glow */
-.contact input:focus,
-.contact textarea:focus{
+.contact-con input:focus,
+.contact-con textarea:focus{
   border-color:#00f5ff;
   box-shadow:0 0 10px rgba(0,245,255,0.4);
 }
 
 /* textarea */
-.contact textarea{
+.contact-con textarea{
   min-height:160px;
   resize:vertical;
 }
 
 /* ================= BUTTON ================= */
-.contact button{
+.contact-con button{
   padding:14px;
   border:none;
   border-radius:30px;
@@ -105,12 +105,12 @@ html,body{
   transition:all 0.3s ease;
 }
 
-.contact button:hover{
+.contact-con button:hover{
   transform:translateY(-3px) scale(1.03);
   box-shadow:0 0 15px #00f5ff,0 0 30px #7b2ff7;
 }
 
-.contact button:active{
+.contact-con button:active{
   transform:scale(0.96);
 }
 
@@ -207,7 +207,7 @@ html,body{
 /* ================= RESPONSIVE (DEDUPED ONCE ONLY) ================= */
 
 @media (max-width:1024px){
-  .contact{
+  .contact-con{
     padding:45px 18px;
   }
 
@@ -218,11 +218,11 @@ html,body{
 }
 
 @media (max-width:768px){
-  .contact{
+  .contact-con{
     padding:40px 18px;
   }
 
-  .contact h1{
+  .contact-con h1{
     font-size:28px;
   }
 
@@ -241,25 +241,25 @@ html,body{
 }
 
 @media (max-width:480px){
-  .contact{
+  .contact-con{
     padding:30px 15px;
   }
 
-  .contact h1{
+  .contact-con h1{
     font-size:24px;
   }
 
-  .contact input,
-  .contact textarea{
+  .contact-con input,
+  .contact-con textarea{
     font-size:14px;
     padding:12px;
   }
 
-  .contact button{
+  .contact-con button{
     width:100%;
   }
 
-  .contact form{
+  .contact-con form{
     padding:18px;
   }
 

@@ -65,7 +65,7 @@ const image = "https://studenttoolsng.com/logo.png";
 
    <h1>Study Planner for Students</h1>
 
-   <div className="planner-input">
+   <div className="planner-inpt">
 
     <input
      placeholder="Add study task"

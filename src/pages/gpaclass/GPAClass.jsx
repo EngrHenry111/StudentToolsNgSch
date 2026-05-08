@@ -90,7 +90,7 @@ const GPAClass = () => {
 
    <p>Enter your CGPA to know your degree classification</p>
 
-   <div className="gpa-input">
+   <div className="input-gpa">
 
     <input
      type="number"

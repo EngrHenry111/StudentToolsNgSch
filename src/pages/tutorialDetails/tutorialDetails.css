@@ -23,7 +23,7 @@ html, body {
 }
 
 /* ================= LAYOUT ================= */
-.tutorial-layout {
+.tutorial-layt {
   /* display: grid;
   grid-template-columns: 1fr 3fr; */
   gap: 40px;
@@ -283,7 +283,7 @@ html, body {
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 900px) {
-  .tutorial-layout {
+  .tutorial-layt {
     grid-template-columns: 1fr;
   }
 
@@ -293,7 +293,7 @@ html, body {
 }
 
 @media (max-width: 600px) {
-  .tutorial-layout {
+  .tutorial-layt {
     padding: 30px 15px;
   }
 

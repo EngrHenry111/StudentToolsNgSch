@@ -10,7 +10,7 @@ html,body{
 }
 
 /* ================= CONTAINER ================= */
-.admin-tutorials{
+.admin-tuto{
   width:100%;
   max-width:1100px;
   margin:auto;
@@ -19,7 +19,7 @@ html,body{
 }
 
 /* ================= TITLE ================= */
-.admin-tutorials h1{
+.admin-tuto h1{
   text-align:center;
   font-size:36px;
   margin-bottom:40px;
@@ -131,11 +131,11 @@ html,body{
 /* tablet */
 @media (max-width:768px){
 
-  .admin-tutorials{
+  .admin-tuto{
     padding:40px 18px;
   }
 
-  .admin-tutorials h1{
+  .admin-tuto h1{
     font-size:28px;
   }
 
@@ -150,11 +150,11 @@ html,body{
 /* mobile */
 @media (max-width:480px){
 
-  .admin-tutorials{
+  .admin-tuto{
     padding:30px 15px;
   }
 
-  .admin-tutorials h1{
+  .admin-tuto h1{
     font-size:24px;
   }
 
@@ -174,11 +174,11 @@ html,body{
 /* large screens */
 @media (min-width:1400px){
 
-  .admin-tutorials{
+  .admin-tuto{
     max-width:1200px;
   }
 
-  .admin-tutorials h1{
+  .admin-tuto h1{
     font-size:44px;
   }
 

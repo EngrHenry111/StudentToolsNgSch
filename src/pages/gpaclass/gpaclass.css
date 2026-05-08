@@ -38,7 +38,7 @@ html,body{
 
 /* ================= INPUT SECTION ================= */
 
-.gpa-input{
+.input-gpa{
   display:flex;
   justify-content:center;
   gap:12px;
@@ -46,7 +46,7 @@ html,body{
   margin-bottom:30px;
 }
 
-.gpa-input input{
+.input-gpa input{
   width:220px;
   padding:14px;
   border-radius:14px;
@@ -57,12 +57,12 @@ html,body{
   outline:none;
 }
 
-.gpa-input input:focus{
+.input-gpa input:focus{
   border-color:#00f5ff;
   box-shadow:0 0 10px rgba(0,245,255,0.3);
 }
 
-.gpa-input button{
+.input-gpa button{
   padding:14px 22px;
   border:none;
   border-radius:30px;
@@ -73,7 +73,7 @@ html,body{
   transition:0.3s ease;
 }
 
-.gpa-input button:hover{
+.input-gpa button:hover{
   transform:translateY(-3px);
   box-shadow:0 0 15px #00f5ff,0 0 30px #7b2ff7;
 }
@@ -234,10 +234,10 @@ html,body{
 }
 
 /* ================= RESPONSIVE (MERGED CLEANLY) ================= */
-
+2
 /* Tablet */
 @media (max-width:1024px){
-  .gpa-container{
+  .gpa-class{
     padding:40px 18px;
   }
 }
@@ -269,12 +269,12 @@ html,body{
     font-size:24px;
   }
 
-  .gpa-input{
+  .input-gpa{
     flex-direction:column;
   }
 
-  .gpa-input input,
-  .gpa-input button{
+  .input-gpa input,
+  .input-gpa button{
     width:100%;
   }
 

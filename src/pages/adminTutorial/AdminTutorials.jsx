@@ -43,7 +43,7 @@ const fetchStats = async ()=>{
 
  return(
 
-  <div className="admin-tutorials">
+  <div className="admin-tuto">
 
    <h1>Manage Tutorials</h1>
 

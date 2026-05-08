@@ -12,7 +12,7 @@ const Author = () => {
   const image = "https://studenttoolsng.com/profile.png";
 
   return (
-    <div className="author-page">
+    <div className="author-pag">
       <Helmet>
         {/* Primary SEO */}
         <title>{title}</title>

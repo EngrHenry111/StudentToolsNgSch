@@ -318,7 +318,7 @@ const generateFAQ = (content)=>{
 
  return(
 
-  <div className="tutorial-layout">
+  <div className="tutorial-layt">
     <div className="breadcrumb">
 
 <Link to="/">Home</Link>

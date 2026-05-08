@@ -30,7 +30,7 @@ html,body{
 }
 
 /* ================= INPUT SECTION ================= */
-.planner-input{
+.planner-inpt{
   display:flex;
   gap:12px;
   margin-bottom:30px;
@@ -38,7 +38,7 @@ html,body{
 }
 
 /* input */
-.planner-input input{
+.planner-inpt input{
   flex:1;
   min-width:200px;
 
@@ -56,13 +56,13 @@ html,body{
 }
 
 /* focus */
-.planner-input input:focus{
+.planner-inpt input:focus{
   border-color:#00f5ff;
   box-shadow:0 0 10px rgba(0,245,255,0.3);
 }
 
 /* button */
-.planner-input button{
+.planner-inpt button{
   padding:14px 22px;
   border:none;
   border-radius:30px;
@@ -75,7 +75,7 @@ html,body{
   transition:0.3s ease;
 }
 
-.planner-input button:hover{
+.planner-inpt button:hover{
   transform:translateY(-2px);
   box-shadow:0 0 15px #00f5ff,0 0 30px #7b2ff7;
 }
@@ -303,11 +303,11 @@ html,body{
     padding:30px 15px;
   }
 
-  .planner-input{
+  .planner-inpt{
     flex-direction:column;
   }
 
-  .planner-input button{
+  .planner-inpt button{
     width:100%;
   }
 }

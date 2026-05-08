@@ -62,7 +62,7 @@ const handleChange = (e)=>{
   <nav className="navbar">
     
 
-    <div className="nav-container">
+    <div className="nav-key">
 
       <h2 className="logo">StudentToolsNG</h2>
 
