@@ -255,7 +255,7 @@ html,body{
 
 /* Desktop reduction */
 @media (max-width:1024px){
-  .jamb-container{
+  .jamb-tool{
     padding:40px 18px;
   }
 
@@ -268,7 +268,7 @@ html,body{
 /* Tablet */
 @media (max-width:768px){
 
-  .jamb-container h1{
+  .jamb-tool h1{
     font-size:28px;
   }
 
@@ -289,7 +289,7 @@ html,body{
     padding:30px 15px;
   }
 
-  .jamb-container h1{
+  .jamb-tool h1{
     font-size:24px;
   }
 
