@@ -12,13 +12,14 @@
       "permanent": true
     }
   ],
+
   "rewrites": [
     {
       "source": "/sitemap.xml",
       "destination": "https://studenttoolsserver.onrender.com/api/sitemap"
     },
     {
-      "source": "/(.*)",
+      "source": "/((?!api|assets|.*\\..*).*)",
       "destination": "/index.html"
     }
   ]

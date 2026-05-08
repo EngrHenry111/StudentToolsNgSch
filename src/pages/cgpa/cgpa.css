@@ -102,6 +102,7 @@ html,body{
 .cgpa-table select:focus{
   border-color:#00f5ff;
   box-shadow:0 0 10px rgba(0,245,255,0.3);
+  background-color: #101313;
 }
 
 /* ================= BUTTONS ================= */

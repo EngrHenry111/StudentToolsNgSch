@@ -44,7 +44,7 @@
   width:90px;
   height:90px;
   border-radius:50%;
-  object-fit:cover;
+  /* object-fit:cover; */
 
   border:2px solid transparent;
   background:linear-gradient(#0f172a,#0f172a) padding-box,
