@@ -1,13 +1,4 @@
-/* ================= GLOBAL SAFETY ================= */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
 
-html, body {
-  overflow-x: hidden;
-}
 
 /* ================= CONTAINER ================= */
 .admin-dashboard {

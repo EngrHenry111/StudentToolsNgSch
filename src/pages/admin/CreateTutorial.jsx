@@ -205,10 +205,11 @@ const CreateTutorial = () => {
     </p>
 
     <div
-     dangerouslySetInnerHTML={{
-      __html: content || "<p>Start writing to see preview...</p>"
-     }}
-    />
+ className="preview-content"
+ dangerouslySetInnerHTML={{
+  __html: content || "<p>Start writing to see preview...</p>"
+ }}
+/>
 
    </div>
 

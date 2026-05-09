@@ -7,7 +7,7 @@ import {
 
 import { Helmet } from "react-helmet-async";
 
-import Leaderboard from "../quizLeader/LeaderBoard";
+import Leaderboard from "../quizLeader/Leaderboard";
 
 import "./quiz.css";
 

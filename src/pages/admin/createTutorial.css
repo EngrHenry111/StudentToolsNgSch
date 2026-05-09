@@ -1,13 +1,3 @@
-/* ================= GLOBAL SAFETY ================= */
-*,
-*::before,
-*::after{
-  box-sizing:border-box;
-}
-
-html,body{
-  overflow-x:hidden;
-}
 
 /* ================= CONTAINER ================= */
 .admin-create{
@@ -129,16 +119,17 @@ html,body{
   box-shadow:
     0 0 10px rgba(0,245,255,0.4),
     0 0 20px rgba(123,47,247,0.3);
+    background-color: black;
 }
 
 /* ================= REACT QUILL ================= */
-.ql-toolbar{
+.admin-create .ql-toolbar{
   border-radius:14px 14px 0 0;
   border:1px solid rgba(255,255,255,0.1);
   background:rgba(255,255,255,0.05);
 }
 
-.ql-container{
+.admin-create .ql-container{
   border-radius:0 0 14px 14px;
   border:1px solid rgba(255,255,255,0.1);
   background:rgba(255,255,255,0.05);
@@ -238,7 +229,7 @@ html,body{
 }
 
 /* content */
-.live-preview div{
+.live-preview .preview-content{
   line-height:1.7;
 }
 

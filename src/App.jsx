@@ -19,7 +19,7 @@ import CreateTutorial from "./pages/admin/CreateTutorial";
 // import Search from "./pages/search/Search";
 import AITutor from "./pages/aiTutor/AITutor";
 
-import AdminLogin from "./pages/adminLogin/adminLogin";
+import AdminLogin from "./pages/adminLogin/AdminLogin";
 import AdminProtectedRoute from "./components/adminProtectedRoute";
 
 import AdminDashboard from "./pages/adminDashboard/AdminDashboard";
