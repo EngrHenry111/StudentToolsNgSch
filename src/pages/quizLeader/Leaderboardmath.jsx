@@ -1,7 +1,7 @@
 import "./leader.css"
 
 
-const Leaderboard = ({ users = [] }) => {
+const Leaderboardmath = ({ users = [] }) => {
   return (
     <div className="leaderboard">
 
@@ -30,4 +30,4 @@ const Leaderboard = ({ users = [] }) => {
     </div>
   );
 };
-export default Leaderboard;
+export default Leaderboardmath;

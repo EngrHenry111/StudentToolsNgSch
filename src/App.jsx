@@ -31,7 +31,7 @@ import About from "./pages/about/About";
 import Terms from "./pages/terms/Terms";
 import Author from "./pages/author/Author";
 import MathCalculatorPage from "./pages/mathCalculator/MathCalculatorPage";
-import QuizPage from "./pages/quiz/QuizPages";
+import QuizPages from "./pages/quiz/QuizPges";
 
 // AI QUIZ SECTION
 import Billing from "./pageQuiz/Billing";
@@ -82,37 +82,27 @@ function App() {
    <Route element={<PublicLayout />}>
 
     <Route path="/" element={<Home />} />
-
     <Route path="/cgpa-calculator" element={<CGPACalculator />} />
-
     <Route path="/waec-grade-calculator" element={<WAECCalculator />} />
-
     <Route path="/jamb-score-calculator" element={<JAMBScore />} />
-
     <Route path="/gpa-class-calculator" element={<GPAClass />} />
-
     <Route path="/tutorials" element={<Tutorials />} />
     <Route path="/tutorial/:slug" element={<TutorialDetails />}/>
     <Route path="/:category" element={<Tutorials />} />
     <Route path="/:category/:topic" element={<Tutorials />} />
     <Route path="/:category/:topic/:subtopic" element={<Tutorials />} />
-
     <Route path="/contact" element={<Contact />} />
     <Route path="/study-planner" element={<StudyPlanner />} />
     <Route path="/scholarships" element={<Scholarships />} />
     <Route path="/admission-predictor" element={<AdmissionPredictor />} />
-        
     <Route path="/ai-tutor" element={<AITutor/>}/>
-
     <Route path="/privacy-policy" element={<PrivacyPolicy/>} />
     <Route path="/about" element={<About/>} />
     <Route path="/terms" element={<Terms />} />
     <Route path="/author" element={<Author/>}/>
-
     {/* <Route path="/:slug" element={<SeoPage/>}/> */}
-
     <Route path="/tutorials/math-calculator" element={<MathCalculatorPage />} />    
-    <Route path="/quiz" element={<QuizPage />} />    
+    <Route path="/quiz" element={<QuizPages />} />    
 
    </Route>
 
@@ -123,16 +113,9 @@ function App() {
   <Route path="/register" element={<Register />} />
 
   <Route path="/pro/quiz/adaptive" element={<AdaptiveQuiz />} />
-  <Route
-  path="/pro/quiz/ai"
-  element={
-    <ProtectedRoute>
-      <AIQuiz />
-    </ProtectedRoute>
-  }
-   />
+  <Route path="/pro/quiz/ai"
+  element={<ProtectedRoute><AIQuiz /></ProtectedRoute>}/>
   <Route path="/pro/quiz/mixed" element={<MixedQuiz />} />
-
   <Route path="/pro/analytics" element={<Analytics />} />
   <Route path="/pro/leaderboard" element={<Leaderboard />} />
   <Route path="/pro/billing" element={<Billing />} />
