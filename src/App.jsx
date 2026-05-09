@@ -31,7 +31,7 @@ import About from "./pages/about/About";
 import Terms from "./pages/terms/Terms";
 import Author from "./pages/author/Author";
 import MathCalculatorPage from "./pages/mathCalculator/MathCalculatorPage";
-import QuizPage from "./pages/quiz/QuizPage";
+import QuizPage from "./pages/quiz/QuizPages";
 
 // AI QUIZ SECTION
 import Billing from "./pageQuiz/Billing";
