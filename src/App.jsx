@@ -20,7 +20,7 @@ import CreateTutorial from "./pages/admin/CreateTutorial";
 import AITutor from "./pages/aiTutor/AITutor";
 
 import AdminProtectedRoute from "./components/adminProtectedRoute";
-import AdminLogin from "./pages/adminLogin/AdminLogin"
+import AdminLogin from "./pages/adminLogin/AdminLoginPage"
 import AdminDashboard from "./pages/adminDashboard/AdminDashboard";
 import AdminTutorials from "./pages/adminTutorial/AdminTutorials";
 import EditTutorial from "./pages/editTutorial/EditorTutorial";
