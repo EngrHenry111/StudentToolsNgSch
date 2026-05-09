@@ -29,9 +29,15 @@ const Contact = () => {
 
   }catch(err){
 
-   console.log(err);
+ console.log("FULL ERROR:", err);
 
-  }
+ console.log("SERVER:", err.response?.data);
+
+ alert(
+   err.response?.data?.message || "Something went wrong"
+ );
+
+}
 
  };
 

@@ -2,29 +2,65 @@
 View Contact Messages
 */
 
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import API from "../../services/api";
-import "./adminMessages.css"
+
+import "./adminMessages.css";
 
 const AdminMessages = () => {
 
- const [messages,setMessages] = useState([]);
+ const [messages, setMessages] = useState([]);
 
- useEffect(()=>{
+ useEffect(() => {
 
   fetchMessages();
 
- },[]);
+ }, []);
 
- const fetchMessages = async ()=>{
+ /* FETCH */
+ const fetchMessages = async () => {
 
-  const res = await API.get("/messages");
+  try {
 
-  setMessages(res.data);
+   const res = await API.get("/messages");
+
+   setMessages(res.data);
+
+  } catch (err) {
+
+   console.log(err);
+
+  }
 
  };
 
- return(
+ /* DELETE */
+ const deleteHandler = async (id) => {
+
+  const confirmDelete = window.confirm(
+   "Are you sure you want to delete this message?"
+  );
+
+  if (!confirmDelete) return;
+
+  try {
+
+   await API.delete(`/messages/${id}`);
+
+   // remove instantly from UI
+   setMessages(messages.filter((m) => m._id !== id));
+
+  } catch (err) {
+
+   console.log(err);
+
+   alert("Failed to delete message");
+
+  }
+
+ };
+
+ return (
 
   <div className="admin-messages">
 
@@ -32,19 +68,26 @@ const AdminMessages = () => {
 
    <div className="messages-grid">
 
-   {messages.map((m)=>(
+    {messages.map((m) => (
 
-    <div key={m._id} className="message-card">
+     <div key={m._id} className="message-card">
 
-     <h3>{m.name}</h3>
+      <h3>{m.name}</h3>
 
-     <p className="email">{m.email}</p>
+      <p className="email">{m.email}</p>
 
-     <p className="message-text">{m.message}</p>
+      <p className="message-text">{m.message}</p>
 
-    </div>
+      <button
+       className="delete-btn"
+       onClick={() => deleteHandler(m._id)}
+      >
+       Delete
+      </button>
 
-   ))}
+     </div>
+
+    ))}
 
    </div>
 
