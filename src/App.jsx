@@ -19,9 +19,8 @@ import CreateTutorial from "./pages/admin/CreateTutorial";
 // import Search from "./pages/search/Search";
 import AITutor from "./pages/aiTutor/AITutor";
 
-import AdminLogin from "./pages/adminLogin/AdminLogin";
 import AdminProtectedRoute from "./components/adminProtectedRoute";
-
+import AdminLogin from "./pages/adminLogin/AdminLogin"
 import AdminDashboard from "./pages/adminDashboard/AdminDashboard";
 import AdminTutorials from "./pages/adminTutorial/AdminTutorials";
 import EditTutorial from "./pages/editTutorial/EditorTutorial";
