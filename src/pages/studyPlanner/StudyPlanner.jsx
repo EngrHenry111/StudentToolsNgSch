@@ -82,94 +82,126 @@ const StudyPlanner = () => {
 
 }, []);
 
-  // ================= ASK NOTIFICATION PERMISSION =================
+// ================= NOTIFICATION PERMISSION =================
 
-  useEffect(() => {
+useEffect(() => {
 
-    if (Notification.permission !== "granted") {
+  if ("Notification" in window) {
 
-      Notification.requestPermission();
+    Notification.requestPermission()
+      .then((permission) => {
 
-    }
+        console.log("Notification permission:", permission);
 
-  }, []);
+      });
 
-  // ================= SHOW NOTIFICATION =================
+  }
 
-  const showNotification = (title) => {
+}, []);
 
-    if (Notification.permission === "granted") {
 
-      new Notification(
-        "Study Reminder 📚",
-        {
-          body: `Time to study: ${title}`,
-          icon: "/logo.png",
-        }
-      );
+// ================= SHOW NOTIFICATION =================
 
-    }
+const showNotification = (title) => {
 
-  };
+  if (
+    "Notification" in window &&
+    Notification.permission === "granted"
+  ) {
 
-  // ================= PLAY ALARM =================
+    new Notification("Study Reminder 📚", {
 
-  const playAlarm = () => {
+      body: `Time to study: ${title}`,
+
+      icon: "/logo.png",
+
+    });
+
+  }
+
+};
+
+
+// ================= PLAY ALARM =================
+
+const playAlarm = async () => {
+
+  try {
 
     const audio = new Audio("/alarm.mp3");
 
-    audio.play();
+    audio.volume = 1;
 
-    // vibrate phone
+    await audio.play();
+
+    console.log("Alarm played");
+
+    // phone vibration
     if (navigator.vibrate) {
 
       navigator.vibrate([300, 200, 300]);
 
     }
 
-  };
+  } catch (err) {
 
-  // ================= CHECK REMINDERS =================
+    console.log("Audio failed:", err);
 
-  useEffect(() => {
+  }
 
-    const interval = setInterval(() => {
+};
 
-      const now = new Date();
 
-      tasks.forEach((task) => {
+// ================= CHECK REMINDERS =================
 
-        const taskDateTime =
-          new Date(
-            `${task.studyDate}T${task.studyTime}`
-          );
+useEffect(() => {
 
-        const diff = taskDateTime - now;
+  const interval = setInterval(() => {
 
-        // notify within 1 minute
-        if (
-          diff > 0 &&
-          diff < 60000 &&
-          !task.notified
-        ) {
+    const now = new Date();
 
-          showNotification(task.title);
+    const updatedTasks = tasks.map((task) => {
 
-          playAlarm();
+      const taskDateTime = new Date(
+        `${task.studyDate}T${task.studyTime}`
+      );
 
-          task.notified = true;
+      const diff = taskDateTime - now;
 
-          setTasks([...tasks]);
+      // within 1 minute
+      if (
+        diff > 0 &&
+        diff <= 60000 &&
+        !task.notified
+      ) {
 
-        }
+        showNotification(task.title);
 
-      });
+        playAlarm();
 
-    }, 30000);
+        return {
+          ...task,
+          notified: true,
+        };
 
-    return () => clearInterval(interval);
+      }
 
-  }, [tasks]);
+      return task;
+
+    });
+
+    setTasks(updatedTasks);
+
+    localStorage.setItem(
+      "studyTasks",
+      JSON.stringify(updatedTasks)
+    );
+
+  }, 10000);
+
+  return () => clearInterval(interval);
+
+}, [tasks]);
 
   // ================= ADD TASK =================
 
@@ -301,6 +333,10 @@ const addTask = () => {
       <h1  className="studyplanner-title">Study Planner for Students</h1>
 
       {/* ================= FORM ================= */}
+    <p className="studyplanner-subtitle">
+      Your study plans automatically expire
+      after 7 days
+    </p>
 
       <div  className="studyplanner-inputs">
 
