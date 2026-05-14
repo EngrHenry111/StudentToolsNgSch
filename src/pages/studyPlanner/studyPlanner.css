@@ -262,6 +262,20 @@
     0 0 40px rgba(123,47,247,0.05);
 }
 
+/* ================= DATE & TIME PICKER FIX ================= */
+
+.studyplanner-input[type="date"],
+.studyplanner-input[type="time"]{
+  color:#e2e8f0;
+  background:rgba(255,255,255,0.08);
+}
+
+/* calendar/time icon */
+.studyplanner-input[type="date"]::-webkit-calendar-picker-indicator,
+.studyplanner-input[type="time"]::-webkit-calendar-picker-indicator{
+  filter:invert(1) brightness(2);
+  cursor:pointer;
+}
 /* ================= RESPONSIVE ================= */
 
 /* tablet */
