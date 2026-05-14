@@ -262,7 +262,40 @@
     0 0 40px rgba(123,47,247,0.05);
 }
 
-/* ================= DATE & TIME PICKER FIX ================= */
+/* ================= TASK INFO ================= */
+
+.studyplanner-task-info{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+/* title */
+
+.studyplanner-task-title{
+  font-size:17px;
+  font-weight:600;
+  color:#ffffff;
+  margin:0;
+}
+
+/* date */
+
+.studyplanner-task-date{
+  font-size:14px;
+  color:#93c5fd;
+  margin:0;
+}
+
+/* time */
+
+.studyplanner-task-time{
+  font-size:14px;
+  color:#facc15;
+  margin:0;
+}
+
+/* ================= DATE & TIME PICKER  ================= */
 
 .studyplanner-input[type="date"],
 .studyplanner-input[type="time"]{

@@ -179,13 +179,19 @@ const addTask = () => {
 
   const newTask = {
 
-    id: Date.now(),
+  id: Date.now(),
 
-    title: task,
+  title: task,
 
-    createdAt: Date.now()
+  studyDate,
 
-  };
+  studyTime,
+
+  createdAt: Date.now(),
+
+  notified: false
+
+};
 
   const updatedTasks = [...tasks, newTask];
 
@@ -349,15 +355,28 @@ const addTask = () => {
 
         {tasks.map((t)=>(
 
- <li 
- className="studyplanner-task-item"
- key={t.id}>
+ <li key={t.id} className="studyplanner-task-item">
 
-  {t.title}
+  <div className="studyplanner-task-info">
+
+   <h3 className="studyplanner-task-title">
+    {t.title}
+   </h3>
+
+   <p className="studyplanner-task-date">
+    📅 {t.studyDate}
+   </p>
+
+   <p className="studyplanner-task-time">
+    ⏰ {t.studyTime}
+   </p>
+
+  </div>
 
   <button
-  className="studyplanner-delete-btn"
-   onClick={() => deleteTask(t.id)}>
+   className="studyplanner-delete-btn"
+   onClick={() => deleteTask(t.id)}
+  >
    Delete
   </button>
 
