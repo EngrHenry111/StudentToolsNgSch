@@ -1,6 +1,5 @@
-
 /* ================= MAIN CONTAINER ================= */
-.planner{
+.studyplanner-container{
   width:100%;
   max-width:720px;
   margin:auto;
@@ -9,7 +8,7 @@
 }
 
 /* ================= TITLE ================= */
-.planner h1{
+.studyplanner-title{
   text-align:center;
   font-size:34px;
   margin-bottom:30px;
@@ -20,7 +19,7 @@
 }
 
 /* ================= INPUT SECTION ================= */
-.planner-inpt{
+.studyplanner-inputs{
   display:flex;
   gap:12px;
   margin-bottom:30px;
@@ -28,7 +27,7 @@
 }
 
 /* input */
-.planner-inpt input{
+.studyplanner-input{
   flex:1;
   min-width:200px;
 
@@ -46,13 +45,13 @@
 }
 
 /* focus */
-.planner-inpt input:focus{
+.studyplanner-input:focus{
   border-color:#00f5ff;
   box-shadow:0 0 10px rgba(0,245,255,0.3);
 }
 
 /* button */
-.planner-inpt button{
+.studyplanner-add-btn{
   padding:14px 22px;
   border:none;
   border-radius:30px;
@@ -65,20 +64,20 @@
   transition:0.3s ease;
 }
 
-.planner-inpt button:hover{
+.studyplanner-add-btn:hover{
   transform:translateY(-2px);
   box-shadow:0 0 15px #00f5ff,0 0 30px #7b2ff7;
 }
 
 /* ================= TASK LIST ================= */
-.planner ul{
+.studyplanner-task-list{
   list-style:none;
   padding:0;
   margin:0;
 }
 
-/* ================= TASK ITEM (FIXED STRUCTURE) ================= */
-.planner li{
+/* ================= TASK ITEM ================= */
+.studyplanner-task-item{
   display:flex;
   justify-content:space-between;
   align-items:center;
@@ -99,7 +98,7 @@
 }
 
 /* glow border */
-.planner li::before{
+.studyplanner-task-item::before{
   content:"";
   position:absolute;
   inset:0;
@@ -119,7 +118,7 @@
 }
 
 /* hover */
-.planner li:hover{
+.studyplanner-task-item:hover{
   transform:translateY(-4px);
   box-shadow:
     0 0 15px rgba(0,245,255,0.2),
@@ -127,7 +126,7 @@
 }
 
 /* delete button */
-.planner li button{
+.studyplanner-delete-btn{
   flex-shrink:0;
 
   padding:8px 14px;
@@ -142,22 +141,21 @@
   transition:0.3s ease;
 }
 
-.planner li button:hover{
+.studyplanner-delete-btn:hover{
   transform:scale(1.05);
   box-shadow:0 0 10px rgba(239,68,68,0.5);
 }
 
-/* ================= EMPTY STATE FIX ================= */
-.planner ul:empty::after{
-  content:"No tasks yet. Add your first study task 🚀";
-  display:block;
+/* ================= EMPTY STATE ================= */
+.studyplanner-empty{
   text-align:center;
   margin-top:20px;
   color:#94a3b8;
+  font-size:15px;
 }
 
 /* ================= CONTENT SECTION ================= */
-.planner-content{
+.studyplanner-content{
   max-width:850px;
   margin:50px auto;
   padding:30px 25px;
@@ -173,7 +171,7 @@
 }
 
 /* headings */
-.planner-content h2{
+.studyplanner-content-heading{
   font-size:22px;
   margin-top:28px;
   margin-bottom:10px;
@@ -182,7 +180,7 @@
   position:relative;
 }
 
-.planner-content h2::after{
+.studyplanner-content-heading::after{
   content:"";
   display:block;
   width:45px;
@@ -194,30 +192,30 @@
 }
 
 /* text */
-.planner-content p{
+.studyplanner-content-text{
   font-size:15.5px;
   color:#cbd5f5;
   margin-bottom:15px;
 }
 
 /* list */
-.planner-content ul{
+.studyplanner-content-list{
   padding-left:20px;
   margin-top:10px;
 }
 
-.planner-content li{
+.studyplanner-content-list-item{
   margin-bottom:10px;
   font-size:15px;
   color:#e2e8f0;
 }
 
-.planner-content li::marker{
+.studyplanner-content-list-item::marker{
   color:#38bdf8;
 }
 
 /* ================= LINK BOX ================= */
-.planLink{
+.studyplanner-link-box{
   margin-top:30px;
   padding:16px 18px;
 
@@ -229,7 +227,7 @@
   line-height:1.7;
 }
 
-.planLink a{
+.studyplanner-link{
   color:#38bdf8;
   font-weight:600;
   text-decoration:none;
@@ -237,7 +235,7 @@
   position:relative;
 }
 
-.planLink a::after{
+.studyplanner-link::after{
   content:"";
   position:absolute;
   left:0;
@@ -249,16 +247,16 @@
   transition:width 0.3s ease;
 }
 
-.planLink a:hover::after{
+.studyplanner-link:hover::after{
   width:100%;
 }
 
-.planLink a:hover{
+.studyplanner-link:hover{
   color:#7dd3fc;
 }
 
 /* hover effect */
-.planner-content:hover{
+.studyplanner-content:hover{
   box-shadow:
     0 0 25px rgba(0,245,255,0.08),
     0 0 40px rgba(123,47,247,0.05);
@@ -269,19 +267,19 @@
 /* tablet */
 @media (max-width:768px){
 
-  .planner{
+  .studyplanner-container{
     padding:40px 18px;
   }
 
-  .planner h1{
+  .studyplanner-title{
     font-size:28px;
   }
 
-  .planner-content{
+  .studyplanner-content{
     padding:22px 18px;
   }
 
-  .planner-content h2{
+  .studyplanner-content-heading{
     font-size:20px;
   }
 }
@@ -289,15 +287,24 @@
 /* mobile */
 @media (max-width:600px){
 
-  .planner{
+  .studyplanner-container{
     padding:30px 15px;
   }
 
-  .planner-inpt{
+  .studyplanner-inputs{
     flex-direction:column;
   }
 
-  .planner-inpt button{
+  .studyplanner-add-btn{
+    width:100%;
+  }
+
+  .studyplanner-task-item{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .studyplanner-delete-btn{
     width:100%;
   }
 }
@@ -305,16 +312,21 @@
 /* small mobile */
 @media (max-width:480px){
 
-  .planner h1{
+  .studyplanner-title{
     font-size:24px;
   }
 
-  .planner-content{
+  .studyplanner-content{
     padding:20px 16px;
   }
 
-  .planLink{
+  .studyplanner-link-box{
     padding:14px;
+    font-size:14px;
+  }
+
+  .studyplanner-content-text,
+  .studyplanner-content-list-item{
     font-size:14px;
   }
 }
