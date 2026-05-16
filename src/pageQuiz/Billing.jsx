@@ -1,8 +1,15 @@
 import { useEffect, useState } from "react";
-import { getBilling, cancelSubscription } from "../apiQuiz/paymentApi";
+
+import {
+  getBilling,
+  cancelSubscription,
+  subscribe
+} from "../apiQuiz/paymentApi";
 
 const Billing = () => {
+
   const [data, setData] = useState(null);
+
   const token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -14,9 +21,21 @@ const Billing = () => {
     setData(res);
   };
 
+  const handleSubscribe = async () => {
+
+    const res = await subscribe(token);
+
+    if (res.authorization_url) {
+      window.location.href = res.authorization_url;
+    }
+  };
+
   const cancel = async () => {
+
     await cancelSubscription(token);
-    alert("Cancelled");
+
+    alert("Subscription Cancelled");
+
     load();
   };
 
@@ -24,11 +43,25 @@ const Billing = () => {
 
   return (
     <div>
-      <h2>Billing</h2>
+
+      <h2>Billing Dashboard</h2>
 
       <p>Status: {data.status}</p>
 
-      <button onClick={cancel}>Cancel Subscription</button>
+      <p>Plan: {data.plan}</p>
+
+      {
+        data.status !== "active" ? (
+          <button onClick={handleSubscribe}>
+            Upgrade to PRO
+          </button>
+        ) : (
+          <button onClick={cancel}>
+            Cancel Subscription
+          </button>
+        )
+      }
+
     </div>
   );
 };

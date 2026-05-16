@@ -1,7 +1,8 @@
 import { useState, useContext } from "react";
-import { loginUser } from "../../apiQuiz/authApi";
-import { AuthContext } from "../../contextQuiz/AuthContext";
+import { loginUser } from "../../../apiQuiz/authApi";
+import { AuthContext } from "../../../contextQuiz/AuthContext";
 import { Link , useNavigate} from "react-router-dom";
+import "./QuizLogin.css"
 
 const Login = () => {
   const { login } = useContext(AuthContext);
@@ -28,7 +29,10 @@ navigate("/pro/quiz/ai");
 };
 
   return (
-    <div>
+  <div className="login-page">
+
+    <div className="login-card">
+
       <h2>Login</h2>
 
       <input
@@ -42,14 +46,18 @@ navigate("/pro/quiz/ai");
         onChange={e => setForm({ ...form, password: e.target.value })}
       />
 
-      <button onClick={handleSubmit}>Login</button>
+      <button onClick={handleSubmit}>
+        Login
+      </button>
 
-      {/* 🔥 ADD THIS */}
       <p>
         Don't have an account? <Link to="/register">Register</Link>
       </p>
+
     </div>
-  );
+
+  </div>
+);
 };
 
 export default Login;

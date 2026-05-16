@@ -40,13 +40,13 @@ import Analytics from "./pageQuiz/Analytics";
 import MixedQuiz from "./pageQuiz/Quiz/MixedQuiz";
 import AIQuiz from "./pageQuiz/Quiz/AIQuiz";
 import AdaptiveQuiz from "./pageQuiz/Quiz/AdaptiveQuiz";
-import Register from "./pageQuiz/Auth/Register";
-import Login from "./pageQuiz/Auth/Login";
+import Register from "./pageQuiz/Auth/register/Register";
+import Login from "./pageQuiz/Auth/login/Login";
 
 import PublicLayout from "./layouts/PublicLayouts";
 import AuthLayout from "./layouts/AuthLayout";
 import ProtectedRoute from "./componentsQuiz/ProtectedRoute";
-import Dashboard from "./pageQuiz/Dashboard";
+import Dashboard from "./pageQuiz/dashboard/Dashboard";
 import PreviewPage from "./pages/adminPreview/PreviewPage";
 import AdminLayout from "./layouts/AdminLayout";
 
@@ -111,15 +111,74 @@ function App() {
 
   <Route path="/login" element={<Login />} />
   <Route path="/register" element={<Register />} />
+  
+  <Route
+  path="/pro/quiz/adaptive"
+  element={
+    <ProtectedRoute>
+      <AdaptiveQuiz />
+    </ProtectedRoute>
+  }
+/>
+<Route path="/pro/quiz/ai"
+  element={
+  <ProtectedRoute>
+    <AIQuiz />
+  </ProtectedRoute>}/>
 
-  <Route path="/pro/quiz/adaptive" element={<AdaptiveQuiz />} />
+<Route
+  path="/pro/quiz/mixed"
+  element={
+    <ProtectedRoute>
+      <MixedQuiz />
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/pro/analytics"
+  element={
+    <ProtectedRoute>
+      <Analytics />
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/pro/leaderboard"
+  element={
+    <ProtectedRoute>
+      <Leaderboard />
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/pro/billing"
+  element={
+    <ProtectedRoute>
+      <Billing />
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/pro/dashboard"
+  element={
+    <ProtectedRoute>
+      <Dashboard />
+    </ProtectedRoute>
+  }
+/>
+
+  {/* <Route path="/pro/quiz/adaptive" element={<AdaptiveQuiz />} />
   <Route path="/pro/quiz/ai"
   element={<ProtectedRoute><AIQuiz /></ProtectedRoute>}/>
   <Route path="/pro/quiz/mixed" element={<MixedQuiz />} />
   <Route path="/pro/analytics" element={<Analytics />} />
   <Route path="/pro/leaderboard" element={<Leaderboard />} />
   <Route path="/pro/billing" element={<Billing />} />
-  <Route path="/pro/dashboard" element={<Dashboard />} />
+  <Route path="/pro/dashboard" element={<Dashboard />} /> */}
 
 </Route>
 </Routes>
