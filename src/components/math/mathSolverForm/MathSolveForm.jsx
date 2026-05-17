@@ -137,6 +137,16 @@ const suggestions = [
 ]
 },
 
+{
+  title: "Polynomial",
+  items: [
+    "(a + b)(c - d)",
+    "(x + 2)(x + 3)",
+    "(a + b)^2",
+    "(a - b)^2",
+    "(a + b)(a - b)"
+  ]
+}
 
 ];
 
