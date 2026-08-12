@@ -179,6 +179,7 @@ const QuizPage = () => {
               <option value="speed_distance">Speed & Distance</option>
               <option value="indices">Indices</option>
               <option value="simultaneous">Simultaneous Equations</option>
+              <option value="polynomial">Polynomial</option>
               </select>
 
             <select value={difficulty} onChange={(e) => setDifficulty(e.target.value)}>

@@ -1,160 +1,194 @@
-import { useEffect, useState, useContext } from "react";
+import { useState } from "react";
 import { getAIQuiz, submitAIQuiz } from "../../apiQuiz/quizApi";
-import { AuthContext } from "../../contextQuiz/AuthContext";
+import { topicBank, subjects } from "../../utils/topicBank";
+import QuestionCard from "../../componentsQuiz/QuestionCard";
+import Loader from "../../componentsQuiz/Loader";
+import Result from "../Result";
+import "../proquiz.css";
 
 const AIQuiz = () => {
-  const { token } = useContext(AuthContext);
+  const [subject, setSubject] = useState(subjects[0]);
+  const [topic, setTopic] = useState(topicBank[subjects[0]][0]);
+  const [numQuestions, setNumQuestions] = useState(5);
 
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
+  const [started, setStarted] = useState(false);
 
-  const subject = "physics";
-  const topic = "Newton's Laws";
-
-  // 🔥 LOAD QUESTIONS
-  const loadQuiz = async () => {
-  if (loading) return; // 🔥 prevent duplicate calls
-
-  setLoading(true);
-  setError(null);
-
-  try {
-    const data = await getAIQuiz(subject, topic, token);
-
-    if (Array.isArray(data)) {
-      setQuestions(data);
-    } else {
-      throw new Error(data.message || "Invalid quiz data format");
-    }
-
-  } catch (err) {
-    console.error("Quiz Load Error:", err.message);
-
-    // 🔥 IMPORTANT: STOP retry loop
-    setError(err.message);
-    setQuestions([]);
-    
-  } finally {
-    setLoading(false);
-  }
-};
-
-  useEffect(() => {
-    loadQuiz();
-  }, []);
-
-  // 🔥 SELECT ANSWER
-  const handleSelect = (qIndex, option) => {
-    setAnswers((prev) => ({
-      ...prev,
-      [qIndex]: option
-    }));
+  const handleSubjectChange = (s) => {
+    setSubject(s);
+    setTopic(topicBank[s][0]);
   };
 
-  // 🔥 SUBMIT QUIZ
-  const handleSubmit = async () => {
-    if (!Array.isArray(questions) || questions.length === 0) {
-      alert("No questions to submit");
-      return;
-    }
+  const loadQuiz = async () => {
+    setLoading(true);
+    setError(null);
+    setResult(null);
+    setAnswers({});
 
     try {
-      const payload = {
-        answers: questions.map((q, i) => ({
-          questionId: q._id,
-          selected: answers[i]
-        }))
-      };
-
-      const res = await submitAIQuiz(payload, token);
-
-      setResult(res);
+      const data = await getAIQuiz(subject, topic, numQuestions);
+      if (Array.isArray(data) && data.length > 0) {
+        setQuestions(data);
+        setStarted(true);
+      } else {
+        throw new Error("No questions were generated. Try a different topic.");
+      }
     } catch (err) {
-      console.error("Submit Error:", err.message);
-      alert("Failed to submit quiz");
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
-  // 🔥 LOADING STATE
-  if (loading) {
-    return <p>Loading quiz...</p>;
-  }
+  const handleSelect = (qIndex, option) => {
+    setAnswers((prev) => ({ ...prev, [qIndex]: option }));
+  };
 
-  // 🔥 ERROR STATE
-  if (error) {
-    return (
-      <div>
-        <p style={{ color: "red" }}>Error: {error}</p>
-        <button onClick={loadQuiz}>Retry</button>
-      </div>
-    );
-  }
+  const handleSubmit = async () => {
+    if (questions.length === 0) return;
 
-  // 🔥 RESULT VIEW
+    setSubmitting(true);
+    setError(null);
+
+    try {
+      const payload = questions.map((q, i) => ({
+        questionId: q._id || q.id,
+        selected: answers[i]
+      }));
+
+      const res = await submitAIQuiz(payload);
+      setResult(res);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const handleRetry = () => {
+    setStarted(false);
+    setResult(null);
+    setQuestions([]);
+    setAnswers({});
+  };
+
+  // ---- RESULT VIEW ----
   if (result) {
     return (
-      <div>
-        <h2>Result</h2>
-        <p><strong>Score:</strong> {result.score}</p>
-
-        {Array.isArray(result.results) &&
-          result.results.map((r, i) => (
-            <div key={i} style={{ marginBottom: "20px" }}>
-              <p><strong>{r.question}</strong></p>
-              <p>Your Answer: {r.selected}</p>
-              <p>Correct Answer: {r.correctAnswer}</p>
-              <p>{r.explanation}</p>
-            </div>
-          ))}
+      <div className="pq-page">
+        <Result result={result} onRetry={handleRetry} retryLabel="New Quiz" />
       </div>
     );
   }
 
-  // 🔥 MAIN QUIZ VIEW
-  return (
-    <div>
-      <h2>AI Quiz ({subject} - {topic})</h2>
+  // ---- SETUP VIEW ----
+  if (!started) {
+    return (
+      <div className="pq-page">
+        <div className="pq-container">
+          <div className="pq-card">
+            <h2 className="pq-title">AI Quiz</h2>
+            <p className="pq-subtitle">
+              Choose a subject and topic — questions are generated fresh by AI.
+            </p>
 
-      {!Array.isArray(questions) || questions.length === 0 ? (
-        <p>No questions available</p>
-      ) : (
-        questions.map((q, i) => (
-          <div key={q._id || i} style={{ marginBottom: "20px" }}>
-            <p><strong>{q.question}</strong></p>
+            {error && <div className="pq-error-box">{error}</div>}
 
-            {Array.isArray(q.options) &&
-              q.options.map((opt, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => handleSelect(i, opt)}
-                  style={{
-                    display: "block",
-                    margin: "5px",
-                    padding: "8px",
-                    borderRadius: "5px",
-                    border: "1px solid #ccc",
-                    cursor: "pointer",
-                    background:
-                      answers[i] === opt ? "#4caf50" : "#eee",
-                    color:
-                      answers[i] === opt ? "#fff" : "#000"
-                  }}
+            <div className="pq-field-row">
+              <div className="pq-field">
+                <label>Subject</label>
+                <select
+                  className="pq-select"
+                  value={subject}
+                  onChange={(e) => handleSubjectChange(e.target.value)}
                 >
-                  {opt}
-                </button>
-              ))}
-          </div>
-        ))
-      )}
+                  {subjects.map((s) => (
+                    <option key={s} value={s}>
+                      {s.charAt(0).toUpperCase() + s.slice(1)}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
-      {questions.length > 0 && (
-        <button onClick={handleSubmit}>
-          Submit Quiz
+              <div className="pq-field">
+                <label>Topic</label>
+                <select
+                  className="pq-select"
+                  value={topic}
+                  onChange={(e) => setTopic(e.target.value)}
+                >
+                  {topicBank[subject].map((t) => (
+                    <option key={t} value={t}>{t}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="pq-field" style={{ maxWidth: 140 }}>
+                <label>Questions</label>
+                <select
+                  className="pq-select"
+                  value={numQuestions}
+                  onChange={(e) => setNumQuestions(Number(e.target.value))}
+                >
+                  {[5, 10, 15, 20].map((n) => (
+                    <option key={n} value={n}>{n}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <button
+              className="pq-btn pq-btn-primary pq-btn-block"
+              onClick={loadQuiz}
+              disabled={loading}
+            >
+              {loading ? "Generating questions..." : "Start Quiz"}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ---- LOADING ----
+  if (loading) {
+    return (
+      <div className="pq-page">
+        <Loader fullPage label="Generating your AI quiz..." />
+      </div>
+    );
+  }
+
+  // ---- QUIZ VIEW ----
+  return (
+    <div className="pq-page">
+      <div className="pq-container">
+        {error && <div className="pq-error-box">{error}</div>}
+
+        {questions.map((q, i) => (
+          <QuestionCard
+            key={q._id || q.id || i}
+            q={q}
+            index={i}
+            total={questions.length}
+            selected={answers[i]}
+            onSelect={(opt) => handleSelect(i, opt)}
+          />
+        ))}
+
+        <button
+          className="pq-btn pq-btn-primary pq-btn-block"
+          onClick={handleSubmit}
+          disabled={submitting || Object.keys(answers).length === 0}
+        >
+          {submitting ? "Submitting..." : "Submit Quiz"}
         </button>
-      )}
+      </div>
     </div>
   );
 };

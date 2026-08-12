@@ -1,69 +1,136 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { getAdaptiveQuiz, submitAIQuiz } from "../../apiQuiz/quizApi";
+import QuestionCard from "../../componentsQuiz/QuestionCard";
+import Loader from "../../componentsQuiz/Loader";
+import Result from "../Result";
+import "../proquiz.css";
 
 const AdaptiveQuiz = () => {
   const [questions, setQuestions] = useState([]);
-  const [answers, setAnswers] = useState([]);
+  const [answers, setAnswers] = useState({});
   const [result, setResult] = useState(null);
-
-  const token = localStorage.getItem("token");
-
-  useEffect(() => {
-    loadQuiz();
-  }, []);
+  const [loading, setLoading] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(null);
+  const [started, setStarted] = useState(false);
 
   const loadQuiz = async () => {
-    const data = await getAdaptiveQuiz(token);
-    setQuestions(data);
+    setLoading(true);
+    setError(null);
+    setResult(null);
+    setAnswers({});
+
+    try {
+      const data = await getAdaptiveQuiz(10);
+      if (Array.isArray(data) && data.length > 0) {
+        setQuestions(data);
+        setStarted(true);
+      } else {
+        throw new Error("Couldn't generate an adaptive quiz right now. Try again shortly.");
+      }
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleSelect = (qid, option) => {
-    setAnswers(prev => [
-      ...prev.filter(a => a.questionId !== qid),
-      { questionId: qid, selectedAnswer: option }
-    ]);
+  const handleSelect = (qIndex, option) => {
+    setAnswers((prev) => ({ ...prev, [qIndex]: option }));
   };
 
   const handleSubmit = async () => {
-    const res = await submitAIQuiz({ answers }, token);
-    setResult(res);
+    setSubmitting(true);
+    setError(null);
+
+    try {
+      const payload = questions.map((q, i) => ({
+        questionId: q._id || q.id,
+        selected: answers[i]
+      }));
+
+      const res = await submitAIQuiz(payload);
+      setResult(res);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const handleRetry = () => {
+    setStarted(false);
+    setResult(null);
+    setQuestions([]);
+    setAnswers({});
   };
 
   if (result) {
     return (
-      <div>
-        <h2>Score: {result.score}</h2>
+      <div className="pq-page">
+        <Result result={result} onRetry={handleRetry} retryLabel="New Adaptive Quiz" />
+      </div>
+    );
+  }
 
-        <h3>Weak Topics:</h3>
-        {result.weakTopics?.map((t, i) => (
-          <p key={i}>
-            {t.subject} - {t.topic} ({(t.accuracy * 100).toFixed(0)}%)
-          </p>
-        ))}
+  if (!started) {
+    return (
+      <div className="pq-page">
+        <div className="pq-container">
+          <div className="pq-card">
+            <h2 className="pq-title">Adaptive Quiz</h2>
+            <p className="pq-subtitle">
+              We weight questions toward the topics you've struggled with most,
+              based on your quiz history.
+            </p>
+
+            {error && <div className="pq-error-box">{error}</div>}
+
+            <button
+              className="pq-btn pq-btn-primary pq-btn-block"
+              onClick={loadQuiz}
+              disabled={loading}
+            >
+              {loading ? "Building your quiz..." : "Start Adaptive Quiz"}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (loading) {
+    return (
+      <div className="pq-page">
+        <Loader fullPage label="Analyzing your weak topics..." />
       </div>
     );
   }
 
   return (
-    <div>
-      <h1>Adaptive Quiz</h1>
+    <div className="pq-page">
+      <div className="pq-container">
+        {error && <div className="pq-error-box">{error}</div>}
 
-      {questions.map((q, i) => (
-        <div key={q.id}>
-          <h3>{i + 1}. {q.question}</h3>
+        {questions.map((q, i) => (
+          <QuestionCard
+            key={q._id || q.id || i}
+            q={q}
+            index={i}
+            total={questions.length}
+            selected={answers[i]}
+            onSelect={(opt) => handleSelect(i, opt)}
+          />
+        ))}
 
-          {q.options.map(opt => (
-            <button
-              key={opt}
-              onClick={() => handleSelect(q.id, opt)}
-            >
-              {opt}
-            </button>
-          ))}
-        </div>
-      ))}
-
-      <button onClick={handleSubmit}>Submit</button>
+        <button
+          className="pq-btn pq-btn-primary pq-btn-block"
+          onClick={handleSubmit}
+          disabled={submitting || Object.keys(answers).length === 0}
+        >
+          {submitting ? "Submitting..." : "Submit Quiz"}
+        </button>
+      </div>
     </div>
   );
 };

@@ -8,6 +8,7 @@ import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { Helmet } from "react-helmet-async";
 import AuthorCard from "../../components/AuthorCard";
 import { decode } from "html-entities";
+import AdUnit from "../../components/ads/AdUnit";
 import "./tutorialDetails.css";
 
 const TutorialDetails = ()=>{
@@ -561,6 +562,8 @@ const generateFAQ = (content)=>{
     </div>
     )}
     </div>
+
+<AdUnit slot="0000000000" />
 
 <h2>Related Tutorials</h2>
 

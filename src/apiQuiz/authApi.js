@@ -1,26 +1,22 @@
-const BASE = "https://studenttoolsserver.onrender.com/api/auth";
+import { apiRequest } from "../utils/apiClient";
 
 export const registerUser = async (data) => {
-  const res = await fetch(`${BASE}/register`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data)
-  });
-  return res.json();
+  return apiRequest("/auth/register", { method: "POST", body: data, auth: false });
 };
 
 export const loginUser = async (data) => {
-  const res = await fetch(`${BASE}/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data)
-  });
-  return res.json();
+  return apiRequest("/auth/login", { method: "POST", body: data, auth: false });
 };
 
 export const logoutUser = async () => {
-  const res = await fetch(`${BASE}/logout`, {
-    method: "POST"
+  const refreshToken = localStorage.getItem("refreshToken");
+  return apiRequest("/auth/logout", {
+    method: "POST",
+    body: { token: refreshToken },
+    auth: false
   });
-  return res.json();
+};
+
+export const getMe = async () => {
+  return apiRequest("/auth/me", { auth: true });
 };

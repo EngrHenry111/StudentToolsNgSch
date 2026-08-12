@@ -1,0 +1,16 @@
+.ad-unit-wrapper {
+  width: 100%;
+  margin: 28px 0;
+  text-align: center;
+  overflow: hidden;
+}
+
+.ad-unit-label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #94a3b8;
+  margin-bottom: 6px;
+  opacity: 0.7;
+}

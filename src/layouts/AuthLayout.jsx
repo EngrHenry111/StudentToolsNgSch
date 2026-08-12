@@ -5,9 +5,7 @@ import { Outlet } from "react-router-dom";
 const AuthLayout = () => {
   return (
     <>
-      <h2>Student Tools Pro</h2>
-
-       <Navbar />
+      <Navbar />
       <Outlet />
       <Footer />
     </>

@@ -1,67 +1,38 @@
-const BASE = "https://studenttoolsserver.onrender.com/api/quiz";
+import { apiRequest } from "../utils/apiClient";
 
-export const getAdaptiveQuiz = async (token) => {
-  const res = await fetch(`${BASE}/adaptive`, {
-    headers: { Authorization: `Bearer ${token}` }
-  });
-  return res.json();
+// ---------- Pro quiz (authenticated) ----------
+
+export const getAIQuiz = async (subject, topic, limit = 5) => {
+  const params = new URLSearchParams({ subject, topic, limit });
+  return apiRequest(`/quiz/ai-quiz?${params.toString()}`, { auth: true });
 };
 
-export const submitAIQuiz = async (payload, token) => {
-  const res = await fetch(`${BASE}/submit-ai`, {
+export const getAdaptiveQuiz = async (limit = 10) => {
+  return apiRequest(`/quiz/adaptive?limit=${limit}`, { auth: true });
+};
+
+export const getMixedQuiz = async (limit = 10) => {
+  return apiRequest(`/quiz/ai-mixed?limit=${limit}`, { auth: true });
+};
+
+export const submitAIQuiz = async (answers) => {
+  return apiRequest("/quiz/ai-quiz/submit", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`
-    },
-    body: JSON.stringify(payload)
+    body: { answers },
+    auth: true
   });
-
-  const data = await res.json();
-
-  if (!res.ok) {
-    throw new Error(data.message || "Submission failed");
-  }
-
-  return data;
 };
 
-export const getAnalytics = async (token) => {
-  const res = await fetch(`${BASE}/analytics`, {
-    headers: { Authorization: `Bearer ${token}` }
-  });
-  return res.json();
+export const getAnalytics = async () => {
+  return apiRequest("/quiz/analytics", { auth: true });
 };
 
-
-export const getAIQuiz = async (subject, topic, token) => {
-  const res = await fetch(
-    `${BASE}/ai-quiz?subject=${subject}&topic=${encodeURIComponent(topic)}&limit=5`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    }
-  );
-
-  const data = await res.json();
-
-  if (!res.ok) {
-    throw new Error(data.message || "Failed to fetch quiz");
-  }
-
-  return data;
+export const getLeaderboardXP = async () => {
+  return apiRequest("/quiz/leaderboard-xp", { auth: true });
 };
 
-// export const getAIQuiz = async (subject, topic, token) => {
-//   const res = await fetch(
-//     `${BASE}/ai-quiz?subject=${subject}&topic=${topic}&limit=5`,
-//     {
-//       headers: {
-//         Authorization: `Bearer ${token}`
-//       }
-//     }
-//   );
+// ---------- Free practice quiz (no login required) ----------
 
-//   return res.json();
-// };
+export const getFreeLeaderboard = async () => {
+  return apiRequest("/quiz/leaderboard", { auth: false });
+};

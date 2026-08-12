@@ -1,24 +1,135 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { getMixedQuiz, submitAIQuiz } from "../../apiQuiz/quizApi";
+import QuestionCard from "../../componentsQuiz/QuestionCard";
+import Loader from "../../componentsQuiz/Loader";
+import Result from "../Result";
+import "../proquiz.css";
 
 const MixedQuiz = () => {
   const [questions, setQuestions] = useState([]);
+  const [answers, setAnswers] = useState({});
+  const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(null);
+  const [started, setStarted] = useState(false);
 
-  useEffect(() => {
-    fetch("https://studenttoolsserver.onrender.com/api/quiz/ai-mixed")
-      .then(res => res.json())
-      .then(setQuestions);
-  }, []);
+  const loadQuiz = async () => {
+    setLoading(true);
+    setError(null);
+    setResult(null);
+    setAnswers({});
+
+    try {
+      const data = await getMixedQuiz(10);
+      if (Array.isArray(data) && data.length > 0) {
+        setQuestions(data);
+        setStarted(true);
+      } else {
+        throw new Error("Couldn't generate a mixed quiz right now. Try again shortly.");
+      }
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSelect = (qIndex, option) => {
+    setAnswers((prev) => ({ ...prev, [qIndex]: option }));
+  };
+
+  const handleSubmit = async () => {
+    setSubmitting(true);
+    setError(null);
+
+    try {
+      const payload = questions.map((q, i) => ({
+        questionId: q._id || q.id,
+        selected: answers[i]
+      }));
+
+      const res = await submitAIQuiz(payload);
+      setResult(res);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const handleRetry = () => {
+    setStarted(false);
+    setResult(null);
+    setQuestions([]);
+    setAnswers({});
+  };
+
+  if (result) {
+    return (
+      <div className="pq-page">
+        <Result result={result} onRetry={handleRetry} retryLabel="New Mixed Quiz" />
+      </div>
+    );
+  }
+
+  if (!started) {
+    return (
+      <div className="pq-page">
+        <div className="pq-container">
+          <div className="pq-card">
+            <h2 className="pq-title">Mixed Quiz</h2>
+            <p className="pq-subtitle">
+              A random spread of questions across Physics, Mathematics, and Chemistry.
+            </p>
+
+            {error && <div className="pq-error-box">{error}</div>}
+
+            <button
+              className="pq-btn pq-btn-primary pq-btn-block"
+              onClick={loadQuiz}
+              disabled={loading}
+            >
+              {loading ? "Building your quiz..." : "Start Mixed Quiz"}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (loading) {
+    return (
+      <div className="pq-page">
+        <Loader fullPage label="Mixing questions from every subject..." />
+      </div>
+    );
+  }
 
   return (
-    <div>
-      <h2>Mixed Quiz</h2>
+    <div className="pq-page">
+      <div className="pq-container">
+        {error && <div className="pq-error-box">{error}</div>}
 
-      {questions.map((q, i) => (
-        <div key={i}>
-          <p>{q.question}</p>
-          {q.options.map(o => <button key={o}>{o}</button>)}
-        </div>
-      ))}
+        {questions.map((q, i) => (
+          <QuestionCard
+            key={q._id || q.id || i}
+            q={q}
+            index={i}
+            total={questions.length}
+            selected={answers[i]}
+            onSelect={(opt) => handleSelect(i, opt)}
+          />
+        ))}
+
+        <button
+          className="pq-btn pq-btn-primary pq-btn-block"
+          onClick={handleSubmit}
+          disabled={submitting || Object.keys(answers).length === 0}
+        >
+          {submitting ? "Submitting..." : "Submit Quiz"}
+        </button>
+      </div>
     </div>
   );
 };

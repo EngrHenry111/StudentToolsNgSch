@@ -102,6 +102,30 @@ providers and hosting platforms to improve the
 performance of the website.
 </p>
 
+<h2>4a. Advertising (Google AdSense)</h2>
+
+<p>
+StudentToolsNG uses Google AdSense to display advertisements.
+Google, as a third-party vendor, uses cookies to serve ads based
+on your prior visits to this website or other websites. Google's
+use of advertising cookies enables it and its partners to serve
+ads based on your visit to this site and/or other sites on the
+internet.
+</p>
+
+<p>
+You may opt out of personalized advertising by visiting{" "}
+<a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer">
+  Google Ads Settings
+</a>
+. Alternatively, you can opt out of a third-party vendor's use of
+cookies for personalized advertising by visiting{" "}
+<a href="https://www.aboutads.info" target="_blank" rel="noopener noreferrer">
+  www.aboutads.info
+</a>
+.
+</p>
+
 <h2>5. External Links</h2>
 
 <p>

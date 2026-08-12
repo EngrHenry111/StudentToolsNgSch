@@ -1,44 +1,17 @@
-const BASE = "https://studenttoolsserver.onrender.com/api/payment";
+import { apiRequest } from "../utils/apiClient";
 
-export const startPayment = async (token) => {
-  const res = await fetch(`${BASE}/paystack/start`, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  });
-
-  return res.json();
+export const startPayment = async () => {
+  return apiRequest("/payment/paystack/start", { method: "POST", auth: true });
 };
 
-export const subscribe = async (token) => {
-  const res = await fetch(`${BASE}/paystack/subscribe`, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  });
-
-  return res.json();
+export const subscribe = async () => {
+  return apiRequest("/payment/paystack/subscribe", { method: "POST", auth: true });
 };
 
-export const cancelSubscription = async (token) => {
-  const res = await fetch(`${BASE}/paystack/cancel`, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  });
-
-  return res.json();
+export const cancelSubscription = async () => {
+  return apiRequest("/payment/paystack/cancel", { method: "POST", auth: true });
 };
 
-export const getBilling = async (token) => {
-  const res = await fetch(`${BASE}/billing`, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  });
-
-  return res.json();
+export const getBilling = async () => {
+  return apiRequest("/payment/billing", { auth: true });
 };

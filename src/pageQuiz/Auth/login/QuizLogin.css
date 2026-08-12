@@ -62,6 +62,29 @@
   color:transparent;
 }
 
+/* ================= SUBTITLE ================= */
+
+.login-subtitle{
+  text-align:center;
+  margin-top:-18px;
+  margin-bottom:22px;
+  font-size:13px;
+  color:#94a3b8;
+}
+
+/* ================= ERROR ================= */
+
+.login-error{
+  padding:12px 14px;
+  margin-bottom:18px;
+  border-radius:12px;
+  border:1px solid rgba(239,68,68,0.35);
+  background:rgba(239,68,68,0.08);
+  color:#ff9c9c;
+  font-size:13px;
+  text-align:center;
+}
+
 /* ================= INPUTS ================= */
 
 .login-card input{
