@@ -1,10 +1,19 @@
 import { useState } from "react";
 import { getAIQuiz, submitAIQuiz } from "../../apiQuiz/quizApi";
-import { topicBank, subjects } from "../../utils/topicBank";
+import { topicBank, subjects, subjectLabels } from "../../utils/topicBank";
 import QuestionCard from "../../componentsQuiz/QuestionCard";
 import Loader from "../../componentsQuiz/Loader";
 import Result from "../Result";
 import "../proquiz.css";
+
+// Groups purely for a friendlier dropdown — the actual request to the
+// server just uses the subject key, grouping has no effect on data.
+const subjectGroups = {
+  "Sciences": ["mathematics", "physics", "chemistry", "biology", "agriculturalScience", "computerScience"],
+  "Languages": ["englishLanguage", "literatureInEnglish"],
+  "Arts & Commercial": ["government", "economics", "geography", "history", "civicEducation", "commerce", "financialAccounting"],
+  "Junior Secondary": ["basicScience", "basicTechnology"]
+};
 
 const AIQuiz = () => {
   const [subject, setSubject] = useState(subjects[0]);
@@ -107,10 +116,14 @@ const AIQuiz = () => {
                   value={subject}
                   onChange={(e) => handleSubjectChange(e.target.value)}
                 >
-                  {subjects.map((s) => (
-                    <option key={s} value={s}>
-                      {s.charAt(0).toUpperCase() + s.slice(1)}
-                    </option>
+                  {Object.entries(subjectGroups).map(([groupName, groupSubjects]) => (
+                    <optgroup label={groupName} key={groupName}>
+                      {groupSubjects.map((s) => (
+                        <option key={s} value={s}>
+                          {subjectLabels[s] || s}
+                        </option>
+                      ))}
+                    </optgroup>
                   ))}
                 </select>
               </div>
