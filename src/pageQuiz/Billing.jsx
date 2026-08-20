@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { getBilling, cancelSubscription, subscribe } from "../apiQuiz/paymentApi";
+import { getBilling, cancelSubscription, subscribe, getLaunchOffer } from "../apiQuiz/paymentApi";
 import { AuthContext } from "../contextQuiz/AuthContext";
 import Loader from "../componentsQuiz/Loader";
 import "./proquiz.css";
@@ -7,6 +7,7 @@ import "./proquiz.css";
 const Billing = () => {
   const { refreshProfile } = useContext(AuthContext);
   const [data, setData] = useState(null);
+  const [offer, setOffer] = useState(null);
   const [loading, setLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -14,8 +15,12 @@ const Billing = () => {
   const load = async () => {
     setLoading(true);
     try {
-      const res = await getBilling();
-      setData(res);
+      const [billingRes, offerRes] = await Promise.all([
+        getBilling(),
+        getLaunchOffer().catch(() => null) // don't block billing if this fails
+      ]);
+      setData(billingRes);
+      setOffer(offerRes);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -103,10 +108,43 @@ const Billing = () => {
 
           {!isActive ? (
             <>
+              {offer?.active && (
+                <div className="pq-topic-row" style={{
+                  marginBottom: 20,
+                  border: "1px solid rgba(0,245,255,0.4)",
+                  background: "rgba(0,245,255,0.06)"
+                }}>
+                  <h4 style={{ margin: "0 0 8px", color: "#00f5ff" }}>
+                    🚀 Launch Offer — ₦{offer.price.toLocaleString()}/month
+                    <span style={{ color: "#94a3b8", fontWeight: 400, fontSize: 13 }}>
+                      {" "}(regularly ₦{offer.regularPrice.toLocaleString()})
+                    </span>
+                  </h4>
+                  <p style={{ margin: 0, fontSize: 13, color: "#cbd5e1" }}>
+                    {offer.spotsRemaining} spot{offer.spotsRemaining === 1 ? "" : "s"} left at this price
+                    {offer.endsAt && (
+                      <> · ends {new Date(offer.endsAt).toLocaleDateString()}</>
+                    )}
+                  </p>
+                </div>
+              )}
+
               <div className="pq-topic-row" style={{ marginBottom: 20 }}>
-                <h4 style={{ margin: "0 0 8px" }}>Pro plan — ₦5,000/month</h4>
+                <h4 style={{ margin: "0 0 8px" }}>
+                  {offer?.active ? (
+                    <>
+                      <span style={{ textDecoration: "line-through", color: "#94a3b8", marginRight: 8 }}>
+                        ₦{offer.regularPrice.toLocaleString()}
+                      </span>
+                      ₦{offer.price.toLocaleString()}/month
+                    </>
+                  ) : (
+                    "Pro plan — ₦5,000/month"
+                  )}
+                </h4>
                 <ul style={{ margin: 0, paddingLeft: 18, fontSize: 13, color: "#cbd5e1" }}>
                   <li>Unlimited AI-generated quizzes</li>
+                  <li>Curated WAEC & JAMB past-question practice</li>
                   <li>Adaptive quizzes targeting your weak topics</li>
                   <li>Full performance analytics</li>
                   <li>Leaderboard access</li>

@@ -10,6 +10,7 @@ const quizModes = [
   { to: "/pro/quiz/ai", title: "AI Quiz", desc: "Pick a subject and topic, get fresh AI-generated questions." },
   { to: "/pro/quiz/adaptive", title: "Adaptive Quiz", desc: "Questions weighted toward the topics you're weakest in." },
   { to: "/pro/quiz/mixed", title: "Mixed Quiz", desc: "A random spread of questions across every subject." },
+  { to: "/pro/quiz/past-questions", title: "Past Questions", desc: "Curated, exam-style WAEC & JAMB practice questions." },
   { to: "/pro/analytics", title: "Analytics", desc: "See your accuracy, weak topics, and progress over time." },
   { to: "/pro/leaderboard", title: "Leaderboard", desc: "See how your XP stacks up against other students." },
   { to: "/pro/billing", title: "Billing", desc: "Manage your Pro subscription." },

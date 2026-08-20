@@ -15,6 +15,14 @@ export const getMixedQuiz = async (limit = 10) => {
   return apiRequest(`/quiz/ai-mixed?limit=${limit}`, { auth: true });
 };
 
+export const getPastQuestions = async (examBody, subject, topic, limit = 10) => {
+  const params = new URLSearchParams({ limit });
+  if (examBody) params.set("examBody", examBody);
+  if (subject) params.set("subject", subject);
+  if (topic) params.set("topic", topic);
+  return apiRequest(`/quiz/past-questions?${params.toString()}`, { auth: true });
+};
+
 export const submitAIQuiz = async (answers) => {
   return apiRequest("/quiz/ai-quiz/submit", {
     method: "POST",

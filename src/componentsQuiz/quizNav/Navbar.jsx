@@ -8,6 +8,7 @@ const links = [
   { to: "/pro/quiz/ai", label: "AI Quiz" },
   { to: "/pro/quiz/adaptive", label: "Adaptive" },
   { to: "/pro/quiz/mixed", label: "Mixed" },
+  { to: "/pro/quiz/past-questions", label: "Past Questions" },
   { to: "/pro/analytics", label: "Analytics" },
   { to: "/pro/leaderboard", label: "Leaderboard" },
   { to: "/pro/billing", label: "Billing" },

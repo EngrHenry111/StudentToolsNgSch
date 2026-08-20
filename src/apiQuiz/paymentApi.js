@@ -15,3 +15,7 @@ export const cancelSubscription = async () => {
 export const getBilling = async () => {
   return apiRequest("/payment/billing", { auth: true });
 };
+
+export const getLaunchOffer = async () => {
+  return apiRequest("/payment/launch-offer", { auth: false });
+};

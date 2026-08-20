@@ -38,6 +38,7 @@ import Billing from "./pageQuiz/Billing";
 import Leaderboard from "./pageQuiz/Leaderboard";
 import Analytics from "./pageQuiz/Analytics";
 import MixedQuiz from "./pageQuiz/Quiz/MixedQuiz";
+import PastQuestions from "./pageQuiz/Quiz/PastQuestions";
 import AIQuiz from "./pageQuiz/Quiz/AIQuiz";
 import AdaptiveQuiz from "./pageQuiz/Quiz/AdaptiveQuiz";
 import Register from "./pageQuiz/Auth/register/Register";
@@ -131,6 +132,15 @@ function App() {
   element={
     <ProtectedRoute>
       <MixedQuiz />
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/pro/quiz/past-questions"
+  element={
+    <ProtectedRoute>
+      <PastQuestions />
     </ProtectedRoute>
   }
 />
