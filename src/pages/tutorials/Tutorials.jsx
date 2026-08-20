@@ -142,7 +142,7 @@ const stripHTML = (html) => {
  <Helmet>
   {/* <title>
    Study Tutorials | StudentToolsNG
-  </title> */}
+   </title> */}
   <title>
 {
  subtopic
@@ -155,9 +155,24 @@ const stripHTML = (html) => {
 }
 </title>
 
+  {/*
+    Previously this was one identical, static description across every
+    single category/topic/subtopic combination. That made Google treat
+    a large number of distinct URLs as near-duplicate content, which is
+    a likely contributor to the "duplicate canonical" issues in Search
+    Console. Each level now gets its own genuinely distinct description.
+  */}
   <meta
    name="description"
-   content="Explore tutorials by subject, topic, and subtopic. Learn faster with structured academic content."
+   content={
+    subtopic
+     ? `Free ${subtopic} tutorials and study guides under ${topic} (${category}) — learn ${subtopic} step by step with StudentToolsNG.`
+     : topic
+     ? `Browse all ${topic} tutorials under ${category} on StudentToolsNG — structured, easy-to-follow lessons for Nigerian students.`
+     : category
+     ? `Explore every ${category} tutorial on StudentToolsNG, organized by topic and subtopic to help you study faster and understand more.`
+     : "Explore tutorials by subject, topic, and subtopic. Learn faster with structured academic content built for Nigerian students."
+   }
   />
   <link
   rel="canonical"
@@ -180,7 +195,35 @@ const stripHTML = (html) => {
 </script>
  </Helmet>
 
- <h1>Study Tutorials</h1>
+ <h1>
+{
+ subtopic
+ ? `${subtopic} Tutorials`
+ : topic
+ ? `${topic} Tutorials`
+ : category
+ ? `${category} Tutorials`
+ : "Study Tutorials"
+}
+</h1>
+
+{/*
+  Short, genuinely unique text per page level — previously every
+  category/topic/subtopic page showed only filtered tutorial cards
+  with no unique body text at all, which reads as thin/duplicate
+  content to Google across hundreds of distinct URLs.
+*/}
+<p className="tutorials-intro">
+{
+ subtopic
+ ? `Browse free ${subtopic} tutorials under ${topic} (${category}) on StudentToolsNG — clear, step-by-step lessons built for Nigerian students.`
+ : topic
+ ? `Explore ${topic} tutorials under ${category} — structured lessons covering every major concept, organized by subtopic below.`
+ : category
+ ? `All ${category} tutorials on StudentToolsNG, organized by topic to help you study efficiently and find exactly what you need.`
+ : "Browse tutorials across every subject — filter by category, topic, and subtopic to find structured lessons built for Nigerian students."
+}
+</p>
  
  <div className="breadcrumb">
  <Link to="/">Home</Link> / 
