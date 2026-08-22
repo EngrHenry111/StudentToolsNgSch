@@ -56,6 +56,10 @@ const AdminNavbar = () => {
      Tutorials
     </Link>
 
+    <Link to="/admin/curated-questions" onClick={closeMenu}>
+     Curated Questions
+    </Link>
+
     <Link to="/admin/messages" onClick={closeMenu}>
      Messages
     </Link>

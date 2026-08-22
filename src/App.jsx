@@ -23,6 +23,7 @@ import AdminProtectedRoute from "./components/adminProtectedRoute";
 import AdminLogin from "./pages/adminLogin/AdminLoginForm"
 import AdminDashboard from "./pages/adminDashboard/AdminDashboard";
 import AdminTutorials from "./pages/adminTutorial/AdminTutorials";
+import AdminCuratedQuestions from "./pages/adminCuratedQuestions/AdminCuratedQuestions";
 import EditTutorial from "./pages/editTutorial/EditorTutorial";
 import AdminMessages from "./pages/adminMessages/AdminMessages";
 import AdmissionPredictor from "./pages/admismissionPreditior/AdmissionPredictor";
@@ -69,6 +70,8 @@ function App() {
   <Route index element={<AdminDashboard />} />
 
   <Route path="tutorials" element={<AdminTutorials />} />
+
+  <Route path="curated-questions" element={<AdminCuratedQuestions />} />
 
   <Route path="edit/:id" element={<EditTutorial />} />
 

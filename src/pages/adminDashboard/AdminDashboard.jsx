@@ -14,11 +14,14 @@ const AdminDashboard = () => {
   views: 0
  });
 
+ const [fullStats, setFullStats] = useState(null);
+
  const [loading, setLoading] = useState(true);
  const [error, setError] = useState("");
 
  useEffect(() => {
   fetchStats();
+  fetchFullStats();
  }, []);
 
  const fetchStats = async () => {
@@ -42,10 +45,22 @@ const AdminDashboard = () => {
   }
  };
 
+ const fetchFullStats = async () => {
+  try {
+   const res = await API.get("/admin/full-stats");
+   setFullStats(res.data);
+  } catch (err) {
+   console.error("Failed to load quiz/curated stats:", err);
+  }
+ };
+
  const handleLogout = () => {
   localStorage.removeItem("adminToken");
   navigate("/admin/login");
  };
+
+ const accuracy = (correct, attempts) =>
+  attempts > 0 ? `${Math.round((correct / attempts) * 100)}%` : "—";
 
  return (
 
@@ -58,29 +73,130 @@ const AdminDashboard = () => {
    {error && <p className="admin-error">{error}</p>}
 
    {!loading && !error && (
-    <div className="admin-stats">
+    <>
+     <h2 className="admin-section-title">Tutorials</h2>
+     <div className="admin-stats">
 
-     <div className="stat-card">
-      <h3>Total Tutorials</h3>
-      <p>{stats.total}</p>
+      <div className="stat-card">
+       <h3>Total Tutorials</h3>
+       <p>{stats.total}</p>
+      </div>
+
+      <div className="stat-card">
+       <h3>Published</h3>
+       <p>{stats.published}</p>
+      </div>
+
+      <div className="stat-card">
+       <h3>Drafts</h3>
+       <p>{stats.drafts}</p>
+      </div>
+
+      <div className="stat-card">
+       <h3>Total Views</h3>
+       <p>{stats.views}</p>
+      </div>
+
      </div>
 
-     <div className="stat-card">
-      <h3>Published</h3>
-      <p>{stats.published}</p>
+     {/* ================= FREE QUIZ ================= */}
+     <h2 className="admin-section-title">Free Quiz</h2>
+     <div className="admin-stats">
+
+      <div className="stat-card">
+       <h3>Unique Players</h3>
+       <p>{fullStats?.freeQuiz.uniquePlayers ?? "—"}</p>
+      </div>
+
+      <div className="stat-card">
+       <h3>Total Attempts</h3>
+       <p>{fullStats?.freeQuiz.totalAttempts ?? "—"}</p>
+      </div>
+
+      <div className="stat-card">
+       <h3>Correct Answers</h3>
+       <p>{fullStats?.freeQuiz.totalCorrect ?? "—"}</p>
+      </div>
+
+      <div className="stat-card">
+       <h3>Accuracy</h3>
+       <p>{fullStats ? accuracy(fullStats.freeQuiz.totalCorrect, fullStats.freeQuiz.totalAttempts) : "—"}</p>
+      </div>
+
      </div>
 
-     <div className="stat-card">
-      <h3>Drafts</h3>
-      <p>{stats.drafts}</p>
+     {/* ================= PRO QUIZ ================= */}
+     <h2 className="admin-section-title">Pro Quiz</h2>
+     <div className="admin-stats">
+
+      <div className="stat-card">
+       <h3>Total Users</h3>
+       <p>{fullStats?.proQuiz.totalUsers ?? "—"}</p>
+      </div>
+
+      <div className="stat-card">
+       <h3>Pro Subscribers</h3>
+       <p>{fullStats?.proQuiz.premiumUsers ?? "—"}</p>
+      </div>
+
+      <div className="stat-card">
+       <h3>Free Plan Users</h3>
+       <p>{fullStats?.proQuiz.freeUsers ?? "—"}</p>
+      </div>
+
+      <div className="stat-card">
+       <h3>Total XP Earned</h3>
+       <p>{fullStats?.proQuiz.totalXP ?? "—"}</p>
+      </div>
+
+      <div className="stat-card">
+       <h3>Pro Attempts</h3>
+       <p>{fullStats?.proQuiz.totalAttempts ?? "—"}</p>
+      </div>
+
+      <div className="stat-card">
+       <h3>Pro Accuracy</h3>
+       <p>{fullStats ? accuracy(fullStats.proQuiz.totalCorrect, fullStats.proQuiz.totalAttempts) : "—"}</p>
+      </div>
+
+      <div className="stat-card">
+       <h3>AI Questions Cached</h3>
+       <p>{fullStats?.proQuiz.aiGeneratedQuestions ?? "—"}</p>
+      </div>
+
      </div>
 
-     <div className="stat-card">
-      <h3>Total Views</h3>
-      <p>{stats.views}</p>
+     {/* ================= CURATED QUESTIONS ================= */}
+     <h2 className="admin-section-title">Curated Questions (WAEC/JAMB)</h2>
+     <div className="admin-stats">
+
+      <div className="stat-card">
+       <h3>Total Curated</h3>
+       <p>{fullStats?.curatedQuestions.total ?? "—"}</p>
+      </div>
+
+      {fullStats && Object.entries(fullStats.curatedQuestions.byExamBody).map(([exam, count]) => (
+       <div className="stat-card" key={exam}>
+        <h3>{exam}</h3>
+        <p>{count}</p>
+       </div>
+      ))}
+
      </div>
 
-    </div>
+     {fullStats && Object.keys(fullStats.curatedQuestions.bySubject).length > 0 && (
+      <div className="admin-subject-breakdown">
+       <h3>By subject</h3>
+       <div className="admin-subject-tags">
+        {Object.entries(fullStats.curatedQuestions.bySubject).map(([subject, count]) => (
+         <span className="admin-subject-tag" key={subject}>
+          {subject}: {count}
+         </span>
+        ))}
+       </div>
+      </div>
+     )}
+    </>
    )}
 
    <button onClick={handleLogout} className="logout-btn">
@@ -95,6 +211,10 @@ const AdminDashboard = () => {
 
     <Link to="/admin/create-tutorial" className="admin-card">
      Create Tutorial
+    </Link>
+
+    <Link to="/admin/curated-questions" className="admin-card">
+     Curated Questions
     </Link>
 
     <Link to="/admin/messages" className="admin-card">

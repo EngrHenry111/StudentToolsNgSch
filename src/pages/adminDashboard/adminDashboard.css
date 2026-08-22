@@ -1,5 +1,3 @@
-
-
 /* ================= CONTAINER ================= */
 .admin-dashboard {
   width: 100%;
@@ -36,6 +34,15 @@
 }
 
 /* ================= STATS GRID ================= */
+/* ================= SECTION TITLES ================= */
+.admin-section-title {
+  font-size: 20px;
+  margin: 36px 0 16px;
+  color: #e2e8f0;
+  border-left: 3px solid #00f5ff;
+  padding-left: 12px;
+}
+
 .admin-stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -215,4 +222,30 @@
   .admin-dashboard h1 {
     font-size: 42px;
   }
+}
+
+/* ================= SUBJECT BREAKDOWN ================= */
+.admin-subject-breakdown {
+  margin: 10px 0 30px;
+}
+
+.admin-subject-breakdown h3 {
+  font-size: 14px;
+  color: #94a3b8;
+  margin-bottom: 10px;
+}
+
+.admin-subject-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.admin-subject-tag {
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e2e8f0;
 }
