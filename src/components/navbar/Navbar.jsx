@@ -115,6 +115,7 @@ const handleChange = (e)=>{
         </form>
 
         <li><Link to="/" onClick={closeMenu}>Home</Link></li>
+        <li><Link to="/pro/quiz/ai"onClick={closeMenu}>Pro Quiz</Link></li>
         <li><Link to="/tutorials/math-calculator" onClick={closeMenu}>Math Engine</Link></li>
         <li><Link to="/cgpa-calculator" onClick={closeMenu}>CGPA</Link></li>
         <li><Link to="/quiz" onClick={closeMenu}> QUIZ</Link></li>
