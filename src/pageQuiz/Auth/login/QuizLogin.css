@@ -85,6 +85,49 @@
   text-align:center;
 }
 
+.login-success{
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid rgba(34,197,94,0.35);
+  background:rgba(34,197,94,0.08);
+  color:#86efac;
+  font-size:13px;
+  text-align:center;
+}
+
+/* ================= GOOGLE DIVIDER ================= */
+
+.login-divider{
+  display:flex;
+  align-items:center;
+  text-align:center;
+  color:#64748b;
+  font-size:12px;
+  margin:16px 0;
+}
+
+.login-divider::before,
+.login-divider::after{
+  content:"";
+  flex:1;
+  border-bottom:1px solid rgba(255,255,255,0.1);
+}
+
+.login-divider span{
+  padding:0 12px;
+}
+
+.login-forgot{
+  text-align:right;
+  margin:-10px 0 16px;
+  font-size:13px;
+}
+
+.login-forgot a{
+  color:#38bdf8;
+  text-decoration:none;
+}
+
 /* ================= INPUTS ================= */
 
 .login-card input{

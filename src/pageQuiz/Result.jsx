@@ -24,6 +24,15 @@ const Result = ({ result, onRetry, retryLabel = "Try Again" }) => {
           <span className="pq-badge pq-badge-streak">🔥 {result.streak} day streak</span>
         </div>
 
+        {result.aiSummary && (
+          <div className="pq-topic-row" style={{ marginTop: 20, textAlign: "left" }}>
+            <h4 style={{ margin: "0 0 8px", color: "#00f5ff" }}>📋 Study Recap</h4>
+            <p style={{ margin: 0, fontSize: 14, color: "#cbd5e1", lineHeight: 1.6 }}>
+              {result.aiSummary}
+            </p>
+          </div>
+        )}
+
         {Array.isArray(result.weakTopics) && result.weakTopics.length > 0 && (
           <>
             <h4 className="pq-section-title" style={{ marginTop: 26 }}>

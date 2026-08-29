@@ -1,9 +1,12 @@
-import { useState } from "react";
-import { registerUser } from "../../../apiQuiz/authApi";
+import { useState, useContext } from "react";
+import { registerUser, googleAuth } from "../../../apiQuiz/authApi";
+import { AuthContext } from "../../../contextQuiz/AuthContext";
+import GoogleSignInButton from "../../../componentsQuiz/GoogleSignInButton";
 import { Link, useNavigate } from "react-router-dom";
 import "./QuizRegister.css";
 
 const Register = () => {
+  const { login } = useContext(AuthContext);
   const [form, setForm] = useState({ username: "", email: "", password: "" });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -42,6 +45,25 @@ const Register = () => {
     }
   };
 
+  const handleGoogleSuccess = async (credential) => {
+    setError("");
+    setSubmitting(true);
+    try {
+      const res = await googleAuth(credential);
+      if (res.accessToken) {
+        // Google sign-up logs you straight in — no separate verify step needed
+        login(res.accessToken, res.refreshToken, res.user);
+        navigate("/pro/dashboard");
+      } else {
+        setError(res.message || "Google sign-up failed.");
+      }
+    } catch (err) {
+      setError(err.message || "Google sign-up failed.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <div className="register-page">
       <form className="register-card" onSubmit={handleSubmit}>
@@ -52,6 +74,13 @@ const Register = () => {
 
         {error && <div className="register-error">{error}</div>}
         {success && <div className="register-success">{success}</div>}
+
+        <GoogleSignInButton
+          onSuccess={handleGoogleSuccess}
+          onError={(msg) => setError(msg)}
+        />
+
+        <div className="register-divider"><span>or</span></div>
 
         <input
           placeholder="Username"

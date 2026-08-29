@@ -19,6 +19,51 @@ const AdminDashboard = () => {
  const [loading, setLoading] = useState(true);
  const [error, setError] = useState("");
 
+  // ---- Grant/Revoke Pro ----
+ const [proSearchEmail, setProSearchEmail] = useState("");
+ const [proSearchResult, setProSearchResult] = useState(null);
+ const [proSearchError, setProSearchError] = useState("");
+ const [proSearching, setProSearching] = useState(false);
+ const [proToggling, setProToggling] = useState(false);
+
+ const handleProSearch = async (e) => {
+  e.preventDefault();
+  setProSearchError("");
+  setProSearchResult(null);
+
+  if (!proSearchEmail.trim()) return;
+
+  setProSearching(true);
+  try {
+   const token = localStorage.getItem("adminToken");
+   const res = await API.get(`/admin/users/find?email=${encodeURIComponent(proSearchEmail.trim())}`, {
+    headers: { Authorization: `Bearer ${token}` }
+   });
+   setProSearchResult(res.data);
+  } catch (err) {
+   setProSearchError(err.response?.data?.message || "User not found");
+  } finally {
+   setProSearching(false);
+  }
+ };
+
+ const handleTogglePro = async () => {
+  if (!proSearchResult) return;
+
+  setProToggling(true);
+  try {
+   const token = localStorage.getItem("adminToken");
+   const res = await API.post(`/admin/users/${proSearchResult._id}/toggle-pro`, {}, {
+    headers: { Authorization: `Bearer ${token}` }
+   });
+   setProSearchResult((prev) => ({ ...prev, isPremium: res.data.isPremium, subscriptionStatus: res.data.subscriptionStatus }));
+  } catch (err) {
+   setProSearchError(err.response?.data?.message || "Failed to update Pro status");
+  } finally {
+   setProToggling(false);
+  }
+ };
+
  useEffect(() => {
   fetchStats();
   fetchFullStats();
@@ -203,6 +248,39 @@ const AdminDashboard = () => {
     Logout
    </button>
 
+   <h2 className="admin-section-title">Grant / Revoke Pro Access</h2>
+
+   <form className="admin-pro-search" onSubmit={handleProSearch}>
+    <input
+     type="email"
+     placeholder="Student's email address"
+     value={proSearchEmail}
+     onChange={(e) => setProSearchEmail(e.target.value)}
+    />
+    <button type="submit" disabled={proSearching}>
+     {proSearching ? "Searching..." : "Search"}
+    </button>
+   </form>
+
+   {proSearchError && <p className="admin-error">{proSearchError}</p>}
+
+   {proSearchResult && (
+    <div className="admin-pro-result">
+     <div>
+      <strong>{proSearchResult.username}</strong> ({proSearchResult.email})
+      <br />
+      Status: {proSearchResult.isPremium ? "Pro (active)" : "Free"}
+     </div>
+     <button
+      onClick={handleTogglePro}
+      disabled={proToggling}
+      className={proSearchResult.isPremium ? "admin-revoke-btn" : "admin-grant-btn"}
+     >
+      {proToggling ? "Updating..." : proSearchResult.isPremium ? "Revoke Pro" : "Grant Pro"}
+     </button>
+    </div>
+   )}
+
    <div className="admin-grid">
 
     <Link to="/admin/tutorials" className="admin-card">
@@ -215,6 +293,10 @@ const AdminDashboard = () => {
 
     <Link to="/admin/curated-questions" className="admin-card">
      Curated Questions
+    </Link>
+
+    <Link to="/admin/institutions" className="admin-card">
+     Institutions
     </Link>
 
     <Link to="/admin/messages" className="admin-card">

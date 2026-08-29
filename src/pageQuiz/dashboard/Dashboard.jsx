@@ -11,6 +11,7 @@ const quizModes = [
   { to: "/pro/quiz/adaptive", title: "Adaptive Quiz", desc: "Questions weighted toward the topics you're weakest in." },
   { to: "/pro/quiz/mixed", title: "Mixed Quiz", desc: "A random spread of questions across every subject." },
   { to: "/pro/quiz/past-questions", title: "Past Questions", desc: "Curated, exam-style WAEC & JAMB practice questions." },
+  { to: "/pro/quiz/material", title: "Material Quiz", desc: "Upload your own notes — get a quiz built strictly from your material." },
   { to: "/pro/analytics", title: "Analytics", desc: "See your accuracy, weak topics, and progress over time." },
   { to: "/pro/leaderboard", title: "Leaderboard", desc: "See how your XP stacks up against other students." },
   { to: "/pro/billing", title: "Billing", desc: "Manage your Pro subscription." },
@@ -52,6 +53,19 @@ const Dashboard = () => {
             <span className={`pq-badge ${isPremium ? "pq-badge-premium" : "pq-badge-free"}`}>
               {isPremium ? "PRO PLAN" : "FREE PLAN"}
             </span>
+          </div>
+        )}
+
+        {!user?.campus?.onboarded && (
+          <div className="pq-topic-row" style={{ marginTop: 18, border: "1px solid rgba(0,245,255,0.35)" }}>
+            <h4 style={{ margin: "0 0 6px" }}>🎓 Studying at a university?</h4>
+            <p style={{ margin: "0 0 12px", fontSize: 13, color: "#94a3b8" }}>
+              Set up your campus profile to unlock university-focused features —
+              starts with Miva, but works for any institution.
+            </p>
+            <Link to="/pro/campus/onboarding" className="pq-btn pq-btn-primary">
+              Set Up Campus Profile
+            </Link>
           </div>
         )}
 

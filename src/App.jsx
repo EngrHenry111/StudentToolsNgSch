@@ -24,6 +24,7 @@ import AdminLogin from "./pages/adminLogin/AdminLoginForm"
 import AdminDashboard from "./pages/adminDashboard/AdminDashboard";
 import AdminTutorials from "./pages/adminTutorial/AdminTutorials";
 import AdminCuratedQuestions from "./pages/adminCuratedQuestions/AdminCuratedQuestions";
+import AdminInstitutions from "./pages/adminInstitutions/AdminInstitutions";
 import EditTutorial from "./pages/editTutorial/EditorTutorial";
 import AdminMessages from "./pages/adminMessages/AdminMessages";
 import AdmissionPredictor from "./pages/admismissionPreditior/AdmissionPredictor";
@@ -44,6 +45,11 @@ import AIQuiz from "./pageQuiz/Quiz/AIQuiz";
 import AdaptiveQuiz from "./pageQuiz/Quiz/AdaptiveQuiz";
 import Register from "./pageQuiz/Auth/register/Register";
 import Login from "./pageQuiz/Auth/login/Login";
+import ForgotPassword from "./pageQuiz/Auth/forgotPassword/ForgotPassword";
+import ResetPassword from "./pageQuiz/Auth/resetPassword/ResetPassword";
+import CampusOnboarding from "./pageQuiz/Campus/CampusOnboarding";
+import MaterialUpload from "./pageQuiz/Materials/MaterialUpload";
+import MaterialQuizTake from "./pageQuiz/Materials/MaterialQuizTake";
 
 import PublicLayout from "./layouts/PublicLayouts";
 import AuthLayout from "./layouts/AuthLayout";
@@ -72,6 +78,8 @@ function App() {
   <Route path="tutorials" element={<AdminTutorials />} />
 
   <Route path="curated-questions" element={<AdminCuratedQuestions />} />
+
+  <Route path="institutions" element={<AdminInstitutions />} />
 
   <Route path="edit/:id" element={<EditTutorial />} />
 
@@ -115,6 +123,35 @@ function App() {
 
   <Route path="/login" element={<Login />} />
   <Route path="/register" element={<Register />} />
+  <Route path="/forgot-password" element={<ForgotPassword />} />
+  <Route path="/reset-password/:token" element={<ResetPassword />} />
+
+  <Route
+    path="/pro/campus/onboarding"
+    element={
+      <ProtectedRoute>
+        <CampusOnboarding />
+      </ProtectedRoute>
+    }
+  />
+
+  <Route
+    path="/pro/quiz/material"
+    element={
+      <ProtectedRoute>
+        <MaterialUpload />
+      </ProtectedRoute>
+    }
+  />
+
+  <Route
+    path="/pro/quiz/material/:id"
+    element={
+      <ProtectedRoute>
+        <MaterialQuizTake />
+      </ProtectedRoute>
+    }
+  />
   
   <Route
   path="/pro/quiz/adaptive"

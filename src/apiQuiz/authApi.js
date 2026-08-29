@@ -20,3 +20,15 @@ export const logoutUser = async () => {
 export const getMe = async () => {
   return apiRequest("/auth/me", { auth: true });
 };
+
+export const googleAuth = async (credential) => {
+  return apiRequest("/auth/google", { method: "POST", body: { credential }, auth: false });
+};
+
+export const forgotPassword = async (email) => {
+  return apiRequest("/auth/forgot-password", { method: "POST", body: { email }, auth: false });
+};
+
+export const resetPassword = async (token, password) => {
+  return apiRequest(`/auth/reset-password/${token}`, { method: "POST", body: { password }, auth: false });
+};

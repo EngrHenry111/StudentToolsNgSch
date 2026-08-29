@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
-import { loginUser } from "../../../apiQuiz/authApi";
+import { loginUser, googleAuth } from "../../../apiQuiz/authApi";
 import { AuthContext } from "../../../contextQuiz/AuthContext";
+import GoogleSignInButton from "../../../componentsQuiz/GoogleSignInButton";
 import { Link, useNavigate } from "react-router-dom";
 import "./QuizLogin.css";
 
@@ -38,6 +39,24 @@ const Login = () => {
     }
   };
 
+  const handleGoogleSuccess = async (credential) => {
+    setError("");
+    setSubmitting(true);
+    try {
+      const res = await googleAuth(credential);
+      if (res.accessToken) {
+        login(res.accessToken, res.refreshToken, res.user);
+        navigate("/pro/dashboard");
+      } else {
+        setError(res.message || "Google sign-in failed.");
+      }
+    } catch (err) {
+      setError(err.message || "Google sign-in failed.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <div className="login-page">
       <form className="login-card" onSubmit={handleSubmit}>
@@ -47,6 +66,13 @@ const Login = () => {
         </p>
 
         {error && <div className="login-error">{error}</div>}
+
+        <GoogleSignInButton
+          onSuccess={handleGoogleSuccess}
+          onError={(msg) => setError(msg)}
+        />
+
+        <div className="login-divider"><span>or</span></div>
 
         <input
           type="email"
@@ -63,6 +89,10 @@ const Login = () => {
           onChange={(e) => setForm({ ...form, password: e.target.value })}
           autoComplete="current-password"
         />
+
+        <p className="login-forgot">
+          <Link to="/forgot-password">Forgot password?</Link>
+        </p>
 
         <button type="submit" disabled={submitting}>
           {submitting ? "Logging in..." : "Login"}
