@@ -1,16 +1,18 @@
 import { useEffect, useState, useContext } from "react";
 import { getBilling, cancelSubscription, subscribe, getLaunchOffer } from "../apiQuiz/paymentApi";
+import { updateNotificationPreferences } from "../apiQuiz/authApi";
 import { AuthContext } from "../contextQuiz/AuthContext";
 import Loader from "../componentsQuiz/Loader";
 import "./proquiz.css";
 
 const Billing = () => {
-  const { refreshProfile } = useContext(AuthContext);
+  const { user, refreshProfile } = useContext(AuthContext);
   const [data, setData] = useState(null);
   const [offer, setOffer] = useState(null);
   const [loading, setLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [savingPrefs, setSavingPrefs] = useState(false);
 
   const load = async () => {
     setLoading(true);
@@ -63,6 +65,18 @@ const Billing = () => {
       setError(err.message);
     } finally {
       setActionLoading(false);
+    }
+  };
+
+  const handleToggleStreakReminders = async () => {
+    setSavingPrefs(true);
+    try {
+      await updateNotificationPreferences(!user?.notificationPreferences?.streakReminders);
+      await refreshProfile();
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setSavingPrefs(false);
     }
   };
 
@@ -167,6 +181,32 @@ const Billing = () => {
               {actionLoading ? "Cancelling..." : "Cancel Subscription"}
             </button>
           )}
+        </div>
+
+        <div className="pq-card">
+          <h4 className="pq-section-title">Notifications</h4>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <div>
+              <p style={{ margin: 0, fontSize: 14, color: "#e2e8f0" }}>Streak reminder emails</p>
+              <p style={{ margin: "4px 0 0", fontSize: 12, color: "#94a3b8" }}>
+                Get a friendly nudge if you haven't studied yet and your streak is at risk.
+              </p>
+            </div>
+            <button
+              className="pq-btn"
+              onClick={handleToggleStreakReminders}
+              disabled={savingPrefs}
+              style={{
+                background: user?.notificationPreferences?.streakReminders
+                  ? "linear-gradient(90deg, #00f5ff, #7b2ff7)"
+                  : undefined,
+                color: user?.notificationPreferences?.streakReminders ? "#04040a" : undefined,
+                minWidth: 70
+              }}
+            >
+              {savingPrefs ? "..." : user?.notificationPreferences?.streakReminders ? "On" : "Off"}
+            </button>
+          </div>
         </div>
       </div>
     </div>

@@ -1,0 +1,73 @@
+.achievement-card {
+  max-width: 340px;
+  margin: 0 auto;
+}
+
+.achievement-card-inner {
+  position: relative;
+  border-radius: 20px;
+  padding: 28px 24px;
+  background: linear-gradient(135deg, #0a0a0f, #1a1030);
+  border: 1px solid rgba(0, 245, 255, 0.25);
+  box-shadow: 0 0 30px rgba(123, 47, 247, 0.25);
+  text-align: center;
+  overflow: hidden;
+}
+
+.achievement-card-inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(0, 245, 255, 0.15), transparent 60%);
+  pointer-events: none;
+}
+
+.achievement-brand {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #94a3b8;
+  margin: 0 0 20px;
+}
+
+.achievement-brand span {
+  background: linear-gradient(90deg, #00f5ff, #7b2ff7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.achievement-username {
+  font-size: 20px;
+  font-weight: 800;
+  color: #e2e8f0;
+  margin: 0 0 20px;
+}
+
+.achievement-stats {
+  display: flex;
+  justify-content: space-around;
+}
+
+.achievement-stats > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.achievement-stat-value {
+  font-size: 24px;
+  font-weight: 800;
+  background: linear-gradient(90deg, #00f5ff, #7b2ff7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.achievement-stat-label {
+  font-size: 11px;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}

@@ -19,7 +19,7 @@ const AdminDashboard = () => {
  const [loading, setLoading] = useState(true);
  const [error, setError] = useState("");
 
-  // ---- Grant/Revoke Pro ----
+ // ---- Grant/Revoke Pro ----
  const [proSearchEmail, setProSearchEmail] = useState("");
  const [proSearchResult, setProSearchResult] = useState(null);
  const [proSearchError, setProSearchError] = useState("");

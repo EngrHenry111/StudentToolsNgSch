@@ -5,13 +5,17 @@ import "./navquiz.css";
 
 const links = [
   { to: "/pro/dashboard", label: "Dashboard" },
+  { to: "/pro/study-coach", label: "Study Coach" },
   { to: "/pro/quiz/ai", label: "AI Quiz" },
   { to: "/pro/quiz/adaptive", label: "Adaptive" },
   { to: "/pro/quiz/mixed", label: "Mixed" },
   { to: "/pro/quiz/past-questions", label: "Past Questions" },
   { to: "/pro/quiz/material", label: "Material Quiz" },
+  { to: "/pro/course-tutor", label: "Course Tutor" },
+  { to: "/pro/career-coach", label: "Career Coach" },
   { to: "/pro/analytics", label: "Analytics" },
   { to: "/pro/leaderboard", label: "Leaderboard" },
+  { to: "/pro/referral", label: "Invite Friends" },
   { to: "/pro/billing", label: "Billing" },
 ];
 

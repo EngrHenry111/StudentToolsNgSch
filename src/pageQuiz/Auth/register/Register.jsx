@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { registerUser, googleAuth } from "../../../apiQuiz/authApi";
 import { AuthContext } from "../../../contextQuiz/AuthContext";
 import GoogleSignInButton from "../../../componentsQuiz/GoogleSignInButton";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import "./QuizRegister.css";
 
 const Register = () => {
@@ -12,6 +12,8 @@ const Register = () => {
   const [success, setSuccess] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const referralCode = searchParams.get("ref");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,7 +32,7 @@ const Register = () => {
 
     setSubmitting(true);
     try {
-      const res = await registerUser(form);
+      const res = await registerUser({ ...form, referralCode });
 
       if (res.message && res.message.toLowerCase().includes("registered")) {
         setSuccess("Account created! Redirecting to login...");
@@ -74,6 +76,11 @@ const Register = () => {
 
         {error && <div className="register-error">{error}</div>}
         {success && <div className="register-success">{success}</div>}
+        {referralCode && !error && !success && (
+          <div className="register-success" style={{ marginBottom: 16 }}>
+            🎁 You've been invited! Sign up now to get a +20 XP welcome bonus.
+          </div>
+        )}
 
         <GoogleSignInButton
           onSuccess={handleGoogleSuccess}

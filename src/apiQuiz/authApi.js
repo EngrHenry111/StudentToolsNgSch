@@ -17,8 +17,20 @@ export const logoutUser = async () => {
   });
 };
 
+export const getReferralLeaderboard = async () => {
+  return apiRequest("/auth/referral-leaderboard", { auth: false });
+};
+
 export const getMe = async () => {
   return apiRequest("/auth/me", { auth: true });
+};
+
+export const updateNotificationPreferences = async (streakReminders) => {
+  return apiRequest("/auth/notification-preferences", {
+    method: "PUT",
+    body: { streakReminders },
+    auth: true
+  });
 };
 
 export const googleAuth = async (credential) => {

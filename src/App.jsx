@@ -50,6 +50,10 @@ import ResetPassword from "./pageQuiz/Auth/resetPassword/ResetPassword";
 import CampusOnboarding from "./pageQuiz/Campus/CampusOnboarding";
 import MaterialUpload from "./pageQuiz/Materials/MaterialUpload";
 import MaterialQuizTake from "./pageQuiz/Materials/MaterialQuizTake";
+import CourseTutor from "./pageQuiz/CourseTutor/CourseTutor";
+import StudyCoach from "./pageQuiz/StudyCoach/StudyCoach";
+import CareerCoach from "./pageQuiz/Career/CareerCoach";
+import Referral from "./pageQuiz/Referral/Referral";
 
 import PublicLayout from "./layouts/PublicLayouts";
 import AuthLayout from "./layouts/AuthLayout";
@@ -149,6 +153,42 @@ function App() {
     element={
       <ProtectedRoute>
         <MaterialQuizTake />
+      </ProtectedRoute>
+    }
+  />
+
+  <Route
+    path="/pro/course-tutor"
+    element={
+      <ProtectedRoute>
+        <CourseTutor />
+      </ProtectedRoute>
+    }
+  />
+
+  <Route
+    path="/pro/study-coach"
+    element={
+      <ProtectedRoute>
+        <StudyCoach />
+      </ProtectedRoute>
+    }
+  />
+
+  <Route
+    path="/pro/career-coach"
+    element={
+      <ProtectedRoute>
+        <CareerCoach />
+      </ProtectedRoute>
+    }
+  />
+
+  <Route
+    path="/pro/referral"
+    element={
+      <ProtectedRoute>
+        <Referral />
       </ProtectedRoute>
     }
   />
