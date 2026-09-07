@@ -111,7 +111,7 @@ WAEC Grade Calculator Nigeria | Convert WAEC Scores to Grades
 
 <meta
  property="og:image"
- content="https://studenttoolsng.com/logo.png"
+ content="https://studenttoolsng.com/logoH.png"
 />
 
 <meta
@@ -136,7 +136,7 @@ WAEC Grade Calculator Nigeria | Convert WAEC Scores to Grades
 
 <meta
  name="twitter:image"
- content="https://studenttoolsng.com/logo.png"
+ content="https://studenttoolsng.com/logoH.png"
 />
 
 {/* Structured Data (Tool) */}

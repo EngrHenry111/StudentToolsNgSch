@@ -1,4 +1,12 @@
 User-agent: *
 Allow: /
 
+Disallow: /admin
+Disallow: /pro/
+Disallow: /login
+Disallow: /register
+Disallow: /forgot-password
+Disallow: /reset-password
+Disallow: /search
+
 Sitemap: https://studenttoolsng.com/sitemap.xml

@@ -3,6 +3,12 @@ import { useParams, useNavigate } from "react-router-dom";
 import API from "../../services/api";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import {
+ tutorialCategoryList,
+ tutorialCategoryLabels,
+ topicOptions,
+ topicSlug
+} from "../../utils/tutorialCategories";
 import "./editorTutorial.css";
 
 const EditTutorial = () => {
@@ -29,7 +35,7 @@ const EditTutorial = () => {
  const fetchTutorial = async () => {
   try {
 
-   const res = await API.get(`/tutorials/${id}`);
+   const res = await API.get(`/tutorials/preview/${id}`);
 
    if (!res.data) {
     alert("Tutorial not found");
@@ -67,7 +73,7 @@ const EditTutorial = () => {
     title,
     content,
     category,
-    topic,
+    topic: topicSlug(topic),
     excerpt,
     image,
     status,
@@ -80,7 +86,7 @@ const EditTutorial = () => {
 
   } catch (err) {
    console.log(err);
-   alert("Update failed");
+   alert(err?.response?.data?.message || "Update failed");
   }
  };
 
@@ -103,22 +109,34 @@ const EditTutorial = () => {
     {/* CATEGORY */}
     <select
      value={category}
-     onChange={(e) => setCategory(e.target.value)}
+     onChange={(e) => { setCategory(e.target.value); setTopic(""); }}
     >
      <option value="">Select Subject</option>
-     <option value="physics">Physics</option>
-     <option value="mathematics">Mathematics</option>
-     <option value="chemistry">Chemistry</option>
-     <option value="biology">Biology</option>
-     <option value="programming">Programming</option>
+     {tutorialCategoryList.map((c) => (
+      <option key={c} value={c}>{tutorialCategoryLabels[c] || c}</option>
+     ))}
+     {category && !tutorialCategoryList.includes(category) && (
+      <option value={category}>{category} (current — not in list)</option>
+     )}
     </select>
 
-    {/* TOPIC (FREE INPUT - IMPORTANT FIX) */}
-    <input
-     value={topic}
-     onChange={(e) => setTopic(e.target.value)}
-     placeholder="Topic (e.g. cell-structure)"
-    />
+    {/* TOPIC — free text, stored as a slug; suggestions via datalist */}
+    {category && (
+    <>
+     <input
+      list="edit-topic-suggestions"
+      placeholder="Topic (e.g. newtons-laws)"
+      value={topic}
+      onChange={(e) => setTopic(e.target.value)}
+      onBlur={(e) => setTopic(topicSlug(e.target.value))}
+     />
+     <datalist id="edit-topic-suggestions">
+      {topicOptions(category).map((t) => (
+       <option key={t.slug} value={t.slug}>{t.label}</option>
+      ))}
+     </datalist>
+    </>
+    )}
 
     {/* IMAGE */}
     <input

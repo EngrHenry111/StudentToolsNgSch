@@ -32,7 +32,7 @@ const EditTutorial = () => {
 
  const fetchTutorial = async () => {
   try {
-   const res = await API.get(`/tutorials/${id}`);
+   const res = await API.get(`/tutorials/preview/${id}`);
 
    if (!res.data) {
  alert("Tutorial not found");

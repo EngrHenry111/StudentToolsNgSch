@@ -97,7 +97,7 @@ StudentToolsNG - Free CGPA, WAEC & JAMB Calculators for Nigerian Students
 
 <meta
  property="og:image"
- content="https://studenttoolsng.com/logo.png"
+ content="https://studenttoolsng.com/logoH.png"
 />
 
 <meta
@@ -120,23 +120,8 @@ StudentToolsNG - Free CGPA, WAEC & JAMB Calculators for Nigerian Students
 
 <meta
  name="twitter:image"
- content="https://studenttoolsng.com/logo.png"
+ content="https://studenttoolsng.com/logoH.png"
 />
-
-{/* Structured Data */}
-<script type="application/ld+json">
-{JSON.stringify({
- "@context": "https://schema.org",
- "@type": "WebSite",
- name: "StudentToolsNG",
- url: "https://studenttoolsng.com",
- potentialAction: {
-  "@type": "SearchAction",
-  target: "https://studenttoolsng.com/search?q={search_term_string}",
-  "query-input": "required name=search_term_string"
- }
-})}
-</script>
 
 </Helmet> {/* HERO SECTION */}
 
@@ -285,7 +270,7 @@ StudentToolsNG - Free CGPA, WAEC & JAMB Calculators for Nigerian Students
 
 <div className="guides-grid">
 
-<a href="/how-to-calculate-cgpa" className="guide-card">
+<Link to="/cgpa-calculator" className="guide-card">
 
 <h3>How to Calculate CGPA</h3>
 
@@ -293,19 +278,19 @@ StudentToolsNG - Free CGPA, WAEC & JAMB Calculators for Nigerian Students
 Learn the step-by-step method to calculate CGPA in Nigerian universities.
 </p>
 
-</a>
+</Link>
 
-<a href="/cgpa-calculator-nigeria" className="guide-card">
+<Link to="/gpa-class-calculator" className="guide-card">
 
-<h3>CGPA Calculator Nigeria</h3>
+<h3>GPA to Class of Degree</h3>
 
 <p>
-Use our simple CGPA calculator designed for Nigerian students.
+See what class of degree your GPA falls into on the Nigerian scale.
 </p>
 
-</a>
+</Link>
 
-<a href="/waec-grading-system" className="guide-card">
+<Link to="/waec-grade-calculator" className="guide-card">
 
 <h3>WAEC Grading System</h3>
 
@@ -313,9 +298,9 @@ Use our simple CGPA calculator designed for Nigerian students.
 Understand WAEC grading from A1 to F9.
 </p>
 
-</a>
+</Link>
 
-<a href="/jamb-score-calculator-nigeria" className="guide-card">
+<Link to="/jamb-score-calculator" className="guide-card">
 
 <h3>JAMB Score Calculator</h3>
 
@@ -323,7 +308,7 @@ Understand WAEC grading from A1 to F9.
 Learn how JAMB scores are calculated and how to estimate your score.
 </p>
 
-</a>
+</Link>
 
 </div>
 

@@ -28,7 +28,7 @@ const AdmissionPredictor = ()=>{
  const url = "https://studenttoolsng.com/admission-predictor";
 const title = "Admission Chance Calculator Nigeria | JAMB & Post UTME Predictor";
 const description = "Predict your admission chances in Nigerian universities using your JAMB and Post UTME scores. Free admission calculator for students.";
-const image = "https://studenttoolsng.com/logo.png";
+const image = "https://studenttoolsng.com/logoH.png";
 
  return(
 

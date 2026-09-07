@@ -11,7 +11,7 @@ const MathCalculatorPage = () => {
   const url = "https://studenttoolsng.com/tutorials/math-calculator";
 const title = "Smart Math Calculator | Solve Algebra, Fractions & Equations Online";
 const description = "Free smart math calculator that solves algebra, fractions, equations, and step-by-step problems instantly. Perfect for students learning mathematics.";
-const image = "https://studenttoolsng.com/logo.png";
+const image = "https://studenttoolsng.com/logoH.png";
     
   return (
     <div className="math-layout">

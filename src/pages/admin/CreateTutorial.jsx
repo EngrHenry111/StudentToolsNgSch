@@ -2,6 +2,12 @@ import { useState, useEffect } from "react";
 import API from "../../services/api";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import {
+ tutorialCategoryList,
+ tutorialCategoryLabels,
+ topicOptions,
+ topicSlug
+} from "../../utils/tutorialCategories";
 import "./createTutorial.css";
 
 const CreateTutorial = () => {
@@ -56,7 +62,9 @@ const CreateTutorial = () => {
  const handleSubmit = async (e) => {
   e.preventDefault();
 
-  if (!title || !content || !category || !topic) {
+  const topicValue = topicSlug(topic);
+
+  if (!title || !content || !category || !topicValue) {
    alert("Please fill all required fields");
    return;
   }
@@ -68,14 +76,14 @@ const CreateTutorial = () => {
     title,
     content,
     category: category.toLowerCase(),
-    topic: topic.toLowerCase(),
+    topic: topicValue,
     excerpt,
     tags: tags.split(",").map(tag => tag.trim()),
     image,
     status: "published"
    });
-   
-   
+
+
 
    alert("Tutorial created successfully");
 
@@ -92,7 +100,7 @@ const CreateTutorial = () => {
 
   } catch (err) {
    console.log(err);
-   alert("Error creating tutorial");
+   alert(err?.response?.data?.message || "Error creating tutorial");
   } finally {
    setLoading(false);
   }
@@ -134,21 +142,30 @@ const CreateTutorial = () => {
      }}
     >
      <option value="">Select Subject</option>
-     <option value="physics">Physics</option>
-     <option value="mathematics">Mathematics</option>
-     <option value="chemistry">Chemistry</option>
-     <option value="biology">Biology</option>
-     <option value="programming">Programming</option>
+     {tutorialCategoryList.map((c) => (
+      <option key={c} value={c}>{tutorialCategoryLabels[c] || c}</option>
+     ))}
     </select>
 
-    {/* TOPIC */}
+    {/* TOPIC — free text, stored as a slug; suggestions via datalist */}
     {category && (
-    <input
-    placeholder="Topic (e.g. mechanics, algebra, javascript)"
-    value={topic}
-    onChange={(e)=>setTopic(e.target.value.toLowerCase())}
-    />
-    
+    <>
+     <input
+      list="topic-suggestions"
+      placeholder="Topic (e.g. newtons-laws)"
+      value={topic}
+      onChange={(e) => setTopic(e.target.value)}
+      onBlur={(e) => setTopic(topicSlug(e.target.value))}
+     />
+     <datalist id="topic-suggestions">
+      {topicOptions(category).map((t) => (
+       <option key={t.slug} value={t.slug}>{t.label}</option>
+      ))}
+     </datalist>
+     {topic && topicSlug(topic) !== topic && (
+      <small>Will be saved as: {topicSlug(topic)}</small>
+     )}
+    </>
     )}
 
     {/* IMAGE */}

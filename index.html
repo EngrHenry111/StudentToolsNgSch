@@ -21,21 +21,7 @@
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5085792833873130"
      crossorigin="anonymous"></script>
-<!--
-  GOOGLE ADSENSE
-  ----------------------------------------------------------------
-  
-  1. Sign up / log in at https://www.google.com/adsense
-  2. Once you have a Publisher ID (looks like "ca-pub-1234567890123456"),
-     replace BOTH placeholders below (the meta tag AND the script src).
-  3. Also update StudentToolsClient/.env:
-       VITE_ADSENSE_CLIENT_ID=ca-pub-1234567890123456
-       VITE_ADSENSE_ENABLED=true
-     (leave VITE_ADSENSE_ENABLED unset/false until your account is
-     approved, so you don't send ad requests before approval)
--->
-<meta name="google-adsense-account" content="ca-pub-XXXXXXXXXXXXXXXX" />
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+<meta name="google-adsense-account" content="ca-pub-5085792833873130" />
 
 
   <!-- Viewport -->
@@ -58,8 +44,33 @@
   />
 
 
-  <meta property="og:image" content="https://studenttoolsng.com/logo.png" />
+  <meta property="og:image" content="https://studenttoolsng.com/logoH.png" />
   <meta property="og:url" content="https://studenttoolsng.com/" />
+
+  <!-- Site-wide structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "StudentToolsNG",
+    "url": "https://studenttoolsng.com",
+    "logo": "https://studenttoolsng.com/logoH.png",
+    "sameAs": [
+      "https://facebook.com/Engrhenrytech",
+      "https://twitter.com/EngrHenryTech",
+      "https://instagram.com/engrhenrytech1",
+      "https://linkedin.com/in/engrhenrytech"
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "StudentToolsNG",
+    "url": "https://studenttoolsng.com"
+  }
+  </script>
 
 </head>
   <body>

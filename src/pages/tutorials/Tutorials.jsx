@@ -6,7 +6,17 @@ import { Link, useParams,useNavigate, useLocation } from "react-router-dom";
 import API from "../../services/api";
 import { Helmet } from "react-helmet-async";
 import { decode } from "html-entities";
+import NotFound from "../notFound/NotFound";
+import {
+ tutorialCategoryList,
+ tutorialCategoryLabels
+} from "../../utils/tutorialCategories";
 import "./tutorials.css";
+
+// The category listing route is served by the catch-all "/:category" path,
+// so any unknown top-level slug would otherwise render an empty tutorials
+// listing (a soft 404). Only these categories are real.
+const KNOWN_CATEGORIES = tutorialCategoryList;
 
 const Tutorials = () => {
 
@@ -26,6 +36,11 @@ const location = useLocation();
  const [subtopics,setSubtopics] = useState([]);
 
 const { category:paramCategory, topic:paramTopic, subtopic:paramSubtopic } = useParams();
+
+const invalidCategory =
+ paramCategory &&
+ !KNOWN_CATEGORIES.includes(paramCategory.toLowerCase());
+
 useEffect(()=>{
 
  if(paramCategory){
@@ -135,25 +150,46 @@ const stripHTML = (html) => {
 
  return decoded.replace(/<[^>]+>/g, "");
 };
+
+ if (invalidCategory) {
+  return <NotFound />;
+ }
+
+ // Drive SEO tags directly off the URL params (not the async filter state)
+ // so the correct title/description/canonical render on the first paint,
+ // before the fetch effects run.
+ const seoCategory = paramCategory || "";
+ const seoTopic = paramTopic || "";
+ const seoSubtopic = paramSubtopic || "";
+
+ const isSubtopicPage = Boolean(seoSubtopic);
+ const canonicalPath = isSubtopicPage
+  ? `/${seoCategory}/${seoTopic}`
+  : location.pathname;
+ const canonicalUrl = `https://studenttoolsng.com${canonicalPath}`;
+
+ const pageTitle = seoSubtopic
+  ? `${seoSubtopic} Tutorials | StudentToolsNG`
+  : seoTopic
+  ? `${seoTopic} Tutorials | StudentToolsNG`
+  : seoCategory
+  ? `${seoCategory} Tutorials | StudentToolsNG`
+  : "Study Tutorials | StudentToolsNG";
+
+ const pageDescription = seoSubtopic
+  ? `Free ${seoSubtopic} tutorials and study guides under ${seoTopic} (${seoCategory}) — learn ${seoSubtopic} step by step with StudentToolsNG.`
+  : seoTopic
+  ? `Browse all ${seoTopic} tutorials under ${seoCategory} on StudentToolsNG — structured, easy-to-follow lessons for Nigerian students.`
+  : seoCategory
+  ? `Explore every ${seoCategory} tutorial on StudentToolsNG, organized by topic to help you study faster and understand more.`
+  : "Explore tutorials by subject, topic, and subtopic. Learn faster with structured academic content built for Nigerian students.";
+
  return(
 
  <div className="tutorials-holder">
 
  <Helmet>
-  {/* <title>
-   Study Tutorials | StudentToolsNG
-   </title> */}
-  <title>
-{
- subtopic
- ? `${subtopic} Tutorials | StudentToolsNG`
- : topic
- ? `${topic} Tutorials | StudentToolsNG`
- : category
- ? `${category} Tutorials | StudentToolsNG`
- : "Study Tutorials | StudentToolsNG"
-}
-</title>
+  <title>{pageTitle}</title>
 
   {/*
     Previously this was one identical, static description across every
@@ -162,24 +198,31 @@ const stripHTML = (html) => {
     a likely contributor to the "duplicate canonical" issues in Search
     Console. Each level now gets its own genuinely distinct description.
   */}
-  <meta
-   name="description"
-   content={
-    subtopic
-     ? `Free ${subtopic} tutorials and study guides under ${topic} (${category}) — learn ${subtopic} step by step with StudentToolsNG.`
-     : topic
-     ? `Browse all ${topic} tutorials under ${category} on StudentToolsNG — structured, easy-to-follow lessons for Nigerian students.`
-     : category
-     ? `Explore every ${category} tutorial on StudentToolsNG, organized by topic and subtopic to help you study faster and understand more.`
-     : "Explore tutorials by subject, topic, and subtopic. Learn faster with structured academic content built for Nigerian students."
-   }
-  />
-  <link
-  rel="canonical"
-  href={`https://studenttoolsng.com${
-    location.pathname
-  }`}
-/>
+  <meta name="description" content={pageDescription} />
+
+  <link rel="canonical" href={canonicalUrl} />
+
+  {/* Open Graph / Twitter */}
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={pageTitle} />
+  <meta property="og:description" content={pageDescription} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:image" content="https://studenttoolsng.com/logoH.png" />
+  <meta property="og:site_name" content="StudentToolsNG" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={pageTitle} />
+  <meta name="twitter:description" content={pageDescription} />
+  <meta name="twitter:image" content="https://studenttoolsng.com/logoH.png" />
+
+  {/*
+    Subtopic-level pages have no dedicated content of their own (there is
+    no subtopic field on tutorials) — they are a filtered view of the
+    topic page, so they are canonicalised to the topic page and excluded
+    from indexing to avoid duplicate-content signals.
+  */}
+  {isSubtopicPage && (
+   <meta name="robots" content="noindex, follow" />
+  )}
 
 <script type="application/ld+json">
 {JSON.stringify({
@@ -187,9 +230,9 @@ const stripHTML = (html) => {
  "@type":"BreadcrumbList",
  itemListElement:[
   { "@type":"ListItem", position:1, name:"Home", item:"https://studenttoolsng.com" },
-  category && { "@type":"ListItem", position:2, name:category, item:`https://studenttoolsng.com/${category}` },
-  topic && { "@type":"ListItem", position:3, name:topic, item:`https://studenttoolsng.com/${category}/${topic}` },
-  subtopic && { "@type":"ListItem", position:4, name:subtopic, item:`https://studenttoolsng.com/${category}/${topic}/${subtopic}` }
+  seoCategory && { "@type":"ListItem", position:2, name:seoCategory, item:`https://studenttoolsng.com/${seoCategory}` },
+  seoTopic && { "@type":"ListItem", position:3, name:seoTopic, item:`https://studenttoolsng.com/${seoCategory}/${seoTopic}` },
+  seoSubtopic && { "@type":"ListItem", position:4, name:seoSubtopic, item:`https://studenttoolsng.com/${seoCategory}/${seoTopic}/${seoSubtopic}` }
  ].filter(Boolean)
 })}
 </script>
@@ -197,12 +240,12 @@ const stripHTML = (html) => {
 
  <h1>
 {
- subtopic
- ? `${subtopic} Tutorials`
- : topic
- ? `${topic} Tutorials`
- : category
- ? `${category} Tutorials`
+ seoSubtopic
+ ? `${seoSubtopic} Tutorials`
+ : seoTopic
+ ? `${seoTopic} Tutorials`
+ : seoCategory
+ ? `${seoCategory} Tutorials`
  : "Study Tutorials"
 }
 </h1>
@@ -215,12 +258,12 @@ const stripHTML = (html) => {
 */}
 <p className="tutorials-intro">
 {
- subtopic
- ? `Browse free ${subtopic} tutorials under ${topic} (${category}) on StudentToolsNG — clear, step-by-step lessons built for Nigerian students.`
- : topic
- ? `Explore ${topic} tutorials under ${category} — structured lessons covering every major concept, organized by subtopic below.`
- : category
- ? `All ${category} tutorials on StudentToolsNG, organized by topic to help you study efficiently and find exactly what you need.`
+ seoSubtopic
+ ? `Browse free ${seoSubtopic} tutorials under ${seoTopic} (${seoCategory}) on StudentToolsNG — clear, step-by-step lessons built for Nigerian students.`
+ : seoTopic
+ ? `Explore ${seoTopic} tutorials under ${seoCategory} — structured lessons covering every major concept in this topic.`
+ : seoCategory
+ ? `All ${seoCategory} tutorials on StudentToolsNG, organized by topic to help you study efficiently and find exactly what you need.`
  : "Browse tutorials across every subject — filter by category, topic, and subtopic to find structured lessons built for Nigerian students."
 }
 </p>
@@ -229,12 +272,16 @@ const stripHTML = (html) => {
  <Link to="/">Home</Link> / 
  <Link to="/tutorials">Tutorials</Link>
 
- {category && (
-  <> / <Link to={`/tutorials/${category}`}>{category}</Link></>
+ {seoCategory && (
+  <> / <Link to={`/${seoCategory}`}>{seoCategory}</Link></>
  )}
 
- {topic && (
-  <> / <span>{topic}</span></>
+ {seoTopic && (
+  <> / {seoSubtopic ? <Link to={`/${seoCategory}/${seoTopic}`}>{seoTopic}</Link> : <span>{seoTopic}</span>}</>
+ )}
+
+ {seoSubtopic && (
+  <> / <span>{seoSubtopic}</span></>
  )}
 </div>
 
@@ -271,11 +318,9 @@ const stripHTML = (html) => {
 }}
  >
   <option value="">All Subjects</option>
-  <option value="physics">Physics</option>
-  <option value="mathematics">Mathematics</option>
-  <option value="chemistry">Chemistry</option>
-  <option value="biology">Biology</option>
-  <option value="programming">Programming</option>
+  {tutorialCategoryList.map((c)=>(
+   <option key={c} value={c}>{tutorialCategoryLabels[c] || c}</option>
+  ))}
  </select>
 
  {/* TOPIC */}
@@ -385,29 +430,37 @@ const stripHTML = (html) => {
  ))}
  </div>
 
- {/* SEO CONTENT */}
- 
-<h2>What You Will Learn</h2>
-<ul>
-  <li>How to calculate CGPA in Nigerian universities</li>
-  <li>Understanding WAEC grading system</li>
-  <li>JAMB score calculation and admission tips</li>
-  <li>Effective study techniques</li>
-</ul>               
+ {/*
+   Site-wide helper content — only shown on the unfiltered /tutorials
+   landing page. Previously this identical block rendered on every
+   category/topic/subtopic URL, which was a strong duplicate-content
+   signal across hundreds of pages.
+ */}
+ {!seoCategory && (
+ <div className="tutorials-seo">
+  <h2>What You Will Learn</h2>
+  <ul>
+    <li>How to calculate CGPA in Nigerian universities</li>
+    <li>Understanding WAEC grading system</li>
+    <li>JAMB score calculation and admission tips</li>
+    <li>Effective study techniques</li>
+  </ul>
 
-<p className="tutorial-intro"> 
-  Explore a wide range of educational tutorials designed for Nigerian students. 
-  Learn how to calculate CGPA, understand WAEC grading system, improve your JAMB score, 
-  and discover effective study strategies to excel academically.
-</p>    
+  <p className="tutorial-intro">
+    Explore a wide range of educational tutorials designed for Nigerian students.
+    Learn how to calculate CGPA, understand WAEC grading system, improve your JAMB score,
+    and discover effective study strategies to excel academically.
+  </p>
 
-<p className="plink">
-  Use our 
-  <a href="/cgpa-calculator">CGPA Calculator</a>, 
-  <a href="/waec-grade-calculator">WAEC Calculator</a>, and 
-  <a href="/jamb-score-calculator">JAMB Calculator</a> 
-  alongside these tutorials.
-</p>
+  <p className="plink">
+    Use our{" "}
+    <Link to="/cgpa-calculator">CGPA Calculator</Link>,{" "}
+    <Link to="/waec-grade-calculator">WAEC Calculator</Link>, and{" "}
+    <Link to="/jamb-score-calculator">JAMB Calculator</Link>{" "}
+    alongside these tutorials.
+  </p>
+ </div>
+ )}
  </div>
 
  );

@@ -35,7 +35,7 @@ const GPAClass = () => {
  const url = "https://studenttoolsng.com/gpa-class-calculator";
  const title = "GPA Class Calculator | Nigerian Degree Classification";
  const description = "Convert your CGPA to degree classification in Nigeria. Instantly know if you have First Class, Second Class Upper or Lower using our free GPA class calculator.";
- const image = "https://studenttoolsng.com/logo.png";
+ const image = "https://studenttoolsng.com/logoH.png";
 
  return(
 

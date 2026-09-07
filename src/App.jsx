@@ -34,6 +34,7 @@ import Terms from "./pages/terms/Terms";
 import Author from "./pages/author/Author";
 import MathCalculatorPage from "./pages/mathCalculator/MathCalculatorPage";
 import QuizPages from "./pages/quiz/QuizPges";
+import NotFound from "./pages/notFound/NotFound";
 
 // AI QUIZ SECTION
 import Billing from "./pageQuiz/Billing";
@@ -117,8 +118,10 @@ function App() {
     <Route path="/terms" element={<Terms />} />
     <Route path="/author" element={<Author/>}/>
     {/* <Route path="/:slug" element={<SeoPage/>}/> */}
-    <Route path="/tutorials/math-calculator" element={<MathCalculatorPage />} />    
-    <Route path="/quiz" element={<QuizPages />} />    
+    <Route path="/tutorials/math-calculator" element={<MathCalculatorPage />} />
+    <Route path="/quiz" element={<QuizPages />} />
+
+    <Route path="*" element={<NotFound />} />
 
    </Route>
 

@@ -7,7 +7,7 @@ const PrivacyPolicy = () => {
 const url = "https://studenttoolsng.com/privacy-policy";
 const title = "Privacy Policy | StudentToolsNG";
 const description = "Learn how StudentToolsNG collects, uses, and protects your personal data while providing academic tools and educational resources.";
-const image = "https://studenttoolsng.com/logo.png";
+const image = "https://studenttoolsng.com/logoH.png";
 
 return (
 

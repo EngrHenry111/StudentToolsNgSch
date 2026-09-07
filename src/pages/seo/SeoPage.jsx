@@ -44,7 +44,7 @@ const SeoPage = ()=>{
  }
 
  const url = `https://studenttoolsng.com/${slug}`;
- const image = "https://studenttoolsng.com/logo.png";
+ const image = "https://studenttoolsng.com/logoH.png";
 
  return(
 

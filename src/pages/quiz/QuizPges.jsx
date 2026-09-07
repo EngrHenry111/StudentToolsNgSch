@@ -196,7 +196,7 @@ const QuizPage = () => {
     property="og:description"
     content="Test your math skills with real-time quizzes and leaderboard ranking."
   />
-  <meta property="og:image" content="https://studenttoolsng.com/logo.png" />
+  <meta property="og:image" content="https://studenttoolsng.com/logoH.png" />
   <meta property="og:url" content="https://studenttoolsng.com/quiz" />
 
   {/* Twitter */}
@@ -206,7 +206,7 @@ const QuizPage = () => {
     name="twitter:description"
     content="Practice math questions and track your performance."
   />
-  <meta name="twitter:image" content="https://studenttoolsng.com/logo.png" />
+  <meta name="twitter:image" content="https://studenttoolsng.com/logoH.png" />
 
 </Helmet>
       

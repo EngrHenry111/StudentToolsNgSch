@@ -30,7 +30,7 @@ const Scholarships = () => {
  const url = "https://studenttoolsng.com/scholarships";
 const title = "Scholarships for Nigerian Students 2026 | Apply Now";
 const description = "Explore available scholarships for Nigerian students including MTN, Federal Government, and Agbami scholarships. Learn eligibility and how to apply.";
-const image = "https://studenttoolsng.com/logo.png";
+const image = "https://studenttoolsng.com/logoH.png";
 
  return(
 

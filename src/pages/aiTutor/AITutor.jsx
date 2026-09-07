@@ -25,7 +25,7 @@ const AITutor = ()=>{
  const url = "https://studenttoolsng.com/ai-tutor";
 const title = "AI Tutor for Students | Ask Questions & Get Instant Answers";
 const description = "Use our AI tutor to ask academic questions, solve problems, and get instant answers. Perfect for Nigerian students studying mathematics, science, and more.";
-const image = "https://studenttoolsng.com/logo.png";
+const image = "https://studenttoolsng.com/logoH.png";
 
  return(
 <div className="ai-tutor">

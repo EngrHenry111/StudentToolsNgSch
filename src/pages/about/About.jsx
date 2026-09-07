@@ -22,14 +22,14 @@ const About = () => {
         <meta property="og:type" content="website" />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
-        <meta property="og:image" content="https://studenttoolsng.com/logo.png" />
+        <meta property="og:image" content="https://studenttoolsng.com/logoH.png" />
         <meta property="og:url" content={url} />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
-        <meta name="twitter:image" content="https://studenttoolsng.com/logo.png" />
+        <meta name="twitter:image" content="https://studenttoolsng.com/logoH.png" />
 
         {/* Schema (Improved) */}
         <script type="application/ld+json">
@@ -38,7 +38,7 @@ const About = () => {
             "@type": "Organization",
             name: "StudentToolsNG",
             url: "https://studenttoolsng.com",
-            logo: "https://studenttoolsng.com/logo.png",
+            logo: "https://studenttoolsng.com/logoH.png",
             sameAs: [
               "https://facebook.com/",
               "https://instagram.com/",

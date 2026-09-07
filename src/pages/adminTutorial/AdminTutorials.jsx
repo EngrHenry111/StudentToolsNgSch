@@ -25,7 +25,7 @@ const fetchStats = async ()=>{
 
  const fetchTutorials = async ()=>{
 
-  const res = await API.get("/tutorials");
+  const res = await API.get("/tutorials/admin/list");
 
   setTutorials(res.data.tutorials || res.data);
 

@@ -9,13 +9,53 @@ import { Helmet } from "react-helmet-async";
 import AuthorCard from "../../components/AuthorCard";
 import { decode } from "html-entities";
 import AdUnit from "../../components/ads/AdUnit";
+import NotFound from "../notFound/NotFound";
 import "./tutorialDetails.css";
+
+const SITE = "https://studenttoolsng.com";
+const FALLBACK_IMAGE = `${SITE}/logoH.png`;
+
+// Plain-text summary from (possibly double-encoded) HTML content, for use in
+// meta/OG description tags.
+const toPlainText = (html = "") =>
+ decode(decode(html))
+  .replace(/<[^>]+>/g, " ")
+  .replace(/\s+/g, " ")
+  .trim();
+
+// Turn a raw (often double HTML-encoded) article body into the HTML we
+// actually render, plus its table of contents:
+//   - decode entity-escaped markup so tags render instead of showing as text
+//   - demote any embedded <h1> to <h2> (the page already has one real <h1>)
+//   - give every section heading a stable id so the TOC links can scroll to it
+const buildArticle = (rawHtml = "") => {
+ const decoded = decode(decode(rawHtml)).replace(
+  /<(\/?)h1(\s[^>]*)?>/gi,
+  "<$1h2$2>"
+ );
+
+ if (typeof window === "undefined" || !window.DOMParser) {
+  return { html: decoded, toc: [] };
+ }
+
+ const doc = new DOMParser().parseFromString(decoded, "text/html");
+ const toc = [];
+
+ doc.querySelectorAll("h2, h3").forEach((heading, index) => {
+  const id = `section-${index}`;
+  heading.setAttribute("id", id);
+  toc.push({ id, text: heading.textContent.trim() });
+ });
+
+ return { html: doc.body.innerHTML, toc };
+};
 
 const TutorialDetails = ()=>{
 
  const {slug} = useParams();
 
 const [tutorial,setTutorial] = useState(null);
+const [notFound,setNotFound] = useState(false);
 const [question,setQuestion] = useState("");
 const [answer,setAnswer] = useState("");
 const [loading,setLoading] = useState(false);
@@ -163,7 +203,10 @@ const addInternalLinks = async (html) => {
 
   tutorials.forEach((t) => {
 
-   const regex = new RegExp(`\\b${t.title}\\b`, "gi");
+   if(!t.title || t.slug === slug) return;
+
+   const safeTitle = t.title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+   const regex = new RegExp(`\\b${safeTitle}\\b`, "gi");
 
    updatedHTML = updatedHTML.replace(
     regex,
@@ -189,54 +232,40 @@ const addInternalLinks = async (html) => {
 
  try{
 
+  setNotFound(false);
+
   const res = await API.get(`/tutorials/${slug}`);
-  
+
 
   const htmlWithLinks = await addInternalLinks(res.data.content);
 
+  const { html: articleHtml, toc: articleToc } = buildArticle(htmlWithLinks);
+
   setTutorial({
    ...res.data,
-   content: htmlWithLinks
+   content: articleHtml
   });
-  // console.log(tutorial.content);
 
-  generateTOC(htmlWithLinks);
-  calculateReadingTime(htmlWithLinks);
+  setToc(articleToc);
+  calculateReadingTime(articleHtml);
 
  }catch(err){
 
   console.log(err);
 
+  if(err?.response?.status === 404){
+   setNotFound(true);
+  }
+
  }
 
 };
 
- const generateTOC = (html)=>{
- const parser = new DOMParser();
- const doc = parser.parseFromString(html,"text/html");
- const headings = doc.querySelectorAll("h1, h2, h3");
- const items = [];
- headings.forEach((heading,index)=>{
-  const id = `section-${index}`;
- heading.setAttribute("id", id); // ✅ important fix
-  items.push({
-   text: heading.innerText,
-   id:id
-  });
-
- });
-
- setToc(items);
-
- return doc.body.innerHTML; // ✅ return updated HTML
-};
-
-
 const calculateReadingTime = (html)=>{
 
- const text = html.replace(/<[^>]+>/g,"");
+ const text = decode(decode(html)).replace(/<[^>]+>/g," ").trim();
 
- const words = text.split(/\s+/).length;
+ const words = text.split(/\s+/).filter(Boolean).length;
 
  const minutes = Math.ceil(words / 200);
 
@@ -288,34 +317,57 @@ const generateFAQ = (content)=>{
 };
 
 
- if(!tutorial) return <p>Loading...</p>;
- const faqData = tutorial ? generateFAQ(tutorial.content) : [];
+ if(notFound){
+  return <NotFound />;
+ }
+
+ if(!tutorial){
+  return (
+   <div className="tutorial-layt">
+    <Helmet>
+     <title>Loading tutorial… | StudentToolsNG</title>
+     <link rel="canonical" href={`${SITE}/tutorial/${slug}`} />
+    </Helmet>
+    <p>Loading...</p>
+   </div>
+  );
+ }
+
+ const faqData = generateFAQ(tutorial.content);
+
+ const canonicalUrl = `${SITE}/tutorial/${tutorial.slug}`;
+
+ // tutorial.content is already decoded, h1-demoted and heading-id'd by
+ // buildArticle() in fetchTutorial.
+ const plainContent = toPlainText(tutorial.content);
+ const metaDescription = (
+  tutorial.excerpt?.trim() || plainContent
+ ).slice(0, 160);
+ const shareImage = tutorial.image || FALLBACK_IMAGE;
 
  const schemaData = {
  "@context": "https://schema.org",
  "@type": "Article",
  headline: tutorial.title,
- description: tutorial.excerpt || "",
-//  image: tutorial.image || "student-toolsngsch.vercel.app/logo.png",
- image: tutorial.image || "https://studenttoolsng.com/logoH.png",
+ description: metaDescription,
+ image: shareImage,
  author: {
   "@type": "Person",
-  name: "Engr. Henry Akpan"
+  name: "Engr. Henry Akpan",
+  url: `${SITE}/author`
  },
  publisher: {
   "@type": "Organization",
   name: "StudentToolsNG",
   logo: {
    "@type": "ImageObject",
-   url: "https://studenttoolsng.com/logoH.png"
+   url: FALLBACK_IMAGE
   }
  },
+ mainEntityOfPage: canonicalUrl,
  datePublished: tutorial.createdAt,
  dateModified: tutorial.updatedAt
 };
-
-// const cleanText = tutorial.content.replace(/<[^>]*>/g, "");
-// const shortDesc = cleanText.slice(0, 150);
 
  return(
 
@@ -349,41 +401,26 @@ const generateFAQ = (content)=>{
 {/* Primary SEO */}
 <title>{tutorial.title} | StudentToolsNG</title>
 
-<meta
- name="description"
- content={tutorial.excerpt || tutorial.content.slice(0,150)}
-/>
+<meta name="description" content={metaDescription} />
 
 <meta
  name="keywords"
  content={`${tutorial.title}, student tutorials Nigeria, academic tutorials, ${tutorial.category}`}
 />
 
-{/* Canonical (FIXED ✅) */}
-<link
- rel="canonical"
- href={`https://studenttoolsng.com/tutorial/${tutorial.slug}`}
-/>
+{/* Canonical */}
+<link rel="canonical" href={canonicalUrl} />
 
 {/* Open Graph */}
 <meta property="og:type" content="article" />
 
 <meta property="og:title" content={tutorial.title} />
 
-<meta
- property="og:description"
- content={tutorial.excerpt || tutorial.content.slice(0,150)}
-/>
+<meta property="og:description" content={metaDescription} />
 
-<meta
- property="og:image"
- content={tutorial.image || "https://studenttoolsng.com/logo.png"}
-/>
+<meta property="og:image" content={shareImage} />
 
-<meta
- property="og:url"
- content={`https://studenttoolsng.com/tutorial/${tutorial.slug}`}
-/>
+<meta property="og:url" content={canonicalUrl} />
 
 <meta property="og:site_name" content="StudentToolsNG" />
 
@@ -408,17 +445,12 @@ const generateFAQ = (content)=>{
 
 <meta name="twitter:title" content={tutorial.title} />
 
-<meta
- name="twitter:description"
- content={tutorial.excerpt || tutorial.content.slice(0,150)}
-/>
+<meta name="twitter:description" content={metaDescription} />
 
-<meta
- name="twitter:image"
- content={tutorial.image || "https://studenttoolsng.com/logo.png"}
-/>
+<meta name="twitter:image" content={shareImage} />
 
-{/* FAQ Schema */}
+{/* FAQ Schema — only when there are real FAQ entries */}
+{faqData.length > 0 && (
 <script type="application/ld+json">
 {JSON.stringify({
  "@context":"https://schema.org",
@@ -433,6 +465,7 @@ const generateFAQ = (content)=>{
  }))
 })}
 </script>
+)}
 
 {/* Breadcrumb Schema */}
 <script type="application/ld+json">
@@ -494,15 +527,10 @@ const generateFAQ = (content)=>{
     ⏱ {readingTime} min read
    </p>
 
-   {/* <div
-    className="content"
-    dangerouslySetInnerHTML={{__html: tutorial.content}}>
-      
-    </div> */}
     <div
  className="content"
  dangerouslySetInnerHTML={{
-  __html: decode(tutorial.content)
+  __html: tutorial.content
   }}
   >
   </div>
