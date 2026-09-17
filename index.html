@@ -27,25 +27,19 @@
   <!-- Viewport -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Default SEO (fallback only) -->
+  <!--
+    Title only. Every route in this app sets its own <title> and full
+    Open Graph / description block via react-helmet-async — and Helmet
+    can only manage tags it rendered itself, it can't see or remove
+    hand-written static tags here. Static og:* / description tags used
+    to live here as a "fallback", but that meant every single page
+    shipped BOTH the generic homepage tags AND the page-specific ones
+    at once (two og:url, two og:image, two descriptions) — a real
+    duplicate-content signal to Google and to social link previews.
+    <title> is safe to keep: it's a singleton DOM property, so Helmet's
+    document.title assignment cleanly replaces this instead of doubling.
+  -->
   <title>Advance Student ToolsNG - Free Academic Tools for Nigerian Students</title>
-
-  <meta
-    name="description"
-    content="StudentToolsNG provides free academic tools including CGPA calculator, WAEC grade calculator, JAMB score calculator, and tutorials for Nigerian students."
-  />
-
-  <!-- Default Open Graph (fallback) -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="StudentToolsNG" />
-  <meta
-    property="og:description"
-    content="Free academic tools and tutorials for Nigerian students."
-  />
-
-
-  <meta property="og:image" content="https://studenttoolsng.com/logoH.png" />
-  <meta property="og:url" content="https://studenttoolsng.com/" />
 
   <!-- Site-wide structured data -->
   <script type="application/ld+json">
