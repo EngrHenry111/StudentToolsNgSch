@@ -163,6 +163,12 @@ const stripHTML = (html) => {
  const seoSubtopic = paramSubtopic || "";
 
  const isSubtopicPage = Boolean(seoSubtopic);
+ // Any filtered view (category, category+topic, or category+topic+subtopic)
+ // is a listing page — a grid of cards plus a short intro. Google flagged
+ // pages of exactly this shape as "low value / similar content" (this is
+ // also what AdSense's rejection cited). Only the unfiltered /tutorials
+ // hub and individual tutorial articles stay indexable.
+ const isFilteredPage = Boolean(seoCategory);
  const canonicalPath = isSubtopicPage
   ? `/${seoCategory}/${seoTopic}`
   : location.pathname;
@@ -215,12 +221,16 @@ const stripHTML = (html) => {
   <meta name="twitter:image" content="https://studenttoolsng.com/logoH.png" />
 
   {/*
-    Subtopic-level pages have no dedicated content of their own (there is
-    no subtopic field on tutorials) — they are a filtered view of the
-    topic page, so they are canonicalised to the topic page and excluded
-    from indexing to avoid duplicate-content signals.
+    Category/topic/subtopic filter pages are listing pages — a grid of
+    tutorial cards plus a short intro paragraph. Even with unique titles
+    and descriptions, they're inherently thin, and Google (both organic
+    indexing and the AdSense "low value content" review) flagged this
+    class of page. noindex,follow keeps Google crawling the links FROM
+    these pages to the real tutorial articles, without indexing the
+    listing page itself. The unfiltered /tutorials hub is intentionally
+    excluded from this — it stays indexable.
   */}
-  {isSubtopicPage && (
+  {isFilteredPage && (
    <meta name="robots" content="noindex, follow" />
   )}
 

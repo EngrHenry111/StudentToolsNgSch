@@ -1,6 +1,33 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async"; // ✅ FIXED
 import "./gpaclass.css";
+
+// AI-drafted (2026-09-13) — factual/explanatory content per Google's "low
+// value content" guidance. Needs human review before final: the CGPA-to-
+// class boundaries below (e.g. 4.50 for First Class) are the most common
+// convention in Nigerian universities but are set by each institution's
+// senate, not by a single national standard — some universities use 4.00
+// (not 4.50) as the First Class boundary on a 5-point scale. Verify against
+// your specific institution's academic regulations.
+const gpaFaq = [
+ {
+  q: "What CGPA is First Class in Nigeria?",
+  a: "On the common 5-point scale, 4.50 and above is First Class at most universities — but some institutions set the boundary at 4.00 instead. Check your own school's academic regulations to be sure."
+ },
+ {
+  q: "Can I graduate with Second Class Upper?",
+  a: "Yes — a CGPA between 3.50 and 4.49 is typically classified as Second Class Upper (also written as \"Second Class Upper Division\") at most Nigerian universities."
+ },
+ {
+  q: "If my CGPA is exactly on a boundary, like exactly 4.50, which class do I get?",
+  a: "In the ranges shown here, the boundary value itself is included in the higher class — 4.50 counts as First Class, not Second Class Upper. But always confirm your institution's own rounding rule: some universities calculate CGPA to more decimal places than they display, so a displayed 4.50 could actually be 4.499 once rounded, which changes the outcome."
+ },
+ {
+  q: "Can a strong final year still change my degree class?",
+  a: "Yes. Because CGPA is cumulative across every semester, a strong final year adds more weight the more credit units you've already accumulated — it won't erase a weak early semester, but it can be enough to push a borderline CGPA into a higher class by graduation."
+ }
+];
 
 const GPAClass = () => {
 
@@ -84,6 +111,19 @@ const GPAClass = () => {
     })}
     </script>
 
+    {/* FAQ structured data */}
+    <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: gpaFaq.map((f) => ({
+       "@type": "Question",
+       name: f.q,
+       acceptedAnswer: { "@type": "Answer", text: f.a }
+      }))
+    })}
+    </script>
+
     </Helmet>
 
 <h1>GPA Class Calculator Nigeria</h1>
@@ -158,45 +198,75 @@ const GPAClass = () => {
 
     </table>
 
+    <p className="grading-table-note">
+     This is the most common scale on Nigerian universities' 5-point
+     system — some institutions use 4.00, not 4.50, as the First Class
+     boundary. See "A note on variation between institutions" further
+     down this page.
+    </p>
+
    </div>
 <section className="gpa-content">
 
-  <h2>What is Degree Classification in Nigeria?</h2>
+  <h2>What is degree classification in Nigeria?</h2>
   <p>
-    Degree classification in Nigeria is based on a student's CGPA and determines
-    the class of degree awarded upon graduation.
+    Degree classification is the honours label — First Class, Second Class
+    Upper, and so on — printed alongside your final CGPA on your degree
+    certificate when you graduate from a Nigerian university. It's a
+    single-tier summary of everything your CGPA already represents: your
+    cumulative academic performance across every semester of your program.
   </p>
 
-  <h2>How to Convert CGPA to Degree Class</h2>
+  <h2>How CGPA converts to degree class</h2>
   <p>
-    Nigerian universities use a 5.0 grading scale. Your CGPA determines your
-    degree class as shown in the table above.
+    Most Nigerian universities use the 5-point CGPA scale shown in the table
+    above to place graduating students into one of five classes. Your CGPA
+    is calculated the same way throughout your program — see our{" "}
+    <Link to="/cgpa-calculator">CGPA Calculator</Link> for the full formula
+    — and at graduation, your final cumulative figure is simply matched
+    against the class ranges above.
   </p>
 
-  <h2>Examples</h2>
+  <h2>Worked examples</h2>
   <p>
-    If your CGPA is 4.70, you will graduate with a First Class degree.  
-    If your CGPA is 3.80, you will have a Second Class Upper.
+    A final CGPA of 4.70 falls in the 4.50–5.00 range, so that graduate
+    receives a First Class degree. A final CGPA of 3.80 falls in the
+    3.50–4.49 range, so that graduate receives a Second Class Upper. A
+    final CGPA of 2.90 falls in the 2.40–3.49 range — Second Class Lower.
   </p>
 
-  <h2>Why Degree Classification Matters</h2>
+  <h2>Why degree classification matters</h2>
   <ul>
-    <li>Important for job opportunities</li>
-    <li>Required for postgraduate studies</li>
-    <li>Used for scholarships and internships</li>
+    <li>Many employers use it as an initial screening criterion for graduate roles</li>
+    <li>Most postgraduate programs (Master's, PGD) set a minimum class or CGPA for admission</li>
+    <li>Some scholarships, fellowships, and NYSC-linked opportunities favour First Class and Second Class Upper graduates</li>
   </ul>
+
+  <h2>A note on variation between institutions</h2>
+  <p>
+    The ranges above reflect the most common convention on a 5-point scale,
+    but they are not a single fixed national law — each university's senate
+    sets its own exact boundaries, and a small number of institutions use a
+    4-point scale with different cut-offs entirely. If you're close to a
+    class boundary, confirm the precise figures in your own institution's
+    academic regulations.
+  </p>
 
   <h2>Frequently Asked Questions</h2>
 
-  <p><strong>What CGPA is First Class?</strong><br/>
-  4.50 and above.</p>
+  {gpaFaq.map((f) => (
+   <p key={f.q}>
+    <strong>{f.q}</strong>
+    <br />
+    {f.a}
+   </p>
+  ))}
 
-  <p><strong>Can I graduate with Second Class Upper?</strong><br/>
-  Yes, with a CGPA between 3.50 and 4.49.</p>    <p>
-You can also calculate your 
-<a href="/cgpa-calculator"> {" "}CGPA</a> or check your 
-<a href="/jamb-score-calculator"> {" "} JAMB Score</a>.
-</p> 
+<p>
+You can also calculate your{" "}
+<Link to="/cgpa-calculator">CGPA</Link> or check your{" "}
+<Link to="/jamb-score-calculator">JAMB Score</Link>.
+</p>
 
 </section>
   </div>
