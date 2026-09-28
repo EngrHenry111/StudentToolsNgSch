@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { getBanks, registerPublisher } from "../apiMarketplace/publisherApi";
+import { getBanks, registerPublisher, getMyPublisherProfile } from "../apiMarketplace/publisherApi";
+import { AuthContext } from "../contextQuiz/AuthContext";
 import Loader from "../componentsQuiz/Loader";
 import "../pageQuiz/proquiz.css";
 
@@ -10,6 +11,10 @@ import "../pageQuiz/proquiz.css";
 // activates on submit — no admin review step, no separate login.
 const PublisherOnboarding = () => {
   const navigate = useNavigate();
+  const { user, logout } = useContext(AuthContext);
+
+  // null = still checking; "none" = no workspace on THIS account.
+  const [existing, setExisting] = useState(null);
 
   const [banks, setBanks] = useState([]);
   const [loadingBanks, setLoadingBanks] = useState(true);
@@ -21,6 +26,27 @@ const PublisherOnboarding = () => {
 
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
+
+  // An existing publisher landing here (old bookmark, stale link) goes
+  // straight to their workspace instead of seeing the signup form again.
+  useEffect(() => {
+    getMyPublisherProfile()
+      .then((publisher) => {
+        if (publisher?.status === "active") {
+          navigate("/publisher/dashboard", { replace: true });
+        } else {
+          setExisting(publisher || "none");
+        }
+      })
+      // Can't tell right now — fall back to showing the form; the server
+      // still refuses a second workspace for the same account.
+      .catch(() => setExisting("none"));
+  }, [navigate]);
+
+  const handleSwitchAccount = () => {
+    logout();
+    navigate("/login?next=/publisher/dashboard");
+  };
 
   useEffect(() => {
     getBanks()
@@ -66,7 +92,23 @@ const PublisherOnboarding = () => {
     }
   };
 
-  if (loadingBanks) {
+  if (existing && existing !== "none") {
+    return (
+      <div className="pq-page">
+        <div className="pq-container">
+          <div className="pq-card">
+            <h2 className="pq-title">Publisher workspace suspended</h2>
+            <p className="pq-subtitle">
+              The publisher workspace on this account ({existing.businessName}) is
+              currently suspended. Please contact support.
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (loadingBanks || existing === null) {
     return (
       <div className="pq-page">
         <Loader fullPage label="Loading..." />
@@ -86,6 +128,21 @@ const PublisherOnboarding = () => {
             every sale. Your workspace activates immediately once your bank
             account is verified — no waiting on approval.
           </p>
+
+          {user && (
+            <div className="pq-topic-row" style={{ marginBottom: 16, fontSize: 13 }}>
+              Logged in as <strong>{user.username}</strong>
+              {user.email ? ` (${user.email})` : ""}. Already a publisher on a
+              different account?{" "}
+              <button
+                type="button"
+                onClick={handleSwitchAccount}
+                style={{ background: "none", border: "none", padding: 0, color: "inherit", font: "inherit", fontWeight: 600, textDecoration: "underline", cursor: "pointer" }}
+              >
+                Log in with that account
+              </button>
+            </div>
+          )}
 
           {error && <div className="pq-error-box">{error}</div>}
 

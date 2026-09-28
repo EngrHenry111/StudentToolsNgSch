@@ -94,7 +94,7 @@ const Dashboard = () => {
               : "Become a Publisher: list documents for sale, free chapter preview for everyone, paid full unlock. Get paid directly to your bank account."}
           </p>
           <Link
-            to={publisher ? "/publisher/dashboard" : "/publisher/onboarding"}
+            to="/publisher/dashboard"
             className="pq-btn pq-btn-primary"
           >
             {publisher ? "Go to Publisher Dashboard" : "Become a Publisher"}
