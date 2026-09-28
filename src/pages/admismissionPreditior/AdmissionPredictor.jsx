@@ -6,6 +6,7 @@ Predicts admission probability
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import "./admissionPredictor.css";
+import MarketplacePromo from "../../componentsMarketplace/MarketplacePromo";
 
 const AdmissionPredictor = ()=>{
 
@@ -117,6 +118,11 @@ const image = "https://studenttoolsng.com/logoH.png";
   <a href="/jamb-score-calculator">JAMB Score</a> and {""}
   <a href="/cgpa-calculator">CGPA</a>.
 </p>
+
+<MarketplacePromo
+  heading="Preparing for your course?"
+  text="Explore study guides and research documents by field in the Research Library — preview chapters 1 & 2 free."
+/>
 
 </section>
 

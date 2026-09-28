@@ -11,6 +11,7 @@ import "./sectionBar.css";
 const sections = [
   { key: "free", to: "/", label: "Free Tools", icon: "🧰" },
   { key: "quiz", to: "/pro/dashboard", label: "Smart Quiz", icon: "🧠" },
+  { key: "library", to: "/marketplace", label: "Research Library", icon: "📖" },
   { key: "publish", to: "/publisher/dashboard", label: "Publish & Earn", icon: "📚" },
   { key: "purchases", to: "/my-purchases", label: "My Purchases", icon: "🛍️", authOnly: true }
 ];
@@ -18,10 +19,11 @@ const sections = [
 const currentSection = (pathname) => {
   if (pathname.startsWith("/pro")) return "quiz";
   // "/publisher/..." is the workspace; "/publishers/..." (plural) is the
-  // public storefront/listing pages, which belong to no single area.
+  // public storefronts and listings, which live in the Research Library.
   if (pathname === "/publisher" || pathname.startsWith("/publisher/")) return "publish";
   if (pathname.startsWith("/my-purchases")) return "purchases";
-  if (pathname.startsWith("/publishers") || pathname === "/login" || pathname === "/register") return null;
+  if (pathname.startsWith("/marketplace") || pathname.startsWith("/publishers")) return "library";
+  if (pathname === "/login" || pathname === "/register") return null;
   return "free";
 };
 

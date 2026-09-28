@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async"; // ✅ FIXED
 import "./cgpa.css";
+import MarketplacePromo from "../../componentsMarketplace/MarketplacePromo";
 
 const CGPACalculator = () => {
 
@@ -342,6 +343,11 @@ const CGPACalculator = () => {
   and{" "}
   <Link to="/jamb-score-calculator">JAMB Calculator</Link>.
 </p>
+
+<MarketplacePromo
+  heading="Final-year project or seminar coming up?"
+  text="Get ahead with project materials and research documents from other students and lecturers. Chapters 1 & 2 are free to read on every document."
+/>
 </section>
 
 

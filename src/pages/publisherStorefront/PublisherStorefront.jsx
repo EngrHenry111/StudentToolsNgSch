@@ -4,6 +4,8 @@ import { Helmet } from "react-helmet-async";
 import { getPublisherStorefront } from "../../apiMarketplace/marketplaceApi";
 import NotFound from "../notFound/NotFound";
 import FormattedText from "../../componentsMarketplace/FormattedText";
+import ShareButtons from "../../componentsMarketplace/ShareButtons";
+import { ListingGrid } from "../../componentsMarketplace/ListingCard";
 import "./publisherStorefront.css";
 
 const SITE = "https://studenttoolsng.com";
@@ -88,14 +90,15 @@ const PublisherStorefront = () => {
             "@type": "BreadcrumbList",
             itemListElement: [
               { "@type": "ListItem", position: 1, name: "Home", item: SITE },
-              { "@type": "ListItem", position: 2, name: publisher.businessName, item: canonicalUrl }
+              { "@type": "ListItem", position: 2, name: "Research Library", item: `${SITE}/marketplace` },
+              { "@type": "ListItem", position: 3, name: publisher.businessName, item: canonicalUrl }
             ]
           })}
         </script>
       </Helmet>
 
       <div className="breadcrumb">
-        <Link to="/">Home</Link> / <span>{publisher.businessName}</span>
+        <Link to="/">Home</Link> / <Link to="/marketplace">Research Library</Link> / <span>{publisher.businessName}</span>
       </div>
 
       {publisher.logoUrl && (
@@ -106,36 +109,14 @@ const PublisherStorefront = () => {
 
       {publisher.description && <FormattedText className="storefront-description" text={publisher.description} />}
 
+      <ShareButtons url={canonicalUrl} title={publisher.businessName} />
+
       <h2>Published Documents</h2>
 
       {listings.length === 0 ? (
         <p className="storefront-empty">No listings published yet.</p>
       ) : (
-        <div className="storefront-grid">
-          {listings.map((listing) => (
-            <Link
-              key={listing._id}
-              to={`/publishers/${publisher.slug}/${listing.slug}`}
-              className="storefront-card"
-            >
-              <div className="storefront-card-image">
-                {listing.coverImageUrl ? (
-                  <img src={listing.coverImageUrl} alt={listing.title} />
-                ) : (
-                  <div className="storefront-card-gradient">
-                    <h3>{listing.title}</h3>
-                  </div>
-                )}
-              </div>
-
-              <div className="storefront-card-content">
-                <h3>{listing.title}</h3>
-                <span className="storefront-card-field">{listing.field}</span>
-                <span className="storefront-card-price">₦{(listing.price / 100).toLocaleString()}</span>
-              </div>
-            </Link>
-          ))}
-        </div>
+        <ListingGrid listings={listings} publisherSlug={publisher.slug} />
       )}
     </div>
   );

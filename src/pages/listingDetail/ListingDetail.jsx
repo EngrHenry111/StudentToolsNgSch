@@ -5,9 +5,23 @@ import { getListingBySlug, initiatePurchase } from "../../apiMarketplace/marketp
 import { AuthContext } from "../../contextQuiz/AuthContext";
 import NotFound from "../notFound/NotFound";
 import FormattedText from "../../componentsMarketplace/FormattedText";
+import ShareButtons from "../../componentsMarketplace/ShareButtons";
+import ReviewsSection from "../../componentsMarketplace/ReviewsSection";
+import Stars from "../../componentsMarketplace/Stars";
+import { ListingGrid } from "../../componentsMarketplace/ListingCard";
 import "./listingDetail.css";
 
 const SITE = "https://studenttoolsng.com";
+
+// Google shows ~155 characters of the meta description — use the opening
+// of the real (free) preview text, which matches what searchers look for
+// far better than a generic template sentence.
+const excerpt = (text, max = 155) => {
+  const flat = String(text || "").replace(/\s+/g, " ").trim();
+  if (flat.length <= max) return flat;
+  const cut = flat.slice(0, max);
+  return `${cut.slice(0, cut.lastIndexOf(" ") > 80 ? cut.lastIndexOf(" ") : max).trim()}…`;
+};
 
 const ListingDetail = () => {
   const { slug, listingSlug } = useParams();
@@ -50,6 +64,12 @@ const ListingDetail = () => {
       })
       .finally(() => setLoading(false));
   }, [slug, listingSlug, reloadKey]);
+
+  // Quiet re-fetch (no loading screen) after posting a review, so the new
+  // average/review appears without the page flashing.
+  const refreshListing = () => {
+    getListingBySlug(slug, listingSlug).then(setListing).catch(() => {});
+  };
 
   // Once unlocked, drop Paystack's ?reference from the URL so a refresh
   // or shared link is just the clean listing URL.
@@ -104,7 +124,9 @@ const ListingDetail = () => {
 
   const canonicalUrl = `${SITE}/publishers/${slug}/${listingSlug}`;
   const title = `${listing.title} | ${listing.field} | StudentToolsNG Marketplace`;
-  const description = `${listing.title} — a ${listing.field} document by ${listing.publisher.businessName} on StudentToolsNG. ${(listing.keywords || []).join(", ")}`.trim();
+  const description =
+    excerpt(listing.previewContent) ||
+    `${listing.title} by ${listing.publisher.businessName} — read chapters 1 & 2 free on StudentToolsNG.`;
   const priceNaira = (listing.price / 100).toFixed(2);
 
   return (
@@ -127,17 +149,29 @@ const ListingDetail = () => {
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "CreativeWork",
+            // Product (not CreativeWork): it's what Google supports for
+            // price + star-rating rich results.
+            "@type": "Product",
             name: listing.title,
             description,
-            about: listing.field,
-            keywords: (listing.keywords || []).join(", "),
-            author: {
+            category: listing.field,
+            brand: {
               "@type": "Organization",
               name: listing.publisher.businessName,
               url: `${SITE}/publishers/${listing.publisher.slug}`
             },
-            ...(listing.coverImageUrl ? { image: listing.coverImageUrl } : {}),
+            image: listing.coverImageUrl || `${SITE}/logoH.png`,
+            ...(listing.ratingCount > 0
+              ? {
+                  aggregateRating: {
+                    "@type": "AggregateRating",
+                    ratingValue: listing.ratingAverage,
+                    reviewCount: listing.ratingCount,
+                    bestRating: 5,
+                    worstRating: 1
+                  }
+                }
+              : {}),
             offers: {
               "@type": "Offer",
               price: priceNaira,
@@ -154,15 +188,16 @@ const ListingDetail = () => {
             "@type": "BreadcrumbList",
             itemListElement: [
               { "@type": "ListItem", position: 1, name: "Home", item: SITE },
-              { "@type": "ListItem", position: 2, name: listing.publisher.businessName, item: `${SITE}/publishers/${slug}` },
-              { "@type": "ListItem", position: 3, name: listing.title, item: canonicalUrl }
+              { "@type": "ListItem", position: 2, name: "Research Library", item: `${SITE}/marketplace` },
+              { "@type": "ListItem", position: 3, name: listing.publisher.businessName, item: `${SITE}/publishers/${slug}` },
+              { "@type": "ListItem", position: 4, name: listing.title, item: canonicalUrl }
             ]
           })}
         </script>
       </Helmet>
 
       <div className="breadcrumb">
-        <Link to="/">Home</Link> / <Link to={`/publishers/${slug}`}>{listing.publisher.businessName}</Link> / <span>{listing.title}</span>
+        <Link to="/">Home</Link> / <Link to="/marketplace">Research Library</Link> / <Link to={`/publishers/${slug}`}>{listing.publisher.businessName}</Link> / <span>{listing.title}</span>
       </div>
 
       {listing.coverImageUrl && (
@@ -170,7 +205,19 @@ const ListingDetail = () => {
       )}
 
       <h1>{listing.title}</h1>
-      <p className="listing-field">{listing.field}</p>
+      <p className="listing-field">
+        {listing.field} · by <Link to={`/publishers/${slug}`}>{listing.publisher.businessName}</Link>
+        {listing.ratingCount > 0 && (
+          <>
+            {" · "}
+            <a href="#reviews-heading" className="listing-rating-link">
+              <Stars value={listing.ratingAverage} count={listing.ratingCount} size={14} />
+            </a>
+          </>
+        )}
+      </p>
+
+      <ShareButtons url={canonicalUrl} title={listing.title} />
 
       {returnedFromPayment && listing.owned && (
         <div className="listing-success">
@@ -224,6 +271,30 @@ const ListingDetail = () => {
             {purchasing ? "Redirecting to payment..." : `Unlock Full Document — ₦${Number(priceNaira).toLocaleString()}`}
           </button>
         </div>
+      )}
+
+      <ReviewsSection listing={listing} onChange={refreshListing} />
+
+      {listing.moreFromPublisher?.length > 0 && (
+        <section className="listing-more">
+          <h2>
+            More from {listing.publisher.businessName}{" "}
+            <Link to={`/publishers/${slug}`} className="listing-more-link">View storefront →</Link>
+          </h2>
+          <ListingGrid listings={listing.moreFromPublisher} />
+        </section>
+      )}
+
+      {listing.related?.length > 0 && (
+        <section className="listing-more">
+          <h2>
+            Related {listing.field} documents{" "}
+            <Link to={`/marketplace?field=${encodeURIComponent(listing.field)}`} className="listing-more-link">
+              Browse all →
+            </Link>
+          </h2>
+          <ListingGrid listings={listing.related} />
+        </section>
       )}
     </div>
   );

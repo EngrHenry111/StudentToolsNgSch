@@ -72,6 +72,7 @@ import ListingManager from "./pageMarketplace/ListingManager";
 import ListingForm from "./pageMarketplace/ListingForm";
 import PublisherOrders from "./pageMarketplace/PublisherOrders";
 import MyPurchases from "./pageMarketplace/MyPurchases";
+import Marketplace from "./pages/marketplace/Marketplace";
 import PublisherStorefront from "./pages/publisherStorefront/PublisherStorefront";
 import ListingDetail from "./pages/listingDetail/ListingDetail";
 
@@ -134,6 +135,7 @@ function App() {
     <Route path="/quiz" element={<QuizPages />} />
 
     {/* Marketplace — public, SEO-indexed (Task 4) */}
+    <Route path="/marketplace" element={<Marketplace />} />
     <Route path="/publishers/:slug" element={<PublisherStorefront />} />
     <Route path="/publishers/:slug/:listingSlug" element={<ListingDetail />} />
 

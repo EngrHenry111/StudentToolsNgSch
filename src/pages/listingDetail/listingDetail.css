@@ -130,3 +130,32 @@
   text-decoration: underline;
   cursor: pointer;
 }
+
+.listing-field a,
+.listing-rating-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.listing-field a:hover {
+  text-decoration: underline;
+}
+
+/* "More from this publisher" / "Related documents" */
+.listing-more {
+  margin-top: 40px;
+}
+
+.listing-more h2 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.listing-more-link {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration: none;
+}

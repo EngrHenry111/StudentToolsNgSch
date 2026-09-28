@@ -138,6 +138,7 @@ StudentToolsNG - Free CGPA, WAEC & JAMB Calculators for Nigerian Students
  <div className="hero-buttons">
 
  <Link to="/pro/quiz/ai">Explore Smart Quiz</Link>
+ <Link to="/marketplace">Research Library</Link>
  <Link to="/publisher/dashboard">Publish &amp; Earn</Link>
  <Link to="/tutorials">Explore Tutorials</Link>
 
@@ -258,6 +259,12 @@ StudentToolsNG - Free CGPA, WAEC & JAMB Calculators for Nigerian Students
  <li>
  <Link to="/admission-predictor">
  Admission Predictor
+ </Link>
+ </li>
+
+ <li>
+ <Link to="/marketplace">
+ Research Library — Project Materials &amp; Research Documents
  </Link>
  </li>
 

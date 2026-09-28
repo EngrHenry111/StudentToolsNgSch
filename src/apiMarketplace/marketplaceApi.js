@@ -23,5 +23,22 @@ export const getListingBySlug = async (slug, listingSlug) => {
 
 export const getMyPurchases = () => apiRequest("/marketplace/me/purchases", { auth: true });
 
+// Research Library search/browse — public.
+export const searchListings = ({ q = "", field = "", page = 1 } = {}) => {
+  const params = new URLSearchParams();
+  if (q) params.set("q", q);
+  if (field) params.set("field", field);
+  if (page > 1) params.set("page", String(page));
+  const qs = params.toString();
+  return apiRequest(`/marketplace/listings${qs ? `?${qs}` : ""}`, { auth: false });
+};
+
+export const submitReview = (listingId, { rating, comment }) =>
+  apiRequest(`/marketplace/listings/${listingId}/reviews`, {
+    method: "POST",
+    body: { rating, comment },
+    auth: true
+  });
+
 export const initiatePurchase = (listingId) =>
   apiRequest("/marketplace/purchase", { method: "POST", body: { listingId }, auth: true });

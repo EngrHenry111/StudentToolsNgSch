@@ -1,0 +1,50 @@
+.mkt-promo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 32px 0;
+  padding: 18px 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(123, 47, 247, 0.35);
+  background: linear-gradient(135deg, rgba(0, 245, 255, 0.07), rgba(123, 47, 247, 0.09));
+  text-align: left;
+}
+
+.mkt-promo h3 {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+}
+
+.mkt-promo p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 560px;
+  opacity: 0.85;
+}
+
+.mkt-promo-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.mkt-promo-btn {
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #00b4d8, #7b2ff7);
+  color: #fff !important;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.mkt-promo-link {
+  font-size: 13px;
+  text-decoration: none;
+  opacity: 0.8;
+}
