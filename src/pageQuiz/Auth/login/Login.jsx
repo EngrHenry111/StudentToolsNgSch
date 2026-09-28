@@ -2,12 +2,21 @@ import { useState, useContext } from "react";
 import { loginUser, googleAuth } from "../../../apiQuiz/authApi";
 import { AuthContext } from "../../../contextQuiz/AuthContext";
 import GoogleSignInButton from "../../../componentsQuiz/GoogleSignInButton";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import "./QuizLogin.css";
 
 const Login = () => {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  // ?next=/some/path sends the user back where they came from (e.g. a
+  // listing they were about to buy). Only same-site paths are allowed —
+  // never "//evil.com" or a full URL (open-redirect guard).
+  const nextParam = searchParams.get("next");
+  const redirectTo = nextParam && nextParam.startsWith("/") && !nextParam.startsWith("//")
+    ? nextParam
+    : "/pro/dashboard";
 
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
@@ -28,7 +37,7 @@ const Login = () => {
 
       if (res.accessToken) {
         login(res.accessToken, res.refreshToken, res.user);
-        navigate("/pro/dashboard");
+        navigate(redirectTo);
       } else {
         setError(res.message || "Login failed. Please check your details.");
       }
@@ -49,7 +58,7 @@ const Login = () => {
       const res = await googleAuth(credential);
       if (res.accessToken) {
         login(res.accessToken, res.refreshToken, res.user);
-        navigate("/pro/dashboard");
+        navigate(redirectTo);
       } else {
         setError(res.message || "Google sign-in failed.");
       }

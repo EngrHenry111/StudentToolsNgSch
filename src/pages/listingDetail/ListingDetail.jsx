@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { getListingBySlug, initiatePurchase } from "../../apiMarketplace/marketplaceApi";
 import { AuthContext } from "../../contextQuiz/AuthContext";
@@ -12,6 +12,13 @@ const ListingDetail = () => {
   const { slug, listingSlug } = useParams();
   const navigate = useNavigate();
   const { isAuthenticated } = useContext(AuthContext);
+
+  // Paystack sends the buyer back here as ?trxref=...&reference=... after
+  // paying. Captured once on mount; the server confirms the payment with
+  // Paystack while serving the listing, so no separate verify call.
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [returnedFromPayment] = useState(() => Boolean(searchParams.get("reference")));
+  const [reloadKey, setReloadKey] = useState(0);
 
   const [listing, setListing] = useState(null);
   const [notFound, setNotFound] = useState(false);
@@ -36,10 +43,20 @@ const ListingDetail = () => {
       .catch((err) => {
         if (err.message?.includes("404") || /not found/i.test(err.message || "")) {
           setNotFound(true);
+        } else {
+          setError(err.message || "Could not load this document. Please refresh.");
         }
       })
       .finally(() => setLoading(false));
-  }, [slug, listingSlug]);
+  }, [slug, listingSlug, reloadKey]);
+
+  // Once unlocked, drop Paystack's ?reference from the URL so a refresh
+  // or shared link is just the clean listing URL.
+  useEffect(() => {
+    if (listing?.owned && searchParams.get("reference")) {
+      setSearchParams({}, { replace: true });
+    }
+  }, [listing, searchParams, setSearchParams]);
 
   const handleUnlock = async () => {
     if (!isAuthenticated) {
@@ -60,6 +77,17 @@ const ListingDetail = () => {
 
   if (notFound) {
     return <NotFound />;
+  }
+
+  if (!loading && !listing && error) {
+    return (
+      <div className="listing-page">
+        <div className="listing-error">{error}</div>
+        <button className="listing-unlock-btn" onClick={() => setReloadKey((k) => k + 1)}>
+          Try again
+        </button>
+      </div>
+    );
   }
 
   if (loading || !listing) {
@@ -142,6 +170,40 @@ const ListingDetail = () => {
 
       <h1>{listing.title}</h1>
       <p className="listing-field">{listing.field}</p>
+
+      {returnedFromPayment && listing.owned && (
+        <div className="listing-success">
+          ✅ Payment confirmed — the full document is unlocked below. It stays
+          unlocked on your account: find it any time under{" "}
+          <Link to="/my-purchases">My Purchases</Link>.
+        </div>
+      )}
+
+      {returnedFromPayment && !listing.owned && (
+        <div className="listing-pending">
+          {isAuthenticated ? (
+            <>
+              We're still confirming your payment with Paystack. This usually
+              takes a few seconds.{" "}
+              <button className="listing-link-btn" onClick={() => setReloadKey((k) => k + 1)}>
+                Check again
+              </button>
+            </>
+          ) : (
+            <>
+              Please{" "}
+              <Link to={`/login?next=/publishers/${slug}/${listingSlug}`}>log in</Link>{" "}
+              with the account you paid with to open your document.
+            </>
+          )}
+        </div>
+      )}
+
+      {listing.owned && !returnedFromPayment && (
+        <div className="listing-owned-note">
+          ✅ You own this document. <Link to="/my-purchases">My Purchases</Link>
+        </div>
+      )}
 
       <div className="listing-content" dangerouslySetInnerHTML={{ __html: listing.previewContent }} />
 

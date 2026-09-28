@@ -101,6 +101,16 @@ const Dashboard = () => {
           </Link>
         </div>
 
+        <div className="pq-topic-row" style={{ marginTop: 18 }}>
+          <h4 style={{ margin: "0 0 6px" }}>📖 My Purchases</h4>
+          <p style={{ margin: "0 0 12px", fontSize: 13, color: "#94a3b8" }}>
+            Documents you've bought — open them any time.
+          </p>
+          <Link to="/my-purchases" className="pq-btn pq-btn-primary">
+            View My Purchases
+          </Link>
+        </div>
+
         {missions && (
           <div className="pq-topic-row" style={{ marginTop: 18 }}>
             <h4 style={{ margin: "0 0 10px" }}>🎯 Today's Missions</h4>

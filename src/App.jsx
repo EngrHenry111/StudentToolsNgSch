@@ -71,6 +71,7 @@ import PublisherDashboard from "./pageMarketplace/PublisherDashboard";
 import ListingManager from "./pageMarketplace/ListingManager";
 import ListingForm from "./pageMarketplace/ListingForm";
 import PublisherOrders from "./pageMarketplace/PublisherOrders";
+import MyPurchases from "./pageMarketplace/MyPurchases";
 import PublisherStorefront from "./pages/publisherStorefront/PublisherStorefront";
 import ListingDetail from "./pages/listingDetail/ListingDetail";
 
@@ -165,6 +166,16 @@ function App() {
     element={
       <ProtectedRoute>
         <PublisherOnboarding />
+      </ProtectedRoute>
+    }
+  />
+
+  {/* Buyer side of the marketplace — any logged-in user. */}
+  <Route
+    path="/my-purchases"
+    element={
+      <ProtectedRoute>
+        <MyPurchases />
       </ProtectedRoute>
     }
   />
