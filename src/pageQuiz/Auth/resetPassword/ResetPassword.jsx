@@ -2,6 +2,7 @@ import { useState } from "react";
 import { resetPassword } from "../../../apiQuiz/authApi";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import "../login/QuizLogin.css";
+import PasswordInput from "../../../components/passwordInput/PasswordInput";
 
 const ResetPassword = () => {
   const { token } = useParams();
@@ -50,16 +51,14 @@ const ResetPassword = () => {
 
         {!success && (
           <>
-            <input
-              type="password"
+            <PasswordInput
               placeholder="New password (min. 6 characters)"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               autoComplete="new-password"
             />
 
-            <input
-              type="password"
+            <PasswordInput
               placeholder="Confirm new password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}

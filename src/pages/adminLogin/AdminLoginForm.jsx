@@ -2,6 +2,7 @@ import { useState } from "react";
 import API from "../../services/api";
 import { useNavigate } from "react-router-dom";
 import './adminlogin.css'
+import PasswordInput from "../../components/passwordInput/PasswordInput";
 
 const AdminLogin = () => {
 
@@ -47,8 +48,7 @@ const AdminLogin = () => {
      onChange={(e)=>setEmail(e.target.value)}
     />
 
-    <input
-     type="password"
+    <PasswordInput
      placeholder="Password"
      value={password}
      onChange={(e)=>setPassword(e.target.value)}

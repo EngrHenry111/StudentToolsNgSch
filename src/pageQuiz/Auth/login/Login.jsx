@@ -4,6 +4,7 @@ import { AuthContext } from "../../../contextQuiz/AuthContext";
 import GoogleSignInButton from "../../../componentsQuiz/GoogleSignInButton";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import "./QuizLogin.css";
+import PasswordInput from "../../../components/passwordInput/PasswordInput";
 
 const Login = () => {
   const { login } = useContext(AuthContext);
@@ -102,8 +103,7 @@ const Login = () => {
           autoComplete="email"
         />
 
-        <input
-          type="password"
+        <PasswordInput
           placeholder="Password"
           value={form.password}
           onChange={(e) => setForm({ ...form, password: e.target.value })}
