@@ -44,6 +44,23 @@ const PublisherDashboard = () => {
             </span>
           </div>
 
+          {/* Paystack holds every new (or bank-details-changed) subaccount's
+              first payout until the admin verifies it by hand, and exposes
+              no API for that status — so this explains it rather than
+              claiming a state we can't read. */}
+          <div className="pq-topic-row" style={{ marginTop: 20, border: "1px solid rgba(0,245,255,0.35)" }}>
+            <h4 style={{ margin: "0 0 6px" }}>💳 How you get paid</h4>
+            <p style={{ margin: 0, fontSize: 13, color: "#94a3b8", lineHeight: 1.6 }}>
+              Buyers can purchase your listings right away. Your share of each
+              sale is paid by Paystack straight to{" "}
+              <strong>{publisher?.bankName || "your bank"}</strong>
+              {publisher?.accountName ? ` (${publisher.accountName})` : ""}.
+              Your <strong>first payout is released after a one-time account
+              review</strong> (usually within 1 business day); after that,
+              payouts follow Paystack's normal schedule automatically.
+            </p>
+          </div>
+
           <div className="dashboard-links" style={{ marginTop: 20 }}>
             <Link to="/publisher/listings" className="dashboard-mode-link">
               <strong>Manage Listings</strong>
