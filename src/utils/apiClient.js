@@ -111,17 +111,37 @@ export const apiRequest = async (path, { method = "GET", body, token, auth = tru
 
 // apiRequest always JSON-encodes its body, which can't carry a file — this
 // is the one place that needs FormData (a listing's cover image upload).
-// Deliberately simpler than apiRequest: it attaches whatever token is
-// currently in localStorage but doesn't retry on a 401/expired token —
-// uploads are infrequent enough that "please try again" on a stale
-// session is an acceptable tradeoff against duplicating the whole
-// silent-refresh dance here.
+// Same silent-refresh-and-retry-once as apiRequest: filling in a listing
+// form easily takes longer than the 15-minute access token lifetime, so
+// without it every slow save failed with "Token expired". FormData can be
+// sent again as-is on the retry.
 export const apiRequestMultipart = async (path, formData, { method = "POST" } = {}) => {
-  const token = localStorage.getItem("token");
-  const headers = {};
-  if (token) headers.Authorization = `Bearer ${token}`;
+  const runOnce = (accessToken) => {
+    const t = accessToken || localStorage.getItem("token");
+    const headers = {};
+    if (t) headers.Authorization = `Bearer ${t}`;
 
-  const res = await fetch(`${BASE}${path}`, { method, headers, body: formData });
+    return fetch(`${BASE}${path}`, { method, headers, body: formData });
+  };
+
+  let res = await runOnce();
+
+  if (res.status === 401) {
+    let data = {};
+    try { data = await res.clone().json(); } catch { /* ignore */ }
+
+    if (data.code === "TOKEN_EXPIRED" || data.message === "Token expired") {
+      try {
+        const newToken = await refreshAccessToken();
+        res = await runOnce(newToken);
+      } catch {
+        localStorage.removeItem("token");
+        localStorage.removeItem("refreshToken");
+        window.dispatchEvent(new CustomEvent(AUTH_LOGOUT_EVENT));
+        throw new Error("Session expired. Please log in again.");
+      }
+    }
+  }
 
   let data;
   try {
