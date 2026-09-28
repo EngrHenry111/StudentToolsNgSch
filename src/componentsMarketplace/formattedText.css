@@ -1,0 +1,10 @@
+.formatted-text p {
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+  margin: 0 0 1em;
+  line-height: 1.7;
+}
+
+.formatted-text p:last-child {
+  margin-bottom: 0;
+}

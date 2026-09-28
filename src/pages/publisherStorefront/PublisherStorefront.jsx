@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { getPublisherStorefront } from "../../apiMarketplace/marketplaceApi";
 import NotFound from "../notFound/NotFound";
+import FormattedText from "../../componentsMarketplace/FormattedText";
 import "./publisherStorefront.css";
 
 const SITE = "https://studenttoolsng.com";
@@ -103,7 +104,7 @@ const PublisherStorefront = () => {
 
       <h1>{publisher.businessName}</h1>
 
-      {publisher.description && <p className="storefront-description">{publisher.description}</p>}
+      {publisher.description && <FormattedText className="storefront-description" text={publisher.description} />}
 
       <h2>Published Documents</h2>
 

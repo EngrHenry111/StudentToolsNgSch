@@ -1,0 +1,41 @@
+.section-bar {
+  background: #0b1120;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.section-bar-inner {
+  display: flex;
+  gap: 6px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 6px 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.section-bar-inner::-webkit-scrollbar {
+  display: none;
+}
+
+.section-bar-link {
+  flex: 0 0 auto;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #cbd5e1;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.section-bar-link:hover {
+  background: rgba(148, 163, 184, 0.15);
+  color: #fff;
+}
+
+.section-bar-link.active {
+  background: #fff;
+  color: #0b1120;
+  font-weight: 600;
+}

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import PublisherNavbar from "../componentsMarketplace/publisherNav/PublisherNavbar";
 import Footer from "../components/footer/Footer";
+import SectionBar from "../components/sectionBar/SectionBar";
 import { getMyPublisherProfile } from "../apiMarketplace/publisherApi";
 
 // The publisher workspace's own layout — deliberately separate from both
@@ -20,6 +21,7 @@ const PublisherLayout = () => {
   return (
     <>
       <PublisherNavbar storefrontSlug={publisher?.slug} />
+      <SectionBar />
       <Outlet context={{ publisher, refreshPublisher: () => getMyPublisherProfile().then(setPublisher) }} />
       <Footer />
     </>

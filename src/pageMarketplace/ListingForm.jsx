@@ -163,6 +163,9 @@ const ListingForm = () => {
                 value={fullContent}
                 onChange={(e) => setFullContent(e.target.value)}
               />
+              <small style={{ color: "#94a3b8" }}>
+                Line breaks are kept exactly as typed. Leave a blank line between paragraphs.
+              </small>
             </div>
 
             <div className="pq-field">

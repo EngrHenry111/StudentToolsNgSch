@@ -51,7 +51,9 @@ const MyPurchases = () => {
                       {p.listing.title}
                     </Link>
                   </span>
-                  <span>{p.publisher.businessName}</span>
+                  <span>
+                    <Link to={`/publishers/${p.publisher.slug}`}>{p.publisher.businessName}</Link>
+                  </span>
                   <span>{nairaFromKobo(p.amount)}</span>
                   <span>{p.purchasedAt ? new Date(p.purchasedAt).toLocaleDateString() : "—"}</span>
                 </div>

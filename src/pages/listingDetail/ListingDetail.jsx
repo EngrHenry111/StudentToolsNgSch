@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async";
 import { getListingBySlug, initiatePurchase } from "../../apiMarketplace/marketplaceApi";
 import { AuthContext } from "../../contextQuiz/AuthContext";
 import NotFound from "../notFound/NotFound";
+import FormattedText from "../../componentsMarketplace/FormattedText";
 import "./listingDetail.css";
 
 const SITE = "https://studenttoolsng.com";
@@ -205,12 +206,12 @@ const ListingDetail = () => {
         </div>
       )}
 
-      <div className="listing-content" dangerouslySetInnerHTML={{ __html: listing.previewContent }} />
+      <FormattedText className="listing-content" text={listing.previewContent} />
 
       {listing.owned && listing.fullContent ? (
         <>
           <h2>Full Document</h2>
-          <div className="listing-content" dangerouslySetInnerHTML={{ __html: listing.fullContent }} />
+          <FormattedText className="listing-content" text={listing.fullContent} />
         </>
       ) : (
         <div className="listing-unlock-box">
