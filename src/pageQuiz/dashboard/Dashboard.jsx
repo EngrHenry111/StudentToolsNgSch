@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../contextQuiz/AuthContext";
 import { getAnalytics } from "../../apiQuiz/quizApi";
 import { getTodaysMissions } from "../../apiQuiz/missionsApi";
+import { getMyPublisherProfile } from "../../apiMarketplace/publisherApi";
 import Loader from "../../componentsQuiz/Loader";
 import AchievementCard from "../../componentsQuiz/AchievementCard";
 import "../proquiz.css";
@@ -28,6 +29,7 @@ const Dashboard = () => {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [missions, setMissions] = useState(null);
+  const [publisher, setPublisher] = useState(null);
 
   useEffect(() => {
     getAnalytics()
@@ -38,6 +40,10 @@ const Dashboard = () => {
     getTodaysMissions()
       .then(setMissions)
       .catch(() => setMissions(null));
+
+    getMyPublisherProfile()
+      .then(setPublisher)
+      .catch(() => setPublisher(null));
   }, []);
 
   return (
@@ -79,6 +85,21 @@ const Dashboard = () => {
             </Link>
           </div>
         )}
+
+        <div className="pq-topic-row" style={{ marginTop: 18, border: "1px solid rgba(123,47,247,0.35)" }}>
+          <h4 style={{ margin: "0 0 6px" }}>📚 Have research documents to sell?</h4>
+          <p style={{ margin: "0 0 12px", fontSize: 13, color: "#94a3b8" }}>
+            {publisher
+              ? "You have a publisher workspace — manage your listings and see your sales."
+              : "Become a Publisher: list documents for sale, free chapter preview for everyone, paid full unlock. Get paid directly to your bank account."}
+          </p>
+          <Link
+            to={publisher ? "/publisher/dashboard" : "/publisher/onboarding"}
+            className="pq-btn pq-btn-primary"
+          >
+            {publisher ? "Go to Publisher Dashboard" : "Become a Publisher"}
+          </Link>
+        </div>
 
         {missions && (
           <div className="pq-topic-row" style={{ marginTop: 18 }}>

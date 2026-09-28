@@ -63,6 +63,17 @@ import Dashboard from "./pageQuiz/dashboard/Dashboard";
 import PreviewPage from "./pages/adminPreview/PreviewPage";
 import AdminLayout from "./layouts/AdminLayout";
 
+// MARKETPLACE (publisher workspace + public storefront/listing pages)
+import PublisherLayout from "./layouts/PublisherLayout";
+import RequirePublisher from "./componentsMarketplace/RequirePublisher";
+import PublisherOnboarding from "./pageMarketplace/PublisherOnboarding";
+import PublisherDashboard from "./pageMarketplace/PublisherDashboard";
+import ListingManager from "./pageMarketplace/ListingManager";
+import ListingForm from "./pageMarketplace/ListingForm";
+import PublisherOrders from "./pageMarketplace/PublisherOrders";
+import PublisherStorefront from "./pages/publisherStorefront/PublisherStorefront";
+import ListingDetail from "./pages/listingDetail/ListingDetail";
+
 // import SeoPage from "./pages/seo/SeoPage";
 function App() {
 
@@ -121,6 +132,10 @@ function App() {
     <Route path="/tutorials/math-calculator" element={<MathCalculatorPage />} />
     <Route path="/quiz" element={<QuizPages />} />
 
+    {/* Marketplace — public, SEO-indexed (Task 4) */}
+    <Route path="/publishers/:slug" element={<PublisherStorefront />} />
+    <Route path="/publishers/:slug/:listingSlug" element={<ListingDetail />} />
+
     <Route path="*" element={<NotFound />} />
 
    </Route>
@@ -138,6 +153,18 @@ function App() {
     element={
       <ProtectedRoute>
         <CampusOnboarding />
+      </ProtectedRoute>
+    }
+  />
+
+  {/* Same placement/pattern as Campus onboarding above — still under the
+      standard authenticated site chrome, not the publisher workspace
+      layout, since the user isn't "in" the workspace until this exists. */}
+  <Route
+    path="/publisher/onboarding"
+    element={
+      <ProtectedRoute>
+        <PublisherOnboarding />
       </ProtectedRoute>
     }
   />
@@ -273,6 +300,53 @@ function App() {
   <Route path="/pro/billing" element={<Billing />} />
   <Route path="/pro/dashboard" element={<Dashboard />} /> */}
 
+</Route>
+
+{/* Publisher workspace — its own layout/nav, fully separate from both
+    the public site and the Pro/quiz experience above. RequirePublisher
+    checks both login AND that a Publisher profile actually exists,
+    redirecting to /publisher/onboarding otherwise. */}
+<Route element={<PublisherLayout />}>
+  <Route
+    path="/publisher/dashboard"
+    element={
+      <RequirePublisher>
+        <PublisherDashboard />
+      </RequirePublisher>
+    }
+  />
+  <Route
+    path="/publisher/listings"
+    element={
+      <RequirePublisher>
+        <ListingManager />
+      </RequirePublisher>
+    }
+  />
+  <Route
+    path="/publisher/listings/new"
+    element={
+      <RequirePublisher>
+        <ListingForm />
+      </RequirePublisher>
+    }
+  />
+  <Route
+    path="/publisher/listings/:id/edit"
+    element={
+      <RequirePublisher>
+        <ListingForm />
+      </RequirePublisher>
+    }
+  />
+  <Route
+    path="/publisher/orders"
+    element={
+      <RequirePublisher>
+        <PublisherOrders />
+      </RequirePublisher>
+    }
+  />
 </Route>
 </Routes>
 

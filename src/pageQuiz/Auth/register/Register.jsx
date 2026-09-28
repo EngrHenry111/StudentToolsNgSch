@@ -47,6 +47,9 @@ const Register = () => {
     }
   };
 
+  // Unused while GoogleSignInButton is commented out below — kept ready
+  // for when it's re-enabled.
+  // eslint-disable-next-line no-unused-vars
   const handleGoogleSuccess = async (credential) => {
     setError("");
     setSubmitting(true);
@@ -82,12 +85,16 @@ const Register = () => {
           </div>
         )}
 
+        {/*
+          Temporarily silenced — see the identical comment in Login.jsx.
+          handleGoogleSuccess and the /auth/google endpoint are untouched.
         <GoogleSignInButton
           onSuccess={handleGoogleSuccess}
           onError={(msg) => setError(msg)}
         />
 
         <div className="register-divider"><span>or</span></div>
+        */}
 
         <input
           placeholder="Username"

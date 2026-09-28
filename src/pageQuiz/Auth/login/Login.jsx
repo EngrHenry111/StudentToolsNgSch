@@ -39,6 +39,9 @@ const Login = () => {
     }
   };
 
+  // Unused while GoogleSignInButton is commented out below — kept ready
+  // for when it's re-enabled.
+  // eslint-disable-next-line no-unused-vars
   const handleGoogleSuccess = async (credential) => {
     setError("");
     setSubmitting(true);
@@ -67,12 +70,20 @@ const Login = () => {
 
         {error && <div className="login-error">{error}</div>}
 
+        {/*
+          Temporarily silenced: Google rejects this with "The given origin
+          is not allowed for the given client ID" until the current
+          origin is added to the OAuth client's Authorized JavaScript
+          origins in Google Cloud Console. Re-enable by uncommenting once
+          that's done — handleGoogleSuccess and the /auth/google endpoint
+          are untouched and ready.
         <GoogleSignInButton
           onSuccess={handleGoogleSuccess}
           onError={(msg) => setError(msg)}
         />
 
         <div className="login-divider"><span>or</span></div>
+        */}
 
         <input
           type="email"

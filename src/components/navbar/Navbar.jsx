@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import API from "../../services/api";
+import Logo from "../logo/Logo";
 import "./navbar.css";
 
 const Navbar = () => {
@@ -64,7 +65,10 @@ const handleChange = (e)=>{
 
     <div className="nav-key">
 
-      <h2 className="logo">StudentToolsNG</h2>
+      <Link to="/" className="logo-link" onClick={closeMenu}>
+        <Logo className="logo-mark" />
+        <span className="logo-text">StudentToolsNG</span>
+      </Link>
 
       {/* Animated Hamburger */}
 
@@ -127,6 +131,7 @@ const handleChange = (e)=>{
         <li><Link to="/admission-predictor" onClick={closeMenu}>Admission</Link></li>
         <li><Link to="/study-planner" onClick={closeMenu}>Planner</Link></li>
         <li><Link to="/scholarships" onClick={closeMenu}>Scholarships</Link></li>
+        <li><Link to="/publisher/dashboard" onClick={closeMenu}>Sell Docs</Link></li>
         <li><Link to="/contact" onClick={closeMenu}>Contact</Link></li>
 
       </ul>

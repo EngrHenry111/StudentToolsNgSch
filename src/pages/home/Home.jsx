@@ -260,6 +260,12 @@ StudentToolsNG - Free CGPA, WAEC & JAMB Calculators for Nigerian Students
  </Link>
  </li>
 
+ <li>
+ <Link to="/publisher/dashboard">
+ Become a Publisher — Sell Your Research
+ </Link>
+ </li>
+
  </ul>
 
  </section>
