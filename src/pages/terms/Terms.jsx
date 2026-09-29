@@ -7,7 +7,7 @@ const Terms = () => {
  const title = "Terms and Conditions | StudentToolsNG";
  const description = "Read the terms and conditions for using StudentToolsNG academic tools, calculators, and educational resources.";
 
- const image = "https://studenttoolsng.com/logoH.png";
+ const image = "https://studenttoolsng.com/og-image.png";
 
  return(
 

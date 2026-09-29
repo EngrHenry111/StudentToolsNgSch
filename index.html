@@ -27,6 +27,18 @@
   <!-- Viewport -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- Site icon: the gradient graduation-cap logo (same mark as the navbar
+       Logo component). Browser tabs, bookmarks, Google search results and
+       phone home screens pick from these. 48x48 PNG is what Google Search
+       prefers (a multiple of 48px); .ico covers old browsers and crawlers
+       that just request /favicon.ico. -->
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-48x48.png" type="image/png" sizes="48x48" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#0b1120" />
+
   <!--
     Title only. Every route in this app sets its own <title> and full
     Open Graph / description block via react-helmet-async — and Helmet
@@ -48,7 +60,7 @@
     "@type": "Organization",
     "name": "StudentToolsNG",
     "url": "https://studenttoolsng.com",
-    "logo": "https://studenttoolsng.com/logoH.png",
+    "logo": "https://studenttoolsng.com/icon-512.png",
     "sameAs": [
       "https://facebook.com/Engrhenrytech",
       "https://twitter.com/EngrHenryTech",

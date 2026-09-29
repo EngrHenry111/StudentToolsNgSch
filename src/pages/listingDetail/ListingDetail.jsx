@@ -140,7 +140,7 @@ const ListingDetail = () => {
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content={listing.coverImageUrl || `${SITE}/logoH.png`} />
+        <meta property="og:image" content={listing.coverImageUrl || `${SITE}/og-image.png`} />
         <meta property="og:site_name" content="StudentToolsNG" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={title} />
@@ -160,7 +160,7 @@ const ListingDetail = () => {
               name: listing.publisher.businessName,
               url: `${SITE}/publishers/${listing.publisher.slug}`
             },
-            image: listing.coverImageUrl || `${SITE}/logoH.png`,
+            image: listing.coverImageUrl || `${SITE}/og-image.png`,
             ...(listing.ratingCount > 0
               ? {
                   aggregateRating: {

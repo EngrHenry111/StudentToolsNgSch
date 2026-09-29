@@ -13,7 +13,7 @@ import NotFound from "../notFound/NotFound";
 import "./tutorialDetails.css";
 
 const SITE = "https://studenttoolsng.com";
-const FALLBACK_IMAGE = `${SITE}/logoH.png`;
+const FALLBACK_IMAGE = `${SITE}/og-image.png`;
 
 // Plain-text summary from (possibly double-encoded) HTML content, for use in
 // meta/OG description tags.

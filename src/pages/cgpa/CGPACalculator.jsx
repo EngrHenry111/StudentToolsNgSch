@@ -66,7 +66,7 @@ const CGPACalculator = () => {
  const url = "https://studenttoolsng.com/cgpa-calculator";
  const title = "CGPA Calculator Nigeria | Calculate University CGPA Online";
  const description = "Free CGPA calculator for Nigerian university students. Calculate your GPA and cumulative CGPA instantly using the Nigerian grading system.";
- const image = "https://studenttoolsng.com/logoH.png";
+ const image = "https://studenttoolsng.com/og-image.png";
 
  // AI-drafted (2026-09-13) — factual/explanatory content per Google's "low
  // value content" guidance (this page was previously a bare calculator with

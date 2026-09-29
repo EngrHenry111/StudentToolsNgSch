@@ -67,7 +67,7 @@ const PublisherStorefront = () => {
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content={publisher.logoUrl || `${SITE}/logoH.png`} />
+        <meta property="og:image" content={publisher.logoUrl || `${SITE}/og-image.png`} />
         <meta property="og:site_name" content="StudentToolsNG" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={title} />

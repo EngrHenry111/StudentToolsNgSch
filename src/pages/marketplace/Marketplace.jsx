@@ -86,7 +86,7 @@ const Marketplace = () => {
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:url" content={`${SITE}/marketplace`} />
-        <meta property="og:image" content={`${SITE}/logoH.png`} />
+        <meta property="og:image" content={`${SITE}/og-image.png`} />
         <meta property="og:site_name" content="StudentToolsNG" />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>

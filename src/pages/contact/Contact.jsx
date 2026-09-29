@@ -45,7 +45,7 @@ const Contact = () => {
  const title = "Contact StudentToolsNG | Support & Enquiries";
  const description = "Contact StudentToolsNG for questions, academic support, feedback, or partnership opportunities. We are here to help students succeed.";
 
- const image = "https://studenttoolsng.com/logoH.png";
+ const image = "https://studenttoolsng.com/og-image.png";
 
  return(
 

@@ -97,7 +97,7 @@ StudentToolsNG - Free CGPA, WAEC & JAMB Calculators for Nigerian Students
 
 <meta
  property="og:image"
- content="https://studenttoolsng.com/logoH.png"
+ content="https://studenttoolsng.com/og-image.png"
 />
 
 <meta
@@ -120,7 +120,7 @@ StudentToolsNG - Free CGPA, WAEC & JAMB Calculators for Nigerian Students
 
 <meta
  name="twitter:image"
- content="https://studenttoolsng.com/logoH.png"
+ content="https://studenttoolsng.com/og-image.png"
 />
 
 </Helmet> {/* HERO SECTION */}

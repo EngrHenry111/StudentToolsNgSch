@@ -113,7 +113,7 @@ const showNotification = (title) => {
 
       body: `Time to study: ${title}`,
 
-      icon: "/logoH.png",
+      icon: "/icon-192.png",
 
     });
 
@@ -266,7 +266,7 @@ const addTask = () => {
     "Free study planner for Nigerian students. Organize your daily study tasks, improve productivity, and achieve academic success.";
 
   const image =
-    "https://studenttoolsng.com/logoH.png";
+    "https://studenttoolsng.com/og-image.png";
 
   return (
 
@@ -660,7 +660,7 @@ export default StudyPlanner;
 //   "Free study planner for Nigerian students. Organize your daily study tasks, improve productivity, and achieve academic success.";
 
 //  const image =
-//   "https://studenttoolsng.com/logoH.png";
+//   "https://studenttoolsng.com/og-image.png";
 
 //  return (
 
@@ -1034,7 +1034,7 @@ export default StudyPlanner;
 //  const url = "https://studenttoolsng.com/study-planner";
 // const title = "Study Planner for Students | Plan Your Daily Study Schedule";
 // const description = "Free study planner for Nigerian students. Organize your daily study tasks, improve productivity, and achieve academic success.";
-// const image = "https://studenttoolsng.com/logoH.png";
+// const image = "https://studenttoolsng.com/og-image.png";
 
 //  return(
 
