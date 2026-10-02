@@ -345,11 +345,25 @@ const generateFAQ = (content)=>{
  ).slice(0, 160);
  const shareImage = tutorial.image || FALLBACK_IMAGE;
 
+ // SEO keywords set by the author, falling back to title/tags/category.
+ const seoKeywords = [...new Set(
+  [
+   tutorial.focusKeyword,
+   ...(tutorial.keywords || []),
+   ...(tutorial.tags || []),
+   tutorial.title,
+   tutorial.category
+  ]
+   .map((k) => String(k || "").trim())
+   .filter(Boolean)
+ )].join(", ");
+
  const schemaData = {
  "@context": "https://schema.org",
  "@type": "Article",
  headline: tutorial.title,
  description: metaDescription,
+ keywords: seoKeywords,
  image: shareImage,
  author: {
   "@type": "Person",
@@ -403,10 +417,7 @@ const generateFAQ = (content)=>{
 
 <meta name="description" content={metaDescription} />
 
-<meta
- name="keywords"
- content={`${tutorial.title}, student tutorials Nigeria, academic tutorials, ${tutorial.category}`}
-/>
+<meta name="keywords" content={seoKeywords} />
 
 {/* Canonical */}
 <link rel="canonical" href={canonicalUrl} />

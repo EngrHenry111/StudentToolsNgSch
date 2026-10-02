@@ -8,6 +8,8 @@ import {
  topicOptions,
  topicSlug
 } from "../../utils/tutorialCategories";
+import TutorialQualityPanel from "../../components/tutorialQuality/TutorialQualityPanel";
+import submitWithDuplicateGate from "../../components/tutorialQuality/submitWithDuplicateGate";
 import "./createTutorial.css";
 
 const CreateTutorial = () => {
@@ -19,6 +21,8 @@ const CreateTutorial = () => {
  const [excerpt, setExcerpt] = useState("");
  const [tags, setTags] = useState("");
  const [image, setImage] = useState("");
+ const [focusKeyword, setFocusKeyword] = useState("");
+ const [keywords, setKeywords] = useState("");
 
  // ✅ NEW STATES
  const [previewMode, setPreviewMode] = useState(false);
@@ -35,6 +39,8 @@ const CreateTutorial = () => {
    setExcerpt(draft.excerpt || "");
    setTags(draft.tags || "");
    setImage(draft.image || "");
+   setFocusKeyword(draft.focusKeyword || "");
+   setKeywords(draft.keywords || "");
   }
  }, []);
 
@@ -47,7 +53,9 @@ const CreateTutorial = () => {
    topic,
    excerpt,
    tags,
-   image
+   image,
+   focusKeyword,
+   keywords
   };
 
   localStorage.setItem("tutorialDraft", JSON.stringify(draftData));
@@ -72,18 +80,23 @@ const CreateTutorial = () => {
   try {
    setLoading(true);
 
-   await API.post("/tutorials", {
-    title,
-    content,
-    category: category.toLowerCase(),
-    topic: topicValue,
-    excerpt,
-    tags: tags.split(",").map(tag => tag.trim()),
-    image,
-    status: "published"
-   });
+   const saved = await submitWithDuplicateGate(
+    (payload) => API.post("/tutorials", payload),
+    {
+     title,
+     content,
+     category: category.toLowerCase(),
+     topic: topicValue,
+     excerpt,
+     tags: tags.split(",").map(tag => tag.trim()).filter(Boolean),
+     image,
+     focusKeyword,
+     keywords,
+     status: "published"
+    }
+   );
 
-
+   if (!saved) return;
 
    alert("Tutorial created successfully");
 
@@ -95,6 +108,8 @@ const CreateTutorial = () => {
    setExcerpt("");
    setTags("");
    setImage("");
+   setFocusKeyword("");
+   setKeywords("");
 
    clearDraft();
 
@@ -182,6 +197,19 @@ const CreateTutorial = () => {
      onChange={(e) => setTags(e.target.value)}
     />
 
+    {/* SEO KEYWORDS */}
+    <input
+     placeholder="Focus keyword (main search phrase, e.g. ohm's law)"
+     value={focusKeyword}
+     onChange={(e) => setFocusKeyword(e.target.value)}
+    />
+
+    <input
+     placeholder="Secondary keywords (comma separated)"
+     value={keywords}
+     onChange={(e) => setKeywords(e.target.value)}
+    />
+
     {/* EXCERPT */}
     <textarea
      placeholder="Short excerpt (SEO description)"
@@ -194,6 +222,10 @@ const CreateTutorial = () => {
      value={content}
      onChange={setContent}
      theme="snow"
+    />
+
+    <TutorialQualityPanel
+     values={{ title, content, category, topic: topicSlug(topic), excerpt, focusKeyword, keywords }}
     />
 
     <button type="submit" disabled={loading}>

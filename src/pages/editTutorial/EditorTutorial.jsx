@@ -9,6 +9,8 @@ import {
  topicOptions,
  topicSlug
 } from "../../utils/tutorialCategories";
+import TutorialQualityPanel from "../../components/tutorialQuality/TutorialQualityPanel";
+import submitWithDuplicateGate from "../../components/tutorialQuality/submitWithDuplicateGate";
 import "./editorTutorial.css";
 
 const EditTutorial = () => {
@@ -26,6 +28,8 @@ const EditTutorial = () => {
  const [tags, setTags] = useState("");
  const [image, setImage] = useState("");
  const [status, setStatus] = useState("draft");
+ const [focusKeyword, setFocusKeyword] = useState("");
+ const [keywords, setKeywords] = useState("");
 
  // FETCH
  useEffect(() => {
@@ -51,6 +55,8 @@ const EditTutorial = () => {
    setExcerpt(t.excerpt || "");
    setImage(t.image || "");
    setStatus(t.status || "draft");
+   setFocusKeyword(t.focusKeyword || "");
+   setKeywords(Array.isArray(t.keywords) ? t.keywords.join(", ") : "");
 
    // convert array → string
    setTags(Array.isArray(t.tags) ? t.tags.join(", ") : "");
@@ -69,16 +75,23 @@ const EditTutorial = () => {
 
   try {
 
-   await API.put(`/tutorials/${id}`, {
-    title,
-    content,
-    category,
-    topic: topicSlug(topic),
-    excerpt,
-    image,
-    status,
-    tags: tags.split(",").map(tag => tag.trim())
-   });
+   const saved = await submitWithDuplicateGate(
+    (payload) => API.put(`/tutorials/${id}`, payload),
+    {
+     title,
+     content,
+     category,
+     topic: topicSlug(topic),
+     excerpt,
+     image,
+     status,
+     focusKeyword,
+     keywords,
+     tags: tags.split(",").map(tag => tag.trim()).filter(Boolean)
+    }
+   );
+
+   if (!saved) return;
 
    alert("Tutorial updated successfully");
 
@@ -152,6 +165,19 @@ const EditTutorial = () => {
      placeholder="Tags (comma separated)"
     />
 
+    {/* SEO KEYWORDS */}
+    <input
+     placeholder="Focus keyword (main search phrase, e.g. ohm's law)"
+     value={focusKeyword}
+     onChange={(e) => setFocusKeyword(e.target.value)}
+    />
+
+    <input
+     placeholder="Secondary keywords (comma separated)"
+     value={keywords}
+     onChange={(e) => setKeywords(e.target.value)}
+    />
+
     {/* EXCERPT */}
     <textarea
      value={excerpt}
@@ -173,6 +199,11 @@ const EditTutorial = () => {
      value={content}
      onChange={setContent}
      theme="snow"
+    />
+
+    <TutorialQualityPanel
+     id={id}
+     values={{ title, content, category, topic: topicSlug(topic), excerpt, focusKeyword, keywords }}
     />
 
     <button type="submit">

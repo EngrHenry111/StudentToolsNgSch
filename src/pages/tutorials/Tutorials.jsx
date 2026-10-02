@@ -131,8 +131,11 @@ useEffect(()=>{
  // 🔥 SEARCH
  const handleSearch = async ()=>{
 
+  const q = search.trim();
+  if(!q) return;
+
   try{
-   const res = await API.get(`/tutorials/search?q=${search}`);
+   const res = await API.get(`/tutorials/search?q=${encodeURIComponent(q)}`);
    setTutorials(res.data);
    setTotalPages(1);
   }catch(err){
@@ -299,9 +302,10 @@ const stripHTML = (html) => {
  {/* SEARCH */}
  <div className="tutorial-search">
   <input
-   placeholder="Search tutorial..."
+   placeholder="Search tutorials or keywords..."
    value={search}
    onChange={(e)=>setSearch(e.target.value)}
+   onKeyDown={(e)=>{ if(e.key === "Enter") handleSearch(); }}
   />
 
   <button onClick={handleSearch}>
