@@ -18,131 +18,131 @@ import "./tutorials.css";
 // listing (a soft 404). Only these categories are real.
 const KNOWN_CATEGORIES = tutorialCategoryList;
 
+// Topics are stored as slugs ("equations-of-motion"); show them as words.
+const topicLabel = (slug) =>
+ String(slug || "")
+  .replace(/-/g, " ")
+  .replace(/\b\w/g, (c) => c.toUpperCase());
+
 const Tutorials = () => {
 
- const [tutorials,setTutorials] = useState([]);
+ const navigate = useNavigate();
+ const location = useLocation();
+
+ const { category:paramCategory, topic:paramTopic, subtopic:paramSubtopic } = useParams();
+
+ // The URL is the single source of truth for the filters. Copying the params
+ // into separate state let a "reset topic when category changes" effect wipe
+ // the topic right after it was read from the URL.
+ const category = (paramCategory || "").toLowerCase();
+ const topic = (paramTopic || "").toLowerCase();
+
+ const invalidCategory =
+  Boolean(paramCategory) && !KNOWN_CATEGORIES.includes(category);
+
  const [search,setSearch] = useState("");
- const [page,setPage] = useState(1);
- const [totalPages,setTotalPages] = useState(1);
-const navigate = useNavigate();
-const location = useLocation();
 
- // FILTER STATES
- const [category,setCategory] = useState("");
- const [topic,setTopic] = useState("");
- const [subtopic,setSubtopic] = useState("");
+ // Page belongs to the current listing — switching subject/topic starts
+ // again at page 1 without a separate reset effect (and a double fetch).
+ const listingKey = `${category}/${topic}`;
+ const [pageState,setPageState] = useState({ key: listingKey, page: 1 });
+ const page = pageState.key === listingKey ? pageState.page : 1;
+ const setPage = (p) => setPageState({ key: listingKey, page: p });
 
- const [topics,setTopics] = useState([]);
- const [subtopics,setSubtopics] = useState([]);
+ // Each response is tagged with what it was fetched for, so a stale one is
+ // never shown and "loading" is simply "the latest response isn't in yet".
+ const fetchKey = `${listingKey}#${page}`;
+ const [listing,setListing] = useState({ key: null, tutorials: [], totalPages: 1 });
+ const loading = listing.key !== fetchKey;
+ const tutorials = loading ? [] : listing.tutorials;
+ const totalPages = loading ? 1 : listing.totalPages;
 
-const { category:paramCategory, topic:paramTopic, subtopic:paramSubtopic } = useParams();
+ const [topicsState,setTopicsState] = useState({ category: null, list: [] });
+ const topics = topicsState.category === category ? topicsState.list : [];
 
-const invalidCategory =
- paramCategory &&
- !KNOWN_CATEGORIES.includes(paramCategory.toLowerCase());
-
-useEffect(()=>{
-
- if(paramCategory){
-  setCategory(paramCategory);
- }
-
- if(paramTopic){
-  setTopic(paramTopic);
- }
-
- if(paramSubtopic){
-  setSubtopic(paramSubtopic);
- }
-
-},[paramCategory,paramTopic,paramSubtopic]);
+ // Search results only apply to the listing they were made on.
+ const [searchState,setSearchState] = useState({ key: null, results: [] });
+ const searchResults = searchState.key === listingKey ? searchState.results : null;
 
  // 🔥 FETCH TUTORIALS
  useEffect(()=>{
-  fetchTutorials();
- },[page,category,topic,subtopic]);
 
- // 🔥 FETCH TOPICS
+  if(invalidCategory) return;
+
+  let ignore = false;
+
+  const params = new URLSearchParams({ page: String(page) });
+  if(category) params.set("category", category);
+  if(topic) params.set("topic", topic);
+
+  API.get(`/tutorials?${params}`)
+   .then((res)=>{
+    if(ignore) return;
+    setListing({
+     key: fetchKey,
+     tutorials: Array.isArray(res.data?.tutorials) ? res.data.tutorials : [],
+     totalPages: res.data?.totalPages || 1
+    });
+   })
+   .catch((err)=>{
+    if(ignore) return;
+    console.log(err);
+    setListing({ key: fetchKey, tutorials: [], totalPages: 1 });
+   });
+
+  return ()=>{ ignore = true; };
+
+ },[page,category,topic,invalidCategory,fetchKey]);
+
+ // 🔥 FETCH TOPICS for the topic dropdown
  useEffect(()=>{
-  if(category){
-   fetchTopics();
-   setTopic("");
-   setSubtopic("");
-  }
- },[category]);
 
- // 🔥 FETCH SUBTOPICS
- useEffect(()=>{
-  if(category && topic){
-   fetchSubtopics();
-   setSubtopic("");
-  }
- },[topic]);
+  if(!category || invalidCategory) return;
 
- const fetchTutorials = async () => {
- try {
+  let ignore = false;
 
-  let url = `/tutorials?page=${page}`;
+  API.get(`/tutorials/topics/${encodeURIComponent(category)}`)
+   .then((res)=>{
+    if(ignore) return;
+    // Only plain, non-empty strings can be <option>s.
+    setTopicsState({
+     category,
+     list: (Array.isArray(res.data) ? res.data : [])
+      .filter((t)=> typeof t === "string" && t.trim())
+      .sort()
+    });
+   })
+   .catch((err)=>{
+    if(!ignore) setTopicsState({ category, list: [] });
+    console.log(err);
+   });
 
-  if (category) {
-   url += `&category=${category}`;
-  }
+  return ()=>{ ignore = true; };
 
-  if (topic) {
-   url += `&topic=${topic}`;
-  }
+ },[category,invalidCategory]);
 
-  const res = await API.get(url);
-
-  setTutorials(res.data.tutorials);
-  setTotalPages(res.data.totalPages);
-
- } catch (err) {
-  console.log(err);
- }
-};
-
-
- const fetchTopics = async ()=>{
-
-  try{
-   const res = await API.get(`/tutorials/topics/${category}`);
-   setTopics(res.data);
-  }catch(err){
-   console.log(err);
-  }
-
- };
-
- const fetchSubtopics = async ()=>{
-
-  try{
-   const res = await API.get(
-    `/tutorials/subtopics?category=${category}&topic=${topic}`
-   );
-
-   setSubtopics(res.data);
-  }catch(err){
-   console.log(err);
-  }
-
- };
+ const clearSearch = ()=> setSearchState({ key: null, results: [] });
 
  // 🔥 SEARCH
  const handleSearch = async ()=>{
 
   const q = search.trim();
-  if(!q) return;
+  if(!q){
+   clearSearch();
+   return;
+  }
 
   try{
    const res = await API.get(`/tutorials/search?q=${encodeURIComponent(q)}`);
-   setTutorials(res.data);
-   setTotalPages(1);
+   setSearchState({ key: listingKey, results: Array.isArray(res.data) ? res.data : [] });
   }catch(err){
    console.log(err);
+   setSearchState({ key: listingKey, results: [] });
   }
 
  };
+
+ const shown = searchResults ?? tutorials;
  
 
 
@@ -313,23 +313,17 @@ const stripHTML = (html) => {
   </button>
  </div>
 
- {/* CATEGORY */}
+
+ {/* SUBJECT + TOPIC — each choice is a URL, the listing reads the URL */}
+ <div className="tutorial-filters">
+
  <select
+  aria-label="Subject"
   value={category}
   onChange={(e)=>{
- const value = e.target.value;
- setCategory(value);
- setTopic("");
- setSubtopic("");
- setPage(1);
-
- if(value){
-  navigate(`/${value}`);
- }else{
-  navigate("/tutorials");
- }
- 
-}}
+   const value = e.target.value;
+   navigate(value ? `/${value}` : "/tutorials");
+  }}
  >
   <option value="">All Subjects</option>
   {tutorialCategoryList.map((c)=>(
@@ -337,54 +331,57 @@ const stripHTML = (html) => {
   ))}
  </select>
 
- {/* TOPIC */}
  {category && (
  <select
+  aria-label="Topic"
   value={topic}
   onChange={(e)=>{
- const value = e.target.value;
- setTopic(value);
- setSubtopic("");
- setPage(1);
-
- navigate(`/${category}/${value}`);
-}}
+   const value = e.target.value;
+   navigate(value ? `/${category}/${value}` : `/${category}`);
+  }}
  >
   <option value="">All Topics</option>
+  {/* A topic opened by URL may not be in the list yet — keep it selectable. */}
+  {topic && !topics.includes(topic) && (
+   <option value={topic}>{topicLabel(topic)}</option>
+  )}
   {topics.map((t)=>(
-   <option key={t} value={t}>
-    {t}
-   </option>
+   <option key={t} value={t}>{topicLabel(t)}</option>
   ))}
  </select>
  )}
 
- {/* SUBTOPIC */}
- {topic && (
- <select
-  value={subtopic}
-  onChange={(e)=>{
- const value = e.target.value;
- setSubtopic(value);
- setPage(1);
+ </div>
 
- navigate(`/${category}/${topic}/${value}`);
-}}
+ {searchResults && (
+  <p className="tutorials-status">
+   {searchResults.length} result{searchResults.length === 1 ? "" : "s"} for "{search.trim()}"{" "}
+   <button
+    type="button"
+    className="clear-search"
+    onClick={()=>{ setSearch(""); clearSearch(); }}
+   >
+    Clear search
+   </button>
+  </p>
+ )}
 
- >
-  <option value="">All Subtopics</option>
-  {subtopics.map((s)=>(
-   <option key={s} value={s}>
-    {s}
-   </option>
-  ))}
- </select>
+ {loading && !searchResults && (
+  <p className="tutorials-status">Loading tutorials…</p>
+ )}
+
+ {!loading && shown.length === 0 && (
+  <p className="tutorials-status">
+   {searchResults
+    ? "No tutorials match your search."
+    : "No tutorials published here yet — check back soon or pick another topic."}
+  </p>
  )}
 
  {/* GRID */}
  <div className="tutorial-grid">
 
- {Array.isArray(tutorials) && tutorials.map((t)=>(
+ {shown.map((t)=>(
 
  <Link
   key={t._id}
@@ -432,17 +429,20 @@ const stripHTML = (html) => {
  </div>
 
  {/* PAGINATION */}
+ {!searchResults && totalPages > 1 && (
  <div className="pagination">
- {[...Array(totalPages)].map((_,index)=>(
+ {Array.from({ length: totalPages }, (_,index)=>(
   <button
    key={index}
-   onClick={()=>setPage(index+1)}
+   onClick={()=>{ setPage(index+1); window.scrollTo({ top: 0, behavior: "smooth" }); }}
    className={page===index+1 ? "active" : ""}
   >
    {index+1}
   </button>
  ))}
  </div>
+ )}
+
 
  {/*
    Site-wide helper content — only shown on the unfiltered /tutorials

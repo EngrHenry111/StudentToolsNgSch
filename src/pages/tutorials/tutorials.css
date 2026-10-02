@@ -490,3 +490,20 @@
     padding:18px 14px;
   }
 }
+/* ================= LISTING STATUS ================= */
+.tutorials-status{
+  text-align:center;
+  margin:24px auto;
+  color:#94a3b8;
+  font-size:15px;
+}
+
+.clear-search{
+  margin-left:8px;
+  padding:4px 12px;
+  border-radius:14px;
+  border:1px solid rgba(56,189,248,0.4);
+  background:transparent;
+  color:#38bdf8;
+  cursor:pointer;
+}
