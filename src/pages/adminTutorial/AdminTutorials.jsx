@@ -35,7 +35,21 @@ const fetchStats = async ()=>{
 
   if(!window.confirm("Delete tutorial?")) return;
 
-  await API.delete(`/tutorials/${id}`);
+  // Google standard for removed pages: 301 to the replacement if there is
+  // one (keeps its ranking), otherwise the URL answers 410 Gone.
+  const redirectTo = window.prompt(
+   "Redirect its old URL to which tutorial?\n\nEnter the slug of the tutorial that replaces it (e.g. newtons-laws-of-motion) or a page path (e.g. /cgpa-calculator).\nLeave empty if nothing replaces it.",
+   ""
+  );
+  if(redirectTo === null) return;
+
+  try{
+   const q = redirectTo.trim() ? `?redirectTo=${encodeURIComponent(redirectTo.trim())}` : "";
+   await API.delete(`/tutorials/${id}${q}`);
+  }catch(err){
+   alert(err?.response?.data?.message || "Delete failed");
+   return;
+  }
 
   fetchTutorials();
 

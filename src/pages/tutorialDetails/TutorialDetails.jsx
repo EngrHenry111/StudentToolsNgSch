@@ -10,6 +10,7 @@ import AuthorCard from "../../components/AuthorCard";
 import { decode } from "html-entities";
 import AdUnit from "../../components/ads/AdUnit";
 import NotFound from "../notFound/NotFound";
+import MovedPermanently from "../notFound/MovedPermanently";
 import "./tutorialDetails.css";
 
 const SITE = "https://studenttoolsng.com";
@@ -56,6 +57,7 @@ const TutorialDetails = ()=>{
 
 const [tutorial,setTutorial] = useState(null);
 const [notFound,setNotFound] = useState(false);
+const [movedTo,setMovedTo] = useState(null);
 const [question,setQuestion] = useState("");
 const [answer,setAnswer] = useState("");
 const [loading,setLoading] = useState(false);
@@ -233,8 +235,15 @@ const addInternalLinks = async (html) => {
  try{
 
   setNotFound(false);
+  setMovedTo(null);
 
   const res = await API.get(`/tutorials/${slug}`);
+
+  // Removed/merged tutorial — permanent redirect to its replacement.
+  if(res.data?.redirectTo){
+   setMovedTo(res.data.redirectTo);
+   return;
+  }
 
 
   const htmlWithLinks = await addInternalLinks(res.data.content);
@@ -253,8 +262,8 @@ const addInternalLinks = async (html) => {
 
   console.log(err);
 
-  if(err?.response?.status === 404){
-   setNotFound(true);
+  if(err?.response?.status === 404 || err?.response?.status === 410){
+   setNotFound(err.response.status);
   }
 
  }
@@ -317,8 +326,12 @@ const generateFAQ = (content)=>{
 };
 
 
+ if(movedTo){
+  return <MovedPermanently to={movedTo} />;
+ }
+
  if(notFound){
-  return <NotFound />;
+  return <NotFound status={notFound} />;
  }
 
  if(!tutorial){

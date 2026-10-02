@@ -62,10 +62,29 @@ export default async function middleware(request) {
         "x-prerender": "1",
         "User-Agent": ua
       },
-      signal: AbortSignal.timeout(20000)
+      signal: AbortSignal.timeout(20000),
+      // Pages set <meta name="prerender-status-code" content="301"> plus a
+      // prerender-header Location for moved tutorials — don't follow it,
+      // hand the crawler the real 301.
+      redirect: "manual"
     });
 
-    if (!upstream.ok) return tag(next(), `fallback:upstream-${upstream.status}`);
+    // Real redirects (moved/merged tutorials) go to the crawler as-is.
+    if ([301, 302, 307, 308].includes(upstream.status)) {
+      const location = upstream.headers.get("location");
+      if (location) {
+        return new Response(null, {
+          status: upstream.status,
+          headers: { location, "x-prerender-mw": `redirect-${upstream.status}` }
+        });
+      }
+    }
+
+    // 404 / 410 must reach Google as real status codes; falling back to the
+    // SPA here would serve a 200 and cause "soft 404" reports.
+    const isNotFound = upstream.status === 404 || upstream.status === 410;
+
+    if (!upstream.ok && !isNotFound) return tag(next(), `fallback:upstream-${upstream.status}`);
 
     // Forward Prerender's response (headers included, so the dashboard's
     // integration check can see its own fingerprint), overriding only the
@@ -78,7 +97,7 @@ export default async function middleware(request) {
       "cache-control",
       "public, max-age=0, s-maxage=86400, stale-while-revalidate=604800"
     );
-    headers.set("x-prerender-mw", "hit");
+    headers.set("x-prerender-mw", isNotFound ? `hit-${upstream.status}` : "hit");
 
     const html = await upstream.text();
     return new Response(html, { status: upstream.status, headers });
