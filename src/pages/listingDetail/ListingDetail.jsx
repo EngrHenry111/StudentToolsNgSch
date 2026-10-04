@@ -8,6 +8,7 @@ import FormattedText from "../../componentsMarketplace/FormattedText";
 import ShareButtons from "../../componentsMarketplace/ShareButtons";
 import ReviewsSection from "../../componentsMarketplace/ReviewsSection";
 import Stars from "../../componentsMarketplace/Stars";
+import { formatViews } from "../../componentsMarketplace/formatViews";
 import { ListingGrid } from "../../componentsMarketplace/ListingCard";
 import "./listingDetail.css";
 
@@ -207,6 +208,7 @@ const ListingDetail = () => {
       <h1>{listing.title}</h1>
       <p className="listing-field">
         {listing.field} · by <Link to={`/publishers/${slug}`}>{listing.publisher.businessName}</Link>
+        {" · "}{formatViews(listing.views)}
         {listing.ratingCount > 0 && (
           <>
             {" · "}

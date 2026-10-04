@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getMyListings, deleteListing, updateListing } from "../apiMarketplace/publisherApi";
 import Loader from "../componentsQuiz/Loader";
+import { formatViews } from "../componentsMarketplace/formatViews";
 import "../pageQuiz/proquiz.css";
 import "./marketplace.css";
 
@@ -70,7 +71,9 @@ const ListingManager = () => {
                     <span className="mkt-listing-title">{listing.title}</span>
                     <span className="mkt-listing-field">{listing.field}</span>
                     <span className="mkt-listing-price">₦{(listing.price / 100).toLocaleString()}</span>
-                    <span style={{ fontSize: 12, color: "#94a3b8" }}>{listing.salesCount} sold</span>
+                    <span style={{ fontSize: 12, color: "#94a3b8" }}>
+                      {formatViews(listing.views)} · {listing.salesCount} sold
+                    </span>
 
                     <div className="mkt-listing-actions">
                       <Link to={`/publisher/listings/${listing._id}/edit`}>Edit</Link>

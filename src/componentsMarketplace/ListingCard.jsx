@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Stars from "./Stars";
+import { formatViews } from "./formatViews";
 import "./listingCard.css";
 
 // One document card, shared by the Research Library, publisher
@@ -29,6 +30,7 @@ const ListingCard = ({ listing, publisherSlug }) => {
         )}
         {listing.ratingCount > 0 && <Stars value={listing.ratingAverage} count={listing.ratingCount} size={13} />}
         <span className="storefront-card-price">₦{(listing.price / 100).toLocaleString()}</span>
+        <span className="storefront-card-views">{formatViews(listing.views)}</span>
       </div>
     </Link>
   );

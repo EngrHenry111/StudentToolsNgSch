@@ -72,6 +72,11 @@
   color: transparent;
 }
 
+.storefront-card-views{
+  font-size: 12px;
+  color: var(--muted);
+}
+
 .storefront-card-publisher{
   font-size: 12px;
   color: var(--muted);
