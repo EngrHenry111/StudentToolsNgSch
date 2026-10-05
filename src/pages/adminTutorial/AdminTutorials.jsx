@@ -48,7 +48,8 @@ const AdminTutorials = () => {
   setBusyId(t._id);
   try{
    await API.put(`/tutorials/${t._id}`, { status });
-   setTutorials(list => list.map(x => x._id === t._id ? { ...x, status } : x));
+   // The server clears publishAt on a manual status change; mirror that.
+   setTutorials(list => list.map(x => x._id === t._id ? { ...x, status, publishAt: undefined } : x));
   }catch(err){
    alert(err?.response?.data?.message || `${verb} failed`);
   }finally{
@@ -149,6 +150,13 @@ const AdminTutorials = () => {
         <span className={`status-badge ${status}`}>
          {status === "published" ? "Published" : "Draft"}
         </span>
+        {status === "draft" && t.publishAt && (
+         <span className="scheduled-note">
+          Goes live {new Date(t.publishAt).toLocaleString(undefined, {
+           day: "numeric", month: "short", hour: "2-digit", minute: "2-digit"
+          })}
+         </span>
+        )}
        </td>
 
        <td className="actions">
