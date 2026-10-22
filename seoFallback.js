@@ -1,0 +1,261 @@
+// Edge SEO fallback — used by middleware.js when Prerender.io can't serve a
+// crawler (no token, subscription lapsed, upstream error).
+//
+// Without this, crawlers get the bare SPA shell: the same homepage <title>,
+// no canonical, no robots tag and an empty <div id="root"> on EVERY URL.
+// Google then folds those URLs together as duplicates ("Duplicate without
+// user-selected canonical", "Google chose different canonical") or leaves
+// them "Discovered – currently not indexed".
+//
+// This builds, from the API, the head tags each page's Helmet would render
+// (title, description, canonical, robots, og:*), the real HTTP status
+// (301 / 404 / 410) and, for tutorials and listings, the article text inside
+// #root. React's createRoot() replaces #root's children on load, so real
+// browsers that somehow reach this see the normal app.
+
+const SITE = "https://studenttoolsng.com";
+const API = "https://studenttoolsserver.onrender.com/api";
+// Server-side view counting skips UAs matching /bot|prerender/.
+const API_UA = "StudentToolsNG-EdgeSEO-bot";
+
+// Keep in sync with src/utils/tutorialCategories.js.
+const CATEGORIES = ["physics", "mathematics", "chemistry", "biology", "programming"];
+
+// Public, indexable fixed routes from App.jsx → [title, description].
+const STATIC_PAGES = {
+  "/": ["Advance Student ToolsNG - Free Academic Tools for Nigerian Students", "Free CGPA, WAEC and JAMB calculators, study planner, quizzes and tutorials built for Nigerian students."],
+  "/tutorials": ["Study Tutorials | StudentToolsNG", "Explore tutorials by subject, topic, and subtopic. Learn faster with structured academic content built for Nigerian students."],
+  "/cgpa-calculator": ["CGPA Calculator | StudentToolsNG", "Calculate your CGPA on the 5-point or 4-point scale used by Nigerian universities."],
+  "/waec-grade-calculator": ["WAEC Grade Calculator | StudentToolsNG", "Convert WAEC scores to grades and check your WAEC result points."],
+  "/jamb-score-calculator": ["JAMB Score Calculator | StudentToolsNG", "Calculate your JAMB aggregate score for university admission screening."],
+  "/gpa-class-calculator": ["GPA Class of Degree Calculator | StudentToolsNG", "Find your class of degree from your GPA or CGPA."],
+  "/study-planner": ["Study Planner | StudentToolsNG", "Plan your study timetable for exams with StudentToolsNG."],
+  "/scholarships": ["Scholarships for Nigerian Students | StudentToolsNG", "Find scholarships open to Nigerian students."],
+  "/admission-predictor": ["Admission Predictor | StudentToolsNG", "Estimate your chances of university admission from your JAMB and post-UTME scores."],
+  "/ai-tutor": ["AI Tutor | StudentToolsNG", "Ask study questions and get step-by-step explanations."],
+  "/tutorials/math-calculator": ["Math Calculator | StudentToolsNG", "Solve maths problems step by step."],
+  "/quiz": ["Practice Quiz | StudentToolsNG", "Practice WAEC, JAMB and university quiz questions."],
+  "/marketplace": ["Research Library | StudentToolsNG Marketplace", "Search research project guides and academic materials by Nigerian publishers."],
+  "/about": ["About | StudentToolsNG", "About StudentToolsNG."],
+  "/contact": ["Contact | StudentToolsNG", "Contact StudentToolsNG."],
+  "/privacy-policy": ["Privacy Policy | StudentToolsNG", "StudentToolsNG privacy policy."],
+  "/terms": ["Terms of Use | StudentToolsNG", "StudentToolsNG terms of use."],
+  "/author": ["Author | StudentToolsNG", "About the author of StudentToolsNG."]
+};
+
+// Routes that exist but aren't ours to describe (account/app pages): pass
+// through untouched.
+const PASS_THROUGH = /^\/(publisher|my-purchases)(\/|$)/i;
+
+const escapeHtml = (s) =>
+  String(s ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+
+const decodeEntities = (s) =>
+  String(s ?? "")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#0?39;|&apos;/g, "'")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&");
+
+// Same double-decode TutorialDetails does (many rows are stored escaped).
+const tutorialHtml = (raw) =>
+  decodeEntities(decodeEntities(raw))
+    .replace(/<script[\s\S]*?<\/script>/gi, "")
+    .replace(/<style[\s\S]*?<\/style>/gi, "")
+    .replace(/\son\w+\s*=\s*("[^"]*"|'[^']*'|[^\s>]+)/gi, "")
+    // The page has its own <h1> (the title); demote content h1s like buildArticle().
+    .replace(/<(\/?)h1\b/gi, "<$1h2");
+
+const plainText = (html) =>
+  decodeEntities(String(html ?? "").replace(/<[^>]+>/g, " ")).replace(/\s+/g, " ").trim();
+
+const paragraphs = (text) =>
+  String(text ?? "")
+    .split(/\n\s*\n/)
+    .map((p) => p.trim())
+    .filter(Boolean)
+    .map((p) => `<p>${escapeHtml(p).replace(/\n/g, "<br>")}</p>`)
+    .join("\n");
+
+const apiGet = async (path) => {
+  const res = await fetch(`${API}${path}`, {
+    headers: { "User-Agent": API_UA, Accept: "application/json" },
+    signal: AbortSignal.timeout(15000)
+  });
+  let data = null;
+  try { data = await res.json(); } catch { /* non-JSON error page */ }
+  return { status: res.status, data };
+};
+
+// Decide what a crawler should get for this path.
+// Returns { status, location?, title, description, canonical?, robots?, ogType?, body? }
+// or null to leave the SPA shell untouched.
+async function describe(pathname) {
+  const path = pathname.replace(/\/+$/, "") || "/";
+  if (PASS_THROUGH.test(path)) return null;
+
+  if (STATIC_PAGES[path]) {
+    const [title, description] = STATIC_PAGES[path];
+    return { status: 200, title, description, canonical: `${SITE}${path === "/" ? "/" : path}` };
+  }
+
+  const parts = path.split("/").filter(Boolean).map((p) => {
+    try { return decodeURIComponent(p); } catch { return p; }
+  });
+
+  // /tutorial/:slug
+  if (parts[0] === "tutorial" && parts.length === 2) {
+    const slug = parts[1];
+    const { status, data } = await apiGet(`/tutorials/${encodeURIComponent(slug)}`);
+    if (status === 404 || status === 410) return notFound(status);
+    if (status !== 200 || !data) return null; // API down — don't guess
+    if (data.redirectTo) return { status: 301, location: `${SITE}${data.redirectTo}` };
+
+    const html = tutorialHtml(data.content);
+    const text = plainText(html);
+    const canonical = `${SITE}/tutorial/${data.slug || slug}`;
+    return {
+      status: 200,
+      title: `${data.title} | StudentToolsNG`,
+      description: (data.excerpt?.trim() || text).slice(0, 160),
+      canonical,
+      ogType: "article",
+      image: data.image,
+      body: `<main><article><h1>${escapeHtml(data.title)}</h1>\n${html}</article></main>`,
+      jsonLd: {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: data.title,
+        description: (data.excerpt?.trim() || text).slice(0, 160),
+        mainEntityOfPage: canonical,
+        datePublished: data.createdAt,
+        dateModified: data.updatedAt || data.createdAt,
+        author: { "@type": "Organization", name: "StudentToolsNG" }
+      }
+    };
+  }
+
+  // /publishers/:slug/:listingSlug
+  if (parts[0] === "publishers" && parts.length === 3) {
+    const [, pub, item] = parts;
+    const { status, data } = await apiGet(
+      `/marketplace/publishers/${encodeURIComponent(pub)}/${encodeURIComponent(item)}`
+    );
+    if (status === 404 || status === 410) return notFound(status);
+    if (status !== 200 || !data?.title) return null;
+
+    const canonical = `${SITE}/publishers/${pub}/${item}`;
+    const text = plainText(data.previewContent);
+    return {
+      status: 200,
+      title: `${data.title} | ${data.field} | StudentToolsNG Marketplace`,
+      description: text.slice(0, 160),
+      canonical,
+      ogType: "article",
+      image: data.coverImageUrl,
+      body: `<main><article><h1>${escapeHtml(data.title)}</h1>\n<p>By ${escapeHtml(data.publisher?.businessName)} · ${escapeHtml(data.field)}</p>\n${paragraphs(data.previewContent)}</article></main>`
+    };
+  }
+
+  // /publishers/:slug
+  if (parts[0] === "publishers" && parts.length === 2) {
+    const { status, data } = await apiGet(`/marketplace/publishers/${encodeURIComponent(parts[1])}`);
+    if (status === 404 || status === 410) return notFound(status);
+    if (status !== 200 || !data) return null;
+    const publisher = data.publisher || data;
+    const name = publisher.businessName || parts[1];
+    return {
+      status: 200,
+      title: `${name} | StudentToolsNG Marketplace`,
+      description: plainText(publisher.description || `Browse research documents published by ${name} on StudentToolsNG.`).slice(0, 160),
+      canonical: `${SITE}/publishers/${parts[1]}`
+    };
+  }
+
+  // /:category(/:topic(/:subtopic)) — listing pages: real, but noindex.
+  if (parts.length <= 3 && CATEGORIES.includes(parts[0].toLowerCase())) {
+    const label = (s) => s.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+    const name = label(parts[parts.length - 1]);
+    return {
+      status: 200,
+      title: `${name} Tutorials | StudentToolsNG`,
+      description: `Browse ${name} tutorials on StudentToolsNG.`,
+      canonical: `${SITE}/${parts.slice(0, 2).join("/")}`,
+      robots: "noindex, follow"
+    };
+  }
+
+  // Anything else falls to App.jsx's "*" route / invalid category → NotFound.
+  return notFound(404);
+}
+
+const notFound = (status) => ({
+  status,
+  title: `${status === 410 ? "Page Removed" : "Page Not Found"} | StudentToolsNG`,
+  description: "",
+  robots: "noindex, follow",
+  body: `<main><h1>${status === 410 ? "410 — Page Removed" : "404 — Page Not Found"}</h1><p><a href="/">Go to Homepage</a> · <a href="/tutorials">Browse Tutorials</a></p></main>`
+});
+
+function inject(shell, page) {
+  const tags = [
+    `<title>${escapeHtml(page.title)}</title>`,
+    page.description && `<meta name="description" content="${escapeHtml(page.description)}" />`,
+    page.canonical && `<link rel="canonical" href="${escapeHtml(page.canonical)}" />`,
+    page.robots && `<meta name="robots" content="${page.robots}" />`,
+    `<meta property="og:type" content="${page.ogType || "website"}" />`,
+    `<meta property="og:title" content="${escapeHtml(page.title)}" />`,
+    page.description && `<meta property="og:description" content="${escapeHtml(page.description)}" />`,
+    page.canonical && `<meta property="og:url" content="${escapeHtml(page.canonical)}" />`,
+    `<meta property="og:image" content="${escapeHtml(page.image || `${SITE}/og-image.png`)}" />`,
+    `<meta property="og:site_name" content="StudentToolsNG" />`,
+    `<meta name="twitter:card" content="summary_large_image" />`,
+    page.jsonLd &&
+      `<script type="application/ld+json">${JSON.stringify(page.jsonLd).replace(/</g, "\\u003c")}</script>`
+  ].filter(Boolean).join("\n  ");
+
+  let html = shell.replace(/<title>[\s\S]*?<\/title>/i, "");
+  html = html.replace(/<\/head>/i, `  ${tags}\n</head>`);
+  if (page.body) {
+    html = html.replace(/<div id="root"><\/div>/i, `<div id="root">${page.body}</div>`);
+  }
+  return html;
+}
+
+// Returns a Response, or null if the caller should fall back to the SPA.
+export async function seoFallback(url, reason) {
+  try {
+    const page = await describe(url.pathname);
+    if (!page) return null;
+
+    const headers = {
+      "x-prerender-mw": `edge-${page.status}:${reason}`,
+      "cache-control": "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400"
+    };
+
+    if (page.status === 301) {
+      return new Response(null, { status: 301, headers: { ...headers, location: page.location } });
+    }
+
+    // x-prerender makes our own middleware pass this straight to the static file.
+    const shellRes = await fetch(`${url.origin}/index.html`, {
+      headers: { "x-prerender": "1" },
+      signal: AbortSignal.timeout(8000)
+    });
+    if (!shellRes.ok) return null;
+    const shell = await shellRes.text();
+
+    return new Response(inject(shell, page), {
+      status: page.status,
+      headers: { ...headers, "content-type": "text/html; charset=utf-8" }
+    });
+  } catch {
+    return null;
+  }
+}

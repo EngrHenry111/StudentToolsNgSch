@@ -14,6 +14,7 @@
 // middleware decided, so you can debug with:  curl -sI -A Googlebot <url>
 
 import { next } from "@vercel/edge";
+import { seoFallback } from "./seoFallback.js";
 
 export const config = {
   matcher: "/:path*"
@@ -45,12 +46,18 @@ export default async function middleware(request) {
   const url = new URL(request.url);
   const ua = request.headers.get("user-agent") || "";
 
-  if (!token) return tag(next(), "skip:no-token");
   if (request.method !== "GET") return tag(next(), "skip:method");
   if (SKIP_EXT.test(url.pathname)) return tag(next(), "skip:asset");
   if (SKIP_PATH.test(url.pathname)) return tag(next(), "skip:path");
   if (request.headers.has("x-prerender")) return tag(next(), "skip:loop");
   if (!BOT_UA.test(ua)) return tag(next(), "skip:not-bot");
+
+  // Prerender unavailable → our own edge render, so crawlers never get the
+  // identical bare shell (see seoFallback.js).
+  const fallback = async (reason) =>
+    (await seoFallback(url, reason)) || tag(next(), `fallback:${reason}`);
+
+  if (!token) return fallback("no-token");
 
   const target = `${PRERENDER_SERVICE}/${url.protocol}//${url.host}${url.pathname}${url.search}`;
 
@@ -84,7 +91,11 @@ export default async function middleware(request) {
     // SPA here would serve a 200 and cause "soft 404" reports.
     const isNotFound = upstream.status === 404 || upstream.status === 410;
 
-    if (!upstream.ok && !isNotFound) return tag(next(), `fallback:upstream-${upstream.status}`);
+    // 503 = Prerender subscription inactive, 429 = free render limit hit.
+    if (!upstream.ok && !isNotFound) {
+      const why = upstream.headers.get("x-prerender-reject-reason");
+      return fallback(`upstream-${upstream.status}${why ? `-${why}` : ""}`);
+    }
 
     // Forward Prerender's response (headers included, so the dashboard's
     // integration check can see its own fingerprint), overriding only the
@@ -102,6 +113,6 @@ export default async function middleware(request) {
     const html = await upstream.text();
     return new Response(html, { status: upstream.status, headers });
   } catch (err) {
-    return tag(next(), `fallback:${err?.name || "error"}`);
+    return fallback(err?.name || "error");
   }
 }
