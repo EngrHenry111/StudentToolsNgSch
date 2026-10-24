@@ -412,3 +412,48 @@ html,body{
     grid-template-columns:1fr;
   }
 }
+/* ================= GUIDE (how-to, topics, worked examples) ================= */
+.math-guide{
+  margin-top:40px;
+  padding:24px;
+  border-radius:16px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.08);
+  color:#cbd5e1;
+  line-height:1.7;
+}
+
+.math-guide h2{
+  color:#e2e8f0;
+  font-size:22px;
+  margin:28px 0 12px;
+}
+
+.math-guide h2:first-child{
+  margin-top:0;
+}
+
+.math-guide h3{
+  color:#00f5ff;
+  font-size:17px;
+  margin:18px 0 6px;
+}
+
+.math-guide ul,
+.math-guide ol{
+  padding-left:22px;
+}
+
+.math-guide li{
+  margin-bottom:6px;
+}
+
+.math-guide a{
+  color:#00f5ff;
+}
+
+@media (max-width:600px){
+  .math-guide{
+    padding:16px;
+  }
+}

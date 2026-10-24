@@ -166,6 +166,25 @@ const Marketplace = () => {
         </>
       )}
 
+      <section className="library-guide">
+        <h2>How the Research Library Works</h2>
+        <ol>
+          <li><strong>Search or browse</strong> by keyword or field of study to find project guides and research documents.</li>
+          <li><strong>Read the free preview:</strong> chapters 1 and 2 of every document are open to read, so you can judge its quality and relevance before paying.</li>
+          <li><strong>Unlock the full document</strong> with a secure online payment if it is what you need. It is then available under My Purchases.</li>
+        </ol>
+
+        <h2>Using Research Materials Responsibly</h2>
+        <p>
+          Documents in the library are guides to help you plan and write your own
+          work: how to frame a research problem, review literature, choose a
+          methodology, design a questionnaire and present results. Use them to learn
+          the structure and approach, collect your own data, and always cite any source
+          you quote or adapt. Submitting someone else's work as your own is
+          plagiarism and can lead to serious academic penalties.
+        </p>
+      </section>
+
       <div className="library-cta">
         <h2>Have research or project work to sell?</h2>
         <p>

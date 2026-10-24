@@ -95,3 +95,20 @@
 .library-cta-btn {
   display: inline-block;
 }
+
+.library-guide {
+  margin-top: 40px;
+  line-height: 1.7;
+}
+
+.library-guide h2 {
+  margin: 24px 0 10px;
+}
+
+.library-guide ol {
+  padding-left: 22px;
+}
+
+.library-guide li {
+  margin-bottom: 6px;
+}

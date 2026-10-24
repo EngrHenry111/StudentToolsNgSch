@@ -150,7 +150,45 @@ const Contact = () => {
   <a href="/cgpa-calculator">CGPA Calculator</a>, 
   <a href="/waec-grade-calculator">WAEC Calculator</a>, and 
   <a href="/jamb-score-calculator">JAMB Calculator</a>.
-</p>  
+</p>
+
+  <h2>What to Include in Your Message</h2>
+  <ul>
+    <li>The page or tool you were using, for example the CGPA calculator or a particular tutorial.</li>
+    <li>What you expected to happen and what actually happened.</li>
+    <li>The device and browser you used, if you are reporting a problem.</li>
+    <li>For a tutorial request, the subject, topic and level (WAEC, JAMB or university).</li>
+  </ul>
+  <p>Clear details help us answer you faster and fix problems for every student.</p>
+
+  <h2>Frequently Asked Questions</h2>
+  <h3>Are the tools on StudentToolsNG free?</h3>
+  <p>
+    Yes. The CGPA, WAEC, JAMB and GPA class calculators, the study planner, the
+    math calculator and the tutorials are free to use.
+  </p>
+  <h3>How is my CGPA calculated?</h3>
+  <p>
+    Each course's grade point is multiplied by its credit units, the results are
+    added together, and the total is divided by the total units. Our
+    <a href="/cgpa-calculator"> CGPA Calculator</a> does this for you and explains
+    how CGPA works.
+  </p>
+  <h3>Can I suggest a tutorial topic?</h3>
+  <p>
+    Yes. Send us the subject and topic using the form above. We publish new
+    physics, mathematics, biology, chemistry and programming tutorials regularly.
+  </p>
+  <h3>Can I sell my research or project materials?</h3>
+  <p>
+    Yes. Publishers can list research documents in our
+    <a href="/marketplace"> Research Library</a> and set their own price.
+  </p>
+  <h3>How is my information used?</h3>
+  <p>
+    Please read our <a href="/privacy-policy">Privacy Policy</a> for details of the
+    information we collect and how it is used.
+  </p>
 
 </section>
 
