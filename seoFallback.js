@@ -23,7 +23,7 @@ const CATEGORIES = ["physics", "mathematics", "chemistry", "biology", "programmi
 
 // Public, indexable fixed routes from App.jsx → [title, description].
 const STATIC_PAGES = {
-  "/": ["Advance Student ToolsNG - Free Academic Tools for Nigerian Students", "Free CGPA, WAEC and JAMB calculators, study planner, quizzes and tutorials built for Nigerian students."],
+  "/": ["StudentToolsNG - Free CGPA, WAEC & JAMB Calculators for Nigerian Students", "StudentToolsNG (Student Tools NG) gives Nigerian students free CGPA, WAEC and JAMB calculators, a study planner, quizzes and tutorials."],
   "/tutorials": ["Study Tutorials | StudentToolsNG", "Explore tutorials by subject, topic, and subtopic. Learn faster with structured academic content built for Nigerian students."],
   "/cgpa-calculator": ["CGPA Calculator | StudentToolsNG", "Calculate your CGPA on the 5-point or 4-point scale used by Nigerian universities."],
   "/waec-grade-calculator": ["WAEC Grade Calculator | StudentToolsNG", "Convert WAEC scores to grades and check your WAEC result points."],
@@ -42,6 +42,26 @@ const STATIC_PAGES = {
   "/terms": ["Terms of Use | StudentToolsNG", "StudentToolsNG terms of use."],
   "/author": ["Author | StudentToolsNG", "About the author of StudentToolsNG."]
 };
+
+// Homepage text for crawlers: the brand name plus links to the main tools,
+// mirroring the hero and "Popular Student Tools" sections of Home.jsx.
+const HOME_BODY = `<main>
+<h1>StudentToolsNG: Free Academic Tools for Nigerian Students</h1>
+<p>StudentToolsNG (Student Tools NG) helps Nigerian students calculate CGPA, WAEC grades and JAMB scores, and learn with free study tutorials, quizzes and research guides.</p>
+<h2>Popular Student Tools</h2>
+<ul>
+<li><a href="/cgpa-calculator">CGPA Calculator</a></li>
+<li><a href="/waec-grade-calculator">WAEC Grade Calculator</a></li>
+<li><a href="/jamb-score-calculator">JAMB Score Calculator</a></li>
+<li><a href="/gpa-class-calculator">GPA Class of Degree Calculator</a></li>
+<li><a href="/admission-predictor">Admission Predictor</a></li>
+<li><a href="/study-planner">Study Planner</a></li>
+<li><a href="/quiz">Practice Quiz</a></li>
+<li><a href="/tutorials">Study Tutorials</a></li>
+<li><a href="/scholarships">Scholarships for Nigerian Students</a></li>
+<li><a href="/marketplace">Research Library</a></li>
+</ul>
+</main>`;
 
 // Routes that exist but aren't ours to describe (account/app pages): pass
 // through untouched.
@@ -102,7 +122,13 @@ async function describe(pathname) {
 
   if (STATIC_PAGES[path]) {
     const [title, description] = STATIC_PAGES[path];
-    return { status: 200, title, description, canonical: `${SITE}${path === "/" ? "/" : path}` };
+    return {
+      status: 200,
+      title,
+      description,
+      canonical: `${SITE}${path === "/" ? "/" : path}`,
+      ...(path === "/" && { body: HOME_BODY })
+    };
   }
 
   const parts = path.split("/").filter(Boolean).map((p) => {

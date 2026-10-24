@@ -71,12 +71,12 @@ StudentToolsNG - Free CGPA, WAEC & JAMB Calculators for Nigerian Students
 
 <meta
  name="description"
- content="Free academic tools for Nigerian students including CGPA calculator, WAEC grade calculator, JAMB score calculator, GPA class converter, and study tutorials."
+ content="StudentToolsNG (Student Tools NG) gives Nigerian students free CGPA, WAEC and JAMB calculators, a GPA class converter, quizzes and study tutorials."
 />
 
 <meta
  name="keywords"
- content="CGPA calculator Nigeria, WAEC calculator, JAMB score calculator, GPA calculator Nigeria, student tools Nigeria"
+ content="StudentToolsNG, Student Tools NG, CGPA calculator Nigeria, WAEC calculator, JAMB score calculator, GPA calculator Nigeria, student tools Nigeria"
 />
 
 {/* Canonical */}
@@ -128,7 +128,7 @@ StudentToolsNG - Free CGPA, WAEC & JAMB Calculators for Nigerian Students
  <section className="hero">
 
  <h1>
- Free Academic Tools for Nigerian Students
+ StudentToolsNG: Free Academic Tools for Nigerian Students
  </h1>
 
  <p>
