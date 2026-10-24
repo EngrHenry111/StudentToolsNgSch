@@ -24,3 +24,21 @@ body{
   --text:#e2e8f0;
   --muted:#94a3b8;
 }
+/* SELECT DROPDOWNS
+   Selects use a translucent background, so the native option list falls back
+   to white while inheriting light text. Force a dark list on all platforms. */
+
+select{
+  color-scheme:dark;
+}
+
+select option,
+select optgroup{
+  background-color:#0f172a;
+  color:var(--text);
+}
+
+select option:checked{
+  background-color:#1e293b;
+  color:var(--primary);
+}

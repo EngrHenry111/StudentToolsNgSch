@@ -306,6 +306,12 @@
   outline:none;
   cursor:pointer;
   transition:0.25s;
+  color-scheme:dark;
+}
+
+.tutorial-filters select option{
+  background-color:#0f172a;
+  color:#e2e8f0;
 }
 
 .tutorial-filters select:focus{
