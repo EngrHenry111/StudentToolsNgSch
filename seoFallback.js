@@ -13,6 +13,8 @@
 // #root. React's createRoot() replaces #root's children on load, so real
 // browsers that somehow reach this see the normal app.
 
+import { STATIC_BODIES } from "./seoStaticPages.js";
+
 const SITE = "https://studenttoolsng.com";
 const API = "https://studenttoolsserver.onrender.com/api";
 // Server-side view counting skips UAs matching /bot|prerender/.
@@ -127,7 +129,7 @@ async function describe(pathname) {
       title,
       description,
       canonical: `${SITE}${path === "/" ? "/" : path}`,
-      ...(path === "/" && { body: HOME_BODY })
+      body: path === "/" ? HOME_BODY : STATIC_BODIES[path]
     };
   }
 
