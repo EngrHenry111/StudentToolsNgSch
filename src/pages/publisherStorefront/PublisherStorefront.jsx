@@ -39,12 +39,18 @@ const PublisherStorefront = () => {
   }
 
   if (loading || !data) {
+    // Crawler snapshot from the edge (see main.jsx), only for this URL.
+    const snapshot = window.__EDGE_SNAPSHOT__;
+    const edge = snapshot && snapshot.path === `/publishers/${slug}` ? snapshot : null;
     return (
       <div className="storefront-page">
         <Helmet>
-          <title>Loading publisher… | StudentToolsNG</title>
+          <title>{edge ? edge.title : "Loading publisher… | StudentToolsNG"}</title>
+          <link rel="canonical" href={`${SITE}/publishers/${slug}`} />
         </Helmet>
-        <p>Loading...</p>
+        {edge
+          ? <div dangerouslySetInnerHTML={{ __html: edge.html }} />
+          : <p>Loading...</p>}
       </div>
     );
   }

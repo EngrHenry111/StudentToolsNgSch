@@ -113,8 +113,8 @@ Explore tools created by Henry such as the
 <h2>Articles by Henry Akpan</h2>
 
 <ul>
-  <li><a href="/tutorial/how-to-calculate-cgpa">How to Calculate CGPA</a></li>
-  <li><a href="/tutorial/waec-grading-system">WAEC Grading System</a></li>
+  <li><a href="/cgpa-calculator">How to Calculate CGPA</a></li>
+  <li><a href="/waec-grade-calculator">WAEC Grading System</a></li>
 </ul>
 </div>
     </div>

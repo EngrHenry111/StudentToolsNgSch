@@ -113,12 +113,20 @@ const ListingDetail = () => {
   }
 
   if (loading || !listing) {
+    // Crawler snapshot from the edge (see main.jsx), only for this URL.
+    // seoFallback escapes the plain-text listing content before building it.
+    const snapshot = window.__EDGE_SNAPSHOT__;
+    const edge =
+      snapshot && snapshot.path === `/publishers/${slug}/${listingSlug}` ? snapshot : null;
     return (
       <div className="listing-page">
         <Helmet>
-          <title>Loading document… | StudentToolsNG</title>
+          <title>{edge ? edge.title : "Loading document… | StudentToolsNG"}</title>
+          <link rel="canonical" href={`${SITE}/publishers/${slug}/${listingSlug}`} />
         </Helmet>
-        <p>Loading...</p>
+        {edge
+          ? <div dangerouslySetInnerHTML={{ __html: edge.html }} />
+          : <p>Loading...</p>}
       </div>
     );
   }

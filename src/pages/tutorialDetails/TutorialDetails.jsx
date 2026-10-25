@@ -335,13 +335,18 @@ const generateFAQ = (content)=>{
  }
 
  if(!tutorial){
+  // Crawler snapshot from the edge (see main.jsx), only for this URL.
+  const snapshot = window.__EDGE_SNAPSHOT__;
+  const edge = snapshot && snapshot.path === `/tutorial/${slug}` ? snapshot : null;
   return (
    <div className="tutorial-layt">
     <Helmet>
-     <title>Loading tutorial… | StudentToolsNG</title>
+     <title>{edge ? edge.title : "Loading tutorial… | StudentToolsNG"}</title>
      <link rel="canonical" href={`${SITE}/tutorial/${slug}`} />
     </Helmet>
-    <p>Loading...</p>
+    {edge
+     ? <div dangerouslySetInnerHTML={{ __html: edge.html }} />
+     : <p>Loading...</p>}
    </div>
   );
  }
