@@ -12,6 +12,8 @@ import JAMBScore from "./pages/jamb/JAMBScore";
 import Scholarships from "./pages/scholarships/Scholarships";
 import StudyPlanner from "./pages/studyPlanner/StudyPlanner";
 import GPAClass from "./pages/gpaclass/GPAClass";
+import AgeCalculator from "./pages/age/AgeCalculator";
+import AgeTracker from "./pages/age/AgeTracker";
 import Tutorials from "./pages/tutorials/Tutorials";
 import TutorialDetails from "./pages/tutorialDetails/TutorialDetails";
 import Contact from "./pages/contact/Contact";
@@ -116,6 +118,8 @@ function App() {
     <Route path="/waec-grade-calculator" element={<WAECCalculator />} />
     <Route path="/jamb-score-calculator" element={<JAMBScore />} />
     <Route path="/gpa-class-calculator" element={<GPAClass />} />
+    <Route path="/age-calculator" element={<AgeCalculator />} />
+    <Route path="/age-tracker" element={<AgeTracker />} />
     <Route path="/tutorials" element={<Tutorials />} />
     <Route path="/tutorial/:slug" element={<TutorialDetails />}/>
     <Route path="/:category" element={<Tutorials />} />

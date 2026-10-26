@@ -31,6 +31,8 @@ const STATIC_PAGES = {
   "/waec-grade-calculator": ["WAEC Grade Calculator | StudentToolsNG", "Convert WAEC scores to grades and check your WAEC result points."],
   "/jamb-score-calculator": ["JAMB Score Calculator | StudentToolsNG", "Calculate your JAMB aggregate score for university admission screening."],
   "/gpa-class-calculator": ["GPA Class of Degree Calculator | StudentToolsNG", "Find your class of degree from your GPA or CGPA."],
+  "/age-calculator": ["Age Calculator | Exact Age in Years, Months and Days", "Free age calculator: find your exact age in years, months and days, your age on any date, days until your next birthday and whether you meet an age limit."],
+  "/age-tracker": ["Age Tracker | Track Birthdays and Ages of Family and Friends", "Free age and birthday tracker: save family, friends or students, see everyone's exact age, upcoming birthdays and milestones, and export a birthday calendar."],
   "/study-planner": ["Study Planner | StudentToolsNG", "Plan your study timetable for exams with StudentToolsNG."],
   "/scholarships": ["Scholarships for Nigerian Students | StudentToolsNG", "Find scholarships open to Nigerian students."],
   "/admission-predictor": ["Admission Predictor | StudentToolsNG", "Estimate your chances of university admission from your JAMB and post-UTME scores."],
@@ -56,6 +58,8 @@ const HOME_BODY = `<main>
 <li><a href="/waec-grade-calculator">WAEC Grade Calculator</a></li>
 <li><a href="/jamb-score-calculator">JAMB Score Calculator</a></li>
 <li><a href="/gpa-class-calculator">GPA Class of Degree Calculator</a></li>
+<li><a href="/age-calculator">Age Calculator</a></li>
+<li><a href="/age-tracker">Age Tracker</a></li>
 <li><a href="/admission-predictor">Admission Predictor</a></li>
 <li><a href="/study-planner">Study Planner</a></li>
 <li><a href="/quiz">Practice Quiz</a></li>

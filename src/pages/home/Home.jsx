@@ -184,6 +184,22 @@ StudentToolsNG - Free CGPA, WAEC & JAMB Calculators for Nigerian Students
  </div>
 
  <div className="tool-card">
+ <h3>Age Calculator</h3>
+ <p>Find your exact age in years, months and days, or check an age limit.</p>
+ <Link to="/age-calculator">
+ Open Tool
+ </Link>
+ </div>
+
+ <div className="tool-card">
+ <h3>Age Tracker</h3>
+ <p>Track the ages and upcoming birthdays of family, friends or classmates.</p>
+ <Link to="/age-tracker">
+ Open Tool
+ </Link>
+ </div>
+
+ <div className="tool-card">
  <h3>Maths Calculator</h3>
  <p> Calculate 
     Percentage, 

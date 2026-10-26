@@ -20,6 +20,8 @@ const PAGES = {
   "/waec-grade-calculator": "src/pages/waec/WAECCalculator.jsx",
   "/jamb-score-calculator": "src/pages/jamb/JAMBScore.jsx",
   "/gpa-class-calculator": "src/pages/gpaclass/GPAClass.jsx",
+  "/age-calculator": "src/pages/age/AgeCalculator.jsx",
+  "/age-tracker": "src/pages/age/AgeTracker.jsx",
   "/study-planner": "src/pages/studyPlanner/StudyPlanner.jsx",
   "/scholarships": "src/pages/scholarships/Scholarships.jsx",
   "/admission-predictor": "src/pages/admismissionPreditior/AdmissionPredictor.jsx",

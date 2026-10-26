@@ -125,6 +125,7 @@ const handleChange = (e)=>{
         <li><Link to="/gpa-class-calculator" onClick={closeMenu}>GPA</Link></li>
         <li><Link to="/waec-grade-calculator" onClick={closeMenu}>WAEC</Link></li>
         <li><Link to="/jamb-score-calculator" onClick={closeMenu}>JAMB</Link></li>
+        <li><Link to="/age-calculator" onClick={closeMenu}>Age</Link></li>
         <li><Link to="/tutorials" onClick={closeMenu}>Tutorials</Link></li>
         <li><Link to="/ai-tutor" onClick={closeMenu}>AI Tutor</Link></li>
         <li><Link to="/admission-predictor" onClick={closeMenu}>Admission</Link></li>

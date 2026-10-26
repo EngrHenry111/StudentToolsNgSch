@@ -1,0 +1,442 @@
+/* Shared by AgeCalculator.jsx and AgeTracker.jsx. Same look as the other
+   calculators (gpaclass.css): dark glass panels, cyan→purple accents, and a
+   white reading section for the guide text. */
+
+/* ================= CONTAINER ================= */
+
+.age-page{
+  width:100%;
+  max-width:960px;
+  margin:auto;
+  padding:60px 20px;
+  color:#e2e8f0;
+  box-sizing:border-box;
+}
+
+.age-page *,
+.age-page *::before,
+.age-page *::after{
+  box-sizing:border-box;
+}
+
+.age-page > h1{
+  text-align:center;
+  font-size:36px;
+  margin-bottom:10px;
+  background:linear-gradient(90deg,#00f5ff,#7b2ff7);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.age-intro{
+  text-align:center;
+  color:#94a3b8;
+  margin:0 auto 30px;
+  max-width:640px;
+}
+
+/* ================= PANELS ================= */
+
+.age-panel{
+  position:relative;
+  padding:24px;
+  margin-bottom:24px;
+  border-radius:18px;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(14px);
+}
+
+.age-panel::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:18px;
+  padding:1px;
+  background:linear-gradient(120deg,#00f5ff,#7b2ff7);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  pointer-events:none;
+}
+
+.age-panel h2{
+  font-size:20px;
+  margin:0 0 16px;
+  color:#e2e8f0;
+}
+
+.age-muted{
+  color:#94a3b8;
+  font-size:14px;
+}
+
+/* ================= FORMS ================= */
+
+.age-form{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:16px;
+  align-items:end;
+}
+
+.age-field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  font-size:14px;
+  color:#94a3b8;
+}
+
+.age-field input,
+.age-field select,
+.age-toolbar input,
+.age-toolbar select{
+  width:100%;
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.12);
+  background:rgba(255,255,255,0.05);
+  color:#e2e8f0;
+  font-size:15px;
+  outline:none;
+  color-scheme:dark;
+}
+
+.age-field input:focus,
+.age-field select:focus,
+.age-toolbar input:focus,
+.age-toolbar select:focus{
+  border-color:#00f5ff;
+  box-shadow:0 0 10px rgba(0,245,255,0.3);
+}
+
+.age-btn{
+  padding:12px 22px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(90deg,#00f5ff,#7b2ff7);
+  color:#fff;
+  cursor:pointer;
+  font-size:15px;
+  transition:transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.age-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 0 15px rgba(0,245,255,0.6);
+}
+
+.age-btn-ghost{
+  padding:10px 16px;
+  border-radius:30px;
+  border:1px solid rgba(255,255,255,0.18);
+  background:transparent;
+  color:#e2e8f0;
+  cursor:pointer;
+  font-size:14px;
+}
+
+.age-btn-ghost:hover{
+  border-color:#00f5ff;
+  color:#00f5ff;
+}
+
+.age-btn-danger:hover{
+  border-color:#f87171;
+  color:#f87171;
+}
+
+.age-error{
+  margin-top:14px;
+  color:#fca5a5;
+  font-size:14px;
+}
+
+/* ================= RESULTS ================= */
+
+.age-headline{
+  text-align:center;
+  margin:28px 0 20px;
+}
+
+.age-headline strong{
+  display:block;
+  font-size:30px;
+  line-height:1.25;
+  color:#00f5ff;
+}
+
+.age-headline span{
+  color:#94a3b8;
+  font-size:14px;
+}
+
+.age-stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:12px;
+}
+
+.age-stat{
+  padding:14px;
+  border-radius:14px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+}
+
+.age-stat b{
+  display:block;
+  font-size:20px;
+  color:#e2e8f0;
+  font-variant-numeric:tabular-nums;
+  overflow-wrap:anywhere;
+}
+
+.age-stat small{
+  color:#94a3b8;
+  font-size:13px;
+}
+
+.age-banner{
+  margin-top:16px;
+  padding:14px 16px;
+  border-radius:14px;
+  background:rgba(0,245,255,0.08);
+  border:1px solid rgba(0,245,255,0.25);
+}
+
+.age-verdict-ok{
+  background:rgba(34,197,94,0.1);
+  border-color:rgba(34,197,94,0.4);
+}
+
+.age-verdict-no{
+  background:rgba(248,113,113,0.1);
+  border-color:rgba(248,113,113,0.4);
+}
+
+/* ================= TRACKER ================= */
+
+.age-toolbar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:16px;
+}
+
+.age-toolbar input{
+  flex:1 1 200px;
+  width:auto;
+}
+
+.age-toolbar select{
+  flex:0 1 220px;
+  width:auto;
+}
+
+.age-list{
+  display:grid;
+  gap:12px;
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.age-person{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:10px 16px;
+  padding:16px;
+  border-radius:14px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+}
+
+.age-person.is-birthday{
+  border-color:rgba(0,245,255,0.6);
+  box-shadow:0 0 18px rgba(0,245,255,0.15);
+}
+
+.age-person h3{
+  margin:0 0 4px;
+  font-size:17px;
+  color:#e2e8f0;
+  overflow-wrap:anywhere;
+}
+
+.age-person p{
+  margin:2px 0;
+  color:#cbd5e1;
+  font-size:14px;
+}
+
+.age-tag{
+  display:inline-block;
+  margin-left:8px;
+  padding:2px 8px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:normal;
+  color:#94a3b8;
+  border:1px solid rgba(255,255,255,0.15);
+}
+
+.age-person-actions{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  align-items:stretch;
+}
+
+.age-countdown{
+  text-align:right;
+  white-space:nowrap;
+}
+
+.age-countdown b{
+  display:block;
+  font-size:24px;
+  color:#00f5ff;
+  font-variant-numeric:tabular-nums;
+}
+
+.age-countdown small{
+  color:#94a3b8;
+}
+
+.age-live{
+  font-size:28px;
+  font-variant-numeric:tabular-nums;
+  color:#00f5ff;
+  text-align:center;
+  overflow-wrap:anywhere;
+}
+
+.age-upcoming{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.age-upcoming li{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  padding:8px 0;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  font-size:14px;
+}
+
+.age-upcoming li:last-child{
+  border-bottom:none;
+}
+
+.age-actions-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.age-empty{
+  text-align:center;
+  padding:30px 10px;
+  color:#94a3b8;
+}
+
+/* ================= GUIDE CONTENT ================= */
+
+.age-content{
+  max-width:900px;
+  margin:40px auto 0;
+  padding:30px 24px;
+  background:#ffffff;
+  border-radius:14px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.06);
+  line-height:1.8;
+}
+
+.age-content h2{
+  margin-top:28px;
+  margin-bottom:10px;
+  font-size:20px;
+  font-weight:600;
+  color:#0f172a;
+}
+
+.age-content h2:first-child{
+  margin-top:0;
+}
+
+.age-content p{
+  color:#475569;
+  font-size:15px;
+  margin-bottom:16px;
+}
+
+.age-content ul,
+.age-content ol{
+  padding-left:20px;
+  margin-bottom:16px;
+}
+
+.age-content li{
+  margin-bottom:8px;
+  color:#334155;
+  font-size:15px;
+}
+
+.age-content strong{
+  color:#0f172a;
+}
+
+.age-content a{
+  color:#2563eb;
+  font-weight:500;
+  text-decoration:none;
+}
+
+.age-content a:hover{
+  text-decoration:underline;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width:768px){
+  .age-page > h1{
+    font-size:28px;
+  }
+  .age-headline strong{
+    font-size:24px;
+  }
+}
+
+@media (max-width:600px){
+  .age-page{
+    padding:30px 16px;
+  }
+  .age-page > h1{
+    font-size:24px;
+  }
+  .age-panel{
+    padding:18px 16px;
+  }
+  .age-person{
+    grid-template-columns:1fr;
+  }
+  .age-countdown{
+    text-align:left;
+  }
+  .age-person-actions{
+    flex-direction:row;
+    flex-wrap:wrap;
+  }
+  .age-live{
+    font-size:22px;
+  }
+  .age-content{
+    padding:22px 16px;
+  }
+}
