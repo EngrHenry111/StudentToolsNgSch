@@ -246,7 +246,13 @@ function inject(shell, page) {
     `<meta name="twitter:card" content="summary_large_image" />`,
     page.jsonLd &&
       `<script type="application/ld+json">${JSON.stringify(page.jsonLd).replace(/</g, "\\u003c")}</script>`
-  ].filter(Boolean).join("\n  ");
+  ]
+    .filter(Boolean)
+    // data-rh marks these as react-helmet tags, so when the page's own
+    // <Helmet> mounts it replaces them instead of adding a second canonical
+    // (Google may ignore canonicals when there are several).
+    .map((t) => (t.startsWith("<title>") ? t : t.replace(/^<(\w+)/, '<$1 data-rh="true"')))
+    .join("\n  ");
 
   let html = shell.replace(/<title>[\s\S]*?<\/title>/i, "");
   html = html.replace(/<\/head>/i, `  ${tags}\n</head>`);
