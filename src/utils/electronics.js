@@ -352,6 +352,176 @@ export function combine(values, kind) {
   };
 }
 
+/* ============ Series / parallel circuit questions (with working) ============ */
+
+// Numbers as a student would write them: up to 4 significant figures.
+export const fmt = (n) =>
+  Number(Number(n).toPrecision(4)).toLocaleString("en-NG", { maximumFractionDigits: 6 });
+
+const gcd = (a, b) => (b ? gcd(b, a % b) : a);
+const lcm = (a, b) => (a / gcd(a, b)) * b;
+
+// "1/R = 1/6 + 1/3 = 1/6 + 2/6 = 3/6, so R = 6 ÷ 3 = 2 Ω" — exact fractions
+// when the resistances are whole numbers, decimals otherwise.
+export function parallelWorking(rs) {
+  const sum = rs.reduce((a, r) => a + 1 / r, 0);
+  const R = 1 / sum;
+  const first = rs.map((r) => `1/${fmt(r)}`).join(" + ");
+  const whole = rs.every((r) => Number.isInteger(r));
+  const L = whole ? rs.reduce(lcm, 1) : Infinity;
+  const lines = [];
+  // Fractions only while the common denominator stays readable.
+  if (L <= 1000) {
+    const parts = rs.map((r) => L / r);
+    const top = parts.reduce((a, b) => a + b, 0);
+    const middle = parts.map((p) => `${p}/${L}`).join(" + ");
+    const sameAsFirst = rs.every((r) => r === L);
+    lines.push(
+      `1/R = ${first}${sameAsFirst || rs.length === 1 ? "" : ` = ${middle}`} = ${top}/${L}, so R = ${L} ÷ ${top} = ${fmt(R)} Ω`
+    );
+  } else {
+    const decimals = rs.map((r) => fmt(1 / r)).join(" + ");
+    lines.push(`1/R = ${first} = ${decimals} = ${fmt(sum)}, so R = 1 ÷ ${fmt(sum)} = ${fmt(R)} Ω`);
+  }
+  if (rs.length === 2) {
+    const [a, b] = rs;
+    lines.push(
+      `(Or use product ÷ sum: R = (${fmt(a)} × ${fmt(b)}) ÷ (${fmt(a)} + ${fmt(b)}) = ${fmt(a * b)} ÷ ${fmt(a + b)} = ${fmt(R)} Ω)`
+    );
+  }
+  return { R, lines };
+}
+
+const close = (a, b) => Math.abs(a - b) <= Math.max(Math.abs(b), 1e-12) * 1e-3;
+
+// Solve a series or parallel resistor circuit and write out the working.
+// Give the supply as `voltage` (emf if `internal` > 0) or as `current`.
+export function solveCircuit({ connection, resistors, voltage = null, current = null, internal = 0 }) {
+  const rs = resistors;
+  if (!rs.length) throw new Error("Enter at least one resistor.");
+  if (rs.some((r) => !(r > 0))) throw new Error("Resistances must be greater than zero.");
+  const r = internal || 0;
+  const steps = [];
+  const dupes = new Set(rs).size !== rs.length;
+  const name = (i) => (dupes ? `R${i + 1} (${fmt(rs[i])} Ω)` : `${fmt(rs[i])} Ω`);
+
+  let R;
+  if (connection === "series" || rs.length === 1) {
+    R = rs.reduce((a, b) => a + b, 0);
+    steps.push(rs.length > 1 ? `Total R = ${rs.map(fmt).join(" + ")} = ${fmt(R)} Ω` : `R = ${fmt(R)} Ω`);
+  } else {
+    const p = parallelWorking(rs);
+    R = p.R;
+    steps.push(...p.lines);
+  }
+
+  let I = null;
+  let V = null; // voltage across the external resistors
+  if (voltage !== null) {
+    if (r > 0) {
+      steps.push(`Total resistance including the internal resistance = R + r = ${fmt(R)} + ${fmt(r)} = ${fmt(R + r)} Ω`);
+      I = voltage / (R + r);
+      steps.push(`I = E ÷ (R + r) = ${fmt(voltage)} ÷ ${fmt(R + r)} = ${fmt(I)} A`);
+      V = I * R;
+      steps.push(`Terminal p.d. V = I × R = ${fmt(I)} × ${fmt(R)} = ${fmt(V)} V`);
+      steps.push(`Lost volts = I × r = ${fmt(I)} × ${fmt(r)} = ${fmt(I * r)} V (check: ${fmt(V)} + ${fmt(I * r)} = ${fmt(voltage)} V ✓)`);
+    } else {
+      I = voltage / R;
+      V = voltage;
+      steps.push(`I = V ÷ R = ${fmt(voltage)} ÷ ${fmt(R)} = ${fmt(I)} A`);
+    }
+  } else if (current !== null) {
+    I = current;
+    V = I * R;
+    steps.push(`V = I × R = ${fmt(I)} × ${fmt(R)} = ${fmt(V)} V`);
+    if (r > 0) {
+      steps.push(`Emf E = I × (R + r) = ${fmt(I)} × ${fmt(R + r)} = ${fmt(I * (R + r))} V`);
+    }
+  }
+
+  const each = [];
+  if (I !== null) {
+    if (connection === "series" || rs.length === 1) {
+      rs.forEach((x, i) => {
+        const v = I * x;
+        each.push({ r: x, v, i: I, p: I * I * x });
+        if (rs.length > 1) steps.push(`V across ${name(i)} = ${fmt(I)} × ${fmt(x)} = ${fmt(v)} V`);
+      });
+      if (rs.length > 1) {
+        const total = each.reduce((a, e) => a + e.v, 0);
+        steps.push(`(check: ${each.map((e) => fmt(e.v)).join(" + ")} = ${fmt(total)} V${close(total, V) ? " ✓" : ""})`);
+      }
+    } else {
+      steps.push(`In parallel every resistor has the same ${fmt(V)} V across it.`);
+      rs.forEach((x, i) => {
+        const ix = V / x;
+        each.push({ r: x, v: V, i: ix, p: V * ix });
+        steps.push(`Current through ${name(i)} = ${fmt(V)} ÷ ${fmt(x)} = ${fmt(ix)} A`);
+      });
+      const total = each.reduce((a, e) => a + e.i, 0);
+      steps.push(`(check: ${each.map((e) => fmt(e.i)).join(" + ")} = ${fmt(total)} A${close(total, I) ? " ✓" : ""})`);
+    }
+    const P = V * I;
+    steps.push(`Power in the resistors P = V × I = ${fmt(V)} × ${fmt(I)} = ${fmt(P)} W`);
+  }
+
+  return { R, I, V, each, steps, power: I !== null ? V * I : null };
+}
+
+// Pull the numbers out of a typed question such as "A 24 V supply is
+// connected to 4 Ω and 8 Ω resistors in series. Find the current…".
+// Worked solutions pasted along with the question are ignored.
+export function parseCircuitQuestion(text) {
+  let q = String(text || "");
+  // Stop at the first line of working ("Total R = …", "I = 24 ÷ 12 …",
+  // "1/R = …", "V across 4 Ω = …").
+  const lines = q.split(/\n/);
+  const cut = lines.findIndex((l) =>
+    /^\s*(total\s+r\b|r\s*=|i\s*=|v\s*=|v\s+across|1\s*\/\s*r|p\s*=|current\s+through|check\b|answer\b|solution\b)/i.test(l)
+  );
+  if (cut > 0) q = lines.slice(0, cut).join(" ");
+  q = q
+    .replace(/[ΩΩ]/g, " ohm ")
+    .replace(/\bohms?\b/gi, " ohm ")
+    .replace(/(\d),(\d{3})\b/g, "$1$2");
+
+  const num = "(\\d+(?:\\.\\d+)?)";
+  const scale = { k: 1e3, K: 1e3, M: 1e6, m: 1e-3 };
+  const value = (n, p) => Number(n) * (p ? scale[p] : 1);
+
+  let internal = 0;
+  const ir = new RegExp(`internal resistance(?:\\s+of)?\\s*(?:is\\s*)?${num}\\s*(k|K|M)?\\s*-?\\s*ohm`, "i").exec(q);
+  if (ir) {
+    internal = value(ir[1], ir[2]);
+    q = q.replace(ir[0], " ");
+  }
+
+  const resistors = [];
+  const rx = new RegExp(`${num}\\s*(k|K|M)?\\s*-?\\s*ohm`, "g");
+  let m;
+  while ((m = rx.exec(q))) resistors.push(value(m[1], m[2]));
+
+  const vm = new RegExp(`${num}\\s*(k|m)?\\s*-?\\s*(?:V|volts?)\\b`).exec(q);
+  const am = new RegExp(`${num}\\s*(m)?\\s*-?\\s*(?:A|amps?|amperes?)\\b`).exec(q);
+
+  const series = /\bseries\b/i.test(q);
+  const parallel = /\bparallel\b/i.test(q);
+  const warnings = [];
+  if (series && parallel) {
+    warnings.push("The question mentions both series and parallel. Mixed circuits aren't supported yet: choose the connection below, or work out the parallel group first and enter its total as one resistor.");
+  }
+  if (!resistors.length) warnings.push("No resistances found. Write them with a unit, for example 4 Ω or 4 ohms.");
+
+  return {
+    connection: series && !parallel ? "series" : parallel && !series ? "parallel" : null,
+    resistors,
+    voltage: vm ? value(vm[1], vm[2]) : null,
+    current: am && !vm ? value(am[1], am[2]) : null,
+    internal,
+    warnings
+  };
+}
+
 export function voltageDivider(vin, r1, r2) {
   const current = vin / (r1 + r2);
   return { vout: (vin * r2) / (r1 + r2), current, p1: current * current * r1, p2: current * current * r2 };

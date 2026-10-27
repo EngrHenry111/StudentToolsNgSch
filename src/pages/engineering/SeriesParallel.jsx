@@ -2,7 +2,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import EngLayout, { FaqList } from "./EngLayout";
 import { Segment, Stat } from "./EngInputs";
-import { combine, formatSI, parseValue } from "../../utils/electronics";
+import { readList } from "./engTools";
+import CircuitSolver from "./CircuitSolver";
+import { combine, formatSI } from "../../utils/electronics";
 
 const PATH = "/engineering-tools/series-parallel-calculator";
 
@@ -27,12 +29,6 @@ const faq = [
   }
 ];
 
-// Split "100, 220 4k7\n1M" into tokens and read each one.
-function readList(text) {
-  const tokens = text.split(/[\n,;]+|\s{2,}|\s(?=\d)/).map((t) => t.trim()).filter(Boolean);
-  return tokens.map((t) => ({ text: t, value: parseValue(t) }));
-}
-
 const SeriesParallel = () => {
   const [kind, setKind] = useState("resistor");
   const [text, setText] = useState("100, 220, 470");
@@ -46,18 +42,21 @@ const SeriesParallel = () => {
   return (
     <EngLayout
       path={PATH}
-      title="Series and Parallel Calculator (Resistors, Capacitors, Inductors) | StudentToolsNG"
-      description="Free series and parallel calculator: enter any number of resistors, capacitors or inductors and get the total in series and in parallel, with formulas and examples."
-      keywords="series and parallel calculator, parallel resistor calculator, resistors in series, capacitors in series and parallel, inductors in parallel"
+      title="Series and Parallel Circuit Calculator with Working | StudentToolsNG"
+      description="Free series and parallel circuit calculator: paste a question to get total resistance, current and the voltage across each resistor with full step-by-step working, or combine resistors, capacitors and inductors."
+      keywords="series and parallel calculator, series parallel circuit solver, resistors in series and parallel questions, current in parallel circuit, internal resistance calculator, parallel resistor calculator"
       faq={faq}
     >
-      <h1>Series and Parallel Calculator</h1>
+      <h1>Series and Parallel Circuit Calculator</h1>
       <p className="eng-intro">
-        Enter the values of your components, separated by commas or new lines,
-        to get the total for a series and a parallel connection.
+        Paste a series or parallel circuit question to get the full working, or
+        combine any number of resistors, capacitors or inductors.
       </p>
 
+      <CircuitSolver />
+
       <section className="eng-panel" aria-label="Series and parallel calculator">
+        <h2>Quick total for any components</h2>
         <div style={{ marginBottom: 14 }}>
           <Segment
             label="Component type"
@@ -117,6 +116,48 @@ const SeriesParallel = () => {
           For exactly two resistors in parallel there is a shortcut, product
           over sum: R = (R1 × R2) ÷ (R1 + R2). For example 100 Ω and 220 Ω in
           parallel give 22,000 ÷ 320 = 68.75 Ω, and in series they give 320 Ω.
+        </p>
+
+        <h2>Worked example: resistors in series</h2>
+        <p>
+          A 24 V supply is connected to 4 Ω and 8 Ω resistors in series. Find the
+          current and the voltage across each resistor.
+        </p>
+        <ul>
+          <li>Total R = 4 + 8 = 12 Ω</li>
+          <li>I = V ÷ R = 24 ÷ 12 = 2 A</li>
+          <li>V across 4 Ω = 2 × 4 = 8 V</li>
+          <li>V across 8 Ω = 2 × 8 = 16 V (check: 8 + 16 = 24 V)</li>
+        </ul>
+        <p>
+          In series the current is the same everywhere and the supply voltage is
+          shared, so the voltages across the resistors always add up to the
+          supply voltage.
+        </p>
+
+        <h2>Worked example: resistors in parallel</h2>
+        <p>
+          A 12 V supply is connected to 6 Ω and 3 Ω resistors in parallel. Find
+          the total current.
+        </p>
+        <ul>
+          <li>1/R = 1/6 + 1/3 = 1/6 + 2/6 = 3/6, so R = 6 ÷ 3 = 2 Ω</li>
+          <li>I = 12 ÷ 2 = 6 A</li>
+          <li>Current through 6 Ω = 12 ÷ 6 = 2 A and through 3 Ω = 12 ÷ 3 = 4 A (check: 2 + 4 = 6 A)</li>
+        </ul>
+        <p>
+          In parallel every resistor has the full supply voltage across it and
+          the currents through the branches add up to the total current.
+        </p>
+
+        <h2>Cells with internal resistance</h2>
+        <p>
+          A real cell has some resistance of its own, called its internal
+          resistance r. The current is I = E ÷ (R + r), where E is the emf. The
+          voltage across the external resistors, the terminal p.d., is V = I × R,
+          and the difference E − V = I × r is called the lost volts. For a 12 V
+          cell with r = 1 Ω driving 11 Ω, I = 12 ÷ 12 = 1 A, the terminal p.d. is
+          11 V and 1 V is lost inside the cell.
         </p>
 
         <h2>Capacitors in series and parallel</h2>

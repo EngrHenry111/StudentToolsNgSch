@@ -422,6 +422,40 @@
   box-shadow:0 0 0 1px rgba(255,255,255,0.35);
 }
 
+/* Step-by-step working, written the way a student would */
+.eng-working-title{
+  margin:18px 0 8px;
+  font-size:15px;
+  color:#94a3b8;
+  font-weight:600;
+}
+
+.eng-working{
+  padding:14px 16px;
+  border-radius:12px;
+  background:rgba(2,6,23,0.55);
+  border:1px solid rgba(255,255,255,0.08);
+  font-size:16px;
+  line-height:1.6;
+  color:#e2e8f0;
+  overflow-wrap:anywhere;
+}
+
+.eng-working > div{
+  padding:3px 0;
+}
+
+.eng-working > div + div{
+  border-top:1px solid rgba(255,255,255,0.05);
+}
+
+@media (max-width:600px){
+  .eng-working{
+    font-size:15px;
+    padding:12px;
+  }
+}
+
 /* SMD part illustration */
 .eng-smd{
   display:inline-flex;
