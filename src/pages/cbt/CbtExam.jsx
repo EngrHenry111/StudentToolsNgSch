@@ -1,4 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../contextQuiz/AuthContext";
 import { Segment, Stat } from "../engineering/EngInputs";
 import {
   SUBJECTS,
@@ -241,6 +243,7 @@ export default function CbtExam({ slug }) {
             )}
           </div>
           <p className="eng-note">Keyboard: A–D to answer, N or → next, P or ← previous, F to flag a question.</p>
+          {stats?.attempts >= 3 && <ProPrompt subject={subject} repeat />}
         </>
       )}
 
@@ -373,6 +376,8 @@ export default function CbtExam({ slug }) {
             </button>
           </div>
 
+          <ProPrompt subject={subject} weakest={result.topics[0]?.correct < result.topics[0]?.total ? result.topics[0].topic : null} />
+
           <div className="cbt-review-head">
             <h3 className="eng-working-title">Review your answers</h3>
             <label className="eng-muted">
@@ -403,6 +408,38 @@ export default function CbtExam({ slug }) {
         </>
       )}
     </section>
+  );
+}
+
+// The free bank is small, so point students who want more at the Pro
+// past-question bank (free accounts get a few quizzes before the paywall).
+function ProPrompt({ subject, weakest, repeat }) {
+  const { isAuthenticated, isPremium } = useContext(AuthContext);
+  const target = `/pro/quiz/past-questions?exam=JAMB&subject=${subject.slug}`;
+  const href = isAuthenticated ? target : `/login?next=${encodeURIComponent(target)}`;
+
+  return (
+    <aside className="cbt-pro" aria-label="More practice questions">
+      <h3>{repeat ? "Seeing the same questions again?" : `Want more ${subject.name} questions?`}</h3>
+      <p>
+        {repeat
+          ? `This free test draws from ${subject.bank.length} questions, so repeats start after a few tests. `
+          : ""}
+        {isPremium ? "Your Pro plan includes" : "Student Tools Pro adds"} a bank of curated JAMB and WAEC questions,
+        adaptive quizzes that drill your weak topics{weakest ? ` (starting with ${weakest})` : ""}, unlimited AI
+        quizzes and full analytics.
+      </p>
+      <div className="eng-row">
+        <Link className="eng-btn" to={href}>
+          {isPremium ? `Open ${subject.name} past questions` : "Practise more questions"}
+        </Link>
+        {!isPremium && (
+          <span className="eng-muted">
+            {isAuthenticated ? "Free accounts get 5 quizzes." : "Free account, 5 quizzes to try. No card needed."}
+          </span>
+        )}
+      </div>
+    </aside>
   );
 }
 

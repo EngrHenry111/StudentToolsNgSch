@@ -330,3 +330,28 @@
     grid-template-columns:minmax(0,1fr) 70px 40px;
   }
 }
+
+.cbt-pro{
+  margin-top:20px;
+  padding:16px 18px;
+  border-radius:12px;
+  background:linear-gradient(135deg, rgba(0,245,255,0.07), rgba(123,47,247,0.09));
+  border:1px solid rgba(0,245,255,0.3);
+}
+
+.cbt-pro h3{
+  margin:0 0 6px;
+  font-size:17px;
+  color:#00f5ff;
+}
+
+.cbt-pro p{
+  margin:0;
+  font-size:14px;
+  line-height:1.55;
+  color:#cbd5e1;
+}
+
+.cbt-pro .eng-btn{
+  text-decoration:none;
+}

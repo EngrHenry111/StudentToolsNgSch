@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { getPastQuestions, submitAIQuiz } from "../../apiQuiz/quizApi";
 import { subjectLabels } from "../../utils/topicBank";
 import QuestionCard from "../../componentsQuiz/QuestionCard";
@@ -13,9 +14,17 @@ const subjectGroups = {
   "Languages": ["englishLanguage"]
 };
 
+const allSubjects = Object.values(subjectGroups).flat();
+
 const PastQuestions = () => {
-  const [examBody, setExamBody] = useState("WAEC");
-  const [subject, setSubject] = useState("mathematics");
+  // ?exam=JAMB&subject=physics preselects (used by links from the free CBT).
+  const [params] = useSearchParams();
+  const [examBody, setExamBody] = useState(() =>
+    examBodies.includes(params.get("exam")) ? params.get("exam") : "WAEC"
+  );
+  const [subject, setSubject] = useState(() =>
+    allSubjects.includes(params.get("subject")) ? params.get("subject") : "mathematics"
+  );
   const [numQuestions, setNumQuestions] = useState(10);
 
   const [questions, setQuestions] = useState([]);
