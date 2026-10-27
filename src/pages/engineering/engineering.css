@@ -378,6 +378,50 @@
   box-shadow:inset 0 0 0 1px rgba(255,255,255,0.2);
 }
 
+/* Formula working */
+.eng-formula{
+  padding:14px 16px;
+  border-radius:12px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  font-family:"Cambria Math","Times New Roman",Georgia,serif;
+  font-size:18px;
+  line-height:1.9;
+  color:#e2e8f0;
+  overflow-x:auto;
+}
+
+.eng-formula .eng-note{
+  font-family:inherit;
+}
+
+.eng-steps{
+  margin:16px 0 0;
+  padding-left:22px;
+  color:#cbd5e1;
+  font-size:15px;
+  line-height:1.7;
+}
+
+.eng-steps li{
+  margin-bottom:8px;
+  overflow-wrap:anywhere;
+}
+
+.eng-steps b{
+  color:#00f5ff;
+}
+
+.eng-dot{
+  display:inline-block;
+  width:11px;
+  height:11px;
+  margin-right:4px;
+  border-radius:3px;
+  vertical-align:-1px;
+  box-shadow:0 0 0 1px rgba(255,255,255,0.35);
+}
+
 /* SMD part illustration */
 .eng-smd{
   display:inline-flex;
