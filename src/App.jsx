@@ -14,6 +14,15 @@ import StudyPlanner from "./pages/studyPlanner/StudyPlanner";
 import GPAClass from "./pages/gpaclass/GPAClass";
 import AgeCalculator from "./pages/age/AgeCalculator";
 import AgeTracker from "./pages/age/AgeTracker";
+import EngineeringTools from "./pages/engineering/EngineeringTools";
+import ResistorColorCode from "./pages/engineering/ResistorColorCode";
+import SmdResistorCode from "./pages/engineering/SmdResistorCode";
+import CapacitorCode from "./pages/engineering/CapacitorCode";
+import OhmsLaw from "./pages/engineering/OhmsLaw";
+import SeriesParallel from "./pages/engineering/SeriesParallel";
+import VoltageDivider from "./pages/engineering/VoltageDivider";
+import LedResistor from "./pages/engineering/LedResistor";
+import Timer555 from "./pages/engineering/Timer555";
 import Tutorials from "./pages/tutorials/Tutorials";
 import TutorialDetails from "./pages/tutorialDetails/TutorialDetails";
 import Contact from "./pages/contact/Contact";
@@ -120,6 +129,15 @@ function App() {
     <Route path="/gpa-class-calculator" element={<GPAClass />} />
     <Route path="/age-calculator" element={<AgeCalculator />} />
     <Route path="/age-tracker" element={<AgeTracker />} />
+    <Route path="/engineering-tools" element={<EngineeringTools />} />
+    <Route path="/engineering-tools/resistor-color-code" element={<ResistorColorCode />} />
+    <Route path="/engineering-tools/smd-resistor-code" element={<SmdResistorCode />} />
+    <Route path="/engineering-tools/capacitor-code" element={<CapacitorCode />} />
+    <Route path="/engineering-tools/ohms-law-calculator" element={<OhmsLaw />} />
+    <Route path="/engineering-tools/series-parallel-calculator" element={<SeriesParallel />} />
+    <Route path="/engineering-tools/voltage-divider-calculator" element={<VoltageDivider />} />
+    <Route path="/engineering-tools/led-resistor-calculator" element={<LedResistor />} />
+    <Route path="/engineering-tools/555-timer-calculator" element={<Timer555 />} />
     <Route path="/tutorials" element={<Tutorials />} />
     <Route path="/tutorial/:slug" element={<TutorialDetails />}/>
     <Route path="/:category" element={<Tutorials />} />

@@ -33,6 +33,15 @@ const STATIC_PAGES = {
   "/gpa-class-calculator": ["GPA Class of Degree Calculator | StudentToolsNG", "Find your class of degree from your GPA or CGPA."],
   "/age-calculator": ["Age Calculator | Exact Age in Years, Months and Days", "Free age calculator: find your exact age in years, months and days, your age on any date, days until your next birthday and whether you meet an age limit."],
   "/age-tracker": ["Age Tracker | Track Birthdays and Ages of Family and Friends", "Free age and birthday tracker: save family, friends or students, see everyone's exact age, upcoming birthdays and milestones, and export a birthday calendar."],
+  "/engineering-tools": ["Engineering Tools: Resistor, Capacitor & Circuit Calculators | StudentToolsNG", "Free electronics calculators for engineering and physics students: resistor colour code, SMD resistor code, capacitor code, Ohm's law, series and parallel, voltage divider, LED resistor and 555 timer."],
+  "/engineering-tools/resistor-color-code": ["Resistor Colour Code Calculator (4, 5 & 6 Band) | StudentToolsNG", "Free resistor colour code calculator: pick the bands to get the resistance, tolerance and range, or enter a value to get its colours. Works for 3, 4, 5 and 6-band resistors and inductors."],
+  "/engineering-tools/smd-resistor-code": ["SMD Resistor Code Calculator (3-digit, 4-digit, EIA-96) | StudentToolsNG", "Decode SMD chip resistor markings: 3-digit codes like 103, 4-digit codes like 1002, R codes like 4R7 and EIA-96 codes like 01C. Or enter a value to get its SMD code."],
+  "/engineering-tools/capacitor-code": ["Capacitor Code Calculator (104, 4R7, 2n2 to pF, nF, µF) | StudentToolsNG", "Free capacitor code calculator: convert ceramic and film capacitor codes like 104, 222J or 4R7 to pF, nF and µF, read tolerance and voltage letters, or find the code for a value."],
+  "/engineering-tools/ohms-law-calculator": ["Ohm's Law Calculator (Voltage, Current, Resistance, Power) | StudentToolsNG", "Free Ohm's law calculator: enter any two of voltage, current, resistance and power to find the other two, with the formulas and worked examples."],
+  "/engineering-tools/series-parallel-calculator": ["Series and Parallel Calculator (Resistors, Capacitors, Inductors) | StudentToolsNG", "Free series and parallel calculator: enter any number of resistors, capacitors or inductors and get the total in series and in parallel, with formulas and examples."],
+  "/engineering-tools/voltage-divider-calculator": ["Voltage Divider Calculator (Vout, R1, R2) | StudentToolsNG", "Free voltage divider calculator: find the output voltage from Vin, R1 and R2, or the R2 needed for a target voltage with the nearest standard resistor."],
+  "/engineering-tools/led-resistor-calculator": ["LED Resistor Calculator (Series Resistor for LEDs) | StudentToolsNG", "Free LED resistor calculator: find the series resistor for one or more LEDs from the supply voltage, LED forward voltage and current, with the nearest standard value, actual current and power rating."],
+  "/engineering-tools/555-timer-calculator": ["555 Timer Calculator (Astable & Monostable) | StudentToolsNG", "Free 555 timer calculator: frequency, period and duty cycle of an astable circuit, R1 and R2 for a target frequency, and the pulse width of a monostable circuit."],
   "/study-planner": ["Study Planner | StudentToolsNG", "Plan your study timetable for exams with StudentToolsNG."],
   "/scholarships": ["Scholarships for Nigerian Students | StudentToolsNG", "Find scholarships open to Nigerian students."],
   "/admission-predictor": ["Admission Predictor | StudentToolsNG", "Estimate your chances of university admission from your JAMB and post-UTME scores."],
@@ -60,6 +69,7 @@ const HOME_BODY = `<main>
 <li><a href="/gpa-class-calculator">GPA Class of Degree Calculator</a></li>
 <li><a href="/age-calculator">Age Calculator</a></li>
 <li><a href="/age-tracker">Age Tracker</a></li>
+<li><a href="/engineering-tools">Engineering Tools: Resistor Colour Code, Capacitor Code and Circuit Calculators</a></li>
 <li><a href="/admission-predictor">Admission Predictor</a></li>
 <li><a href="/study-planner">Study Planner</a></li>
 <li><a href="/quiz">Practice Quiz</a></li>
