@@ -23,6 +23,12 @@ import SeriesParallel from "./pages/engineering/SeriesParallel";
 import VoltageDivider from "./pages/engineering/VoltageDivider";
 import LedResistor from "./pages/engineering/LedResistor";
 import Timer555 from "./pages/engineering/Timer555";
+import SolarCalculator from "./pages/engineering/SolarCalculator";
+import InverterCalculator from "./pages/engineering/InverterCalculator";
+import BatteryBackup from "./pages/engineering/BatteryBackup";
+import AggregateHub from "./pages/aggregate/AggregateHub";
+import UniversityAggregate from "./pages/aggregate/UniversityAggregate";
+import CgpaConverter from "./pages/cgpaConverter/CgpaConverter";
 import Tutorials from "./pages/tutorials/Tutorials";
 import TutorialDetails from "./pages/tutorialDetails/TutorialDetails";
 import Contact from "./pages/contact/Contact";
@@ -138,6 +144,12 @@ function App() {
     <Route path="/engineering-tools/voltage-divider-calculator" element={<VoltageDivider />} />
     <Route path="/engineering-tools/led-resistor-calculator" element={<LedResistor />} />
     <Route path="/engineering-tools/555-timer-calculator" element={<Timer555 />} />
+    <Route path="/engineering-tools/solar-system-calculator" element={<SolarCalculator />} />
+    <Route path="/engineering-tools/inverter-size-calculator" element={<InverterCalculator />} />
+    <Route path="/engineering-tools/battery-backup-calculator" element={<BatteryBackup />} />
+    <Route path="/aggregate-score-calculator" element={<AggregateHub />} />
+    <Route path="/aggregate-score-calculator/:slug" element={<UniversityAggregate />} />
+    <Route path="/cgpa-converter" element={<CgpaConverter />} />
     <Route path="/tutorials" element={<Tutorials />} />
     <Route path="/tutorial/:slug" element={<TutorialDetails />}/>
     <Route path="/:category" element={<Tutorials />} />

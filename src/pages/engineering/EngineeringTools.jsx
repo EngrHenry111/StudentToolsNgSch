@@ -6,7 +6,7 @@ const EngineeringTools = () => (
   <EngLayout
     path="/engineering-tools"
     title="Engineering Tools: Resistor, Capacitor & Circuit Calculators | StudentToolsNG"
-    description="Free electronics calculators for engineering and physics students: resistor colour code, SMD resistor code, capacitor code, Ohm's law, series and parallel, voltage divider, LED resistor and 555 timer."
+    description="Free electronics and power calculators for engineering and physics students: resistor colour code, SMD resistor code, capacitor code, Ohm's law, series and parallel, voltage divider, LED resistor, 555 timer, and solar, inverter and battery sizing."
     keywords="engineering calculators, electronics calculators, resistor calculator, capacitor calculator, circuit calculator, electrical engineering tools"
   >
     <h1>Engineering Tools</h1>
@@ -51,6 +51,18 @@ const EngineeringTools = () => (
         protect LEDs, and the{" "}
         <Link to="/engineering-tools/555-timer-calculator">555 Timer Calculator</Link> for
         oscillators and delays.
+      </p>
+
+      <h2>Solar, inverter and battery sizing</h2>
+      <p>
+        Planning backup power for a home, office or hostel? List your
+        appliances once and the{" "}
+        <Link to="/engineering-tools/solar-system-calculator">Solar System Calculator</Link> sizes
+        the inverter, batteries, panels and charge controller for your city's
+        sunshine. The <Link to="/engineering-tools/inverter-size-calculator">Inverter Size Calculator</Link> and
+        the <Link to="/engineering-tools/battery-backup-calculator">Battery Backup Calculator</Link> answer
+        the two questions people ask most: what size of inverter do I need, and
+        how long will my batteries last?
       </p>
 
       <h2>Built for students</h2>

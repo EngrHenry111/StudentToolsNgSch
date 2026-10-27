@@ -184,6 +184,30 @@ StudentToolsNG - Free CGPA, WAEC & JAMB Calculators for Nigerian Students
  </div>
 
  <div className="tool-card">
+ <h3>Post-UTME Aggregate Calculator</h3>
+ <p>Work out your UNILAG, UI, OAU, UNN, UNIBEN and other university aggregate scores.</p>
+ <Link to="/aggregate-score-calculator">
+ Open Tool
+ </Link>
+ </div>
+
+ <div className="tool-card">
+ <h3>CGPA Converter</h3>
+ <p>Convert your CGPA from 5.0 to the 4.0 scale, to a percentage and to a class of degree.</p>
+ <Link to="/cgpa-converter">
+ Open Tool
+ </Link>
+ </div>
+
+ <div className="tool-card">
+ <h3>Solar &amp; Inverter Calculator</h3>
+ <p>Size your inverter, batteries and solar panels from the appliances you want to power.</p>
+ <Link to="/engineering-tools/solar-system-calculator">
+ Open Tool
+ </Link>
+ </div>
+
+ <div className="tool-card">
  <h3>Engineering Tools</h3>
  <p>Resistor colour code, capacitor code, Ohm's law, LED resistor and 555 timer calculators.</p>
  <Link to="/engineering-tools">

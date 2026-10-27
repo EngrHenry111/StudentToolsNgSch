@@ -499,6 +499,135 @@
   font-weight:600;
 }
 
+/* Editable tables (appliance list, course grades) */
+.eng-table input,
+.eng-table select{
+  width:100%;
+  min-width:64px;
+  padding:7px 9px;
+  border-radius:8px;
+  border:1px solid rgba(255,255,255,0.12);
+  background:rgba(255,255,255,0.05);
+  color:#e2e8f0;
+  font-size:14px;
+  font-family:inherit;
+  outline:none;
+  color-scheme:dark;
+}
+
+.eng-table input:focus,
+.eng-table select:focus{
+  border-color:#00f5ff;
+}
+
+.eng-load td:first-child{
+  min-width:190px;
+  white-space:normal;
+}
+
+.eng-load td:first-child input{
+  min-width:170px;
+}
+
+.eng-load td .eng-btn-ghost,
+.eng-table td .eng-btn-ghost{
+  padding:6px 10px;
+}
+
+.eng-num{
+  text-align:right !important;
+  font-variant-numeric:tabular-nums;
+}
+
+.eng-tag{
+  display:inline-block;
+  margin-top:4px;
+  padding:1px 8px;
+  border-radius:20px;
+  font-size:11px;
+  color:#fbbf24;
+  border:1px solid rgba(251,191,36,0.4);
+}
+
+.eng-btn-ghost[aria-pressed="true"]{
+  border-color:#00f5ff;
+  color:#00f5ff;
+  background:rgba(0,245,255,0.08);
+}
+
+/* Appliance list becomes stacked cards on phones (no sideways scroll). */
+@media (max-width:600px){
+  .eng-load thead{
+    display:none;
+  }
+  .eng-load tr{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr 1fr;
+    gap:8px;
+    padding:12px 0;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .eng-load td{
+    padding:0;
+    border:none;
+    white-space:normal;
+  }
+  .eng-load td:first-child{
+    grid-column:1 / -2;
+    min-width:0;
+  }
+  .eng-load td:first-child input{
+    min-width:0;
+  }
+  .eng-load td:last-child{
+    grid-column:-2 / -1;
+    grid-row:1;
+    text-align:right;
+  }
+  .eng-load td[data-label]:not(:first-child)::before{
+    content:attr(data-label);
+    display:block;
+    font-size:11px;
+    color:#94a3b8;
+    margin-bottom:3px;
+  }
+  .eng-load td input{
+    min-width:0;
+  }
+  .eng-load .eng-num{
+    text-align:left !important;
+    align-self:end;
+    padding-bottom:8px;
+  }
+}
+
+/* Solar summary prints cleanly (Print / save as PDF). */
+@media print{
+  nav, header, footer, .eng-toolnav, .eng-crumbs, .eng-content, .eng-row button{
+    display:none !important;
+  }
+  .eng-page, .eng-panel, .eng-result{
+    color:#000 !important;
+    background:#fff !important;
+    box-shadow:none !important;
+  }
+  .eng-panel{
+    border:1px solid #ccc;
+    break-inside:avoid;
+  }
+  .eng-panel::before{
+    display:none;
+  }
+  .eng-page h1, .eng-panel h2, .eng-table th, .eng-stat b{
+    color:#000 !important;
+    -webkit-text-fill-color:#000;
+  }
+  .eng-table input, .eng-table select, .eng-field input, .eng-field select{
+    color:#000 !important;
+    border-color:#999;
+  }
+}
+
 /* ================= HUB ================= */
 
 .eng-cards{

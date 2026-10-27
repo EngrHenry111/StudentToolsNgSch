@@ -8,7 +8,10 @@ export const ENG_TOOLS = [
   { path: "/engineering-tools/series-parallel-calculator", name: "Series & Parallel Calculator", short: "Series/Parallel", blurb: "Solve series and parallel circuit questions with full working, or combine resistors, capacitors and inductors." },
   { path: "/engineering-tools/voltage-divider-calculator", name: "Voltage Divider Calculator", short: "Voltage Divider", blurb: "Find the output voltage, or the resistor needed for a target voltage." },
   { path: "/engineering-tools/led-resistor-calculator", name: "LED Resistor Calculator", short: "LED Resistor", blurb: "Size the series resistor for one or more LEDs and pick its power rating." },
-  { path: "/engineering-tools/555-timer-calculator", name: "555 Timer Calculator", short: "555 Timer", blurb: "Frequency, duty cycle and pulse width for astable and monostable 555 circuits." }
+  { path: "/engineering-tools/555-timer-calculator", name: "555 Timer Calculator", short: "555 Timer", blurb: "Frequency, duty cycle and pulse width for astable and monostable 555 circuits." },
+  { path: "/engineering-tools/solar-system-calculator", name: "Solar System Calculator", short: "Solar", blurb: "Size the inverter, batteries, solar panels and charge controller for your home from your appliance list." },
+  { path: "/engineering-tools/inverter-size-calculator", name: "Inverter Size Calculator", short: "Inverter", blurb: "Find the inverter kVA for your load, checked against motor starting surge, with fuse and cable size." },
+  { path: "/engineering-tools/battery-backup-calculator", name: "Battery Backup Calculator", short: "Battery", blurb: "How long your batteries will last, or how many tubular or lithium batteries you need." }
 ];
 
 // Value of a ValueInput string, or null when empty/invalid.

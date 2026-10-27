@@ -6,12 +6,24 @@ import "./engineering.css";
 const SITE = "https://studenttoolsng.com";
 const IMAGE = `${SITE}/og-image.png`;
 
-// Shared shell for every engineering tool page: SEO tags, breadcrumbs and
-// the tool switcher. Each page renders its own <h1> and content so the
-// crawler-text build (scripts/buildSeoStatic.mjs) can read them.
-export default function EngLayout({ path, title, description, keywords, faq = [], children }) {
+const ENGINEERING = { name: "Engineering Tools", path: "/engineering-tools" };
+
+// Shared shell for every tool page in a section (engineering, aggregate
+// calculators…): SEO tags, breadcrumbs and the tool switcher. Each page
+// renders its own <h1> and content so the crawler-text build
+// (scripts/buildSeoStatic.mjs) can read them.
+export default function EngLayout({
+  path,
+  title,
+  description,
+  keywords,
+  faq = [],
+  section = ENGINEERING,
+  tools = ENG_TOOLS,
+  children
+}) {
   const url = `${SITE}${path}`;
-  const tool = ENG_TOOLS.find((t) => t.path === path);
+  const tool = tools.find((t) => t.path === path);
 
   return (
     <div className="eng-page">
@@ -36,7 +48,7 @@ export default function EngLayout({ path, title, description, keywords, faq = []
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebApplication",
-            name: tool ? tool.name : "Engineering Tools",
+            name: tool ? tool.name : section.name,
             url,
             applicationCategory: "EducationalApplication",
             operatingSystem: "All",
@@ -51,7 +63,7 @@ export default function EngLayout({ path, title, description, keywords, faq = []
             "@type": "BreadcrumbList",
             itemListElement: [
               { "@type": "ListItem", position: 1, name: "Home", item: SITE },
-              { "@type": "ListItem", position: 2, name: "Engineering Tools", item: `${SITE}/engineering-tools` },
+              { "@type": "ListItem", position: 2, name: section.name, item: `${SITE}${section.path}` },
               tool && { "@type": "ListItem", position: 3, name: tool.name, item: url }
             ].filter(Boolean)
           })}
@@ -73,12 +85,12 @@ export default function EngLayout({ path, title, description, keywords, faq = []
       </Helmet>
 
       <nav className="eng-crumbs" aria-label="Breadcrumb">
-        <Link to="/">Home</Link> › <Link to="/engineering-tools">Engineering Tools</Link>
+        <Link to="/">Home</Link> › <Link to={section.path}>{section.name}</Link>
         {tool && <> › <span>{tool.name}</span></>}
       </nav>
 
-      <nav className="eng-toolnav" aria-label="Engineering tools">
-        {ENG_TOOLS.map((t) => (
+      <nav className="eng-toolnav" aria-label={section.name}>
+        {tools.map((t) => (
           <NavLink key={t.path} to={t.path} className={({ isActive }) => (isActive ? "active" : "")}>
             {t.short}
           </NavLink>
