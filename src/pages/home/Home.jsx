@@ -184,6 +184,14 @@ StudentToolsNG - Free CGPA, WAEC & JAMB Calculators for Nigerian Students
  </div>
 
  <div className="tool-card">
+ <h3>JAMB CBT Practice Test</h3>
+ <p>Free timed UTME practice in Mathematics, Physics, Chemistry and Biology, with answers explained.</p>
+ <Link to="/jamb-cbt-practice">
+ Open Tool
+ </Link>
+ </div>
+
+ <div className="tool-card">
  <h3>Post-UTME Aggregate Calculator</h3>
  <p>Work out your UNILAG, UI, OAU, UNN, UNIBEN and other university aggregate scores.</p>
  <Link to="/aggregate-score-calculator">

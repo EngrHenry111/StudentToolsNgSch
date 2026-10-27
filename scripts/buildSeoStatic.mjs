@@ -12,6 +12,8 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { UNIVERSITIES } from "../src/utils/aggregate.js";
 import { universityContent, AGG_PATH } from "../src/pages/aggregate/aggContent.js";
+import { SUBJECTS } from "../src/utils/cbt/index.js";
+import { subjectContent, optionLine, answerLine, CBT_PATH } from "../src/pages/cbt/cbtContent.js";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -38,6 +40,7 @@ const PAGES = {
   "/engineering-tools/battery-backup-calculator": "src/pages/engineering/BatteryBackup.jsx",
   "/aggregate-score-calculator": "src/pages/aggregate/AggregateHub.jsx",
   "/cgpa-converter": "src/pages/cgpaConverter/CgpaConverter.jsx",
+  "/jamb-cbt-practice": "src/pages/cbt/CbtHub.jsx",
   "/study-planner": "src/pages/studyPlanner/StudyPlanner.jsx",
   "/scholarships": "src/pages/scholarships/Scholarships.jsx",
   "/admission-predictor": "src/pages/admismissionPreditior/AdmissionPredictor.jsx",
@@ -126,6 +129,36 @@ for (const u of UNIVERSITIES) {
   result[c.path] = `<main>${render(blocks)}<h2>Other universities</h2><p>${others}</p></main>`;
   meta[c.path] = [c.title, c.description];
   const words = blocks.reduce((n, b) => n + b.text.split(/\s+/).length, 0);
+  console.log(`${c.path.padEnd(28)} ${String(blocks.length).padStart(3)} blocks ${String(words).padStart(5)} words`);
+}
+
+// One page per CBT subject, from the same subjectContent() the page renders,
+// including the sample questions with their answers.
+for (const s of SUBJECTS) {
+  const c = subjectContent(s);
+  const blocks = [
+    { tag: "h1", text: c.h1 },
+    { tag: "p", text: c.intro },
+    ...c.sections.flatMap((sec) => [
+      { tag: "h2", text: sec.h2 },
+      ...sec.paras.map((t) => ({ tag: "p", text: t })),
+      ...(sec.items || []).map((t) => ({ tag: "li", text: t }))
+    ]),
+    { tag: "h2", text: `Sample JAMB ${s.name} questions with answers` },
+    ...c.samples.flatMap((q, i) => [
+      { tag: "h3", text: `Question ${i + 1}: ${q.q}` },
+      { tag: "p", text: optionLine(q) },
+      { tag: "p", text: answerLine(q) }
+    ]),
+    { tag: "h2", text: "Frequently Asked Questions" },
+    ...c.faq.flatMap((f) => [{ tag: "h3", text: f.q }, { tag: "p", text: f.a }])
+  ];
+  const others = SUBJECTS.filter((x) => x.slug !== s.slug)
+    .map((x) => `<a href="${CBT_PATH}/${x.slug}">JAMB ${escapeHtml(x.name)} CBT practice</a>`)
+    .join(" · ");
+  result[c.path] = `<main>${render(blocks)}<h2>Other subjects</h2><p>${others}</p></main>`;
+  meta[c.path] = [c.title, c.description];
+  const words = blocks.reduce((n, b) => n + b.text.split(/s+/).length, 0);
   console.log(`${c.path.padEnd(28)} ${String(blocks.length).padStart(3)} blocks ${String(words).padStart(5)} words`);
 }
 

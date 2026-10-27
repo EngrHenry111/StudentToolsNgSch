@@ -29,6 +29,8 @@ import BatteryBackup from "./pages/engineering/BatteryBackup";
 import AggregateHub from "./pages/aggregate/AggregateHub";
 import UniversityAggregate from "./pages/aggregate/UniversityAggregate";
 import CgpaConverter from "./pages/cgpaConverter/CgpaConverter";
+import CbtHub from "./pages/cbt/CbtHub";
+import CbtSubject from "./pages/cbt/CbtSubject";
 import Tutorials from "./pages/tutorials/Tutorials";
 import TutorialDetails from "./pages/tutorialDetails/TutorialDetails";
 import Contact from "./pages/contact/Contact";
@@ -150,6 +152,8 @@ function App() {
     <Route path="/aggregate-score-calculator" element={<AggregateHub />} />
     <Route path="/aggregate-score-calculator/:slug" element={<UniversityAggregate />} />
     <Route path="/cgpa-converter" element={<CgpaConverter />} />
+    <Route path="/jamb-cbt-practice" element={<CbtHub />} />
+    <Route path="/jamb-cbt-practice/:subject" element={<CbtSubject />} />
     <Route path="/tutorials" element={<Tutorials />} />
     <Route path="/tutorial/:slug" element={<TutorialDetails />}/>
     <Route path="/:category" element={<Tutorials />} />

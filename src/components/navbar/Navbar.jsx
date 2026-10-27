@@ -1,13 +1,64 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import API from "../../services/api";
 import Logo from "../logo/Logo";
 import "./navbar.css";
 
+// Grouped links, so the bar stays readable on laptop widths.
+const GROUPS = {
+  calculators: {
+    label: "Calculators",
+    links: [
+      ["/cgpa-calculator", "CGPA Calculator"],
+      ["/cgpa-converter", "CGPA Converter (5.0 to 4.0)"],
+      ["/gpa-class-calculator", "GPA Class of Degree"],
+      ["/waec-grade-calculator", "WAEC Grade Calculator"],
+      ["/jamb-score-calculator", "JAMB Score Calculator"],
+      ["/aggregate-score-calculator", "Post-UTME Aggregate"],
+      ["/age-calculator", "Age Calculator"]
+    ]
+  },
+  practice: {
+    label: "Practice",
+    links: [
+      ["/jamb-cbt-practice", "JAMB CBT Practice"],
+      ["/quiz", "Maths Quiz"],
+      ["/tutorials/math-calculator", "Math Engine"],
+      ["/ai-tutor", "AI Tutor"]
+    ]
+  }
+};
+
+// A dropdown: hover or click on desktop, tap to expand inside the mobile menu.
+const NavGroup = ({ id, open, setOpen, onPick }) => {
+  const g = GROUPS[id];
+  const isOpen = open === id;
+  return (
+    <li className={`nav-group ${isOpen ? "open" : ""}`}>
+      <button
+        type="button"
+        className="nav-group-btn"
+        aria-expanded={isOpen}
+        aria-haspopup="true"
+        onClick={() => setOpen(isOpen ? null : id)}
+      >
+        {g.label} <span aria-hidden="true">▾</span>
+      </button>
+      <ul className="nav-drop">
+        {g.links.map(([to, text]) => (
+          <li key={to}><Link to={to} onClick={onPick}>{text}</Link></li>
+        ))}
+      </ul>
+    </li>
+  );
+};
+
 const Navbar = () => {
   
 
  const [menuOpen,setMenuOpen] = useState(false);
+  const [openGroup,setOpenGroup] = useState(null);
+  const navRef = useRef(null);
   const [query,setQuery] = useState("");
   const [suggestions,setSuggestions] = useState([]);
   const navigate = useNavigate();
@@ -56,11 +107,25 @@ const handleChange = (e)=>{
 
  const closeMenu = () =>{
   setMenuOpen(false);
+  setOpenGroup(null);
  };
+
+ // Close an open dropdown on an outside click or Escape.
+ useEffect(()=>{
+  if(!openGroup) return;
+  const onDown = (e)=>{ if(!navRef.current?.contains(e.target)) setOpenGroup(null); };
+  const onKey = (e)=>{ if(e.key === "Escape") setOpenGroup(null); };
+  document.addEventListener("mousedown", onDown);
+  document.addEventListener("keydown", onKey);
+  return ()=>{
+   document.removeEventListener("mousedown", onDown);
+   document.removeEventListener("keydown", onKey);
+  };
+ },[openGroup]);
 
  return (
 
-  <nav className="navbar">
+  <nav className="navbar" ref={navRef}>
     
 
     <div className="nav-key">
@@ -119,16 +184,10 @@ const handleChange = (e)=>{
         </form>
 
         <li><Link to="/" onClick={closeMenu}>Home</Link></li>
-        <li><Link to="/tutorials/math-calculator" onClick={closeMenu}>Math Engine</Link></li>
-        <li><Link to="/cgpa-calculator" onClick={closeMenu}>CGPA</Link></li>
-        <li><Link to="/quiz" onClick={closeMenu}> QUIZ</Link></li>
-        <li><Link to="/gpa-class-calculator" onClick={closeMenu}>GPA</Link></li>
-        <li><Link to="/waec-grade-calculator" onClick={closeMenu}>WAEC</Link></li>
-        <li><Link to="/jamb-score-calculator" onClick={closeMenu}>JAMB</Link></li>
-        <li><Link to="/age-calculator" onClick={closeMenu}>Age</Link></li>
+        <NavGroup id="calculators" open={openGroup} setOpen={setOpenGroup} onPick={closeMenu} />
+        <NavGroup id="practice" open={openGroup} setOpen={setOpenGroup} onPick={closeMenu} />
         <li><Link to="/engineering-tools" onClick={closeMenu}>Engineering</Link></li>
         <li><Link to="/tutorials" onClick={closeMenu}>Tutorials</Link></li>
-        <li><Link to="/ai-tutor" onClick={closeMenu}>AI Tutor</Link></li>
         <li><Link to="/admission-predictor" onClick={closeMenu}>Admission</Link></li>
         <li><Link to="/study-planner" onClick={closeMenu}>Planner</Link></li>
         <li><Link to="/scholarships" onClick={closeMenu}>Scholarships</Link></li>
