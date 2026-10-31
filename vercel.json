@@ -11,6 +11,26 @@
       ],
       "destination": "https://studenttoolsng.com/$1",
       "permanent": true
+    },
+    {
+      "source": "/how-to-calculate-cgpa",
+      "destination": "/cgpa-calculator",
+      "permanent": true
+    },
+    {
+      "source": "/tutorial/how-to-calculate-cgpa",
+      "destination": "/cgpa-calculator",
+      "permanent": true
+    },
+    {
+      "source": "/tutorials/physics",
+      "destination": "/tutorials",
+      "permanent": true
+    },
+    {
+      "source": "/tutorials/study%20tutorials",
+      "destination": "/tutorials",
+      "permanent": true
     }
   ],
   "rewrites": [
