@@ -26,8 +26,8 @@ const faq = [
 const AggregateHub = () => (
   <EngLayout
     path={AGG_PATH}
-    title="Post-UTME Aggregate Score Calculator for Nigerian Universities | StudentToolsNG"
-    description="Free aggregate score calculator for UNILAG, UI, OAU, UNN, UNIBEN, UNIPORT, UNILORIN, LASU, ABU and UNICAL: combine your UTME, post-UTME and O'level grades, see the working and the score you need."
+    title="Post-UTME Aggregate Score Calculator for Nigerian Universities"
+    description="Free aggregate score calculator for UNILAG, UI, OAU, UNN, UNIBEN, UNIPORT, UNILORIN, LASU, ABU and UNICAL: combine UTME, post-UTME and O'level grades."
     keywords="aggregate score calculator, post UTME aggregate calculator, how to calculate aggregate score, JAMB and post UTME aggregate, university aggregate score Nigeria, O'level points calculator"
     faq={faq}
     section={AGG_SECTION}

@@ -1,0 +1,28 @@
+import ReactMarkdown from "react-markdown";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+
+// Loaded on demand: the highlighter ships every language, far too much for
+// readers who never use "Ask AI".
+const AiAnswer = ({ answer }) => (
+  <div className="ai-answer">
+    <ReactMarkdown
+      components={{
+        code({ inline, className, children }) {
+          const match = /language-(\w+)/.exec(className || "");
+          return !inline && match ? (
+            <SyntaxHighlighter style={oneDark} language={match[1]} PreTag="div">
+              {String(children).replace(/\n$/, "")}
+            </SyntaxHighlighter>
+          ) : (
+            <code className={className}>{children}</code>
+          );
+        }
+      }}
+    >
+      {answer}
+    </ReactMarkdown>
+  </div>
+);
+
+export default AiAnswer;

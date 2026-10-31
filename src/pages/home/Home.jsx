@@ -66,7 +66,7 @@ const Home = () => {
 
 {/* Primary SEO */}
 <title>
-StudentToolsNG - Free CGPA, WAEC & JAMB Calculators for Nigerian Students
+StudentToolsNG - Free CGPA, WAEC & JAMB Calculators Nigeria
 </title>
 
 <meta

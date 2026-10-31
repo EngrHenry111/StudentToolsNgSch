@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+import RouteFallback from "../components/RouteFallback";
 import Navbar from "../componentsQuiz/quizNav/Navbar";
 import SectionBar from "../components/sectionBar/SectionBar";
 import Footer from "../components/footer/Footer";
@@ -8,7 +10,7 @@ const AuthLayout = () => {
     <>
       <Navbar />
       <SectionBar />
-      <Outlet />
+      <Suspense fallback={<RouteFallback />}><Outlet /></Suspense>
       <Footer />
     </>
   );

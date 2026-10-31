@@ -1,3 +1,4 @@
+import { seoTitle } from "../../utils/seoTitle";
 import { useEffect, useState, useContext } from "react";
 import { useParams, Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
@@ -122,6 +123,7 @@ const ListingDetail = () => {
       <div className="listing-page">
         <Helmet>
           <title>{edge ? edge.title : "Loading document… | StudentToolsNG"}</title>
+          {edge?.description && <meta name="description" content={edge.description} />}
           <link rel="canonical" href={`${SITE}/publishers/${slug}/${listingSlug}`} />
         </Helmet>
         {edge
@@ -132,7 +134,7 @@ const ListingDetail = () => {
   }
 
   const canonicalUrl = `${SITE}/publishers/${slug}/${listingSlug}`;
-  const title = `${listing.title} | ${listing.field} | StudentToolsNG Marketplace`;
+  const title = seoTitle(listing.title);
   const description =
     excerpt(listing.previewContent) ||
     `${listing.title} by ${listing.publisher.businessName} — read chapters 1 & 2 free on StudentToolsNG.`;

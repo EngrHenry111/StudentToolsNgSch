@@ -71,7 +71,7 @@ const Marketplace = () => {
 
   const listings = data ? [...data.listings, ...extra] : [];
   const isFiltered = Boolean(q || field);
-  const title = "Research Library — Project Materials & Research Documents | StudentToolsNG";
+  const title = "Research Library: Project Materials & Documents | StudentToolsNG";
   const description =
     "Browse and buy research documents, project materials and study guides from Nigerian publishers. Free chapter preview on every document.";
 

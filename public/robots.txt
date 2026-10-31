@@ -8,5 +8,7 @@ Disallow: /register
 Disallow: /forgot-password
 Disallow: /reset-password
 Disallow: /search
+Disallow: /publisher/
+Disallow: /my-purchases
 
 Sitemap: https://studenttoolsng.com/sitemap.xml

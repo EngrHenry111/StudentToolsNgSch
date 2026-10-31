@@ -9,11 +9,12 @@
 //
 // This builds, from the API, the head tags each page's Helmet would render
 // (title, description, canonical, robots, og:*), the real HTTP status
-// (301 / 404 / 410) and, for tutorials and listings, the article text inside
+// (301 / 404 / 410 / 503), the site's main links and the page text inside
 // #root. React's createRoot() replaces #root's children on load, so real
 // browsers that somehow reach this see the normal app.
 
 import { STATIC_BODIES, STATIC_META } from "./seoStaticPages.js";
+import { seoTitle } from "./src/utils/seoTitle.js";
 
 const SITE = "https://studenttoolsng.com";
 const API = "https://studenttoolsserver.onrender.com/api";
@@ -23,46 +24,40 @@ const API_UA = "StudentToolsNG-EdgeSEO-bot";
 // Keep in sync with src/utils/tutorialCategories.js.
 const CATEGORIES = ["physics", "mathematics", "chemistry", "biology", "programming"];
 
-// Public, indexable fixed routes from App.jsx → [title, description].
+// Public fixed routes → [title, description], generated from each page's own
+// Helmet by buildSeoStatic.mjs. /tutorials builds its title from the URL, so
+// it is the one entry kept here.
 const STATIC_PAGES = {
-  "/": ["StudentToolsNG - Free CGPA, WAEC & JAMB Calculators for Nigerian Students", "StudentToolsNG (Student Tools NG) gives Nigerian students free CGPA, WAEC and JAMB calculators, a study planner, quizzes and tutorials."],
   "/tutorials": ["Study Tutorials | StudentToolsNG", "Explore tutorials by subject, topic, and subtopic. Learn faster with structured academic content built for Nigerian students."],
-  "/cgpa-calculator": ["CGPA Calculator | StudentToolsNG", "Calculate your CGPA on the 5-point or 4-point scale used by Nigerian universities."],
-  "/waec-grade-calculator": ["WAEC Grade Calculator | StudentToolsNG", "Convert WAEC scores to grades and check your WAEC result points."],
-  "/jamb-score-calculator": ["JAMB Score Calculator | StudentToolsNG", "Calculate your JAMB aggregate score for university admission screening."],
-  "/gpa-class-calculator": ["GPA Class of Degree Calculator | StudentToolsNG", "Find your class of degree from your GPA or CGPA."],
-  "/age-calculator": ["Age Calculator | Exact Age in Years, Months and Days", "Free age calculator: find your exact age in years, months and days, your age on any date, days until your next birthday and whether you meet an age limit."],
-  "/age-tracker": ["Age Tracker | Track Birthdays and Ages of Family and Friends", "Free age and birthday tracker: save family, friends or students, see everyone's exact age, upcoming birthdays and milestones, and export a birthday calendar."],
-  "/engineering-tools": ["Engineering Tools: Resistor, Capacitor & Circuit Calculators | StudentToolsNG", "Free electronics calculators for engineering and physics students: resistor colour code, SMD resistor code, capacitor code, Ohm's law, series and parallel, voltage divider, LED resistor and 555 timer."],
-  "/engineering-tools/resistor-color-code": ["Resistor Colour Code Calculator (4, 5 & 6 Band) | StudentToolsNG", "Free resistor colour code calculator: pick the bands to get the resistance, tolerance and range, or enter a value to get its colours. Works for 3, 4, 5 and 6-band resistors and inductors."],
-  "/engineering-tools/smd-resistor-code": ["SMD Resistor Code Calculator (3-digit, 4-digit, EIA-96) | StudentToolsNG", "Decode SMD chip resistor markings: 3-digit codes like 103, 4-digit codes like 1002, R codes like 4R7 and EIA-96 codes like 01C. Or enter a value to get its SMD code."],
-  "/engineering-tools/capacitor-code": ["Capacitor Code Calculator (104, 4R7, 2n2 to pF, nF, µF) | StudentToolsNG", "Free capacitor code calculator: convert ceramic and film capacitor codes like 104, 222J or 4R7 to pF, nF and µF, read tolerance and voltage letters, or find the code for a value."],
-  "/engineering-tools/ohms-law-calculator": ["Ohm's Law Calculator (Voltage, Current, Resistance, Power) | StudentToolsNG", "Free Ohm's law calculator: enter any two of voltage, current, resistance and power to find the other two, with the formulas and worked examples."],
-  "/engineering-tools/series-parallel-calculator": ["Series and Parallel Circuit Calculator with Working | StudentToolsNG", "Free series and parallel circuit calculator: paste a question to get total resistance, current and the voltage across each resistor with full step-by-step working, or combine resistors, capacitors and inductors."],
-  "/engineering-tools/voltage-divider-calculator": ["Voltage Divider Calculator (Vout, R1, R2) | StudentToolsNG", "Free voltage divider calculator: find the output voltage from Vin, R1 and R2, or the R2 needed for a target voltage with the nearest standard resistor."],
-  "/engineering-tools/led-resistor-calculator": ["LED Resistor Calculator (Series Resistor for LEDs) | StudentToolsNG", "Free LED resistor calculator: find the series resistor for one or more LEDs from the supply voltage, LED forward voltage and current, with the nearest standard value, actual current and power rating."],
-  "/engineering-tools/555-timer-calculator": ["555 Timer Calculator (Astable & Monostable) | StudentToolsNG", "Free 555 timer calculator: frequency, period and duty cycle of an astable circuit, R1 and R2 for a target frequency, and the pulse width of a monostable circuit."],
-  "/engineering-tools/solar-system-calculator": ["Solar System Calculator Nigeria: Panels, Inverter & Batteries | StudentToolsNG", "Free solar system calculator for Nigerian homes and offices: list your appliances to get the inverter size, number of batteries, number of solar panels, charge controller, cable and fuse sizes, with full working."],
-  "/engineering-tools/inverter-size-calculator": ["Inverter Size Calculator (kVA): What Size Inverter Do I Need? | StudentToolsNG", "Free inverter size calculator: list your appliances to get the right inverter in kVA, checked against the starting surge of fridges, ACs and pumps, plus the battery voltage, battery current, fuse and cable size."],
-  "/engineering-tools/battery-backup-calculator": ["Battery Backup Calculator: How Long Will My Battery Last? | StudentToolsNG", "Free battery backup calculator for inverters: find how many hours your batteries will last at your load, or how many tubular, AGM or lithium batteries you need for the backup you want, with series and parallel wiring."],
-  "/aggregate-score-calculator": ["Post-UTME Aggregate Score Calculator for Nigerian Universities | StudentToolsNG", "Free aggregate score calculator for UNILAG, UI, OAU, UNN, UNIBEN, UNIPORT, UNILORIN, LASU, ABU and UNICAL: combine your UTME, post-UTME and O'level grades, see the working and the score you need."],
-  "/cgpa-converter": ["CGPA Converter: 5.0 to 4.0 Scale, Percentage & Class of Degree | StudentToolsNG", "Free CGPA converter for Nigerian students: convert a 5-point CGPA to the 4.0 scale (or any scale), to a percentage and to a class of degree, with a course-by-course 4.0 estimate for WES and study-abroad applications."],
-  "/study-planner": ["Study Planner | StudentToolsNG", "Plan your study timetable for exams with StudentToolsNG."],
-  "/scholarships": ["Scholarships for Nigerian Students | StudentToolsNG", "Find scholarships open to Nigerian students."],
-  "/admission-predictor": ["Admission Predictor | StudentToolsNG", "Estimate your chances of university admission from your JAMB and post-UTME scores."],
-  "/ai-tutor": ["AI Tutor | StudentToolsNG", "Ask study questions and get step-by-step explanations."],
-  "/tutorials/math-calculator": ["Math Calculator | StudentToolsNG", "Solve maths problems step by step."],
-  "/quiz": ["Practice Quiz | StudentToolsNG", "Practice WAEC, JAMB and university quiz questions."],
-  "/marketplace": ["Research Library | StudentToolsNG Marketplace", "Search research project guides and academic materials by Nigerian publishers."],
-  "/about": ["About | StudentToolsNG", "About StudentToolsNG."],
-  "/contact": ["Contact | StudentToolsNG", "Contact StudentToolsNG."],
-  "/privacy-policy": ["Privacy Policy | StudentToolsNG", "StudentToolsNG privacy policy."],
-  "/terms": ["Terms of Use | StudentToolsNG", "StudentToolsNG terms of use."],
-  "/author": ["Author | StudentToolsNG", "About the author of StudentToolsNG."],
-  "/jamb-cbt-practice": ["Free JAMB CBT Practice Test Online (with Answers) | StudentToolsNG", "Free JAMB CBT practice test online for Mathematics, Physics, Chemistry and Biology: timed UTME-style questions with a navigator, instant scoring by topic and an explanation for every answer."],
-  // Data-driven pages (one per university / CBT subject), generated by buildSeoStatic.mjs.
   ...STATIC_META
 };
+
+// Crawlers that don't run JavaScript only see links that are in the HTML, so
+// every page carries the same main links the Navbar and Footer show visitors.
+const link = (href, text) => `<a href="${href}">${text}</a>`;
+const SITE_NAV = `<nav aria-label="Main">${[
+  ["/", "Home"],
+  ["/tutorials", "Tutorials"],
+  ["/cgpa-calculator", "CGPA Calculator"],
+  ["/waec-grade-calculator", "WAEC Grade Calculator"],
+  ["/jamb-score-calculator", "JAMB Score Calculator"],
+  ["/jamb-cbt-practice", "JAMB CBT Practice"],
+  ["/aggregate-score-calculator", "Aggregate Score Calculator"],
+  ["/engineering-tools", "Engineering Tools"],
+  ["/marketplace", "Research Library"]
+].map(([href, text]) => link(href, text)).join(" · ")}</nav>`;
+const SITE_FOOTER = `<footer>${[
+  ["/physics", "Physics Tutorials"],
+  ["/mathematics", "Mathematics Tutorials"],
+  ["/chemistry", "Chemistry Tutorials"],
+  ["/biology", "Biology Tutorials"],
+  ["/programming", "Programming Tutorials"],
+  ["/about", "About"],
+  ["/author", "Author"],
+  ["/contact", "Contact"],
+  ["/privacy-policy", "Privacy Policy"],
+  ["/terms", "Terms of Use"]
+].map(([href, text]) => link(href, text)).join(" · ")}</footer>`;
 
 // Homepage text for crawlers: the brand name plus links to the main tools,
 // mirroring the hero and "Popular Student Tools" sections of Home.jsx.
@@ -90,6 +85,12 @@ const HOME_BODY = `<main>
 <li><a href="/marketplace">Research Library</a></li>
 </ul>
 </main>`;
+
+const homeBody = () =>
+  HOME_BODY.replace(
+    "</main>",
+    `${(STATIC_BODIES["/"] || "").replace(/<\/?main>/g, "").replace(/<(\/?)h1>/g, "<$1h2>")}</main>`
+  );
 
 // Routes that exist but aren't ours to describe (account/app pages): pass
 // through untouched.
@@ -131,14 +132,69 @@ const paragraphs = (text) =>
     .map((p) => `<p>${escapeHtml(p).replace(/\n/g, "<br>")}</p>`)
     .join("\n");
 
-const apiGet = async (path) => {
-  const res = await fetch(`${API}${path}`, {
-    headers: { "User-Agent": API_UA, Accept: "application/json" },
-    signal: AbortSignal.timeout(15000)
-  });
-  let data = null;
-  try { data = await res.json(); } catch { /* non-JSON error page */ }
-  return { status: res.status, data };
+// Status 0 means the API didn't answer properly. A blip gets one retry.
+const apiGet = async (path, attempts = 2) => {
+  for (let i = 0; i < attempts; i++) {
+    try {
+      const res = await fetch(`${API}${path}`, {
+        headers: { "User-Agent": API_UA, Accept: "application/json" },
+        signal: AbortSignal.timeout(9000)
+      });
+      if (res.status < 500 && res.status !== 429) {
+        let data = null;
+        try { data = await res.json(); } catch { /* non-JSON error page */ }
+        return { status: res.status, data };
+      }
+    } catch { /* timeout or network error */ }
+  }
+  return { status: 0, data: null };
+};
+
+// The page exists but we can't describe it right now. Never answer with the
+// bare shell here: that is the homepage's title on a tutorial's URL with a 200,
+// which tells Google the two are duplicates. A 503 means "come back later".
+const UNAVAILABLE = { status: 503 };
+
+const list = (items) =>
+  `<ul>${items.map(([href, text]) => `<li>${link(href, escapeHtml(text))}</li>`).join("")}</ul>`;
+
+const tutorialLinks = (rows) => list(rows.map((t) => [`/tutorial/${t.slug}`, t.title]));
+const titleCase = (s) => s.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+
+// Related tutorials are a bonus: never fail or retry the page for them.
+const relatedLinks = async (t) => {
+  const query = `category=${encodeURIComponent(t.category)}&id=${t._id}`;
+  const byTopic = t.topic
+    ? await apiGet(`/tutorials/related?${query}&topic=${encodeURIComponent(t.topic)}`, 1)
+    : null;
+  let rows = Array.isArray(byTopic?.data) ? byTopic.data : [];
+  if (!rows.length) {
+    const { data } = await apiGet(`/tutorials/related?${query}`, 1);
+    rows = Array.isArray(data) ? data : [];
+  }
+  return rows.length ? `<h2>Related Tutorials</h2>${tutorialLinks(rows)}` : "";
+};
+
+// /tutorials: a link to every tutorial, grouped by subject.
+const tutorialsHub = async () => {
+  const { status, data } = await apiGet("/tutorials/directory", 1);
+  const intro = (STATIC_BODIES["/tutorials"] || "").replace(/<\/?main>/g, "");
+  const groups = status === 200 && Array.isArray(data)
+    ? CATEGORIES.map((c) => {
+        const rows = data.filter((t) => t.category === c);
+        return rows.length ? `<h2>${link(`/${c}`, `${titleCase(c)} Tutorials`)}</h2>${tutorialLinks(rows)}` : "";
+      }).join("")
+    : "";
+  return `<main><h1>Study Tutorials</h1>${intro}${groups}</main>`;
+};
+
+// /:category and /:category/:topic: the tutorials under that heading.
+const categoryBody = async (name, category, topic) => {
+  const { status, data } = await apiGet("/tutorials/directory", 1);
+  const rows = status === 200 && Array.isArray(data)
+    ? data.filter((t) => t.category === category && (!topic || t.topic === topic))
+    : [];
+  return `<main><h1>${escapeHtml(name)} Tutorials</h1>${rows.length ? tutorialLinks(rows) : ""}</main>`;
 };
 
 // Decide what a crawler should get for this path.
@@ -150,13 +206,11 @@ async function describe(pathname) {
 
   if (STATIC_PAGES[path]) {
     const [title, description] = STATIC_PAGES[path];
-    return {
-      status: 200,
-      title,
-      description,
-      canonical: `${SITE}${path === "/" ? "/" : path}`,
-      body: path === "/" ? HOME_BODY : STATIC_BODIES[path]
-    };
+    const body =
+      path === "/" ? homeBody()
+      : path === "/tutorials" ? await tutorialsHub()
+      : STATIC_BODIES[path];
+    return { status: 200, title, description, canonical: `${SITE}${path}`, body };
   }
 
   const parts = path.split("/").filter(Boolean).map((p) => {
@@ -168,30 +222,51 @@ async function describe(pathname) {
     const slug = parts[1];
     const { status, data } = await apiGet(`/tutorials/${encodeURIComponent(slug)}`);
     if (status === 404 || status === 410) return notFound(status);
-    if (status !== 200 || !data) return null; // API down — don't guess
+    if (status !== 200 || !data) return UNAVAILABLE;
     if (data.redirectTo) return { status: 301, location: `${SITE}${data.redirectTo}` };
 
     const html = tutorialHtml(data.content);
     const text = plainText(html);
     const canonical = `${SITE}/tutorial/${data.slug || slug}`;
+    const description = (data.excerpt?.trim() || text).slice(0, 160);
+    const category = titleCase(data.category || "");
+    const breadcrumb = `<nav aria-label="Breadcrumb">${link("/", "Home")} › ${link("/tutorials", "Tutorials")} › ${link(`/${data.category}`, escapeHtml(category))}</nav>`;
     return {
       status: 200,
-      title: `${data.title} | StudentToolsNG`,
-      description: (data.excerpt?.trim() || text).slice(0, 160),
+      title: seoTitle(data.title),
+      description,
       canonical,
       ogType: "article",
       image: data.image,
-      body: `<main><article><h1>${escapeHtml(data.title)}</h1>\n${html}</article></main>`,
-      jsonLd: {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        headline: data.title,
-        description: (data.excerpt?.trim() || text).slice(0, 160),
-        mainEntityOfPage: canonical,
-        datePublished: data.createdAt,
-        dateModified: data.updatedAt || data.createdAt,
-        author: { "@type": "Organization", name: "StudentToolsNG" }
-      }
+      body: `<main>${breadcrumb}<article><h1>${escapeHtml(data.title)}</h1>\n<p>By ${link("/author", "Engr. Henry Akpan")}</p>\n${html}</article>${await relatedLinks(data)}</main>`,
+      // Same schema TutorialDetails renders.
+      jsonLd: [
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: data.title,
+          description,
+          image: data.image || `${SITE}/og-image.png`,
+          mainEntityOfPage: canonical,
+          datePublished: data.createdAt,
+          dateModified: data.updatedAt || data.createdAt,
+          author: { "@type": "Person", name: "Engr. Henry Akpan", url: `${SITE}/author` },
+          publisher: {
+            "@type": "Organization",
+            name: "StudentToolsNG",
+            logo: { "@type": "ImageObject", url: `${SITE}/icon-512.png` }
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: SITE },
+            { "@type": "ListItem", position: 2, name: "Tutorials", item: `${SITE}/tutorials` },
+            { "@type": "ListItem", position: 3, name: data.title, item: canonical }
+          ]
+        }
+      ]
     };
   }
 
@@ -202,18 +277,18 @@ async function describe(pathname) {
       `/marketplace/publishers/${encodeURIComponent(pub)}/${encodeURIComponent(item)}`
     );
     if (status === 404 || status === 410) return notFound(status);
-    if (status !== 200 || !data?.title) return null;
+    if (status !== 200 || !data?.title) return UNAVAILABLE;
 
     const canonical = `${SITE}/publishers/${pub}/${item}`;
     const text = plainText(data.previewContent);
     return {
       status: 200,
-      title: `${data.title} | ${data.field} | StudentToolsNG Marketplace`,
+      title: seoTitle(data.title),
       description: text.slice(0, 160),
       canonical,
       ogType: "article",
       image: data.coverImageUrl,
-      body: `<main><article><h1>${escapeHtml(data.title)}</h1>\n<p>By ${escapeHtml(data.publisher?.businessName)} · ${escapeHtml(data.field)}</p>\n${paragraphs(data.previewContent)}</article></main>`
+      body: `<main><article><h1>${escapeHtml(data.title)}</h1>\n<p>By ${link(`/publishers/${pub}`, escapeHtml(data.publisher?.businessName))} · ${escapeHtml(data.field)}</p>\n${paragraphs(data.previewContent)}</article></main>`
     };
   }
 
@@ -221,27 +296,30 @@ async function describe(pathname) {
   if (parts[0] === "publishers" && parts.length === 2) {
     const { status, data } = await apiGet(`/marketplace/publishers/${encodeURIComponent(parts[1])}`);
     if (status === 404 || status === 410) return notFound(status);
-    if (status !== 200 || !data) return null;
+    if (status !== 200 || !data) return UNAVAILABLE;
     const publisher = data.publisher || data;
     const name = publisher.businessName || parts[1];
+    const about = plainText(publisher.description);
+    const listings = Array.isArray(data.listings) ? data.listings : [];
     return {
       status: 200,
       title: `${name} | StudentToolsNG Marketplace`,
-      description: plainText(publisher.description || `Browse research documents published by ${name} on StudentToolsNG.`).slice(0, 160),
-      canonical: `${SITE}/publishers/${parts[1]}`
+      description: `${about ? `${about}. ` : ""}Browse research documents published by ${name} on StudentToolsNG.`.slice(0, 160),
+      canonical: `${SITE}/publishers/${parts[1]}`,
+      body: `<main><h1>${escapeHtml(name)}</h1><p>${escapeHtml(about)}</p>${list(listings.map((l) => [`/publishers/${parts[1]}/${l.slug}`, l.title]))}</main>`
     };
   }
 
   // /:category(/:topic(/:subtopic)) — listing pages: real, but noindex.
   if (parts.length <= 3 && CATEGORIES.includes(parts[0].toLowerCase())) {
-    const label = (s) => s.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
-    const name = label(parts[parts.length - 1]);
+    const name = titleCase(parts[parts.length - 1]);
     return {
       status: 200,
       title: `${name} Tutorials | StudentToolsNG`,
       description: `Browse ${name} tutorials on StudentToolsNG.`,
       canonical: `${SITE}/${parts.slice(0, 2).join("/")}`,
-      robots: "noindex, follow"
+      robots: "noindex, follow",
+      body: await categoryBody(name, parts[0].toLowerCase(), parts[1]?.toLowerCase())
     };
   }
 
@@ -270,8 +348,9 @@ function inject(shell, page) {
     `<meta property="og:image" content="${escapeHtml(page.image || `${SITE}/og-image.png`)}" />`,
     `<meta property="og:site_name" content="StudentToolsNG" />`,
     `<meta name="twitter:card" content="summary_large_image" />`,
-    page.jsonLd &&
-      `<script type="application/ld+json">${JSON.stringify(page.jsonLd).replace(/</g, "\\u003c")}</script>`
+    ...(page.jsonLd || []).map(
+      (data) => `<script type="application/ld+json">${JSON.stringify(data).replace(/</g, "\\u003c")}</script>`
+    )
   ]
     .filter(Boolean)
     // data-rh marks these as react-helmet tags, so when the page's own
@@ -282,17 +361,30 @@ function inject(shell, page) {
 
   let html = shell.replace(/<title>[\s\S]*?<\/title>/i, "");
   html = html.replace(/<\/head>/i, `  ${tags}\n</head>`);
-  if (page.body) {
-    html = html.replace(/<div id="root"><\/div>/i, `<div id="root">${page.body}</div>`);
-  }
-  return html;
+  // A function, so "$" in the page text can't be read as a replacement pattern.
+  return html.replace(/<div id="root"><\/div>/i, () =>
+    `<div id="root">${SITE_NAV}${page.body || ""}${SITE_FOOTER}</div>`
+  );
 }
 
-// Returns a Response, or null if the caller should fall back to the SPA.
+const unavailable = (reason) =>
+  new Response("<!doctype html><title>Temporarily unavailable</title><h1>Temporarily unavailable</h1>", {
+    status: 503,
+    headers: {
+      "retry-after": "300",
+      "cache-control": "no-store",
+      "content-type": "text/html; charset=utf-8",
+      "x-prerender-mw": `edge-503:${reason}`
+    }
+  });
+
+// Returns a Response, or null if the caller should fall back to the SPA
+// (only for the account pages in PASS_THROUGH).
 export async function seoFallback(url, reason) {
   try {
     const page = await describe(url.pathname);
     if (!page) return null;
+    if (page.status === 503) return unavailable(reason);
 
     const headers = {
       "x-prerender-mw": `edge-${page.status}:${reason}`,
@@ -308,7 +400,7 @@ export async function seoFallback(url, reason) {
       headers: { "x-prerender": "1" },
       signal: AbortSignal.timeout(8000)
     });
-    if (!shellRes.ok) return null;
+    if (!shellRes.ok) return unavailable(reason);
     const shell = await shellRes.text();
 
     return new Response(inject(shell, page), {
@@ -316,6 +408,6 @@ export async function seoFallback(url, reason) {
       headers: { ...headers, "content-type": "text/html; charset=utf-8" }
     });
   } catch {
-    return null;
+    return unavailable(reason);
   }
 }

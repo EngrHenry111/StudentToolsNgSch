@@ -46,6 +46,7 @@ const PublisherStorefront = () => {
       <div className="storefront-page">
         <Helmet>
           <title>{edge ? edge.title : "Loading publisher… | StudentToolsNG"}</title>
+          {edge?.description && <meta name="description" content={edge.description} />}
           <link rel="canonical" href={`${SITE}/publishers/${slug}`} />
         </Helmet>
         {edge

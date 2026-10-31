@@ -1,13 +1,12 @@
 import { Helmet } from "react-helmet-async";
-// import authorImg from "../../assets/images/Focused coder at work.png";
-import profile from "../../assets/images/profile.png"
+import profile from "../../assets/images/profile.webp";
 import "./author.css";
 
 const Author = () => {
   const url = "https://studenttoolsng.com/author";
-  const title = "Engr. Henry Akpan | Founder of StudentToolsNG | Full-Stack Developer";
+  const title = "Engr. Henry Akpan | Founder of StudentToolsNG";
   const description =
-    "Engr. Henry Akpan is an Electrical Engineer, Full-Stack Web Developer, and founder of StudentToolsNG, building academic tools and tutorials for Nigerian students.";
+    "Engr. Henry Akpan is an Electrical Engineer, Full-Stack Web Developer and founder of StudentToolsNG, building academic tools for Nigerian students.";
 
   const image = "https://studenttoolsng.com/profile.png";
 
@@ -63,6 +62,8 @@ const Author = () => {
         src={profile}
         alt="Henry Akpan - Full Stack Developer"
         className="author-photo"
+        width="300"
+        height="300"
       />
 
       <h1>Engr. Henry Akpan</h1>

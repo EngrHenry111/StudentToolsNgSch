@@ -26,8 +26,8 @@ const faq = [
 const InverterCalculator = () => (
   <EngLayout
     path={PATH}
-    title="Inverter Size Calculator (kVA): What Size Inverter Do I Need? | StudentToolsNG"
-    description="Free inverter size calculator: list your appliances to get the right inverter in kVA, checked against the starting surge of fridges, ACs and pumps, plus the battery voltage, battery current, fuse and cable size."
+    title="Inverter Size Calculator (kVA): What Size Inverter Do I Need?"
+    description="Free inverter size calculator: list your appliances to get the right inverter in kVA, checked against the starting surge of fridges, ACs and pumps."
     keywords="inverter size calculator, what size inverter do I need, inverter load calculator, kVA calculator Nigeria, inverter capacity calculator, how to calculate inverter size"
     faq={faq}
   >

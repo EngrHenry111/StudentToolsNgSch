@@ -31,8 +31,8 @@ const faq = [
 const CbtHub = () => (
   <EngLayout
     path={CBT_PATH}
-    title="Free JAMB CBT Practice Test Online (with Answers) | StudentToolsNG"
-    description="Free JAMB CBT practice test online for Mathematics, Physics, Chemistry and Biology: timed UTME-style questions with a navigator, instant scoring by topic and an explanation for every answer."
+    title="Free JAMB CBT Practice Test Online (with Answers)"
+    description="Free JAMB CBT practice test online for Mathematics, Physics, Chemistry and Biology: timed UTME-style questions with instant scoring and explanations."
     keywords="JAMB CBT practice, free JAMB CBT practice online, JAMB CBT test, UTME practice test, JAMB practice questions and answers, JAMB mock exam online"
     faq={faq}
     section={CBT_SECTION}

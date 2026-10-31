@@ -1,101 +1,108 @@
 // This file controls page navigation using React Router
 
+import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
 
 import Home from "./pages/home/Home";
-import CGPACalculator from "./pages/cgpa/CGPACalculator";
-import WAECCalculator from "./pages/waec/WAECCalculator";
-import JAMBScore from "./pages/jamb/JAMBScore";
-import Scholarships from "./pages/scholarships/Scholarships";
-import StudyPlanner from "./pages/studyPlanner/StudyPlanner";
-import GPAClass from "./pages/gpaclass/GPAClass";
-import AgeCalculator from "./pages/age/AgeCalculator";
-import AgeTracker from "./pages/age/AgeTracker";
-import EngineeringTools from "./pages/engineering/EngineeringTools";
-import ResistorColorCode from "./pages/engineering/ResistorColorCode";
-import SmdResistorCode from "./pages/engineering/SmdResistorCode";
-import CapacitorCode from "./pages/engineering/CapacitorCode";
-import OhmsLaw from "./pages/engineering/OhmsLaw";
-import SeriesParallel from "./pages/engineering/SeriesParallel";
-import VoltageDivider from "./pages/engineering/VoltageDivider";
-import LedResistor from "./pages/engineering/LedResistor";
-import Timer555 from "./pages/engineering/Timer555";
-import SolarCalculator from "./pages/engineering/SolarCalculator";
-import InverterCalculator from "./pages/engineering/InverterCalculator";
-import BatteryBackup from "./pages/engineering/BatteryBackup";
-import AggregateHub from "./pages/aggregate/AggregateHub";
-import UniversityAggregate from "./pages/aggregate/UniversityAggregate";
-import CgpaConverter from "./pages/cgpaConverter/CgpaConverter";
-import CbtHub from "./pages/cbt/CbtHub";
-import CbtSubject from "./pages/cbt/CbtSubject";
-import Tutorials from "./pages/tutorials/Tutorials";
-import TutorialDetails from "./pages/tutorialDetails/TutorialDetails";
-import Contact from "./pages/contact/Contact";
-import CreateTutorial from "./pages/admin/CreateTutorial";
+
 // import Search from "./pages/search/Search";
-import AITutor from "./pages/aiTutor/AITutor";
 
 import AdminProtectedRoute from "./components/adminProtectedRoute";
-import AdminLogin from "./pages/adminLogin/AdminLoginForm"
-import AdminDashboard from "./pages/adminDashboard/AdminDashboard";
-import AdminTutorials from "./pages/adminTutorial/AdminTutorials";
-import AdminCuratedQuestions from "./pages/adminCuratedQuestions/AdminCuratedQuestions";
-import AdminInstitutions from "./pages/adminInstitutions/AdminInstitutions";
-import EditTutorial from "./pages/editTutorial/EditorTutorial";
-import AdminMessages from "./pages/adminMessages/AdminMessages";
-import AdmissionPredictor from "./pages/admismissionPreditior/AdmissionPredictor";
-import PrivacyPolicy from "./pages/privacy/PrivacyPolicy";
-import About from "./pages/about/About";
-import Terms from "./pages/terms/Terms";
-import Author from "./pages/author/Author";
-import MathCalculatorPage from "./pages/mathCalculator/MathCalculatorPage";
-import QuizPages from "./pages/quiz/QuizPges";
-import NotFound from "./pages/notFound/NotFound";
 
 // AI QUIZ SECTION
-import Billing from "./pageQuiz/Billing";
-import Leaderboard from "./pageQuiz/Leaderboard";
-import Analytics from "./pageQuiz/Analytics";
-import MixedQuiz from "./pageQuiz/Quiz/MixedQuiz";
-import PastQuestions from "./pageQuiz/Quiz/PastQuestions";
-import AIQuiz from "./pageQuiz/Quiz/AIQuiz";
-import AdaptiveQuiz from "./pageQuiz/Quiz/AdaptiveQuiz";
-import Register from "./pageQuiz/Auth/register/Register";
-import Login from "./pageQuiz/Auth/login/Login";
-import ForgotPassword from "./pageQuiz/Auth/forgotPassword/ForgotPassword";
-import ResetPassword from "./pageQuiz/Auth/resetPassword/ResetPassword";
-import CampusOnboarding from "./pageQuiz/Campus/CampusOnboarding";
-import MaterialUpload from "./pageQuiz/Materials/MaterialUpload";
-import MaterialQuizTake from "./pageQuiz/Materials/MaterialQuizTake";
-import CourseTutor from "./pageQuiz/CourseTutor/CourseTutor";
-import StudyCoach from "./pageQuiz/StudyCoach/StudyCoach";
-import CareerCoach from "./pageQuiz/Career/CareerCoach";
-import Referral from "./pageQuiz/Referral/Referral";
 
+import RouteFallback from "./components/RouteFallback";
 import PublicLayout from "./layouts/PublicLayouts";
 import AuthLayout from "./layouts/AuthLayout";
 import ProtectedRoute from "./componentsQuiz/ProtectedRoute";
-import Dashboard from "./pageQuiz/dashboard/Dashboard";
-import PreviewPage from "./pages/adminPreview/PreviewPage";
+
 import AdminLayout from "./layouts/AdminLayout";
 
 // MARKETPLACE (publisher workspace + public storefront/listing pages)
 import PublisherLayout from "./layouts/PublisherLayout";
 import RequirePublisher from "./componentsMarketplace/RequirePublisher";
-import PublisherOnboarding from "./pageMarketplace/PublisherOnboarding";
-import PublisherDashboard from "./pageMarketplace/PublisherDashboard";
-import ListingManager from "./pageMarketplace/ListingManager";
-import ListingForm from "./pageMarketplace/ListingForm";
-import PublisherOrders from "./pageMarketplace/PublisherOrders";
-import MyPurchases from "./pageMarketplace/MyPurchases";
-import Marketplace from "./pages/marketplace/Marketplace";
-import PublisherStorefront from "./pages/publisherStorefront/PublisherStorefront";
-import ListingDetail from "./pages/listingDetail/ListingDetail";
 
 // import SeoPage from "./pages/seo/SeoPage";
+// Every page except Home loads on demand, so a visitor to one calculator
+// doesn't download the admin area, the rich-text editor and every other page.
+const CGPACalculator = lazy(() => import("./pages/cgpa/CGPACalculator"));
+const WAECCalculator = lazy(() => import("./pages/waec/WAECCalculator"));
+const JAMBScore = lazy(() => import("./pages/jamb/JAMBScore"));
+const Scholarships = lazy(() => import("./pages/scholarships/Scholarships"));
+const StudyPlanner = lazy(() => import("./pages/studyPlanner/StudyPlanner"));
+const GPAClass = lazy(() => import("./pages/gpaclass/GPAClass"));
+const AgeCalculator = lazy(() => import("./pages/age/AgeCalculator"));
+const AgeTracker = lazy(() => import("./pages/age/AgeTracker"));
+const EngineeringTools = lazy(() => import("./pages/engineering/EngineeringTools"));
+const ResistorColorCode = lazy(() => import("./pages/engineering/ResistorColorCode"));
+const SmdResistorCode = lazy(() => import("./pages/engineering/SmdResistorCode"));
+const CapacitorCode = lazy(() => import("./pages/engineering/CapacitorCode"));
+const OhmsLaw = lazy(() => import("./pages/engineering/OhmsLaw"));
+const SeriesParallel = lazy(() => import("./pages/engineering/SeriesParallel"));
+const VoltageDivider = lazy(() => import("./pages/engineering/VoltageDivider"));
+const LedResistor = lazy(() => import("./pages/engineering/LedResistor"));
+const Timer555 = lazy(() => import("./pages/engineering/Timer555"));
+const SolarCalculator = lazy(() => import("./pages/engineering/SolarCalculator"));
+const InverterCalculator = lazy(() => import("./pages/engineering/InverterCalculator"));
+const BatteryBackup = lazy(() => import("./pages/engineering/BatteryBackup"));
+const AggregateHub = lazy(() => import("./pages/aggregate/AggregateHub"));
+const UniversityAggregate = lazy(() => import("./pages/aggregate/UniversityAggregate"));
+const CgpaConverter = lazy(() => import("./pages/cgpaConverter/CgpaConverter"));
+const CbtHub = lazy(() => import("./pages/cbt/CbtHub"));
+const CbtSubject = lazy(() => import("./pages/cbt/CbtSubject"));
+const Tutorials = lazy(() => import("./pages/tutorials/Tutorials"));
+const TutorialDetails = lazy(() => import("./pages/tutorialDetails/TutorialDetails"));
+const Contact = lazy(() => import("./pages/contact/Contact"));
+const CreateTutorial = lazy(() => import("./pages/admin/CreateTutorial"));
+const AITutor = lazy(() => import("./pages/aiTutor/AITutor"));
+const AdminLogin = lazy(() => import("./pages/adminLogin/AdminLoginForm"));
+const AdminDashboard = lazy(() => import("./pages/adminDashboard/AdminDashboard"));
+const AdminTutorials = lazy(() => import("./pages/adminTutorial/AdminTutorials"));
+const AdminCuratedQuestions = lazy(() => import("./pages/adminCuratedQuestions/AdminCuratedQuestions"));
+const AdminInstitutions = lazy(() => import("./pages/adminInstitutions/AdminInstitutions"));
+const EditTutorial = lazy(() => import("./pages/editTutorial/EditorTutorial"));
+const AdminMessages = lazy(() => import("./pages/adminMessages/AdminMessages"));
+const AdmissionPredictor = lazy(() => import("./pages/admismissionPreditior/AdmissionPredictor"));
+const PrivacyPolicy = lazy(() => import("./pages/privacy/PrivacyPolicy"));
+const About = lazy(() => import("./pages/about/About"));
+const Terms = lazy(() => import("./pages/terms/Terms"));
+const Author = lazy(() => import("./pages/author/Author"));
+const MathCalculatorPage = lazy(() => import("./pages/mathCalculator/MathCalculatorPage"));
+const QuizPages = lazy(() => import("./pages/quiz/QuizPges"));
+const NotFound = lazy(() => import("./pages/notFound/NotFound"));
+const Billing = lazy(() => import("./pageQuiz/Billing"));
+const Leaderboard = lazy(() => import("./pageQuiz/Leaderboard"));
+const Analytics = lazy(() => import("./pageQuiz/Analytics"));
+const MixedQuiz = lazy(() => import("./pageQuiz/Quiz/MixedQuiz"));
+const PastQuestions = lazy(() => import("./pageQuiz/Quiz/PastQuestions"));
+const AIQuiz = lazy(() => import("./pageQuiz/Quiz/AIQuiz"));
+const AdaptiveQuiz = lazy(() => import("./pageQuiz/Quiz/AdaptiveQuiz"));
+const Register = lazy(() => import("./pageQuiz/Auth/register/Register"));
+const Login = lazy(() => import("./pageQuiz/Auth/login/Login"));
+const ForgotPassword = lazy(() => import("./pageQuiz/Auth/forgotPassword/ForgotPassword"));
+const ResetPassword = lazy(() => import("./pageQuiz/Auth/resetPassword/ResetPassword"));
+const CampusOnboarding = lazy(() => import("./pageQuiz/Campus/CampusOnboarding"));
+const MaterialUpload = lazy(() => import("./pageQuiz/Materials/MaterialUpload"));
+const MaterialQuizTake = lazy(() => import("./pageQuiz/Materials/MaterialQuizTake"));
+const CourseTutor = lazy(() => import("./pageQuiz/CourseTutor/CourseTutor"));
+const StudyCoach = lazy(() => import("./pageQuiz/StudyCoach/StudyCoach"));
+const CareerCoach = lazy(() => import("./pageQuiz/Career/CareerCoach"));
+const Referral = lazy(() => import("./pageQuiz/Referral/Referral"));
+const Dashboard = lazy(() => import("./pageQuiz/dashboard/Dashboard"));
+const PreviewPage = lazy(() => import("./pages/adminPreview/PreviewPage"));
+const PublisherOnboarding = lazy(() => import("./pageMarketplace/PublisherOnboarding"));
+const PublisherDashboard = lazy(() => import("./pageMarketplace/PublisherDashboard"));
+const ListingManager = lazy(() => import("./pageMarketplace/ListingManager"));
+const ListingForm = lazy(() => import("./pageMarketplace/ListingForm"));
+const PublisherOrders = lazy(() => import("./pageMarketplace/PublisherOrders"));
+const MyPurchases = lazy(() => import("./pageMarketplace/MyPurchases"));
+const Marketplace = lazy(() => import("./pages/marketplace/Marketplace"));
+const PublisherStorefront = lazy(() => import("./pages/publisherStorefront/PublisherStorefront"));
+const ListingDetail = lazy(() => import("./pages/listingDetail/ListingDetail"));
+
 function App() {
 
  return (
@@ -105,6 +112,7 @@ function App() {
    {/* Navbar appears on every page */}
    {/* <Navbar /> */}
 
+   <Suspense fallback={<RouteFallback />}>
    <Routes>
   <Route path="/admin/login" element={<AdminLogin />} />
 
@@ -400,6 +408,7 @@ function App() {
   />
 </Route>
 </Routes>
+   </Suspense>
 
 {/* Footer appears on every page */}
    {/* <Footer /> */}

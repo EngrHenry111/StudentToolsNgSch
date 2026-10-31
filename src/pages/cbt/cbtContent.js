@@ -60,8 +60,8 @@ export function subjectContent(s) {
 
   return {
     path: `${CBT_PATH}/${s.slug}`,
-    title: `JAMB ${name} CBT Practice Test: Free Questions with Answers | StudentToolsNG`,
-    description: `Free JAMB ${name} CBT practice online: ${n} UTME-style ${lower} questions with answers and explanations, a timer at real exam pace, a question navigator and a score by topic.`,
+    title: `JAMB ${name} CBT Practice Test: Free Questions with Answers`,
+    description: `Free JAMB ${name} CBT practice online: ${n} UTME-style ${lower} questions with answers, explanations, a timer, a question navigator and a score by topic.`,
     keywords: `JAMB ${lower} CBT practice, JAMB ${lower} questions and answers, UTME ${lower} practice questions, JAMB ${lower} past questions, free JAMB CBT practice online`,
     h1: `JAMB ${name} CBT Practice Test`,
     intro: `Practise UTME ${name} on a computer-based test that works like the real one: timed questions, a navigator to jump between them, and a full review with the correct answer and an explanation for every question.`,

@@ -5,8 +5,8 @@ import { ENG_TOOLS } from "./engTools";
 const EngineeringTools = () => (
   <EngLayout
     path="/engineering-tools"
-    title="Engineering Tools: Resistor, Capacitor & Circuit Calculators | StudentToolsNG"
-    description="Free electronics and power calculators for engineering and physics students: resistor colour code, SMD resistor code, capacitor code, Ohm's law, series and parallel, voltage divider, LED resistor, 555 timer, and solar, inverter and battery sizing."
+    title="Engineering Tools: Resistor, Capacitor & Circuit Calculators"
+    description="Free electronics and power calculators: resistor colour code, capacitor code, Ohm's law, voltage divider, 555 timer, and solar, inverter and battery sizing."
     keywords="engineering calculators, electronics calculators, resistor calculator, capacitor calculator, circuit calculator, electrical engineering tools"
   >
     <h1>Engineering Tools</h1>

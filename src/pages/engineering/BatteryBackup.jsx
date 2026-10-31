@@ -26,8 +26,8 @@ const faq = [
 const BatteryBackup = () => (
   <EngLayout
     path={PATH}
-    title="Battery Backup Calculator: How Long Will My Battery Last? | StudentToolsNG"
-    description="Free battery backup calculator for inverters: find how many hours your batteries will last at your load, or how many tubular, AGM or lithium batteries you need for the backup you want, with series and parallel wiring."
+    title="Battery Backup Calculator: How Long Will My Battery Last?"
+    description="Free battery backup calculator: find how many hours your batteries will last at your load, or how many you need for the backup you want."
     keywords="battery backup calculator, how long will my battery last, inverter battery calculator, how many batteries do I need, battery backup time calculator, 200Ah battery backup time"
     faq={faq}
   >

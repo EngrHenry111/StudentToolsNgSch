@@ -67,8 +67,8 @@ const LedResistor = () => {
   return (
     <EngLayout
       path={PATH}
-      title="LED Resistor Calculator (Series Resistor for LEDs) | StudentToolsNG"
-      description="Free LED resistor calculator: find the series resistor for one or more LEDs from the supply voltage, LED forward voltage and current, with the nearest standard value, actual current and power rating."
+      title="LED Resistor Calculator (Series Resistor for LEDs)"
+      description="Free LED resistor calculator: find the series resistor for your LEDs from supply voltage, forward voltage and current, with the nearest standard value."
       keywords="led resistor calculator, led series resistor, resistor for led 5v, resistor for led 12v, led current limiting resistor"
       faq={faq}
     >

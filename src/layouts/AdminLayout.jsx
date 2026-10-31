@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+import RouteFallback from "../components/RouteFallback";
 import { Outlet, Navigate } from "react-router-dom";
 import AdminNavbar from "../components/adminNav/AdminNavbar";
 import Navbar from "../components/navbar/Navbar";
@@ -19,7 +21,7 @@ const AdminLayout = () => {
    <AdminNavbar />
 
    <div className="admin-page-content">
-    <Outlet />
+    <Suspense fallback={<RouteFallback />}><Outlet /></Suspense>
    </div>
  <Footer/>
   </div>

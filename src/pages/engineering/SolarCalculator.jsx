@@ -30,8 +30,8 @@ const faq = [
 const SolarCalculator = () => (
   <EngLayout
     path={PATH}
-    title="Solar System Calculator Nigeria: Panels, Inverter & Batteries | StudentToolsNG"
-    description="Free solar system calculator for Nigerian homes and offices: list your appliances to get the inverter size, number of batteries, number of solar panels, charge controller, cable and fuse sizes, with full working."
+    title="Solar System Calculator Nigeria: Panels, Inverter & Batteries"
+    description="Free solar system calculator for Nigerian homes and offices: list your appliances to get the inverter size, batteries, solar panels, cable and fuse sizes."
     keywords="solar calculator Nigeria, how many solar panels do I need, solar panel calculator, solar system sizing, inverter and battery calculator Nigeria, solar installation calculator, peak sun hours Nigeria"
     faq={faq}
   >

@@ -19,9 +19,19 @@ if (rootEl.innerHTML.trim()) {
   window.__EDGE_SNAPSHOT__ = {
     path: window.location.pathname,
     title: document.title,
-    html: rootEl.innerHTML
+    description: document.querySelector('meta[name="description"]')?.content,
+    html: rootEl.querySelector("main")?.outerHTML || rootEl.innerHTML
   };
 }
+
+// Pages load on demand, so a tab left open across a deploy can ask for a file
+// that no longer exists. Reload once to pick up the new version.
+window.addEventListener("vite:preloadError", (event) => {
+  event.preventDefault();
+  if (sessionStorage.getItem("chunk-reload")) return;
+  sessionStorage.setItem("chunk-reload", "1");
+  window.location.reload();
+});
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

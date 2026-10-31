@@ -60,7 +60,7 @@ const OhmsLaw = () => {
   return (
     <EngLayout
       path={PATH}
-      title="Ohm's Law Calculator (Voltage, Current, Resistance, Power) | StudentToolsNG"
+      title="Ohm's Law Calculator (Voltage, Current, Resistance, Power)"
       description="Free Ohm's law calculator: enter any two of voltage, current, resistance and power to find the other two, with the formulas and worked examples."
       keywords="ohm's law calculator, voltage current resistance calculator, power calculator, V=IR, electrical power formula"
       faq={faq}

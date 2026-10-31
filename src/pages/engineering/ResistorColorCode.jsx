@@ -167,7 +167,7 @@ const ResistorColorCode = () => {
     <EngLayout
       path={PATH}
       title="Resistor Colour Code Calculator (4, 5 & 6 Band) | StudentToolsNG"
-      description="Free resistor colour code calculator: pick the bands to get the resistance, tolerance and range, or enter a value to get its colours. Works for 3, 4, 5 and 6-band resistors and inductors."
+      description="Free resistor colour code calculator for 3, 4, 5 and 6-band resistors: pick the bands to get resistance and tolerance, or enter a value to get the colours."
       keywords="resistor color code calculator, resistor colour code, 4 band resistor, 5 band resistor, 6 band resistor, inductor color code, resistor value"
       faq={faq}
     >

@@ -177,12 +177,11 @@ const stripHTML = (html) => {
   : location.pathname;
  const canonicalUrl = `https://studenttoolsng.com${canonicalPath}`;
 
- const pageTitle = seoSubtopic
-  ? `${seoSubtopic} Tutorials | StudentToolsNG`
-  : seoTopic
-  ? `${seoTopic} Tutorials | StudentToolsNG`
-  : seoCategory
-  ? `${seoCategory} Tutorials | StudentToolsNG`
+ const seoName = (seoSubtopic || seoTopic || seoCategory)
+  .replace(/-/g, " ")
+  .replace(/\b\w/g, (c) => c.toUpperCase());
+ const pageTitle = seoName
+  ? `${seoName} Tutorials | StudentToolsNG`
   : "Study Tutorials | StudentToolsNG";
 
  const pageDescription = seoSubtopic

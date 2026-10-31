@@ -1,4 +1,4 @@
-import authorImg from "../assets/images/Focused coder at work.png" 
+import authorImg from "../assets/images/author-card.webp";
 import "./authorCard.css";
 import { Link } from "react-router-dom";
 const AuthorCard = () => {
@@ -9,8 +9,11 @@ const AuthorCard = () => {
 
  <img
  src={authorImg}
- alt="Henry Akpan"
+ alt="Engr. Henry Akpan"
  className="author-image"
+ width="90"
+ height="90"
+ loading="lazy"
  />
 
  <div>

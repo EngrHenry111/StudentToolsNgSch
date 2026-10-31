@@ -36,8 +36,8 @@ const faq = [
 const CgpaConverter = () => (
   <EngLayout
     path={PATH}
-    title="CGPA Converter: 5.0 to 4.0 Scale, Percentage & Class of Degree | StudentToolsNG"
-    description="Free CGPA converter for Nigerian students: convert a 5-point CGPA to the 4.0 scale (or any scale), to a percentage and to a class of degree, with a course-by-course 4.0 estimate for WES and study-abroad applications."
+    title="CGPA Converter: 5.0 to 4.0 Scale, Percentage & Class of Degree"
+    description="Free CGPA converter for Nigerian students: convert a 5-point CGPA to the 4.0 scale, a percentage and a class of degree, for WES and study abroad."
     keywords="CGPA converter, convert 5.0 CGPA to 4.0, CGPA to percentage, CGPA to GPA 4.0 scale Nigeria, 4.0 to 5.0 CGPA, WES GPA calculator Nigeria"
     faq={faq}
     section={SECTION}

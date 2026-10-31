@@ -1,10 +1,7 @@
 
 import { useParams, Link } from "react-router-dom";
-import { useEffect,useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import API from "../../services/api";
-import ReactMarkdown from "react-markdown";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { Helmet } from "react-helmet-async";
 import AuthorCard from "../../components/AuthorCard";
 import { decode } from "html-entities";
@@ -12,6 +9,10 @@ import AdUnit from "../../components/ads/AdUnit";
 import NotFound from "../notFound/NotFound";
 import MovedPermanently from "../notFound/MovedPermanently";
 import "./tutorialDetails.css";
+
+import { seoTitle } from "../../utils/seoTitle";
+
+const AiAnswer = lazy(() => import("./AiAnswer"));
 
 const SITE = "https://studenttoolsng.com";
 const FALLBACK_IMAGE = `${SITE}/og-image.png`;
@@ -283,50 +284,7 @@ const calculateReadingTime = (html)=>{
 };
 
 
-const generateFAQ = (content)=>{
-
- const text = content.replace(/<[^>]*>/g,"");
-
- const questions = [];
-
- if(text.toLowerCase().includes("cgpa")){
-
-  questions.push({
-   question:"What is CGPA?",
-   answer:"CGPA stands for Cumulative Grade Point Average and represents the overall academic performance of a student."
-  });
-
-  questions.push({
-   question:"How is CGPA calculated?",
-   answer:"CGPA is calculated by dividing the total grade points earned by the total credit units taken."
-  });
-
- }
-
- if(text.toLowerCase().includes("waec")){
-
-  questions.push({
-   question:"What is WAEC grading system?",
-   answer:"WAEC grading ranges from A1 for excellent to F9 for fail."
-  });
-
- }
-
- if(text.toLowerCase().includes("jamb")){
-
-  questions.push({
-   question:"What is the maximum JAMB score?",
-   answer:"The maximum JAMB score is 400 from four subjects each worth 100 marks."
-  });
-
- }
-
- return questions;
-
-};
-
-
- if(movedTo){
+if(movedTo){
   return <MovedPermanently to={movedTo} />;
  }
 
@@ -342,6 +300,7 @@ const generateFAQ = (content)=>{
    <div className="tutorial-layt">
     <Helmet>
      <title>{edge ? edge.title : "Loading tutorial… | StudentToolsNG"}</title>
+     {edge?.description && <meta name="description" content={edge.description} />}
      <link rel="canonical" href={`${SITE}/tutorial/${slug}`} />
     </Helmet>
     {edge
@@ -350,8 +309,6 @@ const generateFAQ = (content)=>{
    </div>
   );
  }
-
- const faqData = generateFAQ(tutorial.content);
 
  const canonicalUrl = `${SITE}/tutorial/${tutorial.slug}`;
 
@@ -431,7 +388,7 @@ const generateFAQ = (content)=>{
 <Helmet>
 
 {/* Primary SEO */}
-<title>{tutorial.title} | StudentToolsNG</title>
+<title>{seoTitle(tutorial.title)}</title>
 
 <meta name="description" content={metaDescription} />
 
@@ -477,24 +434,6 @@ const generateFAQ = (content)=>{
 <meta name="twitter:description" content={metaDescription} />
 
 <meta name="twitter:image" content={shareImage} />
-
-{/* FAQ Schema — only when there are real FAQ entries */}
-{faqData.length > 0 && (
-<script type="application/ld+json">
-{JSON.stringify({
- "@context":"https://schema.org",
- "@type":"FAQPage",
- mainEntity: faqData.map(faq=>({
-  "@type":"Question",
-  name: faq.question,
-  acceptedAnswer:{
-   "@type":"Answer",
-   text: faq.answer
-  }
- }))
-})}
-</script>
-)}
 
 {/* Breadcrumb Schema */}
 <script type="application/ld+json">
@@ -564,19 +503,7 @@ const generateFAQ = (content)=>{
   >
   </div>
 
-        {faqData.length > 0 && (
-    <div className="faq-section">
-    <h2>Frequently Asked Questions</h2>
-    {faqData.map((faq,index)=>(
-    <div key={index} className="faq-item">
-    <h3>{faq.question}</h3>
-    <p>{faq.answer}</p>
-    </div>
-    ))}
-    </div>
-    )}
-
-  <div className="ai-assistant">
+        <div className="ai-assistant">
 <h3>Ask AI Questions About This Topic</h3>
 
     <input
@@ -592,31 +519,9 @@ const generateFAQ = (content)=>{
     {loading && <p>AI thinking...</p>}
 
     {answer && (
-    <div className="ai-answer">
-
-    <ReactMarkdown
-    components={{
-    code({node, inline, className, children}) {
-      const match = /language-(\w+)/.exec(className || '');
-      return !inline && match ? (
-      <SyntaxHighlighter
-        style={oneDark}
-        language={match[1]}
-        PreTag="div"
-      >
-        {String(children).replace(/\n$/, '')}
-      </SyntaxHighlighter>
-      ) : (
-      <code className={className}>{children}</code>
-      );
-      
-    }
-    }}
-    >
-    {answer}
-    </ReactMarkdown>
-
-    </div>
+    <Suspense fallback={<p>AI thinking...</p>}>
+    <AiAnswer answer={answer} />
+    </Suspense>
     )}
     </div>
 
@@ -635,7 +540,7 @@ const generateFAQ = (content)=>{
 <p>{t.excerpt}</p>
 
 <Link to={`/tutorial/${t.slug}`}>
-Read Tutorial
+Read {t.title}
 </Link>
 
 </div>

@@ -96,8 +96,8 @@ export function universityContent(u) {
 
   return {
     path: `${AGG_PATH}/${u.slug}`,
-    title: `${u.short} Aggregate Score Calculator: Formula & Worked Example | StudentToolsNG`,
-    description: `Calculate your ${u.short} (${u.name}) aggregate score from your UTME${usesPost ? ", post-UTME" : ""}${usesOlevel ? " and O'level grades" : ""}, see the formula and a worked example, and find the score you need for your course.`,
+    title: `${u.short} Aggregate Score Calculator: Formula & Worked Example`,
+    description: `Calculate your ${u.short} aggregate score from your UTME${usesPost ? ", post-UTME" : ""}${usesOlevel ? " and O'level grades" : ""}, see the formula and a worked example, and find the score you need.`,
     keywords: `${u.short} aggregate score calculator, how to calculate ${u.short} aggregate score, ${u.short} post UTME aggregate, ${u.name} aggregate score, ${u.short} screening score`,
     h1: `${u.short} Aggregate Score Calculator`,
     intro: u.summary,

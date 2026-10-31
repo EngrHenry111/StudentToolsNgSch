@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import RouteFallback from "../components/RouteFallback";
+import { Suspense, useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import PublisherNavbar from "../componentsMarketplace/publisherNav/PublisherNavbar";
 import Footer from "../components/footer/Footer";
@@ -22,7 +23,7 @@ const PublisherLayout = () => {
     <>
       <PublisherNavbar storefrontSlug={publisher?.slug} />
       <SectionBar />
-      <Outlet context={{ publisher, refreshPublisher: () => getMyPublisherProfile().then(setPublisher) }} />
+      <Suspense fallback={<RouteFallback />}><Outlet context={{ publisher, refreshPublisher: () => getMyPublisherProfile().then(setPublisher) }} /></Suspense>
       <Footer />
     </>
   );

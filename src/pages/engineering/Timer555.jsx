@@ -80,7 +80,7 @@ const Timer555 = () => {
     <EngLayout
       path={PATH}
       title="555 Timer Calculator (Astable & Monostable) | StudentToolsNG"
-      description="Free 555 timer calculator: frequency, period and duty cycle of an astable circuit, R1 and R2 for a target frequency, and the pulse width of a monostable circuit."
+      description="Free 555 timer calculator: frequency, period and duty cycle of an astable circuit, R1 and R2 for a target frequency, and monostable pulse width."
       keywords="555 timer calculator, 555 astable calculator, 555 monostable calculator, 555 frequency formula, ne555 duty cycle"
       faq={faq}
     >

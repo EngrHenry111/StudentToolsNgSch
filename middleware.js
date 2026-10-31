@@ -28,7 +28,7 @@ const PRERENDER_SERVICE = "https://service.prerender.io";
 // and loop. It falls through to the SPA, which is exactly what it wants to
 // render.
 const BOT_UA =
-  /(googlebot|google-inspectiontool|bingbot|yandex|duckduckbot|baiduspider|slurp|sogou|exabot|facebookexternalhit|facebot|twitterbot|slackbot|slack-imgproxy|linkedinbot|embedly|pinterest|redditbot|whatsapp|telegrambot|discordbot|skypeuripreview|applebot|petalbot|bytespider|ahrefsbot|semrushbot|rogerbot|screaming\s?frog|gptbot|oai-searchbot|chatgpt-user|perplexitybot|claudebot|anthropic-ai|claude-web|ccbot|google-extended|cohere-ai|amazonbot|bitlybot|w3c_validator)/i;
+  /(googlebot|google-inspectiontool|googleother|storebot-google|mediapartners-google|adsbot-google|bingbot|yandex|duckduckbot|baiduspider|slurp|sogou|exabot|facebookexternalhit|facebot|twitterbot|slackbot|slack-imgproxy|linkedinbot|embedly|pinterest|redditbot|whatsapp|telegrambot|discordbot|skypeuripreview|applebot|petalbot|bytespider|ahrefsbot|semrushbot|rogerbot|screaming\s?frog|gptbot|oai-searchbot|chatgpt-user|perplexitybot|claudebot|anthropic-ai|claude-web|ccbot|google-extended|cohere-ai|amazonbot|bitlybot|w3c_validator)/i;
 
 const SKIP_EXT =
   /\.(js|mjs|cjs|css|json|xml|txt|map|png|jpe?g|gif|svg|webp|avif|ico|bmp|woff2?|ttf|otf|eot|mp[34]|webm|ogg|wav|pdf|zip|gz|wasm|webmanifest)$/i;

@@ -64,8 +64,8 @@ const CapacitorCode = () => {
   return (
     <EngLayout
       path={PATH}
-      title="Capacitor Code Calculator (104, 4R7, 2n2 to pF, nF, µF) | StudentToolsNG"
-      description="Free capacitor code calculator: convert ceramic and film capacitor codes like 104, 222J or 4R7 to pF, nF and µF, read tolerance and voltage letters, or find the code for a value."
+      title="Capacitor Code Calculator (104, 4R7, 2n2 to pF, nF, µF)"
+      description="Free capacitor code calculator: convert codes like 104, 222J or 4R7 to pF, nF and µF, read tolerance and voltage letters, or find the code for a value."
       keywords="capacitor code calculator, 104 capacitor value, ceramic capacitor code, capacitor value chart, pf to nf to uf, capacitor voltage code"
       faq={faq}
     >

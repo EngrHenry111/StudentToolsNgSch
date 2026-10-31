@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+import RouteFallback from "../components/RouteFallback";
 import Navbar from "../components/navbar/Navbar";
 import SectionBar from "../components/sectionBar/SectionBar";
 import Footer from "../components/footer/Footer";
@@ -9,7 +11,7 @@ const PublicLayout = () => {
     <>
       <Navbar />
       <SectionBar />
-      <Outlet />
+      <Suspense fallback={<RouteFallback />}><Outlet /></Suspense>
       <AdUnit slot="0000000001" />
       <Footer />
     </>

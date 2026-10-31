@@ -42,8 +42,8 @@ const SmdResistorCode = () => {
   return (
     <EngLayout
       path={PATH}
-      title="SMD Resistor Code Calculator (3-digit, 4-digit, EIA-96) | StudentToolsNG"
-      description="Decode SMD chip resistor markings: 3-digit codes like 103, 4-digit codes like 1002, R codes like 4R7 and EIA-96 codes like 01C. Or enter a value to get its SMD code."
+      title="SMD Resistor Code Calculator (3-digit, 4-digit, EIA-96)"
+      description="Decode SMD resistor markings: 3-digit codes like 103, 4-digit codes like 1002, R codes like 4R7 and EIA-96 codes like 01C, or get the code for a value."
       keywords="smd resistor code calculator, smd resistor code, eia-96 code, 103 resistor value, 4r7 resistor, chip resistor marking"
       faq={faq}
     >

@@ -42,8 +42,8 @@ const SeriesParallel = () => {
   return (
     <EngLayout
       path={PATH}
-      title="Series and Parallel Circuit Calculator with Working | StudentToolsNG"
-      description="Free series and parallel circuit calculator: paste a question to get total resistance, current and the voltage across each resistor with full step-by-step working, or combine resistors, capacitors and inductors."
+      title="Series and Parallel Circuit Calculator with Working"
+      description="Free series and parallel circuit calculator: paste a question to get total resistance, current and voltages with full step-by-step working."
       keywords="series and parallel calculator, series parallel circuit solver, resistors in series and parallel questions, current in parallel circuit, internal resistance calculator, parallel resistor calculator"
       faq={faq}
     >
