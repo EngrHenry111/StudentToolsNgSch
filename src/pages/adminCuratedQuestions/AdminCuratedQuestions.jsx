@@ -256,6 +256,17 @@ const AdminCuratedQuestions = () => {
           </select>
         </div>
 
+        {!loadingList && questions.length > 0 && (
+          <p className="admin-curated-count">
+            <strong>{questions.length.toLocaleString()}</strong> question{questions.length === 1 ? "" : "s"}
+            {examBodies
+              .map((e) => [e, questions.filter((q) => q.examBody === e).length])
+              .filter(([, n]) => n > 0)
+              .map(([e, n]) => ` · ${e}: ${n.toLocaleString()}`)
+              .join("")}
+          </p>
+        )}
+
         {loadingList ? (
           <p>Loading...</p>
         ) : questions.length === 0 ? (
