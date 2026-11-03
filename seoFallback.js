@@ -43,6 +43,7 @@ const SITE_NAV = `<nav aria-label="Main">${[
   ["/jamb-score-calculator", "JAMB Score Calculator"],
   ["/jamb-cbt-practice", "JAMB CBT Practice"],
   ["/aggregate-score-calculator", "Aggregate Score Calculator"],
+  ["/project-topics", "Project Topics"],
   ["/engineering-tools", "Engineering Tools"],
   ["/marketplace", "Research Library"]
 ].map(([href, text]) => link(href, text)).join(" · ")}</nav>`;
@@ -74,6 +75,7 @@ const HOME_BODY = `<main>
 <li><a href="/age-tracker">Age Tracker</a></li>
 <li><a href="/jamb-cbt-practice">Free JAMB CBT Practice Test</a></li>
 <li><a href="/aggregate-score-calculator">Post-UTME Aggregate Score Calculator</a></li>
+<li><a href="/project-topics">Final Year Project Topics by Department</a></li>
 <li><a href="/cgpa-converter">CGPA Converter: 5.0 to 4.0 Scale and Percentage</a></li>
 <li><a href="/engineering-tools/solar-system-calculator">Solar, Inverter and Battery Calculator</a></li>
 <li><a href="/engineering-tools">Engineering Tools: Resistor Colour Code, Capacitor Code and Circuit Calculators</a></li>

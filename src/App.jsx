@@ -53,6 +53,8 @@ const UniversityAggregate = lazy(() => import("./pages/aggregate/UniversityAggre
 const CgpaConverter = lazy(() => import("./pages/cgpaConverter/CgpaConverter"));
 const CbtHub = lazy(() => import("./pages/cbt/CbtHub"));
 const CbtSubject = lazy(() => import("./pages/cbt/CbtSubject"));
+const ProjectTopicsHub = lazy(() => import("./pages/projectTopics/ProjectTopicsHub"));
+const DepartmentTopics = lazy(() => import("./pages/projectTopics/DepartmentTopics"));
 const Tutorials = lazy(() => import("./pages/tutorials/Tutorials"));
 const TutorialDetails = lazy(() => import("./pages/tutorialDetails/TutorialDetails"));
 const Contact = lazy(() => import("./pages/contact/Contact"));
@@ -162,6 +164,8 @@ function App() {
     <Route path="/cgpa-converter" element={<CgpaConverter />} />
     <Route path="/jamb-cbt-practice" element={<CbtHub />} />
     <Route path="/jamb-cbt-practice/:subject" element={<CbtSubject />} />
+    <Route path="/project-topics" element={<ProjectTopicsHub />} />
+    <Route path="/project-topics/:slug" element={<DepartmentTopics />} />
     <Route path="/tutorials" element={<Tutorials />} />
     <Route path="/tutorial/:slug" element={<TutorialDetails />}/>
     <Route path="/:category" element={<Tutorials />} />

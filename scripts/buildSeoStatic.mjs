@@ -15,6 +15,9 @@ import { UNIVERSITIES } from "../src/utils/aggregate.js";
 import { universityContent, AGG_PATH } from "../src/pages/aggregate/aggContent.js";
 import { SUBJECTS } from "../src/utils/cbt/index.js";
 import { subjectContent, optionLine, answerLine, CBT_PATH } from "../src/pages/cbt/cbtContent.js";
+import { DEPARTMENTS } from "../src/pages/projectTopics/departments.js";
+import { departmentContent, hubContent, PT_PATH } from "../src/pages/projectTopics/topicsContent.js";
+import { currentYear, utmeYear } from "../src/utils/seoYear.js";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -86,19 +89,24 @@ function extract(file) {
   return out;
 }
 
+// Year helpers a page may put in a template-literal title or description
+// (title={`… ${utmeYear()} …`}), filled in with this build's values.
+const YEARS = { "${utmeYear()}": String(utmeYear()), "${currentYear()}": String(currentYear()) };
+const fillYears = (s) => s.replace(/\$\{(utmeYear|currentYear)\(\)\}/g, (m) => YEARS[m]);
+
 // [title, description] as the page's own <Helmet> sets them.
 function metaOf(file) {
   const src = fs.readFileSync(path.join(ROOT, file), "utf8");
   const first = (...patterns) => {
     for (const p of patterns) {
       const m = src.match(p);
-      if (m) return m[1].replace(/\s+/g, " ").trim();
+      if (m) return fillYears(m[1].replace(/\s+/g, " ").trim());
     }
     return null;
   };
   return [
-    first(/const title\s*=\s*["'`]([^"'`]+)["'`]/, /\btitle="([^"]+)"/, /<title>\s*([^{<]+?)\s*<\/title>/),
-    first(/const description\s*=\s*\n?\s*["'`](.+?)["'`];/s, /\bdescription="([^"]+)"/, /name="description"\s+content="([^"]+)"/)
+    first(/const title\s*=\s*["'`]([^"'`]+)["'`]/, /\btitle="([^"]+)"/, /\btitle=\{`([^`]+)`\}/, /<title>\s*([^{<]+?)\s*<\/title>/),
+    first(/const description\s*=\s*\n?\s*["'`](.+?)["'`];/s, /\bdescription="([^"]+)"/, /\bdescription=\{`([^`]+)`\}/, /name="description"\s+content="([^"]+)"/)
   ];
 }
 
@@ -188,6 +196,56 @@ for (const s of SUBJECTS) {
   meta[c.path] = [c.title, c.description];
   const words = blocks.reduce((n, b) => n + b.text.split(/s+/).length, 0);
   console.log(`${c.path.padEnd(28)} ${String(blocks.length).padStart(3)} blocks ${String(words).padStart(5)} words`);
+}
+
+// Project topics: the hub and one page per department, from the same
+// hubContent() and departmentContent() the React pages render.
+const sectionBlocks = (sections) =>
+  sections.flatMap((sec) => [
+    { tag: "h2", text: sec.h2 },
+    ...sec.paras.map((t) => ({ tag: "p", text: t })),
+    ...(sec.items || []).map((t) => ({ tag: "li", text: t }))
+  ]);
+const faqBlocks = (faq) => [
+  { tag: "h2", text: "Frequently Asked Questions" },
+  ...faq.flatMap((f) => [{ tag: "h3", text: f.q }, { tag: "p", text: f.a }])
+];
+const linkList = (items) =>
+  `<ul>${items.map(([href, text]) => `<li><a href="${href}">${escapeHtml(text)}</a></li>`).join("")}</ul>`;
+const logWords = (route, blocks) => {
+  const words = blocks.reduce((n, b) => n + b.text.split(/\s+/).length, 0);
+  console.log(`${route.padEnd(28)} ${String(blocks.length).padStart(3)} blocks ${String(words).padStart(5)} words`);
+};
+
+{
+  const c = hubContent();
+  const head = [{ tag: "h1", text: c.h1 }, { tag: "p", text: c.intro }];
+  const rest = [...sectionBlocks(c.sections), ...faqBlocks(c.faq)];
+  const departments = linkList(c.departments.map((d) => [d.path, `${d.name} Project Topics (${d.count} topics)`]));
+  result[c.path] = `<main>${render(head)}${departments}${render(rest)}</main>`;
+  meta[c.path] = [c.title, c.description];
+  logWords(c.path, [...head, ...rest]);
+}
+
+for (const d of DEPARTMENTS) {
+  const c = departmentContent(d);
+  const blocks = [
+    { tag: "h1", text: c.h1 },
+    { tag: "p", text: c.intro },
+    ...c.groups.flatMap((g) => [{ tag: "h2", text: g.name }, ...g.topics.map((t) => ({ tag: "li", text: t }))]),
+    ...sectionBlocks(c.sections)
+  ];
+  const guides = c.guides.length
+    ? `<h2>Project guides for ${escapeHtml(d.name.toLowerCase())} students</h2>${linkList(c.guides.map((g) => [g.path, g.title]))}`
+    : "";
+  const others = DEPARTMENTS.filter((x) => x.slug !== d.slug)
+    .map((x) => `<a href="${PT_PATH}/${x.slug}">${escapeHtml(x.name)} project topics</a>`)
+    .join(" · ");
+  result[c.path] =
+    `<main>${render(blocks)}${guides}${render(faqBlocks(c.faq))}` +
+    `<h2>Project topics for other departments</h2><p>${others}</p></main>`;
+  meta[c.path] = [c.title, c.description];
+  logWords(c.path, [...blocks, ...faqBlocks(c.faq)]);
 }
 
 for (const [route, [title, description]] of Object.entries(meta)) {

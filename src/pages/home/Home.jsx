@@ -200,6 +200,14 @@ StudentToolsNG - Free CGPA, WAEC & JAMB Calculators Nigeria
  </div>
 
  <div className="tool-card">
+ <h3>Final Year Project Topics</h3>
+ <p>Original project topics for Accounting, Nursing, Computer Science, Economics, Education and more.</p>
+ <Link to="/project-topics">
+ Browse Topics
+ </Link>
+ </div>
+
+ <div className="tool-card">
  <h3>CGPA Converter</h3>
  <p>Convert your CGPA from 5.0 to the 4.0 scale, to a percentage and to a class of degree.</p>
  <Link to="/cgpa-converter">

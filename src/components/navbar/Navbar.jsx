@@ -24,7 +24,8 @@ const GROUPS = {
       ["/jamb-cbt-practice", "JAMB CBT Practice"],
       ["/quiz", "Maths Quiz"],
       ["/tutorials/math-calculator", "Math Engine"],
-      ["/ai-tutor", "AI Tutor"]
+      ["/ai-tutor", "AI Tutor"],
+      ["/project-topics", "Project Topics"]
     ]
   }
 };

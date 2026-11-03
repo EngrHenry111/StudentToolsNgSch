@@ -3,6 +3,7 @@ import EngLayout, { FaqList } from "../engineering/EngLayout";
 import CbtExam from "./CbtExam";
 import { SUBJECTS } from "../../utils/cbt";
 import { CBT_SECTION, CBT_TOOLS, CBT_PATH } from "./cbtContent";
+import { utmeYear } from "../../utils/seoYear";
 import "../engineering/engineering.css";
 
 const faq = [
@@ -31,9 +32,9 @@ const faq = [
 const CbtHub = () => (
   <EngLayout
     path={CBT_PATH}
-    title="Free JAMB CBT Practice Test Online (with Answers)"
-    description="Free JAMB CBT practice test online for Mathematics, Physics, Chemistry and Biology: timed UTME-style questions with instant scoring and explanations."
-    keywords="JAMB CBT practice, free JAMB CBT practice online, JAMB CBT test, UTME practice test, JAMB practice questions and answers, JAMB mock exam online"
+    title={`Free JAMB CBT Practice Test ${utmeYear()} Online (with Answers)`}
+    description={`Free JAMB CBT practice test for UTME ${utmeYear()}: Mathematics, Physics, Chemistry and Biology, timed questions with instant scoring and explanations.`}
+    keywords={`JAMB CBT practice, JAMB CBT practice ${utmeYear()}, free JAMB CBT practice online, JAMB ${utmeYear()} practice questions, JAMB CBT test, UTME practice test, JAMB mock exam online`}
     faq={faq}
     section={CBT_SECTION}
     tools={CBT_TOOLS}

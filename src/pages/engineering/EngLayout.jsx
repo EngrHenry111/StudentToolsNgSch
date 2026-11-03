@@ -20,6 +20,8 @@ export default function EngLayout({
   faq = [],
   section = ENGINEERING,
   tools = ENG_TOOLS,
+  // "app" for tools; "collection" for pages that list things (project topics).
+  schemaType = "app",
   children
 }) {
   const url = `${SITE}${path}`;
@@ -45,16 +47,27 @@ export default function EngLayout({
         <meta name="twitter:image" content={IMAGE} />
 
         <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "WebApplication",
-            name: tool ? tool.name : section.name,
-            url,
-            applicationCategory: "EducationalApplication",
-            operatingSystem: "All",
-            description,
-            offers: { "@type": "Offer", price: "0", priceCurrency: "NGN" }
-          })}
+          {JSON.stringify(
+            schemaType === "collection"
+              ? {
+                  "@context": "https://schema.org",
+                  "@type": "CollectionPage",
+                  name: title,
+                  url,
+                  description,
+                  inLanguage: "en-NG"
+                }
+              : {
+                  "@context": "https://schema.org",
+                  "@type": "WebApplication",
+                  name: tool ? tool.name : section.name,
+                  url,
+                  applicationCategory: "EducationalApplication",
+                  operatingSystem: "All",
+                  description,
+                  offers: { "@type": "Offer", price: "0", priceCurrency: "NGN" }
+                }
+          )}
         </script>
 
         <script type="application/ld+json">

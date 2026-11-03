@@ -2,6 +2,7 @@
 // Plain JS (no JSX) so scripts/buildSeoStatic.mjs can produce the same
 // crawler text the page shows.
 import { SUBJECTS, topicsOf, LETTERS, SECONDS_PER_QUESTION } from "../../utils/cbt/index.js";
+import { utmeYear } from "../../utils/seoYear.js";
 
 export const CBT_PATH = "/jamb-cbt-practice";
 export const CBT_SECTION = { name: "JAMB CBT Practice", path: CBT_PATH };
@@ -57,13 +58,14 @@ export function subjectContent(s) {
   const n = s.bank.length;
   const name = s.name;
   const lower = name.toLowerCase();
+  const year = utmeYear();
 
   return {
     path: `${CBT_PATH}/${s.slug}`,
-    title: `JAMB ${name} CBT Practice Test: Free Questions with Answers`,
-    description: `Free JAMB ${name} CBT practice online: ${n} UTME-style ${lower} questions with answers, explanations, a timer, a question navigator and a score by topic.`,
-    keywords: `JAMB ${lower} CBT practice, JAMB ${lower} questions and answers, UTME ${lower} practice questions, JAMB ${lower} past questions, free JAMB CBT practice online`,
-    h1: `JAMB ${name} CBT Practice Test`,
+    title: `JAMB ${name} CBT Practice ${year}: Free Questions with Answers`,
+    description: `Free JAMB ${name} CBT practice for UTME ${year}: ${n} ${lower} questions with answers, explanations, a timer, a question navigator and a score by topic.`,
+    keywords: `JAMB ${lower} CBT practice, JAMB ${lower} CBT practice ${year}, JAMB ${year} ${lower} questions, JAMB ${lower} questions and answers, UTME ${lower} practice questions, JAMB ${lower} past questions, free JAMB CBT practice online`,
+    h1: `JAMB ${name} CBT Practice Test (UTME ${year})`,
     intro: `Practise UTME ${name} on a computer-based test that works like the real one: timed questions, a navigator to jump between them, and a full review with the correct answer and an explanation for every question.`,
     sections: [
       {
