@@ -1,4 +1,1 @@
-# Replace pub-XXXXXXXXXXXXXXXX with YOUR AdSense publisher ID
-# (same number as VITE_ADSENSE_CLIENT_ID, without the "ca-" prefix)
-# Find it at: AdSense > Account > Account information
-google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
+google.com, pub-5085792833873130, DIRECT, f08c47fec0942fa0
