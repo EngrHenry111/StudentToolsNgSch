@@ -15,7 +15,9 @@ const GROUPS = {
       ["/waec-grade-calculator", "WAEC Grade Calculator"],
       ["/jamb-score-calculator", "JAMB Score Calculator"],
       ["/aggregate-score-calculator", "Post-UTME Aggregate"],
-      ["/age-calculator", "Age Calculator"]
+      ["/percentage-calculator", "Percentage Calculator"],
+      ["/age-calculator", "Age Calculator"],
+      ["/calculators", "All Calculators"]
     ]
   },
   practice: {

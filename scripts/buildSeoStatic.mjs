@@ -18,6 +18,7 @@ import { subjectContent, optionLine, answerLine, CBT_PATH } from "../src/pages/c
 import { DEPARTMENTS } from "../src/pages/projectTopics/departments.js";
 import { departmentContent, hubContent, PT_PATH } from "../src/pages/projectTopics/topicsContent.js";
 import { currentYear, utmeYear } from "../src/utils/seoYear.js";
+import { CALCULATOR_GROUPS } from "../src/pages/everyday/everydayTools.js";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -44,6 +45,11 @@ const PAGES = {
   "/engineering-tools/inverter-size-calculator": "src/pages/engineering/InverterCalculator.jsx",
   "/engineering-tools/battery-backup-calculator": "src/pages/engineering/BatteryBackup.jsx",
   "/aggregate-score-calculator": "src/pages/aggregate/AggregateHub.jsx",
+  "/calculators": "src/pages/everyday/CalculatorsHub.jsx",
+  "/percentage-calculator": "src/pages/everyday/PercentageCalculator.jsx",
+  "/bmi-calculator": "src/pages/everyday/BmiCalculator.jsx",
+  "/ovulation-calculator": "src/pages/everyday/OvulationCalculator.jsx",
+  "/pregnancy-due-date-calculator": "src/pages/everyday/PregnancyCalculator.jsx",
   "/cgpa-converter": "src/pages/cgpaConverter/CgpaConverter.jsx",
   "/jamb-cbt-practice": "src/pages/cbt/CbtHub.jsx",
   "/study-planner": "src/pages/studyPlanner/StudyPlanner.jsx",
@@ -197,6 +203,17 @@ for (const s of SUBJECTS) {
   const words = blocks.reduce((n, b) => n + b.text.split(/s+/).length, 0);
   console.log(`${c.path.padEnd(28)} ${String(blocks.length).padStart(3)} blocks ${String(words).padStart(5)} words`);
 }
+
+// The /calculators hub's cards are built from data, so add their links.
+result["/calculators"] = result["/calculators"].replace(
+  "</main>",
+  CALCULATOR_GROUPS.map(
+    (g) =>
+      `<h2>${escapeHtml(g.name)}</h2><ul>${g.links
+        .map(([href, name, blurb]) => `<li><a href="${href}">${escapeHtml(name)}</a>: ${escapeHtml(blurb)}</li>`)
+        .join("")}</ul>`
+  ).join("") + "</main>"
+);
 
 // Project topics: the hub and one page per department, from the same
 // hubContent() and departmentContent() the React pages render.

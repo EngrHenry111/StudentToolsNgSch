@@ -55,6 +55,11 @@ const CbtHub = lazy(() => import("./pages/cbt/CbtHub"));
 const CbtSubject = lazy(() => import("./pages/cbt/CbtSubject"));
 const ProjectTopicsHub = lazy(() => import("./pages/projectTopics/ProjectTopicsHub"));
 const DepartmentTopics = lazy(() => import("./pages/projectTopics/DepartmentTopics"));
+const CalculatorsHub = lazy(() => import("./pages/everyday/CalculatorsHub"));
+const PercentageCalculator = lazy(() => import("./pages/everyday/PercentageCalculator"));
+const BmiCalculator = lazy(() => import("./pages/everyday/BmiCalculator"));
+const OvulationCalculator = lazy(() => import("./pages/everyday/OvulationCalculator"));
+const PregnancyCalculator = lazy(() => import("./pages/everyday/PregnancyCalculator"));
 const Tutorials = lazy(() => import("./pages/tutorials/Tutorials"));
 const TutorialDetails = lazy(() => import("./pages/tutorialDetails/TutorialDetails"));
 const Contact = lazy(() => import("./pages/contact/Contact"));
@@ -166,6 +171,11 @@ function App() {
     <Route path="/jamb-cbt-practice/:subject" element={<CbtSubject />} />
     <Route path="/project-topics" element={<ProjectTopicsHub />} />
     <Route path="/project-topics/:slug" element={<DepartmentTopics />} />
+    <Route path="/calculators" element={<CalculatorsHub />} />
+    <Route path="/percentage-calculator" element={<PercentageCalculator />} />
+    <Route path="/bmi-calculator" element={<BmiCalculator />} />
+    <Route path="/ovulation-calculator" element={<OvulationCalculator />} />
+    <Route path="/pregnancy-due-date-calculator" element={<PregnancyCalculator />} />
     <Route path="/tutorials" element={<Tutorials />} />
     <Route path="/tutorial/:slug" element={<TutorialDetails />}/>
     <Route path="/:category" element={<Tutorials />} />
