@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async"; // ✅ FIXED
 import "./jamb.css";
+import ShareButtons from "../../componentsMarketplace/ShareButtons";
 
 // AI-drafted (2026-09-13) — factual/explanatory content per Google's "low
 // value content" guidance. Needs human review before final: JAMB's official
@@ -186,6 +187,15 @@ const JAMBScore = () => {
     </div>
 
    )}
+
+   <ShareButtons
+    url={url}
+    title="JAMB Score Calculator"
+    label={total > 0 ? "Share your result:" : "Share this calculator:"}
+    text={total > 0
+     ? `My UTME total is ${total}/400. Add up your JAMB score free on StudentToolsNG:`
+     : "Free JAMB score calculator. Add up your UTME subject scores here:"}
+   />
 
 
 <section className="jamb-content">

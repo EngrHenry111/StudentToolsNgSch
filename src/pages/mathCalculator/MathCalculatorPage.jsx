@@ -4,6 +4,7 @@ import MathResultCard from "../../components/math/mathResultCard/MathResultCard"
 import HistoryPanel from "../../components/math/history/HistoryPanel";
 import { Helmet } from "react-helmet-async";
 import "../../styles/math.css";
+import ShareButtons from "../../componentsMarketplace/ShareButtons";
 
 const MathCalculatorPage = () => {
   const { solve, result, loading, error } = useMathSolver();
@@ -54,6 +55,15 @@ const image = "https://studenttoolsng.com/og-image.png";
         {error && <div className="error">{error}</div>}
 
         {result && <MathResultCard result={result} />}
+
+        <ShareButtons
+          url={url}
+          title="Smart Math Calculator"
+          label={result?.success ? "Share this solver:" : "Share:"}
+          text={result?.success
+            ? `I just solved a ${result.topic ? `${result.topic} ` : ""}question with step-by-step working on StudentToolsNG's free Smart Math Calculator. Try it:`
+            : "Free maths solver with step-by-step working. Try it:"}
+        />
 
         <section className="math-guide">
           <h2>How to Use the Smart Math Calculator</h2>

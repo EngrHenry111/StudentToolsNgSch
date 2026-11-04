@@ -13,6 +13,8 @@ import {
   SECONDS_PER_QUESTION
 } from "../../utils/cbt";
 import "./cbt.css";
+import ShareButtons from "../../componentsMarketplace/ShareButtons";
+import { CBT_PATH } from "./cbtContent";
 
 const STORE = "stng-cbt-v1";
 const COUNTS = [10, 20, 40];
@@ -349,6 +351,13 @@ export default function CbtExam({ slug }) {
             {result.answered < result.total && <Stat value={result.total - result.answered} label="left unanswered" />}
           </div>
           <p className="eng-note">{verdict(result.percent)}</p>
+
+          <ShareButtons
+            url={`https://studenttoolsng.com${CBT_PATH}/${subject.slug}`}
+            title={`JAMB ${subject.name} CBT Practice`}
+            label="Challenge a friend:"
+            text={`I scored ${result.percent}% (${result.correct}/${result.total}) on a JAMB ${subject.name} CBT practice test. Can you beat me? Try it free:`}
+          />
 
           <h3 className="eng-working-title">Score by topic</h3>
           <div className="cbt-topics">

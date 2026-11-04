@@ -11,6 +11,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import "./waec.css";
+import ShareButtons from "../../componentsMarketplace/ShareButtons";
+
+const CREDIT = /^(A1|B2|B3|C4|C5|C6)$/;
 
 // AI-drafted (2026-09-13) — factual/explanatory content per Google's "low
 // value content" guidance. Needs human review before final: the 0–100
@@ -300,6 +303,15 @@ WAEC Grade Calculator Nigeria | Convert WAEC Scores to Grades
     </div>
 
    )}
+
+   <ShareButtons
+    url="https://studenttoolsng.com/waec-grade-calculator"
+    title="WAEC Grade Calculator"
+    label={results.length > 0 ? "Share your result:" : "Share this calculator:"}
+    text={results.length > 0
+     ? `I checked my WAEC grades: ${results.filter((r) => CREDIT.test(r.grade)).length} credit${results.filter((r) => CREDIT.test(r.grade)).length === 1 ? "" : "s"} in ${results.length} subject${results.length === 1 ? "" : "s"}. Convert your scores to grades free on StudentToolsNG:`
+     : "Free WAEC grade calculator. Turn your scores into A1–F9 grades here:"}
+   />
 
 <section className="waec-content">
 

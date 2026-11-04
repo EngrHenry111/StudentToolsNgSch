@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async"; // ✅ FIXED
 import "./gpaclass.css";
+import ShareButtons from "../../componentsMarketplace/ShareButtons";
 
 // AI-drafted (2026-09-13) — factual/explanatory content per Google's "low
 // value content" guidance. Needs human review before final: the CGPA-to-
@@ -153,6 +154,15 @@ const GPAClass = () => {
     </div>
 
    )}
+
+   <ShareButtons
+    url={url}
+    title="GPA Class Calculator"
+    label={result ? "Share your result:" : "Share this calculator:"}
+    text={result
+     ? `My CGPA of ${cgpa} puts me in: ${result}. Check your degree class free on StudentToolsNG:`
+     : "Free calculator: find out your degree class from your CGPA."}
+   />
 
    <div className="grading-table">
 

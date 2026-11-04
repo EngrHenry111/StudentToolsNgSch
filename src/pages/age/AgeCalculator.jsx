@@ -14,6 +14,7 @@ import {
   plural
 } from "../../utils/ageMath";
 import "./age.css";
+import ShareButtons from "../../componentsMarketplace/ShareButtons";
 
 const ageFaq = [
   {
@@ -222,6 +223,14 @@ const AgeCalculator = () => {
                 </>
               )}
             </div>
+
+            {/* Shares a fun fact, never the date of birth itself. */}
+            <ShareButtons
+              url={url}
+              title="Age Calculator"
+              label="Share:"
+              text={`Fun fact: I have been alive for ${report.totalDays.toLocaleString("en-NG")} days. Find out your exact age in days on StudentToolsNG:`}
+            />
           </div>
         )}
       </section>

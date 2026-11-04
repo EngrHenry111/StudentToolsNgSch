@@ -8,6 +8,7 @@ import { decode } from "html-entities";
 import AdUnit from "../../components/ads/AdUnit";
 import NotFound from "../notFound/NotFound";
 import MovedPermanently from "../notFound/MovedPermanently";
+import ShareButtons from "../../componentsMarketplace/ShareButtons";
 import "./tutorialDetails.css";
 
 import { seoTitle } from "../../utils/seoTitle";
@@ -495,6 +496,8 @@ if(movedTo){
     ⏱ {readingTime} min read
    </p>
 
+   <ShareButtons url={canonicalUrl} title={tutorial.title} />
+
     <div
  className="content"
  dangerouslySetInnerHTML={{
@@ -502,6 +505,13 @@ if(movedTo){
   }}
   >
   </div>
+
+   <ShareButtons
+    url={canonicalUrl}
+    title={tutorial.title}
+    label="Found this helpful? Send it to a classmate:"
+    text={`I'm studying "${tutorial.title}" on StudentToolsNG. It's free, have a look:`}
+   />
 
         <div className="ai-assistant">
 <h3>Ask AI Questions About This Topic</h3>

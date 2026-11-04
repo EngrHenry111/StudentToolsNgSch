@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async"; // ✅ FIXED
 import "./cgpa.css";
 import MarketplacePromo from "../../componentsMarketplace/MarketplacePromo";
+import ShareButtons from "../../componentsMarketplace/ShareButtons";
 
 const CGPACalculator = () => {
 
@@ -237,6 +238,15 @@ const CGPACalculator = () => {
      <p>{cgpa}</p>
     </div>
    </div>
+
+   <ShareButtons
+    url={url}
+    title="CGPA Calculator"
+    label={Number(cgpa) > 0 ? "Share your result:" : "Share this calculator:"}
+    text={Number(cgpa) > 0
+     ? `I just calculated my CGPA: ${cgpa} from ${totalUnits} units. Calculate yours free on StudentToolsNG:`
+     : "Free CGPA calculator for Nigerian students. Try it:"}
+   />
 
    <section className="cgpa-content">
 

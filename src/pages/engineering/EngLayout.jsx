@@ -1,6 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { ENG_TOOLS } from "./engTools";
+import ShareButtons from "../../componentsMarketplace/ShareButtons";
 import "./engineering.css";
 
 const SITE = "https://studenttoolsng.com";
@@ -111,6 +112,13 @@ export default function EngLayout({
       </nav>
 
       {children}
+
+      <ShareButtons
+        url={url}
+        title={tool ? tool.name : section.name}
+        label="Share this page:"
+        text={`${tool ? tool.name : section.name}, free on StudentToolsNG:`}
+      />
     </div>
   );
 }

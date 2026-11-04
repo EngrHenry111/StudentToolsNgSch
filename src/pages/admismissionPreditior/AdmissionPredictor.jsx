@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import "./admissionPredictor.css";
 import MarketplacePromo from "../../componentsMarketplace/MarketplacePromo";
+import ShareButtons from "../../componentsMarketplace/ShareButtons";
 
 const AdmissionPredictor = ()=>{
 
@@ -79,6 +80,13 @@ const image = "https://studenttoolsng.com/og-image.png";
    </button>
 
    <h2>{chance}</h2>
+
+   <ShareButtons
+    url={url}
+    title="Admission Chance Calculator"
+    label={chance ? "Share with a friend:" : "Share this calculator:"}
+    text="Free admission chance calculator for Nigerian universities. Check your chances with your JAMB and post-UTME scores:"
+   />
 
    <section className="predictor-content">
 

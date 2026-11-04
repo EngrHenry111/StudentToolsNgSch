@@ -5,6 +5,7 @@ Displays available scholarships
 
 import { Helmet } from "react-helmet-async";
 import "./scholarships.css";
+import ShareButtons from "../../componentsMarketplace/ShareButtons";
 
 const Scholarships = () => {
 
@@ -59,6 +60,13 @@ const image = "https://studenttoolsng.com/og-image.png";
 </Helmet>
 
    <h1>Scholarship Opportunities</h1>
+
+   <ShareButtons
+    url={url}
+    title="Scholarships for Nigerian Students"
+    label="Know someone who needs this? Share:"
+    text="Scholarships for Nigerian students, with eligibility and how to apply:"
+   />
 
    <div className="scholarship-grid">
 

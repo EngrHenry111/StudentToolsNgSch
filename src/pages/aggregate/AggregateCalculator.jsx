@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Stat } from "../engineering/EngInputs";
+import ShareButtons from "../../componentsMarketplace/ShareButtons";
+import { AGG_PATH } from "./aggContent";
 import {
   OLEVEL_GRADES,
   UNIVERSITIES,
@@ -212,6 +214,12 @@ export default function AggregateCalculator({ slug }) {
               {copied ? "Copied ✓" : "Copy working"}
             </button>
           </div>
+          <ShareButtons
+            url={`https://studenttoolsng.com${fixed ? `${AGG_PATH}/${fixed.slug}` : AGG_PATH}`}
+            title={u === CUSTOM ? "Aggregate Score Calculator" : `${u.short} Aggregate Score Calculator`}
+            label="Share your result:"
+            text={`My ${u === CUSTOM ? "" : `${u.short} `}aggregate score is ${round2(result.total)}/100. Work out yours free on StudentToolsNG:`}
+          />
         </div>
       )}
       {!errors.length && result && !ready && (
