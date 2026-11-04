@@ -2,6 +2,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import API from "../../services/api";
 import "./adminDashboard.css";
+import { DEPARTMENTS, topicCount } from "../projectTopics/departments";
+
+// Project topics live in departments.js, not the database, so count them here.
+const TOPIC_TOTAL = DEPARTMENTS.reduce((n, d) => n + topicCount(d), 0);
 
 const AdminDashboard = () => {
 
@@ -241,6 +245,33 @@ const AdminDashboard = () => {
        </div>
       </div>
      )}
+
+     {/* ================= PROJECT TOPICS ================= */}
+     <h2 className="admin-section-title">Project Topics</h2>
+     <div className="admin-stats">
+
+      <div className="stat-card">
+       <h3>Total Topics</h3>
+       <p>{TOPIC_TOTAL}</p>
+      </div>
+
+      <div className="stat-card">
+       <h3>Departments</h3>
+       <p>{DEPARTMENTS.length}</p>
+      </div>
+
+     </div>
+
+     <div className="admin-subject-breakdown">
+      <h3>By department</h3>
+      <div className="admin-subject-tags">
+       {DEPARTMENTS.map((d) => (
+        <a className="admin-subject-tag" key={d.slug} href={`/project-topics/${d.slug}`} target="_blank" rel="noopener noreferrer">
+         {d.name}: {topicCount(d)}
+        </a>
+       ))}
+      </div>
+     </div>
     </>
    )}
 
