@@ -17,13 +17,16 @@ const AdmissionPredictor = ()=>{
 
  const predict = ()=>{
 
+  // JAMB is out of 400, post-UTME out of 100: put JAMB on the same
+  // 100-point scale first, or the 60% weight swamps everything.
   const score =
-   (Number(jamb)*0.6) +
+   (Number(jamb)/400*100*0.6) +
    (Number(postutme)*0.4);
+  const rounded = Math.round(score*10)/10;
 
-  if(score>70) setChance("High Admission Chance");
-  else if(score>60) setChance("Moderate Chance");
-  else setChance("Low Chance");
+  if(score>=70) setChance(`Estimated score ${rounded}: High Admission Chance`);
+  else if(score>=60) setChance(`Estimated score ${rounded}: Moderate Chance`);
+  else setChance(`Estimated score ${rounded}: Low Chance`);
 
  };
 
@@ -71,7 +74,10 @@ const image = "https://studenttoolsng.com/og-image.png";
    />
 
    <input
-    placeholder="Post UTME Score"
+    type="number"
+    min="0"
+    max="100"
+    placeholder="Post UTME Score (out of 100)"
     onChange={(e)=>setPostutme(e.target.value)}
    />
 
@@ -99,14 +105,17 @@ const image = "https://studenttoolsng.com/og-image.png";
   <h2>How This Admission Predictor Works</h2>
   <p>
     This tool estimates your admission chances using a weighted formula:
-    60% JAMB score and 40% Post UTME score.
+    60% JAMB score and 40% Post UTME score. Your JAMB score (out of 400)
+    is first converted to a mark out of 100, so both scores are on the
+    same scale.
   </p>
 
   <h2>Example Calculation</h2>
   <p>
     If you score 250 in JAMB and 70 in Post UTME:
   </p>
-  <p><strong>(250 × 0.6) + (70 × 0.4) = 178</strong></p>
+  <p>JAMB out of 100: 250 ÷ 400 × 100 = 62.5</p>
+  <p><strong>(62.5 × 0.6) + (70 × 0.4) = 37.5 + 28 = 65.5</strong> → Moderate Chance</p>
 
   <h2>Admission Chance Guide</h2>
   <ul>
