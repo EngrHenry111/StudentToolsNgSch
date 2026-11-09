@@ -1,4 +1,5 @@
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
@@ -7,6 +8,7 @@ import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 const AiAnswer = ({ answer }) => (
   <div className="ai-answer">
     <ReactMarkdown
+      remarkPlugins={[remarkGfm]}
       components={{
         code({ inline, className, children }) {
           const match = /language-(\w+)/.exec(className || "");

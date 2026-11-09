@@ -1,8 +1,11 @@
-import { useState, useEffect, useRef } from "react";
+import { lazy, Suspense, useState, useEffect, useRef } from "react";
 import { askCourseTutor, listConversations, getConversation, deleteConversation } from "../../apiQuiz/courseTutorApi";
 import Loader from "../../componentsQuiz/Loader";
 import "../proquiz.css";
 import "./courseTutor.css";
+
+// Tutor replies are markdown; render them (safely) instead of showing raw symbols.
+const AiAnswer = lazy(() => import("../../pages/tutorialDetails/AiAnswer"));
 
 const CourseTutor = () => {
   const [conversations, setConversations] = useState([]);
@@ -190,7 +193,15 @@ const CourseTutor = () => {
 
             {messages.map((m, i) => (
               <div key={i} className={`ct-message ${m.role}`}>
-                <div className="ct-message-bubble">{m.content}</div>
+                <div className="ct-message-bubble">
+                  {m.role === "assistant" ? (
+                    <Suspense fallback={m.content}>
+                      <AiAnswer answer={m.content} />
+                    </Suspense>
+                  ) : (
+                    m.content
+                  )}
+                </div>
               </div>
             ))}
 

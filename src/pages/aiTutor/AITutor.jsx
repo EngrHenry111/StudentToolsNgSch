@@ -1,7 +1,11 @@
-import {useState} from "react";
+import { lazy, Suspense, useState } from "react";
 import API from "../../services/api";
 import { Helmet } from "react-helmet-async";
 import "./aiTutor.css"
+
+// Renders the answer as markdown (never as raw HTML); loaded on demand
+// because it bundles the code highlighter.
+const AiAnswer = lazy(() => import("../tutorialDetails/AiAnswer"));
 const AITutor = ()=>{
 
  const [question,setQuestion] = useState("");
@@ -74,10 +78,9 @@ const image = "https://studenttoolsng.com/og-image.png";
 
      <h3>Answer</h3>
 
-     <div
-      className="ai-answer"
-      dangerouslySetInnerHTML={{ __html: answer }}
-     ></div>
+     <Suspense fallback={<p className="ai-loading">Loading answer…</p>}>
+      <AiAnswer answer={answer} />
+     </Suspense>
 
     </div>
 
