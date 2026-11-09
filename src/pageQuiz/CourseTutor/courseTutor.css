@@ -145,7 +145,10 @@
   .ct-layout {
     flex-direction: column;
   }
-  .ct-sidebar {
+  /* Stacked layout: the chat panel must be the screen's width, not its
+     widest message's (align-items: flex-start would size it to content). */
+  .ct-sidebar,
+  .ct-main {
     width: 100%;
   }
 }
