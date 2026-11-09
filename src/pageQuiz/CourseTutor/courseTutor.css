@@ -149,3 +149,26 @@
     width: 100%;
   }
 }
+
+/* Tutor replies are rendered markdown: let them wrap normally, and keep
+   wide code blocks and tables scrolling inside the bubble instead of
+   pushing the whole page sideways on phones. */
+.ct-message-bubble {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.ct-message.assistant .ct-message-bubble {
+  white-space: normal;
+}
+
+.ct-message-bubble pre,
+.ct-message-bubble table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.ct-message-bubble pre {
+  white-space: pre;
+}
