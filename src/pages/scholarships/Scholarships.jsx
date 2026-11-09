@@ -18,12 +18,14 @@ const Scholarships = () => {
 
   {
    name:"Federal Government Scholarship",
-   link:"#"
+   link:"https://scholarship.education.gov.ng/"
   },
 
   {
    name:"Agbami Medical Scholarship",
-   link:"#"
+   // No stable official page: each year's advert names the portal.
+   link:null,
+   note:"Applications open once a year through the official advert from Star Deep Water (Chevron). Apply only through the portal named in that advert, and never pay anyone to apply."
   }
 
  ];
@@ -80,9 +82,13 @@ const image = "https://studenttoolsng.com/og-image.png";
   Learn about eligibility, application process, and deadlines for this scholarship.
 </p>
 
-      <a href={s.link} target="_blank">
-       View Details
-      </a>
+      {s.link ? (
+       <a href={s.link} target="_blank" rel="noopener noreferrer">
+        View Details
+       </a>
+      ) : (
+       <p className="scholarship-note">{s.note}</p>
+      )}
 
      </div>
 
