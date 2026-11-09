@@ -31,6 +31,26 @@
       "source": "/tutorials/study%20tutorials",
       "destination": "/tutorials",
       "permanent": true
+    },
+    {
+      "source": "/tutorials/waec%20grading",
+      "destination": "/waec-grade-calculator",
+      "permanent": true
+    },
+    {
+      "source": "/tutorials/waec%20tutorials",
+      "destination": "/tutorials",
+      "permanent": true
+    },
+    {
+      "source": "/tutorials/cgpa%20tutorials",
+      "destination": "/cgpa-calculator",
+      "permanent": true
+    },
+    {
+      "source": "/tutorials/learn%20the%20simple%20step-by-step%20method%20nigerian%20universities%20use%20to%20calculate%20cgpa%20using%20credit%20units%20and%20grade%20points.",
+      "destination": "/cgpa-calculator",
+      "permanent": true
     }
   ],
   "rewrites": [
