@@ -363,11 +363,49 @@ const QuizPage = () => {
   <h3>Topics Covered</h3>
 
   <ul>
-    <li>Algebra equations</li>
-    <li>Fractions and ratios</li>
-    <li>Percentages</li>
-    <li>Simple interest</li>
-    <li>Set theory basics</li>
+    <li>Percentage: percentage of a quantity, increase and decrease, profit and loss</li>
+    <li>Algebra: solving linear equations</li>
+    <li>Fractions: adding, subtracting, multiplying and dividing fractions</li>
+    <li>Ratio: sharing a quantity in a given ratio</li>
+    <li>Simple interest: I = PRT ÷ 100</li>
+    <li>Set theory: union, intersection and the number of elements</li>
+    <li>Average: the mean of a set of numbers</li>
+    <li>Speed and distance: distance = speed × time</li>
+    <li>Indices: the laws of indices</li>
+    <li>Simultaneous equations: two equations in two unknowns</li>
+    <li>Polynomials: expanding and multiplying brackets</li>
+  </ul>
+
+  <h3>How the Quiz Works</h3>
+
+  <p>
+    Choose a topic and a difficulty level (easy, medium or hard), then answer
+    each question before the 30-second timer runs out. Correct answers add to
+    your score and build a streak. When you get a question wrong or run out of
+    time, the quiz shows the correct answer with a step-by-step solution, so
+    every mistake becomes a short lesson. You only need a display name for the
+    leaderboard; no account is required.
+  </p>
+
+  <h3>Why Timed Practice Helps in WAEC and JAMB</h3>
+
+  <p>
+    The JAMB UTME is a computer-based test with a strict time limit across four
+    subjects, so speed matters as much as knowing the method. WAEC and NECO
+    mathematics papers also reward students who can do routine calculations
+    quickly and save their time for the longer theory questions. Short, timed
+    rounds on one topic at a time are one of the most effective ways to build
+    that speed.
+  </p>
+
+  <h3>Tips for Getting the Most From Each Session</h3>
+
+  <ul>
+    <li>Start on easy until you can answer most questions in under 15 seconds, then move up a level.</li>
+    <li>Practise your weakest topic first, while you are fresh.</li>
+    <li>Read the step-by-step solution for every question you miss, then try a similar one straight away.</li>
+    <li>Work with pen and paper as you would in the exam hall, rather than a calculator.</li>
+    <li>For full explanations of any topic, read the matching lesson in our <a href="/tutorials">mathematics tutorials</a>, then come back and practise.</li>
   </ul>
 
   <h3>Why Use This Quiz?</h3>
@@ -375,7 +413,9 @@ const QuizPage = () => {
   <p>
     Practicing regularly helps students build confidence and improve
     accuracy in exams like WAEC and JAMB. The leaderboard feature also
-    allows students to compete and track their performance.
+    allows students to compete and track their performance. For full
+    past-question style practice across all JAMB subjects, try the{" "}
+    <a href="/jamb-cbt-practice">JAMB CBT practice</a>.
   </p>
 
   <h3>Related Tools</h3>

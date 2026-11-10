@@ -14,15 +14,20 @@ const AITutor = ()=>{
 
  const askAI = async ()=>{
 
+  if (!question.trim()) return;
+
   setLoading(true);
 
-  const res = await API.post("/ai/chat",{
-   question
-  });
-
-  setAnswer(res.data.answer);
-
-  setLoading(false);
+  try {
+   const res = await API.post("/ai/chat",{
+    question
+   });
+   setAnswer(res.data.answer);
+  } catch {
+   setAnswer("Sorry, the AI tutor could not answer just now. Please try again in a moment.");
+  } finally {
+   setLoading(false);
+  }
 
  };
 
@@ -112,7 +117,41 @@ const image = "https://studenttoolsng.com/og-image.png";
   <p>What is CGPA?</p>
   <p>Solve 2x + 4 = 10</p>
   <p>Explain WAEC grading system</p>
-  
+  <p>Why does ice float on water?</p>
+  <p>Balance the equation Fe + O₂ → Fe₂O₃ and explain each step</p>
+  <p>What is the difference between mitosis and meiosis?</p>
+  <p>Write a Python function that returns the largest number in a list</p>
+
+  <h2>How to Ask Questions That Get Good Answers</h2>
+  <ul>
+    <li>Ask one question at a time, and type the full question exactly as it appears in your textbook or past paper.</li>
+    <li>Say your level, for example "for SS2", "for JAMB" or "for 100 level", so the explanation matches what you are expected to know.</li>
+    <li>For calculations, ask for the working: "show every step" gets a method you can copy in an exam, not just the final number.</li>
+    <li>If an explanation is unclear, ask a follow-up such as "explain it more simply" or "give me a Nigerian example".</li>
+    <li>After you understand the method, try a similar question on your own before asking for the answer.</li>
+  </ul>
+
+  <h2>Use It to Learn, Not to Copy</h2>
+  <p>
+    The AI tutor works best as a patient study partner that explains a step you
+    are stuck on. It is not a way to skip learning: copying answers for an
+    assignment teaches you nothing for the exam hall, and many schools treat
+    AI-written assignments as malpractice. Read the explanation, close it, and
+    try to reproduce the working yourself.
+  </p>
+
+  <h2>Check Important Answers</h2>
+  <p>
+    AI answers are generated automatically and can sometimes be wrong, especially
+    for long calculations or questions about current admission rules and
+    deadlines. Check important answers against your textbook, your teacher or
+    lecturer, or the official WAEC, NECO and JAMB websites. Do not type personal
+    details such as your phone number, address or JAMB registration number into
+    the question box. For carefully checked explanations of whole topics, read
+    our <a href="/tutorials">tutorials</a> in physics, chemistry, biology,
+    mathematics and programming.
+  </p>
+
   <p>
 You can also use our 
 <a href="/cgpa-calculator">CGPA Calculator</a>, 
