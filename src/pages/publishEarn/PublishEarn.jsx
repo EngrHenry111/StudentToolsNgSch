@@ -64,7 +64,7 @@ const PublishEarn = () => {
         <Link to={startLink} className="pe-button">
           Become a publisher
         </Link>
-        <span className="pe-cta-note">Free to join. No listing fees.</span>
+        <span className="pe-cta-note">Free to join. You keep 85% of every sale.</span>
       </div>
 
       <h2>How It Works</h2>
@@ -89,8 +89,8 @@ const PublishEarn = () => {
         </li>
         <li>
           <strong>Get paid.</strong> When a student pays, Paystack splits the payment
-          automatically: your share is settled to your bank account, and the platform keeps a
-          flat commission.
+          automatically: 85% is settled to your bank account, and the platform keeps a flat 15%
+          commission.
         </li>
       </ol>
 
@@ -158,8 +158,10 @@ const PublishEarn = () => {
 
       <h3>How much commission does StudentToolsNG keep?</h3>
       <p>
-        A flat percentage of each sale. The rate is set when you join, shown on your dashboard,
-        and does not change for your account afterwards.
+        A flat 15% of each sale, and nothing else: no sign-up fee, no listing fee and no monthly
+        charge. On a ₦2,000 guide, you receive ₦1,700 and the platform keeps ₦300. Your rate is
+        fixed when you join, shown on your dashboard, and does not change for your account
+        afterwards.
       </p>
 
       <h3>When do I receive my money?</h3>
