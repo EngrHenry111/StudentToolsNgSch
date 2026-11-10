@@ -60,6 +60,7 @@ const PAGES = {
   "/quiz": "src/pages/quiz/QuizPges.jsx",
   "/marketplace": "src/pages/marketplace/Marketplace.jsx",
   "/about": "src/pages/about/About.jsx",
+  "/publish-and-earn": "src/pages/publishEarn/PublishEarn.jsx",
   "/contact": "src/pages/contact/Contact.jsx",
   "/privacy-policy": "src/pages/privacy/PrivacyPolicy.jsx",
   "/terms": "src/pages/terms/Terms.jsx",

@@ -12,7 +12,7 @@ const sections = [
   { key: "free", to: "/", label: "Free Tools", icon: "🧰" },
   { key: "quiz", to: "/pro/dashboard", label: "Smart Quiz", icon: "🧠" },
   { key: "library", to: "/marketplace", label: "Research Library", icon: "📖" },
-  { key: "publish", to: "/publisher/dashboard", label: "Publish & Earn", icon: "📚" },
+  { key: "publish", to: "/publisher/dashboard", publicTo: "/publish-and-earn", label: "Publish & Earn", icon: "📚" },
   { key: "purchases", to: "/my-purchases", label: "My Purchases", icon: "🛍️", authOnly: true }
 ];
 
@@ -20,7 +20,7 @@ const currentSection = (pathname) => {
   if (pathname.startsWith("/pro")) return "quiz";
   // "/publisher/..." is the workspace; "/publishers/..." (plural) is the
   // public storefronts and listings, which live in the Research Library.
-  if (pathname === "/publisher" || pathname.startsWith("/publisher/")) return "publish";
+  if (pathname === "/publisher" || pathname.startsWith("/publisher/") || pathname === "/publish-and-earn") return "publish";
   if (pathname.startsWith("/my-purchases")) return "purchases";
   if (pathname.startsWith("/marketplace") || pathname.startsWith("/publishers")) return "library";
   if (pathname === "/login" || pathname === "/register") return null;
@@ -40,7 +40,7 @@ const SectionBar = () => {
           .map((s) => (
             <Link
               key={s.key}
-              to={s.to}
+              to={!isAuthenticated && s.publicTo ? s.publicTo : s.to}
               className={`section-bar-link${active === s.key ? " active" : ""}`}
               aria-current={active === s.key ? "page" : undefined}
             >

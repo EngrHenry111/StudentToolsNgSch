@@ -1,0 +1,58 @@
+/* Extras on top of the About page styles (about.css). */
+.publish-earn .pe-cta{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:12px 18px;
+  margin:28px 0 10px;
+}
+
+.publish-earn .pe-button{
+  display:inline-block;
+  padding:13px 26px;
+  border-radius:12px;
+  background:linear-gradient(90deg,#00b4d8,#7b2ff7);
+  color:#fff;
+  font-weight:700;
+  text-decoration:none;
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+
+.publish-earn .pe-button:hover,
+.publish-earn .pe-button:focus-visible{
+  transform:translateY(-2px);
+  box-shadow:0 0 20px rgba(0,245,255,.3);
+}
+
+.publish-earn .pe-cta-note{
+  color:#94a3b8;
+  font-size:15px;
+}
+
+.publish-earn .pe-cta-note a,
+.publish-earn p a,
+.publish-earn li a{
+  color:#38bdf8;
+}
+
+.publish-earn .pe-steps{
+  background:rgba(255,255,255,0.05);
+  padding:22px 22px 22px 44px;
+  border-radius:18px;
+  margin-bottom:20px;
+}
+
+.publish-earn .pe-steps li{
+  margin-bottom:12px;
+  color:#cbd5e1;
+}
+
+.publish-earn h3{
+  margin:26px 0 8px;
+  font-size:18px;
+  color:#e2e8f0;
+}
+
+@media (max-width:600px){
+  .publish-earn .pe-button{ width:100%; text-align:center; }
+}
