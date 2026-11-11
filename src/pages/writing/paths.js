@@ -11,5 +11,13 @@ export const GUIDE_PATHS = [
   "/application-letter-for-internship",
   "/application-letter-for-school-admission",
   "/cv-format-nigeria",
-  "/how-to-write-a-cv-with-no-experience"
+  "/how-to-write-a-cv-with-no-experience",
+  "/formal-letter-format",
+  "/informal-letter-format",
+  "/semi-formal-letter-format",
+  "/resignation-letter",
+  "/permission-letter",
+  "/complaint-letter",
+  "/reference-letter",
+  "/acceptance-letter"
 ];

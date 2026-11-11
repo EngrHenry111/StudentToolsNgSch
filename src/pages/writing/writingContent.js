@@ -4,11 +4,13 @@ import { applicationLetter } from "./guides/applicationLetter.js";
 import { JOB_LETTERS } from "./guides/jobLetters.js";
 import { coverLetter } from "./guides/coverLetter.js";
 import { CV_GUIDES } from "./guides/cvGuides.js";
+import { SCHOOL_LETTERS } from "./guides/schoolLetters.js";
+import { OTHER_LETTERS } from "./guides/otherLetters.js";
 
 export const WR_PATH = "/writing-guides";
 export const WR_SECTION = { name: "Writing Guides", path: WR_PATH };
 
-export const GUIDES = [applicationLetter, coverLetter, ...JOB_LETTERS, ...CV_GUIDES];
+export const GUIDES = [applicationLetter, coverLetter, ...JOB_LETTERS, ...CV_GUIDES, ...SCHOOL_LETTERS, ...OTHER_LETTERS];
 
 export const GROUP_ORDER = ["Job Letters", "Application Letter Samples", "CV", "School Letters (WAEC)", "Other Letters", "Essays and Composition"];
 

@@ -98,3 +98,26 @@
   .wr-print figcaption, .wr-print .wr-copy{ display:none; }
   .wr-print pre{ padding:0 !important; font-size:12pt; color:#000; }
 }
+
+/* Letter body rendered line by line (see LetterCard in GuidePage.jsx). */
+.wr-letter-body{
+  padding:18px 18px 52px;
+  font-family:Georgia, "Times New Roman", serif;
+  font-size:15px;
+  line-height:1.65;
+  color:#1e293b;
+}
+
+.wr-l{
+  white-space:pre-wrap;
+  word-wrap:break-word;
+}
+
+.wr-r{
+  padding-left:52%;
+}
+
+@media (max-width:600px){
+  .wr-letter-body{ font-size:14px; padding:14px 14px 50px; }
+  .wr-r{ padding-left:34%; }
+}

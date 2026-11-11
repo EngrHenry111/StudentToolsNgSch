@@ -21,7 +21,16 @@ function LetterCard({ text, caption }) {
   return (
     <figure className="wr-letter">
       {caption && <figcaption>{caption}</figcaption>}
-      <pre>{text}</pre>
+      {/* Lines indented with many spaces (the writer's address and the close in
+          school letters) are pushed right with CSS instead of spaces, so they
+          still line up on narrow phones. Copy keeps the original text. */}
+      <div className="wr-letter-body">
+        {text.split("\n").map((line, i) => (
+          <div key={i} className={/^\s{10,}\S/.test(line) ? "wr-l wr-r" : "wr-l"}>
+            {line.trim() || " "}
+          </div>
+        ))}
+      </div>
       <button type="button" className="wr-copy" onClick={copy}>
         {copied ? "Copied ✓" : "Copy text"}
       </button>
