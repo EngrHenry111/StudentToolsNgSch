@@ -262,6 +262,15 @@ const GPAClass = () => {
     academic regulations.
   </p>
 
+  <h2>Guides to each degree class</h2>
+  <ul>
+    <li><Link to="/cgpa-for-first-class">What CGPA is First Class in Nigeria?</Link></li>
+    <li><Link to="/cgpa-for-second-class-upper">What CGPA is Second Class Upper?</Link></li>
+    <li><Link to="/cgpa-for-second-class-lower">What CGPA is Second Class Lower?</Link></li>
+    <li><Link to="/cgpa-for-third-class">What CGPA is Third Class?</Link></li>
+    <li><Link to="/polytechnic-grading-system">Polytechnic grading system (ND and HND)</Link></li>
+  </ul>
+
   <h2>Frequently Asked Questions</h2>
 
   {gpaFaq.map((f) => (

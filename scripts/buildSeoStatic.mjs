@@ -20,6 +20,7 @@ import { departmentContent, hubContent, PT_PATH } from "../src/pages/projectTopi
 import { currentYear, utmeYear } from "../src/utils/seoYear.js";
 import { CALCULATOR_GROUPS } from "../src/pages/everyday/everydayTools.js";
 import { COURSES } from "../src/pages/jambSubjects/courseInfo.js";
+import { DC_PAGES, calcIntro, calcSteps } from "../src/pages/degreeClass/degreeContent.js";
 import { courseContent, hubContent as jambHubContent, JS_PATH } from "../src/pages/jambSubjects/jambContent.js";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -306,6 +307,24 @@ for (const course of COURSES) {
   result[c.path] = `<main>${render(top)}${render(schools)}${render(bottom)}${related}</main>`;
   meta[c.path] = [c.title, c.description];
   logWords(c.path, [...top, ...schools, ...bottom]);
+}
+
+// Degree class pages (CGPA for First Class, 2:1, 2:2, Third Class,
+// polytechnic grading), from degreeContent.js.
+for (const p of DC_PAGES) {
+  const blocks = [
+    { tag: "h1", text: p.h1 },
+    { tag: "p", text: p.intro },
+    { tag: "h2", text: "Can I still make it?" },
+    { tag: "p", text: calcIntro(p) },
+    ...calcSteps.map((t) => ({ tag: "li", text: t })),
+    ...sectionBlocks(p.sections),
+    ...faqBlocks(p.faq)
+  ];
+  const others = linkList(DC_PAGES.filter((x) => x !== p).map((x) => [x.path, x.h1.replace(/\?$/, "")]));
+  result[p.path] = `<main>${render(blocks)}<h2>Related pages</h2>${others}</main>`;
+  meta[p.path] = [p.title, p.description];
+  logWords(p.path, blocks);
 }
 
 for (const [route, [title, description]] of Object.entries(meta)) {

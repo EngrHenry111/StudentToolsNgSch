@@ -59,6 +59,7 @@ const CalculatorsHub = lazy(() => import("./pages/everyday/CalculatorsHub"));
 const PublishEarn = lazy(() => import("./pages/publishEarn/PublishEarn"));
 const SubjectCombinationHub = lazy(() => import("./pages/jambSubjects/SubjectCombinationHub"));
 const CourseCombination = lazy(() => import("./pages/jambSubjects/CourseCombination"));
+const DegreeClassPage = lazy(() => import("./pages/degreeClass/DegreeClassPage"));
 const PercentageCalculator = lazy(() => import("./pages/everyday/PercentageCalculator"));
 const BmiCalculator = lazy(() => import("./pages/everyday/BmiCalculator"));
 const OvulationCalculator = lazy(() => import("./pages/everyday/OvulationCalculator"));
@@ -178,6 +179,11 @@ function App() {
     <Route path="/publish-and-earn" element={<PublishEarn />} />
     <Route path="/jamb-subject-combination" element={<SubjectCombinationHub />} />
     <Route path="/jamb-subject-combination/:slug" element={<CourseCombination />} />
+    <Route path="/cgpa-for-first-class" element={<DegreeClassPage slug="first-class" />} />
+    <Route path="/cgpa-for-second-class-upper" element={<DegreeClassPage slug="second-class-upper" />} />
+    <Route path="/cgpa-for-second-class-lower" element={<DegreeClassPage slug="second-class-lower" />} />
+    <Route path="/cgpa-for-third-class" element={<DegreeClassPage slug="third-class" />} />
+    <Route path="/polytechnic-grading-system" element={<DegreeClassPage slug="polytechnic" />} />
     <Route path="/percentage-calculator" element={<PercentageCalculator />} />
     <Route path="/bmi-calculator" element={<BmiCalculator />} />
     <Route path="/ovulation-calculator" element={<OvulationCalculator />} />
