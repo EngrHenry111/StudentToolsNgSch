@@ -21,6 +21,9 @@ import { currentYear, utmeYear } from "../src/utils/seoYear.js";
 import { CALCULATOR_GROUPS } from "../src/pages/everyday/everydayTools.js";
 import { COURSES } from "../src/pages/jambSubjects/courseInfo.js";
 import { DC_PAGES, calcIntro, calcSteps } from "../src/pages/degreeClass/degreeContent.js";
+import { GUIDES, hubContent as writingHubContent, relatedOf } from "../src/pages/writing/writingContent.js";
+import { GUIDE_PATHS } from "../src/pages/writing/paths.js";
+import { toCrawlerBlocks } from "../src/pages/writing/blocks.js";
 import { courseContent, hubContent as jambHubContent, JS_PATH } from "../src/pages/jambSubjects/jambContent.js";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -64,6 +67,7 @@ const PAGES = {
   "/marketplace": "src/pages/marketplace/Marketplace.jsx",
   "/about": "src/pages/about/About.jsx",
   "/publish-and-earn": "src/pages/publishEarn/PublishEarn.jsx",
+  "/letter-generator": "src/pages/writing/LetterGenerator.jsx",
   "/contact": "src/pages/contact/Contact.jsx",
   "/privacy-policy": "src/pages/privacy/PrivacyPolicy.jsx",
   "/terms": "src/pages/terms/Terms.jsx",
@@ -325,6 +329,34 @@ for (const p of DC_PAGES) {
   result[p.path] = `<main>${render(blocks)}<h2>Related pages</h2>${others}</main>`;
   meta[p.path] = [p.title, p.description];
   logWords(p.path, blocks);
+}
+
+// Writing guides: hub and one page per guide, from writingContent.js.
+{
+  const missing = GUIDES.map((g) => g.path).filter((p) => !GUIDE_PATHS.includes(p));
+  const extra = GUIDE_PATHS.filter((p) => !GUIDES.some((g) => g.path === p));
+  if (missing.length || extra.length) throw new Error(`writing/paths.js out of sync: missing ${missing} extra ${extra}`);
+
+  const c = writingHubContent();
+  const head = [{ tag: "h1", text: c.h1 }, { tag: "p", text: c.intro }];
+  const lists = c.groups
+    .map((grp) => `<h2>${escapeHtml(grp.name)}</h2><ul>${grp.guides
+      .map((x) => `<li><a href="${x.path}">${escapeHtml(x.name)}</a>: ${escapeHtml(x.blurb)}</li>`)
+      .join("")}</ul>`)
+    .join("");
+  const rest = [...sectionBlocks(c.sections), ...faqBlocks(c.faq)];
+  result[c.path] = `<main>${render(head)}<p><a href="/letter-generator">Letter Generator</a></p>${lists}${render(rest)}</main>`;
+  meta[c.path] = [c.title, c.description];
+  logWords(c.path, [...head, ...rest]);
+}
+
+for (const g of GUIDES) {
+  const blocks = [{ tag: "h1", text: g.h1 }, { tag: "p", text: g.intro }, ...toCrawlerBlocks(g.blocks), ...faqBlocks(g.faq)];
+  const rel = relatedOf(g);
+  const related = rel.length ? `<h2>Related guides</h2>${linkList(rel.map((r) => [r.path, r.name]))}` : "";
+  result[g.path] = `<main>${render(blocks)}${related}<p><a href="/writing-guides">All writing guides</a></p></main>`;
+  meta[g.path] = [g.title, g.description];
+  logWords(g.path, blocks);
 }
 
 for (const [route, [title, description]] of Object.entries(meta)) {

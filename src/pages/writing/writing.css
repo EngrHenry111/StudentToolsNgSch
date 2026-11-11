@@ -1,0 +1,100 @@
+/* Writing guides and tools: extras on top of engineering.css. */
+
+.wr-cta{
+  text-align:center;
+  margin:0 0 6px;
+}
+
+.wr-cta .eng-btn{
+  display:inline-block;
+  text-decoration:none;
+}
+
+.wr-letter{
+  position:relative;
+  margin:16px 0 22px;
+  padding:0;
+  border:1px solid #e2e8f0;
+  border-radius:12px;
+  background:#fffdf7;
+  overflow:hidden;
+}
+
+.wr-letter figcaption{
+  padding:10px 16px;
+  border-bottom:1px solid #e2e8f0;
+  background:#f1f5f9;
+  color:#0f172a;
+  font-size:14px;
+  font-weight:600;
+}
+
+.wr-letter pre{
+  margin:0;
+  padding:18px 18px 52px;
+  white-space:pre-wrap;
+  word-wrap:break-word;
+  font-family:Georgia, "Times New Roman", serif;
+  font-size:15px;
+  line-height:1.65;
+  color:#1e293b;
+}
+
+.wr-copy{
+  position:absolute;
+  right:12px;
+  bottom:12px;
+  padding:6px 12px;
+  border:1px solid #cbd5e1;
+  border-radius:999px;
+  background:#ffffff;
+  color:#0f172a;
+  font:inherit;
+  font-size:13px;
+  cursor:pointer;
+}
+
+.wr-copy:hover,
+.wr-copy:focus-visible{
+  border-color:#0891b2;
+  color:#0891b2;
+}
+
+.eng-content .wr-tip{
+  padding:12px 14px;
+  border-left:4px solid #0891b2;
+  border-radius:8px;
+  background:#ecfeff;
+  color:#155e75;
+}
+
+/* Generator / builder output */
+.wr-output{
+  margin-top:18px;
+}
+
+.wr-output .wr-letter{
+  background:#fffdf7;
+}
+
+.wr-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:12px;
+}
+
+@media print{
+  body *{ visibility:hidden; }
+  .wr-print, .wr-print *{ visibility:visible; }
+  .wr-print{
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    border:none !important;
+    background:#fff !important;
+  }
+  .wr-print figcaption, .wr-print .wr-copy{ display:none; }
+  .wr-print pre{ padding:0 !important; font-size:12pt; color:#000; }
+}

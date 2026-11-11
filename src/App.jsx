@@ -24,6 +24,7 @@ import AdminLayout from "./layouts/AdminLayout";
 // MARKETPLACE (publisher workspace + public storefront/listing pages)
 import PublisherLayout from "./layouts/PublisherLayout";
 import RequirePublisher from "./componentsMarketplace/RequirePublisher";
+import { GUIDE_PATHS } from "./pages/writing/paths";
 
 // import SeoPage from "./pages/seo/SeoPage";
 // Every page except Home loads on demand, so a visitor to one calculator
@@ -60,6 +61,9 @@ const PublishEarn = lazy(() => import("./pages/publishEarn/PublishEarn"));
 const SubjectCombinationHub = lazy(() => import("./pages/jambSubjects/SubjectCombinationHub"));
 const CourseCombination = lazy(() => import("./pages/jambSubjects/CourseCombination"));
 const DegreeClassPage = lazy(() => import("./pages/degreeClass/DegreeClassPage"));
+const WritingHub = lazy(() => import("./pages/writing/WritingHub"));
+const GuidePage = lazy(() => import("./pages/writing/GuidePage"));
+const LetterGenerator = lazy(() => import("./pages/writing/LetterGenerator"));
 const PercentageCalculator = lazy(() => import("./pages/everyday/PercentageCalculator"));
 const BmiCalculator = lazy(() => import("./pages/everyday/BmiCalculator"));
 const OvulationCalculator = lazy(() => import("./pages/everyday/OvulationCalculator"));
@@ -184,6 +188,9 @@ function App() {
     <Route path="/cgpa-for-second-class-lower" element={<DegreeClassPage slug="second-class-lower" />} />
     <Route path="/cgpa-for-third-class" element={<DegreeClassPage slug="third-class" />} />
     <Route path="/polytechnic-grading-system" element={<DegreeClassPage slug="polytechnic" />} />
+    <Route path="/writing-guides" element={<WritingHub />} />
+    <Route path="/letter-generator" element={<LetterGenerator />} />
+    {GUIDE_PATHS.map((p) => <Route key={p} path={p} element={<GuidePage path={p} />} />)}
     <Route path="/percentage-calculator" element={<PercentageCalculator />} />
     <Route path="/bmi-calculator" element={<BmiCalculator />} />
     <Route path="/ovulation-calculator" element={<OvulationCalculator />} />

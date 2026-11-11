@@ -25,6 +25,7 @@ const GROUPS = {
     links: [
       ["/jamb-cbt-practice", "JAMB CBT Practice"],
       ["/jamb-subject-combination", "JAMB Subject Combination"],
+      ["/writing-guides", "Letter & CV Writing"],
       ["/quiz", "Maths Quiz"],
       ["/tutorials/math-calculator", "Math Engine"],
       ["/ai-tutor", "AI Tutor"],
