@@ -19,5 +19,11 @@ export const GUIDE_PATHS = [
   "/permission-letter",
   "/complaint-letter",
   "/reference-letter",
-  "/acceptance-letter"
+  "/acceptance-letter",
+  "/how-to-write-an-essay",
+  "/narrative-essay",
+  "/argumentative-essay",
+  "/speech-writing",
+  "/article-writing",
+  "/report-writing"
 ];

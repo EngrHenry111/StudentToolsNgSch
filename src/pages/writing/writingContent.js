@@ -6,11 +6,12 @@ import { coverLetter } from "./guides/coverLetter.js";
 import { CV_GUIDES } from "./guides/cvGuides.js";
 import { SCHOOL_LETTERS } from "./guides/schoolLetters.js";
 import { OTHER_LETTERS } from "./guides/otherLetters.js";
+import { ESSAYS } from "./guides/essays.js";
 
 export const WR_PATH = "/writing-guides";
 export const WR_SECTION = { name: "Writing Guides", path: WR_PATH };
 
-export const GUIDES = [applicationLetter, coverLetter, ...JOB_LETTERS, ...CV_GUIDES, ...SCHOOL_LETTERS, ...OTHER_LETTERS];
+export const GUIDES = [applicationLetter, coverLetter, ...JOB_LETTERS, ...CV_GUIDES, ...SCHOOL_LETTERS, ...OTHER_LETTERS, ...ESSAYS];
 
 export const GROUP_ORDER = ["Job Letters", "Application Letter Samples", "CV", "School Letters (WAEC)", "Other Letters", "Essays and Composition"];
 
@@ -52,11 +53,11 @@ export function hubContent() {
 
   return {
     path: WR_PATH,
-    title: "Letter Writing Guides & Samples: Application, Formal, CV",
-    description: "Free writing guides for Nigerian students and job seekers: application letter samples, cover letters, letter formats and a letter generator.",
-    h1: "Writing Guides: Letters, Applications and CVs",
+    title: "Letter, CV and Essay Writing Guides With Samples",
+    description: "Free writing guides for Nigerian students and job seekers: application letters, CVs, WAEC letter formats, essays, speeches and reports, with samples.",
+    h1: "Writing Guides: Letters, CVs and Essays",
     intro:
-      "Clear, correct writing gets you jobs, admissions and good WAEC English marks. These guides show the exact format for each kind of letter, explain what to write in every paragraph, and give complete samples you can adapt. Use the Letter Generator to produce a ready-to-print letter in a few minutes.",
+      "Clear, correct writing gets you jobs, admissions and good WAEC English marks. These guides show the exact format for each kind of letter, CV and essay, explain what to write in every paragraph, and give complete samples you can adapt. Use the Letter Generator and CV Builder to produce a ready-to-print letter or CV in a few minutes.",
     groups,
     sections: [
       {
