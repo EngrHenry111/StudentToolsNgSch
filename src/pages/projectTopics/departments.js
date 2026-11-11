@@ -6,6 +6,7 @@
 // department. Only list slugs that are published, or the link will 404.
 
 import { MORE_DEPARTMENTS } from "./moreDepartments.js";
+import { EXTRA_DEPARTMENTS } from "./extraDepartments.js";
 
 export const DEPARTMENTS = [
   {
@@ -864,7 +865,8 @@ export const DEPARTMENTS = [
       ["effects-of-flooding-and-climate-change-on-communities-in-nigeria-project-guide", "Effects of Flooding and Climate Change on Communities in Nigeria"]
     ]
   },
-  ...MORE_DEPARTMENTS
+  ...MORE_DEPARTMENTS,
+  ...EXTRA_DEPARTMENTS
 ];
 
 export const departmentBySlug = (slug) => DEPARTMENTS.find((d) => d.slug === slug);
