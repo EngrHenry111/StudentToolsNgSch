@@ -5,6 +5,8 @@
 // guides: published marketplace project guides (slug, title) that match the
 // department. Only list slugs that are published, or the link will 404.
 
+import { MORE_DEPARTMENTS } from "./moreDepartments.js";
+
 export const DEPARTMENTS = [
   {
     slug: "accounting",
@@ -837,7 +839,8 @@ export const DEPARTMENTS = [
       ["knowledge-and-uptake-of-cervical-cancer-screening-and-hpv-vaccination-in-nigeria-project-guide", "Knowledge and Uptake of Cervical Cancer Screening and HPV Vaccination in Nigeria"],
       ["domestic-violence-against-women-in-nigeria-causes-effects-and-responses-project-guide", "Domestic Violence against Women in Nigeria: Causes, Effects and Responses"]
     ]
-  }
+  },
+  ...MORE_DEPARTMENTS
 ];
 
 export const departmentBySlug = (slug) => DEPARTMENTS.find((d) => d.slug === slug);
