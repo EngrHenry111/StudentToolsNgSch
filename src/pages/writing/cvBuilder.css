@@ -1,0 +1,150 @@
+/* CV Builder: form + live preview side by side on wide screens, stacked on
+   phones. The preview is a white A4-like sheet; print shows only the sheet. */
+
+.cv-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:20px;
+  align-items:start;
+}
+
+.cv-form h2{
+  margin-top:20px !important;
+}
+
+.cv-form .eng-field{
+  margin-bottom:10px;
+}
+
+.cv-entry{
+  padding:12px;
+  margin-bottom:12px;
+  border:1px dashed rgba(255,255,255,0.15);
+  border-radius:12px;
+}
+
+.cv-remove{
+  border:none;
+  background:none;
+  color:#f87171;
+  font:inherit;
+  font-size:13px;
+  cursor:pointer;
+  padding:0;
+}
+
+.cv-preview-col{
+  position:sticky;
+  top:16px;
+}
+
+.cv-sheet{
+  background:#ffffff;
+  color:#1f2937;
+  border-radius:8px;
+  padding:34px 36px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.25);
+  font-family:Calibri, Arial, "Helvetica Neue", sans-serif;
+  font-size:13.5px;
+  line-height:1.5;
+  min-height:600px;
+}
+
+.cv-head{
+  text-align:center;
+  border-bottom:2px solid #0e7490;
+  padding-bottom:10px;
+  margin-bottom:12px;
+}
+
+.cv-sheet .cv-name{
+  margin:0;
+  font-size:26px;
+  letter-spacing:0.02em;
+  color:#0f172a;
+  background:none;
+  -webkit-text-fill-color:initial;
+}
+
+.cv-headline{
+  margin:2px 0 0;
+  color:#0e7490;
+  font-weight:600;
+}
+
+.cv-contact{
+  margin:6px 0 0;
+  font-size:12.5px;
+  color:#475569;
+}
+
+.cv-sheet section{
+  margin-bottom:12px;
+}
+
+.cv-sheet h3{
+  margin:0 0 6px;
+  padding-bottom:3px;
+  border-bottom:1px solid #e2e8f0;
+  font-size:13px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:#0e7490;
+}
+
+.cv-sheet p{
+  margin:0 0 4px;
+  color:#1f2937;
+}
+
+.cv-sheet ul{
+  margin:4px 0 0;
+  padding-left:18px;
+}
+
+.cv-sheet li{
+  margin-bottom:2px;
+  color:#1f2937;
+}
+
+.cv-item{
+  margin-bottom:8px;
+}
+
+.cv-item-head{
+  display:flex;
+  flex-wrap:wrap;
+  gap:0 4px;
+}
+
+.cv-dates{
+  margin-left:auto;
+  color:#64748b;
+  font-size:12.5px;
+}
+
+@media (max-width:900px){
+  .cv-layout{ grid-template-columns:1fr; }
+  .cv-preview-col{ position:static; }
+}
+
+@media (max-width:600px){
+  .cv-sheet{ padding:22px 18px; font-size:13px; }
+  .cv-sheet .cv-name{ font-size:22px; }
+}
+
+@media print{
+  @page{ size:A4; margin:14mm; }
+  body *{ visibility:hidden; }
+  .wr-print-cv, .wr-print-cv *{ visibility:visible; }
+  .wr-print-cv{
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    box-shadow:none;
+    border-radius:0;
+    padding:0;
+    min-height:0;
+  }
+}

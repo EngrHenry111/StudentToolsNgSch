@@ -68,6 +68,7 @@ const PAGES = {
   "/about": "src/pages/about/About.jsx",
   "/publish-and-earn": "src/pages/publishEarn/PublishEarn.jsx",
   "/letter-generator": "src/pages/writing/LetterGenerator.jsx",
+  "/cv-builder": "src/pages/writing/CvBuilder.jsx",
   "/contact": "src/pages/contact/Contact.jsx",
   "/privacy-policy": "src/pages/privacy/PrivacyPolicy.jsx",
   "/terms": "src/pages/terms/Terms.jsx",
@@ -345,7 +346,7 @@ for (const p of DC_PAGES) {
       .join("")}</ul>`)
     .join("");
   const rest = [...sectionBlocks(c.sections), ...faqBlocks(c.faq)];
-  result[c.path] = `<main>${render(head)}<p><a href="/letter-generator">Letter Generator</a></p>${lists}${render(rest)}</main>`;
+  result[c.path] = `<main>${render(head)}<p><a href="/letter-generator">Letter Generator</a> · <a href="/cv-builder">CV Builder</a></p>${lists}${render(rest)}</main>`;
   meta[c.path] = [c.title, c.description];
   logWords(c.path, [...head, ...rest]);
 }

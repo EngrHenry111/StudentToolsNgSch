@@ -80,6 +80,7 @@ const HOME_BODY = `<main>
 <li><a href="/jamb-subject-combination">JAMB Subject Combination for All Courses</a></li>
 <li><a href="/writing-guides">Letter Writing Guides: Application Letter, Cover Letter and CV</a></li>
 <li><a href="/letter-generator">Letter Generator</a></li>
+<li><a href="/cv-builder">Free CV Builder</a></li>
 <li><a href="/project-topics">Final Year Project Topics by Department</a></li>
 <li><a href="/calculators">All Free Calculators</a></li>
 <li><a href="/percentage-calculator">Percentage Calculator</a></li>

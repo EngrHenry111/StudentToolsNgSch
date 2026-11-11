@@ -3,15 +3,21 @@
 import { applicationLetter } from "./guides/applicationLetter.js";
 import { JOB_LETTERS } from "./guides/jobLetters.js";
 import { coverLetter } from "./guides/coverLetter.js";
+import { CV_GUIDES } from "./guides/cvGuides.js";
 
 export const WR_PATH = "/writing-guides";
 export const WR_SECTION = { name: "Writing Guides", path: WR_PATH };
 
-export const GUIDES = [applicationLetter, coverLetter, ...JOB_LETTERS];
+export const GUIDES = [applicationLetter, coverLetter, ...JOB_LETTERS, ...CV_GUIDES];
 
 export const GROUP_ORDER = ["Job Letters", "Application Letter Samples", "CV", "School Letters (WAEC)", "Other Letters", "Essays and Composition"];
 
 export const WR_TOOLS_LIST = [
+  {
+    path: "/cv-builder",
+    name: "CV Builder",
+    blurb: "Build a clean, recruiter-friendly CV in your browser and save it as a PDF."
+  },
   {
     path: "/letter-generator",
     name: "Letter Generator",

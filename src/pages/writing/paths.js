@@ -9,5 +9,7 @@ export const GUIDE_PATHS = [
   "/application-letter-for-hotel-job",
   "/application-letter-for-sales-job",
   "/application-letter-for-internship",
-  "/application-letter-for-school-admission"
+  "/application-letter-for-school-admission",
+  "/cv-format-nigeria",
+  "/how-to-write-a-cv-with-no-experience"
 ];
