@@ -170,7 +170,10 @@ export const DEPARTMENTS = [
       ["knowledge-and-use-of-malaria-prevention-measures-among-pregnant-women-in-nigeria-project-guide", "Knowledge and Use of Malaria Prevention Measures among Pregnant Women in Nigeria"],
       ["awareness-prevalence-and-risk-factors-of-hypertension-among-adults-in-nigeria-project-guide", "Awareness, Prevalence and Risk Factors of Hypertension among Adults in Nigeria"],
       ["factors-influencing-emigration-japa-intentions-of-health-workers-in-nigeria-project-guide", "Factors Influencing Emigration (Japa) Intentions of Health Workers in Nigeria"],
-      ["knowledge-and-uptake-of-cervical-cancer-screening-and-hpv-vaccination-in-nigeria-project-guide", "Knowledge and Uptake of Cervical Cancer Screening and HPV Vaccination in Nigeria"]
+      ["knowledge-and-uptake-of-cervical-cancer-screening-and-hpv-vaccination-in-nigeria-project-guide", "Knowledge and Uptake of Cervical Cancer Screening and HPV Vaccination in Nigeria"],
+      ["knowledge-and-practice-of-hand-hygiene-and-infection-prevention-among-nurses-in-nigerian-hospitals-project-guide", "Knowledge and Practice of Hand Hygiene and Infection Prevention among Nurses in Nigerian Hospitals"],
+      ["factors-influencing-the-utilisation-of-antenatal-care-services-among-pregnant-women-in-nigeria-project-guide", "Factors Influencing the Utilisation of Antenatal Care Services among Pregnant Women in Nigeria"],
+      ["knowledge-of-sickle-cell-disease-and-attitude-towards-premarital-genotype-testing-among-young-adults-project-guide", "Knowledge of Sickle Cell Disease and Attitude towards Premarital Genotype Testing among Young Adults"]
     ]
   },
   {
@@ -253,7 +256,11 @@ export const DEPARTMENTS = [
       ["design-and-implementation-of-a-hospital-patient-record-and-appointment-system-project-guide", "Design and Implementation of a Hospital Patient Record and Appointment System"],
       ["predicting-students-academic-performance-using-machine-learning-project-guide", "Predicting Students' Academic Performance Using Machine Learning"],
       ["use-of-ai-tools-like-chatgpt-by-undergraduates-learning-and-academic-integrity-project-guide", "Use of AI Tools like ChatGPT by Undergraduates: Learning and Academic Integrity"],
-      ["design-and-implementation-of-a-secure-online-voting-system-for-student-elections-project-guide", "Design and Implementation of a Secure Online Voting System for Student Elections"]
+      ["design-and-implementation-of-a-secure-online-voting-system-for-student-elections-project-guide", "Design and Implementation of a Secure Online Voting System for Student Elections"],
+      ["design-and-implementation-of-a-web-based-inventory-and-sales-management-system-for-small-businesses-project-guide", "Design and Implementation of a Web-Based Inventory and Sales Management System for Small Businesses"],
+      ["design-and-implementation-of-a-web-based-library-management-system-for-a-tertiary-institution-project-guide", "Design and Implementation of a Web-Based Library Management System for a Tertiary Institution"],
+      ["phishing-awareness-and-cybersecurity-practices-among-undergraduates-in-nigeria-project-guide", "Phishing Awareness and Cybersecurity Practices among Undergraduates in Nigeria"],
+      ["sms-spam-and-scam-message-detection-using-machine-learning-project-guide", "SMS Spam and Scam Message Detection Using Machine Learning"]
     ]
   },
   {
@@ -336,7 +343,10 @@ export const DEPARTMENTS = [
       ["youth-unemployment-and-the-rise-of-social-vices-in-nigeria-project-guide", "Youth Unemployment and the Rise of Social Vices in Nigeria"],
       ["impact-of-microfinance-banks-on-poverty-reduction-and-micro-enterprises-in-nigeria-project-guide", "Impact of Microfinance Banks on Poverty Reduction and Micro-Enterprises in Nigeria"],
       ["effect-of-government-expenditure-on-economic-growth-in-nigeria-ardl-approach-project-guide", "Effect of Government Expenditure on Economic Growth in Nigeria: ARDL Approach"],
-      ["profitability-and-constraints-of-poultry-production-among-small-scale-farmers-project-guide", "Profitability and Constraints of Poultry Production among Small-Scale Farmers"]
+      ["profitability-and-constraints-of-poultry-production-among-small-scale-farmers-project-guide", "Profitability and Constraints of Poultry Production among Small-Scale Farmers"],
+      ["effect-of-foreign-direct-investment-on-economic-growth-in-nigeria-project-guide", "Effect of Foreign Direct Investment on Economic Growth in Nigeria"],
+      ["effect-of-public-debt-on-economic-growth-in-nigeria-project-guide", "Effect of Public Debt on Economic Growth in Nigeria"],
+      ["contribution-of-the-agricultural-sector-to-economic-growth-in-nigeria-project-guide", "Contribution of the Agricultural Sector to Economic Growth in Nigeria"]
     ]
   },
   {
@@ -419,7 +429,12 @@ export const DEPARTMENTS = [
       ["influence-of-social-media-marketing-and-influencers-on-purchase-decisions-in-nigeria-project-guide", "Influence of Social Media Marketing and Influencers on Purchase Decisions in Nigeria"],
       ["effect-of-entrepreneurship-education-on-entrepreneurial-intentions-of-undergraduates-project-guide", "Effect of Entrepreneurship Education on Entrepreneurial Intentions of Undergraduates"],
       ["impact-of-cashless-policy-and-pos-adoption-on-small-businesses-in-nigeria-project-guide", "Impact of Cashless Policy and POS Adoption on Small Businesses in Nigeria"],
-      ["influence-of-record-keeping-practices-on-the-growth-of-small-businesses-in-nigeria-project-guide", "Influence of Record Keeping Practices on the Growth of Small Businesses in Nigeria"]
+      ["influence-of-record-keeping-practices-on-the-growth-of-small-businesses-in-nigeria-project-guide", "Influence of Record Keeping Practices on the Growth of Small Businesses in Nigeria"],
+      ["effect-of-leadership-styles-on-employee-performance-in-nigerian-organisations-project-guide", "Effect of Leadership Styles on Employee Performance in Nigerian Organisations"],
+      ["effect-of-training-and-development-on-employee-performance-in-nigerian-organisations-project-guide", "Effect of Training and Development on Employee Performance in Nigerian Organisations"],
+      ["effect-of-access-to-finance-on-the-growth-of-small-and-medium-enterprises-in-nigeria-project-guide", "Effect of Access to Finance on the Growth of Small and Medium Enterprises in Nigeria"],
+      ["effect-of-customer-relationship-management-on-customer-retention-in-the-nigerian-telecommunications-industry-project-guide", "Effect of Customer Relationship Management on Customer Retention in the Nigerian Telecommunications Industry"],
+      ["corporate-social-responsibility-of-oil-companies-and-community-development-in-the-niger-delta-project-guide", "Corporate Social Responsibility of Oil Companies and Community Development in the Niger Delta"]
     ]
   },
   {
@@ -586,7 +601,10 @@ export const DEPARTMENTS = [
       ["influence-of-english-language-proficiency-on-students-academic-performance-project-guide", "Influence of English Language Proficiency on Students' Academic Performance"],
       ["adoption-and-use-of-e-learning-platforms-in-nigerian-universities-project-guide", "Adoption and Use of E-Learning Platforms in Nigerian Universities"],
       ["causes-and-effects-of-drug-abuse-among-secondary-school-students-in-nigeria-project-guide", "Causes and Effects of Drug Abuse among Secondary School Students in Nigeria"],
-      ["influence-of-teacher-quality-on-students-academic-achievement-in-nigeria-project-guide", "Influence of Teacher Quality on Students' Academic Achievement in Nigeria"]
+      ["influence-of-teacher-quality-on-students-academic-achievement-in-nigeria-project-guide", "Influence of Teacher Quality on Students' Academic Achievement in Nigeria"],
+      ["causes-and-effects-of-examination-malpractice-among-secondary-school-students-in-nigeria-project-guide", "Causes and Effects of Examination Malpractice among Secondary School Students in Nigeria"],
+      ["effect-of-instructional-materials-on-students-academic-achievement-in-biology-in-secondary-schools-project-guide", "Effect of Instructional Materials on Students' Academic Achievement in Biology in Secondary Schools"],
+      ["influence-of-parental-involvement-and-socio-economic-status-on-students-academic-performance-project-guide", "Influence of Parental Involvement and Socio-Economic Status on Students' Academic Performance"]
     ]
   },
   {
@@ -670,7 +688,9 @@ export const DEPARTMENTS = [
       ["influence-of-social-media-on-academic-performance-of-undergraduates-project-guide", "Influence of Social Media on Academic Performance of Undergraduates"],
       ["influence-of-social-media-on-the-political-participation-of-youths-in-nigeria-project-guide", "Influence of Social Media on the Political Participation of Youths in Nigeria"],
       ["use-of-tiktok-as-a-source-of-information-among-undergraduates-in-nigeria-project-guide", "Use of TikTok as a Source of Information among Undergraduates in Nigeria"],
-      ["effectiveness-of-radio-programmes-in-disseminating-information-to-rural-dwellers-project-guide", "Effectiveness of Radio Programmes in Disseminating Information to Rural Dwellers"]
+      ["effectiveness-of-radio-programmes-in-disseminating-information-to-rural-dwellers-project-guide", "Effectiveness of Radio Programmes in Disseminating Information to Rural Dwellers"],
+      ["newspaper-coverage-of-insecurity-in-nigeria-a-content-analysis-of-selected-national-dailies-project-guide", "Newspaper Coverage of Insecurity in Nigeria: A Content Analysis of Selected National Dailies"],
+      ["influence-of-television-advertising-on-the-buying-behaviour-of-undergraduates-in-nigeria-project-guide", "Influence of Television Advertising on the Buying Behaviour of Undergraduates in Nigeria"]
     ]
   },
   {
@@ -754,7 +774,8 @@ export const DEPARTMENTS = [
       ["effect-of-insecurity-on-agricultural-production-and-rural-livelihoods-in-nigeria-project-guide", "Effect of Insecurity on Agricultural Production and Rural Livelihoods in Nigeria"],
       ["effect-of-vote-buying-on-democratic-governance-in-nigeria-project-guide", "Effect of Vote Buying on Democratic Governance in Nigeria"],
       ["effect-of-bvas-and-the-irev-portal-on-the-credibility-of-elections-in-nigeria-project-guide", "Effect of BVAS and the IReV Portal on the Credibility of Elections in Nigeria"],
-      ["influence-of-social-media-on-the-political-participation-of-youths-in-nigeria-project-guide", "Influence of Social Media on the Political Participation of Youths in Nigeria"]
+      ["influence-of-social-media-on-the-political-participation-of-youths-in-nigeria-project-guide", "Influence of Social Media on the Political Participation of Youths in Nigeria"],
+      ["effect-of-corruption-on-public-service-delivery-in-nigeria-project-guide", "Effect of Corruption on Public Service Delivery in Nigeria"]
     ]
   },
   {
@@ -837,7 +858,10 @@ export const DEPARTMENTS = [
       ["self-medication-and-misuse-of-antibiotics-among-undergraduates-in-nigeria-project-guide", "Self-Medication and Misuse of Antibiotics among Undergraduates in Nigeria"],
       ["knowledge-and-use-of-malaria-prevention-measures-among-pregnant-women-in-nigeria-project-guide", "Knowledge and Use of Malaria Prevention Measures among Pregnant Women in Nigeria"],
       ["knowledge-and-uptake-of-cervical-cancer-screening-and-hpv-vaccination-in-nigeria-project-guide", "Knowledge and Uptake of Cervical Cancer Screening and HPV Vaccination in Nigeria"],
-      ["domestic-violence-against-women-in-nigeria-causes-effects-and-responses-project-guide", "Domestic Violence against Women in Nigeria: Causes, Effects and Responses"]
+      ["domestic-violence-against-women-in-nigeria-causes-effects-and-responses-project-guide", "Domestic Violence against Women in Nigeria: Causes, Effects and Responses"],
+      ["knowledge-attitude-and-preventive-practices-towards-lassa-fever-among-residents-of-nigerian-communities-project-guide", "Knowledge, Attitude and Preventive Practices towards Lassa Fever among Residents of Nigerian Communities"],
+      ["factors-influencing-the-utilisation-of-antenatal-care-services-among-pregnant-women-in-nigeria-project-guide", "Factors Influencing the Utilisation of Antenatal Care Services among Pregnant Women in Nigeria"],
+      ["effects-of-flooding-and-climate-change-on-communities-in-nigeria-project-guide", "Effects of Flooding and Climate Change on Communities in Nigeria"]
     ]
   },
   ...MORE_DEPARTMENTS

@@ -82,7 +82,10 @@ export const MORE_DEPARTMENTS = [
       ["local-government-autonomy-and-grassroots-development-in-nigeria-project-guide", "Local Government Autonomy and Grassroots Development in Nigeria"],
       ["effect-of-employee-motivation-on-organisational-productivity-project-guide", "Effect of Employee Motivation on Organisational Productivity"],
       ["effect-of-fuel-subsidy-removal-on-household-welfare-in-nigeria-project-guide", "Effect of Fuel Subsidy Removal on Household Welfare in Nigeria"],
-      ["youth-unemployment-and-the-rise-of-social-vices-in-nigeria-project-guide", "Youth Unemployment and the Rise of Social Vices in Nigeria"]
+      ["youth-unemployment-and-the-rise-of-social-vices-in-nigeria-project-guide", "Youth Unemployment and the Rise of Social Vices in Nigeria"],
+      ["effect-of-corruption-on-public-service-delivery-in-nigeria-project-guide", "Effect of Corruption on Public Service Delivery in Nigeria"],
+      ["impact-of-e-government-on-public-service-delivery-in-nigeria-project-guide", "Impact of E-Government on Public Service Delivery in Nigeria"],
+      ["effect-of-training-and-development-on-employee-performance-in-nigerian-organisations-project-guide", "Effect of Training and Development on Employee Performance in Nigerian Organisations"]
     ]
   },
   {
@@ -163,7 +166,10 @@ export const MORE_DEPARTMENTS = [
       ["domestic-violence-against-women-in-nigeria-causes-effects-and-responses-project-guide", "Domestic Violence against Women in Nigeria: Causes, Effects and Responses"],
       ["youth-unemployment-and-the-rise-of-social-vices-in-nigeria-project-guide", "Youth Unemployment and the Rise of Social Vices in Nigeria"],
       ["factors-influencing-emigration-japa-intentions-of-health-workers-in-nigeria-project-guide", "Factors Influencing Emigration (Japa) Intentions of Health Workers in Nigeria"],
-      ["influence-of-nollywood-films-on-the-cultural-values-and-behaviour-of-nigerian-youths-project-guide", "Influence of Nollywood Films on the Cultural Values and Behaviour of Nigerian Youths"]
+      ["influence-of-nollywood-films-on-the-cultural-values-and-behaviour-of-nigerian-youths-project-guide", "Influence of Nollywood Films on the Cultural Values and Behaviour of Nigerian Youths"],
+      ["causes-and-effects-of-rural-urban-migration-on-rural-development-in-nigeria-project-guide", "Causes and Effects of Rural-Urban Migration on Rural Development in Nigeria"],
+      ["causes-and-effects-of-street-hawking-among-school-age-children-in-nigeria-project-guide", "Causes and Effects of Street Hawking among School-Age Children in Nigeria"],
+      ["effects-of-flooding-and-climate-change-on-communities-in-nigeria-project-guide", "Effects of Flooding and Climate Change on Communities in Nigeria"]
     ]
   },
   {
@@ -243,7 +249,10 @@ export const MORE_DEPARTMENTS = [
     guides: [
       ["influence-of-social-media-marketing-and-influencers-on-purchase-decisions-in-nigeria-project-guide", "Influence of Social Media Marketing and Influencers on Purchase Decisions in Nigeria"],
       ["effect-of-service-quality-on-customer-satisfaction-and-loyalty-in-nigerian-banks-project-guide", "Effect of Service Quality on Customer Satisfaction and Loyalty in Nigerian Banks"],
-      ["effect-of-inflation-and-exchange-rate-on-small-businesses-in-nigeria-project-guide", "Effect of Inflation and Exchange Rate on Small Businesses in Nigeria"]
+      ["effect-of-inflation-and-exchange-rate-on-small-businesses-in-nigeria-project-guide", "Effect of Inflation and Exchange Rate on Small Businesses in Nigeria"],
+      ["effect-of-brand-image-on-consumer-loyalty-to-fast-moving-consumer-goods-in-nigeria-project-guide", "Effect of Brand Image on Consumer Loyalty to Fast-Moving Consumer Goods in Nigeria"],
+      ["effect-of-customer-relationship-management-on-customer-retention-in-the-nigerian-telecommunications-industry-project-guide", "Effect of Customer Relationship Management on Customer Retention in the Nigerian Telecommunications Industry"],
+      ["influence-of-television-advertising-on-the-buying-behaviour-of-undergraduates-in-nigeria-project-guide", "Influence of Television Advertising on the Buying Behaviour of Undergraduates in Nigeria"]
     ]
   },
   {
@@ -401,7 +410,9 @@ export const MORE_DEPARTMENTS = [
     methods: "Microbiology projects are laboratory-based: samples are collected, cultured on suitable media, counted (CFU/ml or MPN), and isolates are identified with Gram staining and biochemical tests. Antimicrobial studies measure zones of inhibition and minimum inhibitory concentration. Results are presented in tables and analysed with means, standard deviation and ANOVA where needed.",
     narrow: ["Water quality", "Bacteriological quality of sachet water brands sold in Samaru, Zaria"],
     guides: [
-      ["self-medication-and-misuse-of-antibiotics-among-undergraduates-in-nigeria-project-guide", "Self-Medication and Misuse of Antibiotics among Undergraduates in Nigeria"]
+      ["self-medication-and-misuse-of-antibiotics-among-undergraduates-in-nigeria-project-guide", "Self-Medication and Misuse of Antibiotics among Undergraduates in Nigeria"],
+      ["bacteriological-and-physicochemical-quality-of-sachet-water-sold-in-nigerian-towns-project-guide", "Bacteriological and Physicochemical Quality of Sachet Water Sold in Nigerian Towns"],
+      ["knowledge-and-practice-of-hand-hygiene-and-infection-prevention-among-nurses-in-nigerian-hospitals-project-guide", "Knowledge and Practice of Hand Hygiene and Infection Prevention among Nurses in Nigerian Hospitals"]
     ]
   },
   {
@@ -558,7 +569,9 @@ export const MORE_DEPARTMENTS = [
     guides: [
       ["profitability-and-constraints-of-poultry-production-among-small-scale-farmers-project-guide", "Profitability and Constraints of Poultry Production among Small-Scale Farmers"],
       ["effect-of-insecurity-on-agricultural-production-and-rural-livelihoods-in-nigeria-project-guide", "Effect of Insecurity on Agricultural Production and Rural Livelihoods in Nigeria"],
-      ["impact-of-microfinance-banks-on-poverty-reduction-and-micro-enterprises-in-nigeria-project-guide", "Impact of Microfinance Banks on Poverty Reduction and Micro-Enterprises in Nigeria"]
+      ["impact-of-microfinance-banks-on-poverty-reduction-and-micro-enterprises-in-nigeria-project-guide", "Impact of Microfinance Banks on Poverty Reduction and Micro-Enterprises in Nigeria"],
+      ["adoption-of-improved-seeds-and-fertiliser-and-output-of-smallholder-farmers-project-guide", "Adoption of Improved Seeds and Fertiliser and Output of Smallholder Farmers"],
+      ["effect-of-cooperative-membership-on-the-income-and-productivity-of-smallholder-farmers-in-nigeria-project-guide", "Effect of Cooperative Membership on the Income and Productivity of Smallholder Farmers in Nigeria"]
     ]
   },
   {
@@ -639,7 +652,11 @@ export const MORE_DEPARTMENTS = [
     guides: [
       ["influence-of-study-habits-on-academic-performance-of-secondary-school-students-project-guide", "Influence of Study Habits on Academic Performance of Secondary School Students"],
       ["causes-and-effects-of-drug-abuse-among-secondary-school-students-in-nigeria-project-guide", "Causes and Effects of Drug Abuse among Secondary School Students in Nigeria"],
-      ["influence-of-social-media-on-academic-performance-of-undergraduates-project-guide", "Influence of Social Media on Academic Performance of Undergraduates"]
+      ["influence-of-social-media-on-academic-performance-of-undergraduates-project-guide", "Influence of Social Media on Academic Performance of Undergraduates"],
+      ["causes-and-effects-of-examination-malpractice-among-secondary-school-students-in-nigeria-project-guide", "Causes and Effects of Examination Malpractice among Secondary School Students in Nigeria"],
+      ["prevalence-and-correlates-of-depression-and-anxiety-among-undergraduates-in-nigeria-project-guide", "Prevalence and Correlates of Depression and Anxiety among Undergraduates in Nigeria"],
+      ["relationship-between-social-media-addiction-and-academic-procrastination-among-undergraduates-project-guide", "Relationship between Social Media Addiction and Academic Procrastination among Undergraduates"],
+      ["influence-of-parental-involvement-and-socio-economic-status-on-students-academic-performance-project-guide", "Influence of Parental Involvement and Socio-Economic Status on Students' Academic Performance"]
     ]
   },
   {
@@ -720,7 +737,8 @@ export const MORE_DEPARTMENTS = [
       ["effect-of-entrepreneurship-education-on-entrepreneurial-intentions-of-undergraduates-project-guide", "Effect of Entrepreneurship Education on Entrepreneurial Intentions of Undergraduates"],
       ["influence-of-record-keeping-practices-on-the-growth-of-small-businesses-in-nigeria-project-guide", "Influence of Record Keeping Practices on the Growth of Small Businesses in Nigeria"],
       ["effect-of-inflation-and-exchange-rate-on-small-businesses-in-nigeria-project-guide", "Effect of Inflation and Exchange Rate on Small Businesses in Nigeria"],
-      ["impact-of-cashless-policy-and-pos-adoption-on-small-businesses-in-nigeria-project-guide", "Impact of Cashless Policy and POS Adoption on Small Businesses in Nigeria"]
+      ["impact-of-cashless-policy-and-pos-adoption-on-small-businesses-in-nigeria-project-guide", "Impact of Cashless Policy and POS Adoption on Small Businesses in Nigeria"],
+      ["effect-of-access-to-finance-on-the-growth-of-small-and-medium-enterprises-in-nigeria-project-guide", "Effect of Access to Finance on the Growth of Small and Medium Enterprises in Nigeria"]
     ]
   },
   {
@@ -801,7 +819,9 @@ export const MORE_DEPARTMENTS = [
       ["knowledge-attitude-and-practice-of-exclusive-breastfeeding-among-nursing-mothers-project-guide", "Knowledge, Attitude and Practice of Exclusive Breastfeeding among Nursing Mothers"],
       ["knowledge-and-uptake-of-cervical-cancer-screening-and-hpv-vaccination-in-nigeria-project-guide", "Knowledge and Uptake of Cervical Cancer Screening and HPV Vaccination in Nigeria"],
       ["knowledge-and-use-of-malaria-prevention-measures-among-pregnant-women-in-nigeria-project-guide", "Knowledge and Use of Malaria Prevention Measures among Pregnant Women in Nigeria"],
-      ["awareness-prevalence-and-risk-factors-of-hypertension-among-adults-in-nigeria-project-guide", "Awareness, Prevalence and Risk Factors of Hypertension among Adults in Nigeria"]
+      ["awareness-prevalence-and-risk-factors-of-hypertension-among-adults-in-nigeria-project-guide", "Awareness, Prevalence and Risk Factors of Hypertension among Adults in Nigeria"],
+      ["knowledge-of-sickle-cell-disease-and-attitude-towards-premarital-genotype-testing-among-young-adults-project-guide", "Knowledge of Sickle Cell Disease and Attitude towards Premarital Genotype Testing among Young Adults"],
+      ["knowledge-attitude-and-preventive-practices-towards-lassa-fever-among-residents-of-nigerian-communities-project-guide", "Knowledge, Attitude and Preventive Practices towards Lassa Fever among Residents of Nigerian Communities"]
     ]
   }
 ];
