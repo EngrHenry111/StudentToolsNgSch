@@ -25,5 +25,14 @@ export const GUIDE_PATHS = [
   "/argumentative-essay",
   "/speech-writing",
   "/article-writing",
-  "/report-writing"
+  "/report-writing",
+  "/application-letter-for-bank-job",
+  "/application-letter-for-driver",
+  "/application-letter-for-secretary",
+  "/application-letter-for-factory-job",
+  "/descriptive-essay",
+  "/expository-essay",
+  "/letter-of-appreciation",
+  "/letter-of-intent",
+  "/attestation-letter"
 ];

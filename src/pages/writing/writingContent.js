@@ -7,11 +7,14 @@ import { CV_GUIDES } from "./guides/cvGuides.js";
 import { SCHOOL_LETTERS } from "./guides/schoolLetters.js";
 import { OTHER_LETTERS } from "./guides/otherLetters.js";
 import { ESSAYS } from "./guides/essays.js";
+import { MORE_JOB_LETTERS } from "./guides/moreJobLetters.js";
+import { MORE_ESSAYS } from "./guides/moreEssays.js";
+import { MORE_LETTERS } from "./guides/moreLetters.js";
 
 export const WR_PATH = "/writing-guides";
 export const WR_SECTION = { name: "Writing Guides", path: WR_PATH };
 
-export const GUIDES = [applicationLetter, coverLetter, ...JOB_LETTERS, ...CV_GUIDES, ...SCHOOL_LETTERS, ...OTHER_LETTERS, ...ESSAYS];
+export const GUIDES = [applicationLetter, coverLetter, ...JOB_LETTERS, ...MORE_JOB_LETTERS, ...CV_GUIDES, ...SCHOOL_LETTERS, ...OTHER_LETTERS, ...MORE_LETTERS, ...ESSAYS, ...MORE_ESSAYS];
 
 export const GROUP_ORDER = ["Job Letters", "Application Letter Samples", "CV", "School Letters (WAEC)", "Other Letters", "Essays and Composition"];
 

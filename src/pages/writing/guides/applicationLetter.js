@@ -131,6 +131,11 @@ CHIOMA OKAFOR`,
     "/application-letter-for-teaching-job",
     "/application-letter-for-nurses",
     "/application-letter-for-hotel-job",
+    "/application-letter-for-bank-job",
+    "/application-letter-for-secretary",
+    "/application-letter-for-driver",
+    "/application-letter-for-factory-job",
+    "/letter-of-intent",
     "/cover-letter-for-job-application",
     "/cv-format-nigeria"
   ]

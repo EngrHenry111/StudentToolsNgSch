@@ -436,7 +436,7 @@ Head of Operations, Greenfield Foods Limited`,
     { q: "Can I write my own reference letter?", a: "Some referees ask applicants to draft the letter for them to edit. If so, write it honestly from the referee's point of view and let them change and sign it. Never sign on someone else's behalf." },
     { q: "How many referees do I need?", a: "Usually two or three, as the employer or institution states." }
   ],
-  related: ["/cv-format-nigeria", "/resignation-letter", "/acceptance-letter", "/how-to-write-an-application-letter"]
+  related: ["/attestation-letter", "/cv-format-nigeria", "/resignation-letter", "/acceptance-letter", "/how-to-write-an-application-letter"]
 };
 
 export const acceptanceLetter = {
@@ -533,7 +533,7 @@ Human Resources Manager`,
     { q: "What is an acceptance letter for an IT student?", a: "A letter from a company to the student's school confirming that the company has accepted the student for industrial training (SIWES), with the dates, department and supervisor." },
     { q: "Do I need to write an acceptance letter for university admission?", a: "University admission is accepted on JAMB's CAPS portal and the school's own portal. Some schools also ask for a signed acceptance form; follow your school's instructions." }
   ],
-  related: ["/application-letter-for-internship", "/resignation-letter", "/reference-letter", "/how-to-write-an-application-letter"]
+  related: ["/application-letter-for-internship", "/letter-of-appreciation", "/resignation-letter", "/reference-letter", "/how-to-write-an-application-letter"]
 };
 
 export const OTHER_LETTERS = [resignationLetter, permissionLetter, complaintLetter, referenceLetter, acceptanceLetter];

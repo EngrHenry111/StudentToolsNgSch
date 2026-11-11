@@ -65,7 +65,7 @@ export const howToWriteEssay = {
     { q: "How many types of essays are there?", a: "The main types are narrative, descriptive, argumentative and expository essays, plus letter, speech, article and report writing, which follow special formats." },
     { q: "How is the WAEC essay marked?", a: "Out of 50: content 10, organisation 10, expression 20 and mechanical accuracy 10." }
   ],
-  related: ["/argumentative-essay", "/narrative-essay", "/speech-writing", "/article-writing", "/report-writing", "/formal-letter-format"]
+  related: ["/argumentative-essay", "/narrative-essay", "/descriptive-essay", "/expository-essay", "/speech-writing", "/article-writing", "/report-writing", "/formal-letter-format"]
 };
 
 export const narrativeEssay = {
@@ -137,7 +137,7 @@ I returned to school taller, darker and much happier, and I am already counting 
     { q: "How do I start a narrative essay?", a: "Set the scene quickly: when and where the story happened and who was involved, then hint at what is coming. An interesting first sentence or a line of dialogue can grab the reader." },
     { q: "Should a narrative essay have a title?", a: "Yes. Write the title at the top, usually the topic given in the question." }
   ],
-  related: ["/how-to-write-an-essay", "/argumentative-essay", "/informal-letter-format", "/article-writing"]
+  related: ["/how-to-write-an-essay", "/descriptive-essay", "/argumentative-essay", "/informal-letter-format", "/article-writing"]
 };
 
 export const argumentativeEssay = {
@@ -215,7 +215,7 @@ Thank you for listening.`,
     { q: "How do you start a debate?", a: "Greet the audience with the vocatives, then state your stand: 'I am here to support (or oppose) the motion which states that...'" },
     { q: "What is the difference between a debate and an argumentative essay?", a: "Both argue one side. A debate is written as a speech to a live audience with vocatives and a direct appeal to the judges; an argumentative essay is written for readers, with a title, introduction, arguments and conclusion." }
   ],
-  related: ["/how-to-write-an-essay", "/speech-writing", "/narrative-essay", "/article-writing"]
+  related: ["/how-to-write-an-essay", "/expository-essay", "/speech-writing", "/narrative-essay", "/article-writing"]
 };
 
 export const speechWriting = {
