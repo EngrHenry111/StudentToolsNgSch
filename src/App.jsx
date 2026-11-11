@@ -57,6 +57,8 @@ const ProjectTopicsHub = lazy(() => import("./pages/projectTopics/ProjectTopicsH
 const DepartmentTopics = lazy(() => import("./pages/projectTopics/DepartmentTopics"));
 const CalculatorsHub = lazy(() => import("./pages/everyday/CalculatorsHub"));
 const PublishEarn = lazy(() => import("./pages/publishEarn/PublishEarn"));
+const SubjectCombinationHub = lazy(() => import("./pages/jambSubjects/SubjectCombinationHub"));
+const CourseCombination = lazy(() => import("./pages/jambSubjects/CourseCombination"));
 const PercentageCalculator = lazy(() => import("./pages/everyday/PercentageCalculator"));
 const BmiCalculator = lazy(() => import("./pages/everyday/BmiCalculator"));
 const OvulationCalculator = lazy(() => import("./pages/everyday/OvulationCalculator"));
@@ -174,6 +176,8 @@ function App() {
     <Route path="/project-topics/:slug" element={<DepartmentTopics />} />
     <Route path="/calculators" element={<CalculatorsHub />} />
     <Route path="/publish-and-earn" element={<PublishEarn />} />
+    <Route path="/jamb-subject-combination" element={<SubjectCombinationHub />} />
+    <Route path="/jamb-subject-combination/:slug" element={<CourseCombination />} />
     <Route path="/percentage-calculator" element={<PercentageCalculator />} />
     <Route path="/bmi-calculator" element={<BmiCalculator />} />
     <Route path="/ovulation-calculator" element={<OvulationCalculator />} />

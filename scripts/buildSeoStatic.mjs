@@ -19,6 +19,8 @@ import { DEPARTMENTS } from "../src/pages/projectTopics/departments.js";
 import { departmentContent, hubContent, PT_PATH } from "../src/pages/projectTopics/topicsContent.js";
 import { currentYear, utmeYear } from "../src/utils/seoYear.js";
 import { CALCULATOR_GROUPS } from "../src/pages/everyday/everydayTools.js";
+import { COURSES } from "../src/pages/jambSubjects/courseInfo.js";
+import { courseContent, hubContent as jambHubContent, JS_PATH } from "../src/pages/jambSubjects/jambContent.js";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -264,6 +266,46 @@ for (const d of DEPARTMENTS) {
     `<h2>Project topics for other departments</h2><p>${others}</p></main>`;
   meta[c.path] = [c.title, c.description];
   logWords(c.path, [...blocks, ...faqBlocks(c.faq)]);
+}
+
+// JAMB subject combinations: the hub (course lists by faculty) and one page
+// per course, from the same jambContent.js the React pages render.
+{
+  const c = jambHubContent();
+  const head = [{ tag: "h1", text: c.h1 }, { tag: "p", text: c.intro }];
+  const lists = c.faculties
+    .map((f) => `<h2>${escapeHtml(f.name)}</h2><ul>${f.courses
+      .map((x) => `<li><a href="${x.path}">${escapeHtml(x.name)}</a>: ${escapeHtml(x.combo)}</li>`)
+      .join("")}</ul>`)
+    .join("");
+  const rest = [...sectionBlocks(c.sections), ...faqBlocks(c.faq)];
+  result[c.path] = `<main>${render(head)}${lists}${render(rest)}</main>`;
+  meta[c.path] = [c.title, c.description];
+  const listWords = c.faculties.flatMap((f) => f.courses.map((x) => ({ text: `${x.name} ${x.combo}` })));
+  logWords(c.path, [...head, ...listWords, ...rest]);
+}
+
+for (const course of COURSES) {
+  const c = courseContent(course);
+  const top = [
+    { tag: "h1", text: c.h1 },
+    { tag: "p", text: c.intro },
+    { tag: "p", text: `UTME subjects: ${course.combo}` },
+    ...sectionBlocks(c.sections),
+    { tag: "h2", text: c.schoolsH2 },
+    { tag: "p", text: c.schoolsIntro }
+  ];
+  const schools = c.schools.flatMap((x) => [
+    { tag: "h3", text: x.school },
+    ...(x.utme ? [{ tag: "p", text: `UTME: ${x.utme}` }] : []),
+    ...(x.olevel ? [{ tag: "p", text: `O'level: ${x.olevel}` }] : [])
+  ]);
+  const bottom = [...sectionBlocks(c.after), ...faqBlocks(c.faq)];
+  const related = `<h2>Related courses</h2>${linkList(c.related.map((r) => [r.path, `JAMB subject combination for ${r.name}`]))}` +
+    `<p><a href="${JS_PATH}">JAMB subject combination for all courses and Course Finder</a></p>`;
+  result[c.path] = `<main>${render(top)}${render(schools)}${render(bottom)}${related}</main>`;
+  meta[c.path] = [c.title, c.description];
+  logWords(c.path, [...top, ...schools, ...bottom]);
 }
 
 for (const [route, [title, description]] of Object.entries(meta)) {

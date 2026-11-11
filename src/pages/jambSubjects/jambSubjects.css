@@ -1,0 +1,123 @@
+/* JAMB subject combination pages: extras on top of engineering.css
+   (dark panels above, white reading section below). */
+
+.js-combo{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  max-width:720px;
+  margin:0 auto 10px;
+  padding:16px 20px;
+  border-radius:14px;
+  border:1px solid rgba(0,245,255,0.35);
+  background:rgba(0,245,255,0.06);
+  text-align:center;
+}
+
+.js-combo-label{
+  font-size:12px;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:#94a3b8;
+}
+
+.js-combo strong{
+  color:#e2e8f0;
+  font-size:17px;
+  line-height:1.5;
+}
+
+/* per-university cards inside the white reading section */
+.js-schools{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:14px;
+  margin:14px 0;
+}
+
+.js-school{
+  padding:14px 16px;
+  border:1px solid #e2e8f0;
+  border-radius:12px;
+  background:#f8fafc;
+}
+
+.eng-content .js-school h3{
+  margin:0 0 8px;
+  font-size:15px;
+}
+
+.eng-content .js-school p{
+  margin:0 0 8px;
+  font-size:14px;
+  line-height:1.6;
+}
+
+.js-tag{
+  display:inline-block;
+  min-width:58px;
+  margin-right:6px;
+  padding:1px 8px;
+  border-radius:999px;
+  background:#e0f2fe;
+  color:#0369a1;
+  font-size:12px;
+  font-weight:600;
+  text-align:center;
+}
+
+.eng-content .js-source{
+  font-size:13px;
+  color:#64748b;
+}
+
+/* Course Finder */
+.js-finder select{
+  width:100%;
+}
+
+.js-results{
+  margin-top:18px;
+  padding-top:14px;
+  border-top:1px solid rgba(255,255,255,0.1);
+}
+
+.js-results h3{
+  margin:14px 0 6px;
+  font-size:15px;
+  color:#00f5ff;
+}
+
+.js-match-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+
+.js-match-list a{
+  display:inline-block;
+  padding:6px 12px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,0.15);
+  color:#e2e8f0;
+  text-decoration:none;
+  font-size:14px;
+}
+
+.js-match-list a:hover,
+.js-match-list a:focus-visible{
+  border-color:#00f5ff;
+  color:#00f5ff;
+}
+
+.js-course-list li{
+  margin-bottom:6px;
+}
+
+@media (max-width:600px){
+  .js-combo strong{ font-size:15px; }
+  .js-schools{ grid-template-columns:1fr; }
+}

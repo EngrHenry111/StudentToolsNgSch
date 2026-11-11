@@ -42,6 +42,7 @@ const SITE_NAV = `<nav aria-label="Main">${[
   ["/waec-grade-calculator", "WAEC Grade Calculator"],
   ["/jamb-score-calculator", "JAMB Score Calculator"],
   ["/jamb-cbt-practice", "JAMB CBT Practice"],
+  ["/jamb-subject-combination", "JAMB Subject Combination"],
   ["/aggregate-score-calculator", "Aggregate Score Calculator"],
   ["/project-topics", "Project Topics"],
   ["/calculators", "All Calculators"],
@@ -76,6 +77,7 @@ const HOME_BODY = `<main>
 <li><a href="/age-tracker">Age Tracker</a></li>
 <li><a href="/jamb-cbt-practice">Free JAMB CBT Practice Test</a></li>
 <li><a href="/aggregate-score-calculator">Post-UTME Aggregate Score Calculator</a></li>
+<li><a href="/jamb-subject-combination">JAMB Subject Combination for All Courses</a></li>
 <li><a href="/project-topics">Final Year Project Topics by Department</a></li>
 <li><a href="/calculators">All Free Calculators</a></li>
 <li><a href="/percentage-calculator">Percentage Calculator</a></li>

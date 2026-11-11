@@ -24,6 +24,7 @@ const GROUPS = {
     label: "Practice",
     links: [
       ["/jamb-cbt-practice", "JAMB CBT Practice"],
+      ["/jamb-subject-combination", "JAMB Subject Combination"],
       ["/quiz", "Maths Quiz"],
       ["/tutorials/math-calculator", "Math Engine"],
       ["/ai-tutor", "AI Tutor"],
