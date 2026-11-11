@@ -86,6 +86,15 @@ const CourseCombination = () => {
         <h2>Frequently Asked Questions</h2>
         <FaqList faq={c.faq} />
 
+        {c.topics && (
+          <>
+            <h2>{c.topics.name} project topics</h2>
+            <p>
+              {c.topics.text} <Link to={c.topics.path}>See {c.topics.name} project topics</Link>.
+            </p>
+          </>
+        )}
+
         <h2>Related courses</h2>
         <ul>
           {c.related.map((r) => (

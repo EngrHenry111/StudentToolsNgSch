@@ -4,6 +4,31 @@
 import { COURSES, FACULTIES, courseBySlug } from "./courseInfo.js";
 import { BROCHURE, BROCHURE_DATE } from "./brochureData.js";
 import { utmeYear } from "../../utils/seoYear.js";
+import { departmentBySlug, topicCount } from "../projectTopics/departments.js";
+
+// JAMB course slug -> project topics department slug, where they differ.
+// Courses whose slug matches a department slug link without an entry here.
+const TOPIC_DEPT = {
+  english: "english-language",
+  "electrical-electronics-engineering": "electrical-engineering",
+  "cyber-security": "computer-science",
+  "software-engineering": "computer-science",
+  "information-technology": "computer-science",
+  "medical-laboratory-science": "microbiology",
+  "computer-engineering": "electrical-engineering",
+  agriculture: "agricultural-economics"
+};
+
+// The matching project topics page for a course, or null.
+export function topicsFor(c) {
+  const d = departmentBySlug(TOPIC_DEPT[c.slug] || c.slug);
+  if (!d) return null;
+  return {
+    path: `/project-topics/${d.slug}`,
+    name: d.name,
+    text: `Looking ahead to your final year? Browse ${topicCount(d)} original ${d.name.toLowerCase()} project topics, with tips on choosing one and research guides you can use.`
+  };
+}
 
 export const JS_PATH = "/jamb-subject-combination";
 export const JS_SECTION = { name: "JAMB Subject Combination", path: JS_PATH };
@@ -112,6 +137,7 @@ export function courseContent(c, year = utmeYear()) {
     schoolsIntro: `What each university lists for ${c.name} in JAMB's brochure (${brochureDateText()}). Use of English is compulsory even where it is not written.`,
     after,
     faq,
+    topics: topicsFor(c),
     related: c.related.map(courseBySlug).filter(Boolean).map((r) => ({ path: `${JS_PATH}/${r.slug}`, name: r.name }))
   };
 }

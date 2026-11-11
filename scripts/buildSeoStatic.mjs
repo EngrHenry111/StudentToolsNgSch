@@ -307,7 +307,10 @@ for (const course of COURSES) {
     ...(x.olevel ? [{ tag: "p", text: `O'level: ${x.olevel}` }] : [])
   ]);
   const bottom = [...sectionBlocks(c.after), ...faqBlocks(c.faq)];
-  const related = `<h2>Related courses</h2>${linkList(c.related.map((r) => [r.path, `JAMB subject combination for ${r.name}`]))}` +
+  const topics = c.topics
+    ? `<h2>${escapeHtml(c.topics.name)} project topics</h2><p>${escapeHtml(c.topics.text)} <a href="${c.topics.path}">See ${escapeHtml(c.topics.name)} project topics</a>.</p>`
+    : "";
+  const related = topics + `<h2>Related courses</h2>${linkList(c.related.map((r) => [r.path, `JAMB subject combination for ${r.name}`]))}` +
     `<p><a href="${JS_PATH}">JAMB subject combination for all courses and Course Finder</a></p>`;
   result[c.path] = `<main>${render(top)}${render(schools)}${render(bottom)}${related}</main>`;
   meta[c.path] = [c.title, c.description];
