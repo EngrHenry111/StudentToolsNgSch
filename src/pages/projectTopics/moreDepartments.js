@@ -410,6 +410,7 @@ export const MORE_DEPARTMENTS = [
     methods: "Microbiology projects are laboratory-based: samples are collected, cultured on suitable media, counted (CFU/ml or MPN), and isolates are identified with Gram staining and biochemical tests. Antimicrobial studies measure zones of inhibition and minimum inhibitory concentration. Results are presented in tables and analysed with means, standard deviation and ANOVA where needed.",
     narrow: ["Water quality", "Bacteriological quality of sachet water brands sold in Samaru, Zaria"],
     guides: [
+      ["prevalence-of-urinary-tract-infection-and-antibiotic-susceptibility-of-uropathogens-among-pregnant-women-project-guide", "Prevalence of Urinary Tract Infection and Antibiotic Susceptibility of Uropathogens among Pregnant Women"],
       ["self-medication-and-misuse-of-antibiotics-among-undergraduates-in-nigeria-project-guide", "Self-Medication and Misuse of Antibiotics among Undergraduates in Nigeria"],
       ["bacteriological-and-physicochemical-quality-of-sachet-water-sold-in-nigerian-towns-project-guide", "Bacteriological and Physicochemical Quality of Sachet Water Sold in Nigerian Towns"],
       ["knowledge-and-practice-of-hand-hygiene-and-infection-prevention-among-nurses-in-nigerian-hospitals-project-guide", "Knowledge and Practice of Hand Hygiene and Infection Prevention among Nurses in Nigerian Hospitals"]
@@ -489,7 +490,9 @@ export const MORE_DEPARTMENTS = [
     ],
     methods: "Biochemistry projects are laboratory-based. Phytochemical and proximate analyses use standard AOAC methods; antioxidant activity is often measured with the DPPH assay; animal studies use groups of rats with a control, and serum parameters are measured with commercial kits. Results are expressed as mean ± standard deviation and compared with one-way ANOVA.",
     narrow: ["Medicinal plants", "Antioxidant activity and phytochemical composition of Vernonia amygdalina leaves from Nsukka"],
-    guides: []
+    guides: [
+      ["phytochemical-screening-proximate-composition-and-antioxidant-activity-of-bitter-leaf-vernonia-amygdalina-leaves-project-guide", "Phytochemical Screening, Proximate Composition and Antioxidant Activity of Bitter Leaf (Vernonia amygdalina) Leaves"]
+    ]
   },
   {
     slug: "agricultural-economics",
