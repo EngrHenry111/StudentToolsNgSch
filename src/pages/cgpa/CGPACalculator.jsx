@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async"; // ✅ FIXED
 import "./cgpa.css";
 import MarketplacePromo from "../../componentsMarketplace/MarketplacePromo";
 import ShareButtons from "../../componentsMarketplace/ShareButtons";
+import { degreeClass } from "../../utils/cgpaConvert";
 
 const CGPACalculator = () => {
 
@@ -243,6 +244,7 @@ const CGPACalculator = () => {
     url={url}
     title="CGPA Calculator"
     label={Number(cgpa) > 0 ? "Share your result:" : "Share this calculator:"}
+    card={Number(cgpa) > 0 ? { label: "My CGPA", value: String(cgpa), sub: `${degreeClass(Number(cgpa), 5)} · ${totalUnits} units` } : undefined}
     text={Number(cgpa) > 0
      ? `I just calculated my CGPA: ${cgpa} from ${totalUnits} units. Calculate yours free on StudentToolsNG:`
      : "Free CGPA calculator for Nigerian students. Try it:"}

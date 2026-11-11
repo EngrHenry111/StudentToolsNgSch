@@ -159,6 +159,7 @@ const GPAClass = () => {
     url={url}
     title="GPA Class Calculator"
     label={result ? "Share your result:" : "Share this calculator:"}
+    card={result && result !== "Invalid CGPA" ? { label: "My degree class", value: Number(cgpa).toFixed(2), sub: result } : undefined}
     text={result
      ? `My CGPA of ${cgpa} puts me in: ${result}. Check your degree class free on StudentToolsNG:`
      : "Free calculator: find out your degree class from your CGPA."}

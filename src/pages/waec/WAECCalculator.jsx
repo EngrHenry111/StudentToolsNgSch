@@ -308,6 +308,7 @@ WAEC Grade Calculator Nigeria | Convert WAEC Scores to Grades
     url="https://studenttoolsng.com/waec-grade-calculator"
     title="WAEC Grade Calculator"
     label={results.length > 0 ? "Share your result:" : "Share this calculator:"}
+    card={results.length > 0 ? (() => { const n = results.filter((r) => CREDIT.test(r.grade)).length; return { label: "My WAEC result", value: `${n} credit${n === 1 ? "" : "s"}`, sub: `in ${results.length} subject${results.length === 1 ? "" : "s"}` }; })() : undefined}
     text={results.length > 0
      ? `I checked my WAEC grades: ${results.filter((r) => CREDIT.test(r.grade)).length} credit${results.filter((r) => CREDIT.test(r.grade)).length === 1 ? "" : "s"} in ${results.length} subject${results.length === 1 ? "" : "s"}. Convert your scores to grades free on StudentToolsNG:`
      : "Free WAEC grade calculator. Turn your scores into A1–F9 grades here:"}

@@ -192,6 +192,7 @@ const JAMBScore = () => {
     url={url}
     title="JAMB Score Calculator"
     label={total > 0 ? "Share your result:" : "Share this calculator:"}
+    card={total > 0 ? { label: "My UTME score", value: `${total}/400` } : undefined}
     text={total > 0
      ? `My UTME total is ${total}/400. Add up your JAMB score free on StudentToolsNG:`
      : "Free JAMB score calculator. Add up your UTME subject scores here:"}

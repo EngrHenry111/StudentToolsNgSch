@@ -8,8 +8,28 @@ import "./shareButtons.css";
 // `text` replaces the default message, e.g. a calculator sharing the
 // student's result ("I just calculated my CGPA: 4.21 …"). The link is
 // always the page itself, so whoever opens it can try the tool too.
-const ShareButtons = ({ url, title, text, label = "Share:" }) => {
+//
+// `card` ({ label, value, sub }) adds a "Share as image" button that draws a
+// result card for WhatsApp Status (see resultCard.js). Pass it only once
+// there is a result to show.
+const ShareButtons = ({ url, title, text, label = "Share:", card }) => {
   const [copied, setCopied] = useState(false);
+  const [cardState, setCardState] = useState("");
+
+  const shareCard = async () => {
+    setCardState("working");
+    try {
+      // Loaded on demand so pages without a result don't pay for it.
+      const { shareResultCard } = await import("./resultCard");
+      const path = new URL(url).pathname;
+      const slug = path.split("/").filter(Boolean).pop() || "result";
+      const outcome = await shareResultCard({ ...card, path }, `my-${slug}-result.png`);
+      setCardState(outcome === "downloaded" ? "saved" : "");
+      if (outcome === "downloaded") setTimeout(() => setCardState(""), 3000);
+    } catch {
+      setCardState("");
+    }
+  };
   const message = text || `${title} — on StudentToolsNG`;
   const enc = encodeURIComponent;
 
@@ -32,6 +52,11 @@ const ShareButtons = ({ url, title, text, label = "Share:" }) => {
   return (
     <div className="share-buttons" aria-label="Share">
       <span className="share-label">{label}</span>
+      {card && (
+        <button type="button" className="share-btn share-card" onClick={shareCard} disabled={cardState === "working"}>
+          {cardState === "working" ? "Preparing…" : cardState === "saved" ? "Image saved ✓" : "📷 Share as image"}
+        </button>
+      )}
       <a
         className="share-btn share-whatsapp"
         href={`https://wa.me/?text=${enc(`${message}\n${url}`)}`}

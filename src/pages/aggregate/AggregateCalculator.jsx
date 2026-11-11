@@ -218,6 +218,7 @@ export default function AggregateCalculator({ slug }) {
             url={`https://studenttoolsng.com${fixed ? `${AGG_PATH}/${fixed.slug}` : AGG_PATH}`}
             title={u === CUSTOM ? "Aggregate Score Calculator" : `${u.short} Aggregate Score Calculator`}
             label="Share your result:"
+            card={{ label: `My ${u === CUSTOM ? "" : `${u.short} `}aggregate score`, value: `${round2(result.total)}`, sub: "out of 100" }}
             text={`My ${u === CUSTOM ? "" : `${u.short} `}aggregate score is ${round2(result.total)}/100. Work out yours free on StudentToolsNG:`}
           />
         </div>
