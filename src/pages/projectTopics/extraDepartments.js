@@ -239,6 +239,7 @@ export const EXTRA_DEPARTMENTS = [
     methods: "Electrical engineering projects use a design-and-construction method (block diagram, circuit design, component selection, construction and testing) or an analytical method (data collection from the utility, modelling and simulation in MATLAB, ETAP or similar tools). Results are presented as test readings, waveforms, tables and graphs compared with the design specification.",
     narrow: ["Solar energy", "Design of a 3 kW solar photovoltaic system for the primary health centre in a selected rural community in Kwara State"],
     guides: [
+      ["design-and-construction-of-a-microcontroller-based-automatic-changeover-switch-for-mains-and-generator-project-guide", "Design and Construction of a Microcontroller-Based Automatic Changeover Switch for Mains and Generator"],
       ["factors-influencing-adoption-of-solar-energy-by-households-and-businesses-in-nigeria-project-guide", "Factors Influencing Adoption of Solar Energy by Households and Businesses in Nigeria"]
     ]
   },
@@ -317,6 +318,7 @@ export const EXTRA_DEPARTMENTS = [
     methods: "Geography projects combine field work (sampling soils or water, measuring erosion sites), questionnaires and interviews with residents, and GIS or remote sensing analysis of maps and satellite images. Data are analysed with descriptive statistics, chi-square, correlation or regression, and results are presented as maps, tables and charts.",
     narrow: ["Gully erosion", "Spatial distribution and causes of gully erosion sites in Nnewi North Local Government Area, Anambra State"],
     guides: [
+      ["land-use-and-land-cover-change-detection-in-a-nigerian-city-using-landsat-imagery-and-gis-project-guide", "Land Use and Land Cover Change Detection in a Nigerian City Using Landsat Imagery and GIS"],
       ["causes-and-socio-economic-effects-of-gully-erosion-in-nigerian-communities-project-guide", "Causes and Socio-Economic Effects of Gully Erosion in Nigerian Communities"]
     ]
   }

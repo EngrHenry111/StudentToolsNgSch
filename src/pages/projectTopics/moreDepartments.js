@@ -331,6 +331,7 @@ export const MORE_DEPARTMENTS = [
     methods: "Linguistic projects collect written or spoken data (essays, recordings, advertisements, speeches) and analyse them with a stated framework, presenting examples and frequency tables. Language education projects usually use a survey or a pre-test and post-test design, analysed with mean scores and t-tests.",
     narrow: ["Pronunciation problems", "Problems of English vowel pronunciation among Yoruba-speaking JSS 3 students in Ogbomoso"],
     guides: [
+      ["error-analysis-of-the-written-english-of-senior-secondary-school-students-in-nigeria-project-guide", "Error Analysis of the Written English of Senior Secondary School Students in Nigeria"],
       ["influence-of-english-language-proficiency-on-students-academic-performance-project-guide", "Influence of English Language Proficiency on Students' Academic Performance"],
       ["use-of-ai-tools-like-chatgpt-by-undergraduates-learning-and-academic-integrity-project-guide", "Use of AI Tools like ChatGPT by Undergraduates: Learning and Academic Integrity"]
     ]
@@ -491,6 +492,7 @@ export const MORE_DEPARTMENTS = [
     methods: "Biochemistry projects are laboratory-based. Phytochemical and proximate analyses use standard AOAC methods; antioxidant activity is often measured with the DPPH assay; animal studies use groups of rats with a control, and serum parameters are measured with commercial kits. Results are expressed as mean ± standard deviation and compared with one-way ANOVA.",
     narrow: ["Medicinal plants", "Antioxidant activity and phytochemical composition of Vernonia amygdalina leaves from Nsukka"],
     guides: [
+      ["fasting-blood-glucose-lipid-profile-and-body-mass-index-of-adults-in-a-nigerian-community-project-guide", "Fasting Blood Glucose, Lipid Profile and Body Mass Index of Adults in a Nigerian Community"],
       ["phytochemical-screening-proximate-composition-and-antioxidant-activity-of-bitter-leaf-vernonia-amygdalina-leaves-project-guide", "Phytochemical Screening, Proximate Composition and Antioxidant Activity of Bitter Leaf (Vernonia amygdalina) Leaves"]
     ]
   },

@@ -597,6 +597,7 @@ export const DEPARTMENTS = [
     methods: "Education projects use survey designs with questionnaires analysed by mean scores and standard deviation, or quasi-experimental designs (pre-test and post-test with a control group) analysed with t-tests or ANCOVA. Instruments are validated by experts and tested for reliability, often with Cronbach's alpha or the test-retest method.",
     narrow: ["Teaching methods and performance", "Effect of cooperative learning on SS2 students' achievement in mathematics in Nsukka Education Zone"],
     guides: [
+      ["error-analysis-of-the-written-english-of-senior-secondary-school-students-in-nigeria-project-guide", "Error Analysis of the Written English of Senior Secondary School Students in Nigeria"],
       ["effect-of-cooperative-learning-on-students-achievement-and-interest-in-mathematics-project-guide", "Effect of Cooperative Learning on Students' Achievement and Interest in Mathematics"],
       ["influence-of-study-habits-on-academic-performance-of-secondary-school-students-project-guide", "Influence of Study Habits on Academic Performance of Secondary School Students"],
       ["influence-of-english-language-proficiency-on-students-academic-performance-project-guide", "Influence of English Language Proficiency on Students' Academic Performance"],
