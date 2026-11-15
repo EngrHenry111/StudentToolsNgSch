@@ -15,6 +15,10 @@ import "./listingDetail.css";
 
 const SITE = "https://studenttoolsng.com";
 
+// Rolling one-year offer validity for the Product structured data, so
+// Google doesn't flag the offer as expired. Computed once per page load.
+const priceValidUntil = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
+
 // Google shows ~155 characters of the meta description — use the opening
 // of the real (free) preview text, which matches what searchers look for
 // far better than a generic template sentence.
@@ -165,18 +169,19 @@ const ListingDetail = () => {
             "@type": "Product",
             name: listing.title,
             description,
+            sku: listing._id,
             category: listing.field,
             brand: {
-              "@type": "Organization",
-              name: listing.publisher.businessName,
-              url: `${SITE}/publishers/${listing.publisher.slug}`
+              // Google's Merchant listings only accept "Brand" here (not Organization).
+              "@type": "Brand",
+              name: listing.publisher.businessName
             },
             image: listing.coverImageUrl || `${SITE}/og-image.png`,
             ...(listing.ratingCount > 0
               ? {
                   aggregateRating: {
                     "@type": "AggregateRating",
-                    ratingValue: listing.ratingAverage,
+                    ratingValue: Number(Number(listing.ratingAverage || 0).toFixed(1)),
                     reviewCount: listing.ratingCount,
                     bestRating: 5,
                     worstRating: 1
@@ -188,7 +193,26 @@ const ListingDetail = () => {
               price: priceNaira,
               priceCurrency: "NGN",
               availability: "https://schema.org/InStock",
-              url: canonicalUrl
+              itemCondition: "https://schema.org/NewCondition",
+              priceValidUntil: priceValidUntil,
+              url: canonicalUrl,
+              // Digital download: no physical shipping, delivered instantly.
+              // Google's Merchant listings report flags these as missing otherwise.
+              shippingDetails: {
+                "@type": "OfferShippingDetails",
+                shippingRate: { "@type": "MonetaryAmount", value: 0, currency: "NGN" },
+                shippingDestination: { "@type": "DefinedRegion", addressCountry: "NG" },
+                deliveryTime: {
+                  "@type": "ShippingDeliveryTime",
+                  handlingTime: { "@type": "QuantitativeValue", minValue: 0, maxValue: 0, unitCode: "DAY" },
+                  transitTime: { "@type": "QuantitativeValue", minValue: 0, maxValue: 0, unitCode: "DAY" }
+                }
+              },
+              hasMerchantReturnPolicy: {
+                "@type": "MerchantReturnPolicy",
+                applicableCountry: "NG",
+                returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted"
+              }
             }
           })}
         </script>
