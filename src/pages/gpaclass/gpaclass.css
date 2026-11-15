@@ -313,3 +313,19 @@
     font-size:44px;
   }
 }
+.gpa-result p{
+  margin: 8px 0 0;
+  line-height: 1.5;
+}
+
+.gpa-quick{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 6px 18px;
+  padding-left: 18px;
+}
+
+.gpa-result a{
+  color: var(--primary);
+  font-weight: 600;
+}

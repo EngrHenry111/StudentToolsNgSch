@@ -66,8 +66,8 @@ const CGPACalculator = () => {
  };
 
  const url = "https://studenttoolsng.com/cgpa-calculator";
- const title = "CGPA Calculator Nigeria | Calculate University CGPA Online";
- const description = "Free CGPA calculator for Nigerian university students. Calculate your GPA and cumulative CGPA instantly using the Nigerian grading system.";
+ const title = "CGPA Calculator Nigeria: Calculate Your CGPA (5.0 Scale)";
+ const description = "Enter each course's grade and credit units to get your GPA, CGPA and degree class instantly. Free, works for every Nigerian university on the 5.0 scale.";
  const image = "https://studenttoolsng.com/og-image.png";
 
  // AI-drafted (2026-09-13) — factual/explanatory content per Google's "low
@@ -155,7 +155,7 @@ const CGPACalculator = () => {
     </script>
    </Helmet>
 
-   <h1>Advanced CGPA Calculator</h1>
+   <h1>CGPA Calculator Nigeria (5.0 Scale)</h1>
 
    <p>Calculate your university CGPA using Nigerian grading system</p>
 

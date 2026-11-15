@@ -77,8 +77,8 @@ const JAMBScore = () => {
  };
 
  const url = "https://studenttoolsng.com/jamb-score-calculator";
- const title = "JAMB Score Calculator | Calculate Your UTME Score Online";
- const description = "Free JAMB score calculator for Nigerian students. Enter your UTME subject scores and instantly calculate your total score and admission chances.";
+ const title = "JAMB Score Calculator: Calculate Your UTME Score (Out of 400)";
+ const description = "Add your four UTME subject scores (each out of 100) to get your JAMB total out of 400, and see what your score means for admission.";
  const image = "https://studenttoolsng.com/og-image.png";
 
  return(

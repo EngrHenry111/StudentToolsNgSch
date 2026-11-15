@@ -98,6 +98,11 @@ const WAECCalculator = () => {
 
  };
 
+ // Defined once so the crawler copy (scripts/buildSeoStatic.mjs) reads the
+ // real title — it takes the first title it finds in the file.
+ const title = "WAEC Calculator: Check Your WAEC Grades A1–F9 and Credits";
+ const description = "Enter your WAEC scores to get each grade and count your credits. A1 75–100, B2 70–74, B3 65–69, C4 60–64, C5 55–59, C6 50–54, F9 0–39.";
+
  return(
 
   <div className="waec-cal">
@@ -105,13 +110,11 @@ const WAECCalculator = () => {
     <Helmet>
 
 {/* Primary SEO */}
-<title>
-WAEC Grade Calculator Nigeria | Convert WAEC Scores to Grades
-</title>
+<title>{title}</title>
 
 <meta
  name="description"
- content="Free WAEC grade calculator for Nigerian students. Convert your WAEC scores to grades (A1–F9) instantly and understand the WAEC grading system."
+ content={description}
 />
 
 <meta
@@ -130,7 +133,7 @@ WAEC Grade Calculator Nigeria | Convert WAEC Scores to Grades
 
 <meta
  property="og:title"
- content="WAEC Grade Calculator Nigeria"
+ content={title}
 />
 
 <meta
