@@ -18,8 +18,49 @@ export const getCourse = async (slug) => {
   }
 };
 
-export const playLesson = (slug, lessonId) =>
-  apiRequest(`/courses/${slug}/lessons/${lessonId}/play`, { auth: true });
+// A stable random id for this browser, used for "one device at a time".
+// Falls back to a per-tab id if storage is blocked (private mode etc.).
+let memoryDeviceId = null;
+const randomId = () =>
+  (crypto?.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`).replace(/[^A-Za-z0-9_-]/g, "");
+
+export const getDeviceId = () => {
+  try {
+    let id = localStorage.getItem("stng-device-id");
+    if (!id) {
+      id = randomId();
+      localStorage.setItem("stng-device-id", id);
+    }
+    return id;
+  } catch {
+    memoryDeviceId = memoryDeviceId || randomId();
+    return memoryDeviceId;
+  }
+};
+
+// takeover=true moves playback to this device and stops it on the other one.
+export const playLesson = (slug, lessonId, { takeover = false } = {}) => {
+  const qs = new URLSearchParams({ device: getDeviceId() });
+  if (takeover) qs.set("takeover", "1");
+  return apiRequest(`/courses/${slug}/lessons/${lessonId}/play?${qs}`, { auth: true });
+};
+
+export const watchHeartbeat = () =>
+  apiRequest("/courses/watch/heartbeat", { method: "POST", body: { deviceId: getDeviceId() }, auth: true });
+
+// Fire-and-forget on leaving the page; keepalive lets it finish after unload.
+export const releaseWatch = () => {
+  try {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+    fetch("https://studenttoolsserver.onrender.com/api/courses/watch/release", {
+      method: "POST",
+      keepalive: true,
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+      body: JSON.stringify({ deviceId: getDeviceId() })
+    }).catch(() => {});
+  } catch { /* storage blocked */ }
+};
 
 export const claimCourseAccess = (slug, token) =>
   apiRequest(`/courses/${slug}/claim`, { method: "POST", body: { token }, auth: true });

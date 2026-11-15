@@ -7,11 +7,14 @@ import {
   playLesson,
   claimCourseAccess,
   purchaseCourse,
-  setLessonComplete
+  setLessonComplete,
+  watchHeartbeat,
+  releaseWatch
 } from "../../apiCourses/courseApi";
 import { AuthContext } from "../../contextQuiz/AuthContext";
 import NotFound from "../notFound/NotFound";
 import { formatDuration } from "./courseFormat";
+import { courseDescription, courseJsonLd } from "../../utils/courseSeo";
 import "./courses.css";
 
 const SITE = "https://studenttoolsng.com";
@@ -83,16 +86,55 @@ const CoursePage = () => {
 
   // Fetch a fresh signed player URL whenever the selected lesson changes.
   // Results are keyed by lesson id, so a stale response is simply ignored.
-  const [fetched, setFetched] = useState({ lessonId: null, url: null, error: null });
+  const [fetched, setFetched] = useState({ lessonId: null, url: null, error: null, otherDevice: false });
+  const fetchFailed = (lessonId, err) => ({
+    lessonId,
+    url: null,
+    error: err.message,
+    otherDevice: err.code === "OTHER_DEVICE"
+  });
   useEffect(() => {
     if (!activeWatchable) return;
     let cancelled = false;
     const lessonId = active._id;
     playLesson(slug, lessonId)
-      .then((r) => { if (!cancelled) setFetched({ lessonId, url: r.url, error: null }); })
-      .catch((err) => { if (!cancelled) setFetched({ lessonId, url: null, error: err.message }); });
+      .then((r) => { if (!cancelled) setFetched({ lessonId, url: r.url, error: null, otherDevice: false }); })
+      .catch((err) => { if (!cancelled) setFetched(fetchFailed(lessonId, err)); });
     return () => { cancelled = true; };
   }, [activeWatchable, active?._id, slug]);
+
+  // "Watch here instead": move playback to this device (stops the other one).
+  const watchHere = () => {
+    const lessonId = active._id;
+    setFetched({ lessonId: null, url: null, error: null, otherDevice: false });
+    playLesson(slug, lessonId, { takeover: true })
+      .then((r) => setFetched({ lessonId, url: r.url, error: null, otherDevice: false }))
+      .catch((err) => setFetched(fetchFailed(lessonId, err)));
+  };
+
+  // One device at a time: while an enrolled lesson is playing, check in
+  // every 30s. If another device has taken over, stop the player here.
+  const heldLessonId = fetched.url && active && !active.isFreePreview && fetched.lessonId === active._id
+    ? active._id
+    : null;
+  useEffect(() => {
+    if (!heldLessonId) return;
+    const beat = () =>
+      watchHeartbeat().catch((err) => {
+        if (err.code === "OTHER_DEVICE") setFetched(fetchFailed(heldLessonId, err));
+      });
+    const timer = setInterval(beat, 30000);
+    // Coming back to a backgrounded tab: check straight away.
+    const onVisible = () => { if (document.visibilityState === "visible") beat(); };
+    document.addEventListener("visibilitychange", onVisible);
+    window.addEventListener("pagehide", releaseWatch);
+    return () => {
+      clearInterval(timer);
+      document.removeEventListener("visibilitychange", onVisible);
+      window.removeEventListener("pagehide", releaseWatch);
+      releaseWatch();
+    };
+  }, [heldLessonId]);
 
   const player = !active || !canWatch(active)
     ? { url: null, loading: false, error: null }
@@ -161,31 +203,51 @@ const CoursePage = () => {
   }
 
   if (!data) {
-    return <div className="course-page"><p className="course-muted"><Loader2 className="spin" size={18} /> Loading course…</p></div>;
+    // Crawler snapshot from the edge (see main.jsx / seoFallback.js), only for this URL.
+    const snapshot = window.__EDGE_SNAPSHOT__;
+    const edge = snapshot && snapshot.path === `/courses/${slug}` ? snapshot : null;
+    return (
+      <div className="course-page">
+        <Helmet>
+          <title>{edge ? edge.title : "Loading course… | StudentToolsNG"}</title>
+          {edge?.description && <meta name="description" content={edge.description} />}
+          <link rel="canonical" href={`${SITE}/courses/${slug}`} />
+        </Helmet>
+        {edge
+          ? <div dangerouslySetInnerHTML={{ __html: edge.html }} />
+          : <p className="course-muted"><Loader2 className="spin" size={18} /> Loading course…</p>}
+      </div>
+    );
   }
 
   const { course, access } = data;
   const doneCount = lessons.filter((l) => completed.has(l._id)).length;
   const totalSeconds = lessons.reduce((s, l) => s + (l.durationSeconds || 0), 0);
   const canonicalUrl = `${SITE}/courses/${course.slug}`;
+  const metaDescription = courseDescription(course, lessons.length);
 
   return (
     <div className="course-page">
       <Helmet>
         <title>{`${course.title} | StudentToolsNG`}</title>
-        <meta name="description" content={course.tagline || course.description.slice(0, 155)} />
+        <meta name="description" content={metaDescription} />
         <link rel="canonical" href={canonicalUrl} />
+        <meta property="og:type" content="website" />
         <meta property="og:title" content={course.title} />
-        <meta property="og:description" content={course.tagline || course.description.slice(0, 155)} />
+        <meta property="og:description" content={metaDescription} />
         <meta property="og:url" content={canonicalUrl} />
-        {course.coverImageUrl && <meta property="og:image" content={course.coverImageUrl} />}
+        <meta property="og:image" content={course.coverImageUrl || `${SITE}/og-image.png`} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <script type="application/ld+json">{JSON.stringify(courseJsonLd(course, lessons))}</script>
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "Course",
-            name: course.title,
-            description: course.tagline || course.description.slice(0, 300) || course.title,
-            provider: { "@type": "Organization", name: "StudentToolsNG", sameAs: SITE }
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: SITE },
+              { "@type": "ListItem", position: 2, name: "Courses", item: `${SITE}/courses` },
+              { "@type": "ListItem", position: 3, name: course.title, item: canonicalUrl }
+            ]
           })}
         </script>
       </Helmet>
@@ -199,7 +261,7 @@ const CoursePage = () => {
         {course.tagline && <p className="course-tagline">{course.tagline}</p>}
         <p className="course-meta">
           {course.instructor && <>By {course.instructor} · </>}
-          {lessons.length} lessons{totalSeconds > 0 && <> · {formatDuration(totalSeconds, true)}</>}
+          {lessons.length} lesson{lessons.length === 1 ? "" : "s"}{totalSeconds > 0 && <> · {formatDuration(totalSeconds, true)}</>}
           {hasAccess && <> · <strong>{doneCount}/{lessons.length} completed</strong></>}
         </p>
         {hasAccess && lessons.length > 0 && (
@@ -255,8 +317,16 @@ const CoursePage = () => {
             {active && canWatch(active) && player.loading && (
               <div className="course-player-msg"><Loader2 className="spin" size={22} /> Loading video…</div>
             )}
-            {active && canWatch(active) && player.error && (
+            {active && canWatch(active) && player.error && !player.otherDevice && (
               <div className="course-player-msg">{player.error}</div>
+            )}
+            {active && canWatch(active) && player.otherDevice && (
+              <div className="course-player-msg locked">
+                <p><strong>Playing on another device</strong></p>
+                <p>Your account can only watch on one device at a time.</p>
+                <button className="course-btn" onClick={watchHere}>Watch here instead</button>
+                <p className="small">This will stop the video on the other device.</p>
+              </div>
             )}
             {active && !canWatch(active) && (
               <div className="course-player-msg locked">

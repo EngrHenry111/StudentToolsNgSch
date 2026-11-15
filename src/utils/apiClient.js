@@ -103,7 +103,12 @@ export const apiRequest = async (path, { method = "GET", body, token, auth = tru
   }
 
   if (!res.ok) {
-    throw new Error((data && data.message) || `Request failed (${res.status})`);
+    // status/code ride along for callers that branch on them (e.g. the
+    // course player's OTHER_DEVICE); existing callers only read .message.
+    const err = new Error((data && data.message) || `Request failed (${res.status})`);
+    err.status = res.status;
+    err.code = data?.code;
+    throw err;
   }
 
   return data;
@@ -151,7 +156,12 @@ export const apiRequestMultipart = async (path, formData, { method = "POST" } = 
   }
 
   if (!res.ok) {
-    throw new Error((data && data.message) || `Request failed (${res.status})`);
+    // status/code ride along for callers that branch on them (e.g. the
+    // course player's OTHER_DEVICE); existing callers only read .message.
+    const err = new Error((data && data.message) || `Request failed (${res.status})`);
+    err.status = res.status;
+    err.code = data?.code;
+    throw err;
   }
 
   return data;

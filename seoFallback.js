@@ -15,6 +15,7 @@
 
 import { STATIC_BODIES, STATIC_META } from "./seoStaticPages.js";
 import { seoTitle } from "./src/utils/seoTitle.js";
+import { courseDescription, courseJsonLd } from "./src/utils/courseSeo.js";
 
 const SITE = "https://studenttoolsng.com";
 const API = "https://studenttoolsserver.onrender.com/api";
@@ -47,7 +48,8 @@ const SITE_NAV = `<nav aria-label="Main">${[
   ["/project-topics", "Project Topics"],
   ["/calculators", "All Calculators"],
   ["/engineering-tools", "Engineering Tools"],
-  ["/marketplace", "Research Library"]
+  ["/marketplace", "Research Library"],
+  ["/courses", "Video Courses"]
 ].map(([href, text]) => link(href, text)).join(" · ")}</nav>`;
 const SITE_FOOTER = `<footer>${[
   ["/physics", "Physics Tutorials"],
@@ -277,6 +279,66 @@ async function describe(pathname) {
             { "@type": "ListItem", position: 1, name: "Home", item: SITE },
             { "@type": "ListItem", position: 2, name: "Tutorials", item: `${SITE}/tutorials` },
             { "@type": "ListItem", position: 3, name: data.title, item: canonical }
+          ]
+        }
+      ]
+    };
+  }
+
+  // /courses — every published video course
+  if (parts[0] === "courses" && parts.length === 1) {
+    const { status, data } = await apiGet("/courses");
+    if (status !== 200 || !Array.isArray(data)) return UNAVAILABLE;
+    const items = data.map((c) =>
+      `<li>${link(`/courses/${c.slug}`, escapeHtml(c.title))}${c.tagline ? ` — ${escapeHtml(c.tagline)}` : ""} (${c.lessonCount} lesson${c.lessonCount === 1 ? "" : "s"}${c.price > 0 ? `, ₦${Number(c.price).toLocaleString("en-NG")}` : ""})</li>`
+    ).join("");
+    return {
+      status: 200,
+      title: "Video Courses | StudentToolsNG",
+      description: "Recorded video classes you can watch any time — learn web development and tech skills at your own pace.",
+      canonical: `${SITE}/courses`,
+      body: `<main><h1>Video Courses</h1><p>Recorded classes you can watch any time, at your own pace.</p>${items ? `<ul>${items}</ul>` : "<p>No courses yet — check back soon.</p>"}</main>`
+    };
+  }
+
+  // /courses/:slug — course page with its lesson outline
+  if (parts[0] === "courses" && parts.length === 2) {
+    const { status, data } = await apiGet(`/courses/${encodeURIComponent(parts[1])}`);
+    if (status === 404 || status === 410) return notFound(status);
+    if (status !== 200 || !data?.course) return UNAVAILABLE;
+
+    const { course } = data;
+    const lessons = Array.isArray(data.lessons) ? data.lessons : [];
+    const canonical = `${SITE}/courses/${course.slug}`;
+    const outline = [];
+    let currentModule = null;
+    for (const l of lessons) {
+      const m = l.module || "Lessons";
+      if (m !== currentModule) {
+        if (currentModule !== null) outline.push("</ul>");
+        outline.push(`<h3>${escapeHtml(m)}</h3><ul>`);
+        currentModule = m;
+      }
+      outline.push(`<li>${escapeHtml(l.title)}${l.isFreePreview ? " (free preview)" : ""}</li>`);
+    }
+    if (currentModule !== null) outline.push("</ul>");
+
+    return {
+      status: 200,
+      title: `${course.title} | StudentToolsNG`,
+      description: courseDescription(course, lessons.length),
+      canonical,
+      image: course.coverImageUrl,
+      body: `<main><nav aria-label="Breadcrumb">${link("/", "Home")} › ${link("/courses", "Courses")}</nav><h1>${escapeHtml(course.title)}</h1>${course.tagline ? `<p>${escapeHtml(course.tagline)}</p>` : ""}${course.instructor ? `<p>By ${escapeHtml(course.instructor)}</p>` : ""}${paragraphs(course.description)}<p>${lessons.length} video lesson${lessons.length === 1 ? "" : "s"} · lifetime access${course.price > 0 ? ` · ₦${Number(course.price).toLocaleString("en-NG")} one-time` : ""}</p><h2>Course content</h2>${outline.join("")}</main>`,
+      jsonLd: [
+        courseJsonLd(course, lessons),
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: SITE },
+            { "@type": "ListItem", position: 2, name: "Courses", item: `${SITE}/courses` },
+            { "@type": "ListItem", position: 3, name: course.title, item: canonical }
           ]
         }
       ]
