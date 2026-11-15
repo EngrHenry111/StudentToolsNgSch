@@ -65,7 +65,11 @@ const AdminCourses = () => {
             <tbody>
               {data.courses.map((c) => (
                 <tr key={c._id}>
-                  <td><strong>{c.title}</strong><div className="course-muted small">/courses/{c.slug}</div></td>
+                  <td><strong>{c.title}</strong><div className="course-muted small">
+                    {c.isPublished
+                      ? <a href={`/courses/${c.slug}`} target="_blank" rel="noreferrer">studenttoolsng.com/courses/{c.slug} ↗</a>
+                      : `/courses/${c.slug} (publish it in Course details to make this live)`}
+                  </div></td>
                   <td>{c.isPublished ? <span className="adm-badge ok">Published</span> : <span className="adm-badge">Draft</span>}</td>
                   <td>{c.price > 0 ? `₦${c.price.toLocaleString()}` : "—"}</td>
                   <td>{c.lessonCount}</td>

@@ -193,6 +193,7 @@ const handleChange = (e)=>{
         <NavGroup id="practice" open={openGroup} setOpen={setOpenGroup} onPick={closeMenu} />
         <li><Link to="/engineering-tools" onClick={closeMenu}>Engineering</Link></li>
         <li><Link to="/tutorials" onClick={closeMenu}>Tutorials</Link></li>
+        <li><Link to="/courses" onClick={closeMenu}>Courses</Link></li>
         <li><Link to="/admission-predictor" onClick={closeMenu}>Admission</Link></li>
         <li><Link to="/study-planner" onClick={closeMenu}>Planner</Link></li>
         <li><Link to="/scholarships" onClick={closeMenu}>Scholarships</Link></li>
