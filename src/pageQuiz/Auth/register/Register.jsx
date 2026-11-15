@@ -15,6 +15,11 @@ const Register = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const referralCode = searchParams.get("ref");
+  // ?next=/path is carried through to login (same-site paths only), so a
+  // student invited to a course lands back on it after signing up.
+  const nextParam = searchParams.get("next");
+  const safeNext = nextParam && nextParam.startsWith("/") && !nextParam.startsWith("//") ? nextParam : null;
+  const loginPath = safeNext ? `/login?next=${encodeURIComponent(safeNext)}` : "/login";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,7 +42,7 @@ const Register = () => {
 
       if (res.message && res.message.toLowerCase().includes("registered")) {
         setSuccess("Account created! Redirecting to login...");
-        setTimeout(() => navigate("/login"), 1200);
+        setTimeout(() => navigate(loginPath), 1200);
       } else {
         setError(res.message || "Registration failed.");
       }
@@ -59,7 +64,7 @@ const Register = () => {
       if (res.accessToken) {
         // Google sign-up logs you straight in — no separate verify step needed
         login(res.accessToken, res.refreshToken, res.user);
-        navigate("/pro/dashboard");
+        navigate(safeNext || "/pro/dashboard");
       } else {
         setError(res.message || "Google sign-up failed.");
       }
@@ -124,7 +129,7 @@ const Register = () => {
         </button>
 
         <p>
-          Already have an account? <Link to="/login">Login</Link>
+          Already have an account? <Link to={loginPath}>Login</Link>
         </p>
       </form>
     </div>

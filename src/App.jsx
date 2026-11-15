@@ -116,6 +116,10 @@ const ListingForm = lazy(() => import("./pageMarketplace/ListingForm"));
 const PublisherOrders = lazy(() => import("./pageMarketplace/PublisherOrders"));
 const MyPurchases = lazy(() => import("./pageMarketplace/MyPurchases"));
 const Marketplace = lazy(() => import("./pages/marketplace/Marketplace"));
+const CoursesHub = lazy(() => import("./pages/courses/CoursesHub"));
+const CoursePage = lazy(() => import("./pages/courses/CoursePage"));
+const AdminCourses = lazy(() => import("./pages/adminCourses/AdminCourses"));
+const AdminCourseEdit = lazy(() => import("./pages/adminCourses/AdminCourseEdit"));
 const PublisherStorefront = lazy(() => import("./pages/publisherStorefront/PublisherStorefront"));
 const ListingDetail = lazy(() => import("./pages/listingDetail/ListingDetail"));
 
@@ -145,6 +149,9 @@ function App() {
   <Route path="edit/:id" element={<EditTutorial />} />
 
   <Route path="messages" element={<AdminMessages />} />
+
+  <Route path="courses" element={<AdminCourses />} />
+  <Route path="courses/:id" element={<AdminCourseEdit />} />
 
   <Route path="create-tutorial" element={<CreateTutorial />} />
 
@@ -219,6 +226,10 @@ function App() {
     <Route path="/marketplace" element={<Marketplace />} />
     <Route path="/publishers/:slug" element={<PublisherStorefront />} />
     <Route path="/publishers/:slug/:listingSlug" element={<ListingDetail />} />
+
+    {/* Video courses (Youth Tech Hub etc.) — public page, access checked server-side */}
+    <Route path="/courses" element={<CoursesHub />} />
+    <Route path="/courses/:slug" element={<CoursePage />} />
 
     <Route path="*" element={<NotFound />} />
 

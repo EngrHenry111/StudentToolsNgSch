@@ -64,6 +64,10 @@ const AdminNavbar = () => {
      Institutions
     </Link>
 
+    <Link to="/admin/courses" onClick={closeMenu}>
+     Video Courses
+    </Link>
+
     <Link to="/admin/messages" onClick={closeMenu}>
      Messages
     </Link>
