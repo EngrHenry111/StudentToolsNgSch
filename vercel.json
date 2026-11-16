@@ -23,6 +23,16 @@
       "permanent": true
     },
     {
+      "source": "/admission-prediction",
+      "destination": "/admission-predictor",
+      "permanent": true
+    },
+    {
+      "source": "/tutorials/:category(physics|mathematics|chemistry|biology|programming)/:slug",
+      "destination": "/tutorial/:slug",
+      "permanent": true
+    },
+    {
       "source": "/tutorials/physics",
       "destination": "/tutorials",
       "permanent": true
