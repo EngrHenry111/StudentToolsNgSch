@@ -1,0 +1,89 @@
+.prog-copy{
+  display:inline-flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:8px;
+  font-size:14px;
+}
+
+.prog-copy a{ word-break:break-all; }
+.prog-copy.compact{ font-size:12px; margin-top:4px; }
+.prog-copy.compact .course-btn{ padding:3px 8px; font-size:12px; }
+
+.prog-status-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:10px;
+  margin-top:10px;
+}
+
+.prog-status-opt{
+  text-align:left;
+  padding:12px;
+  border-radius:10px;
+  border:2px solid rgba(127,127,127,.25);
+  background:transparent;
+  color:var(--text);
+  cursor:pointer;
+  font:inherit;
+}
+
+.prog-status-opt strong{ display:block; margin-bottom:4px; }
+.prog-status-opt span{ font-size:13px; color:var(--muted); }
+.prog-status-opt.active{ border-color:var(--primary); background:rgba(37,99,235,.08); }
+.prog-status-opt:disabled{ cursor:default; }
+
+.prog-filters{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
+  margin-bottom:12px;
+}
+
+.prog-filters select{
+  padding:7px 9px;
+  border-radius:8px;
+  border:1px solid rgba(127,127,127,.35);
+  background:transparent;
+  color:var(--text);
+}
+
+.prog-filters select option{ color:#111; }
+
+.prog-app-detail td{
+  background:rgba(127,127,127,.06);
+  font-size:13px;
+  line-height:1.6;
+}
+
+.prog-app-detail dl{
+  display:grid;
+  grid-template-columns:max-content 1fr;
+  gap:2px 14px;
+  margin:0;
+}
+
+.prog-app-detail dt{ color:var(--muted); }
+.prog-app-detail dd{ margin:0; white-space:pre-wrap; }
+
+.prog-name-btn{
+  background:none;
+  border:0;
+  padding:0;
+  color:var(--primary);
+  font:inherit;
+  font-weight:600;
+  cursor:pointer;
+  text-align:left;
+}
+
+.prog-course-checks{
+  display:grid;
+  gap:6px;
+}
+
+/* Plain links were browser-default dark blue on the dark admin background. */
+.prog-admin a:not(.course-btn){
+  color:#00f5ff;
+}

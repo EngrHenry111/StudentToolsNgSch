@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import API from "../../services/api";
 import Logo from "../logo/Logo";
+import useActiveProgram from "../../hooks/useActiveProgram";
+import "../programBanner/programBanner.css";
 import "./navbar.css";
 
 // Grouped links, so the bar stays readable on laptop widths.
@@ -62,6 +64,7 @@ const NavGroup = ({ id, open, setOpen, onPick }) => {
 const Navbar = () => {
   
 
+ const program = useActiveProgram();
  const [menuOpen,setMenuOpen] = useState(false);
   const [openGroup,setOpenGroup] = useState(null);
   const navRef = useRef(null);
@@ -189,6 +192,19 @@ const handleChange = (e)=>{
 
         </form>
 
+        {program && (
+          <li>
+            <Link
+              to={`/programs/${program.slug}`}
+              onClick={closeMenu}
+              className={`nav-program ${program.status === "open" ? "" : "is-paused"}`}
+              title={[program.sponsorName, program.title].filter(Boolean).join(" ")}
+            >
+              <span className="nav-program-dot" aria-hidden="true" />
+              {program.status === "open" ? `Register: ${program.title}` : program.title}
+            </Link>
+          </li>
+        )}
         <li><Link to="/" onClick={closeMenu}>Home</Link></li>
         <NavGroup id="calculators" open={openGroup} setOpen={setOpenGroup} onPick={closeMenu} />
         <NavGroup id="practice" open={openGroup} setOpen={setOpenGroup} onPick={closeMenu} />

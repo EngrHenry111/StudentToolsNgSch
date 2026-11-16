@@ -68,6 +68,10 @@ const AdminNavbar = () => {
      Video Courses
     </Link>
 
+    <Link to="/admin/programs" onClick={closeMenu}>
+     Registration Forms
+    </Link>
+
     <Link to="/admin/messages" onClick={closeMenu}>
      Messages
     </Link>

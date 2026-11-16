@@ -1,0 +1,78 @@
+.program-banner{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:center;
+  gap:6px 14px;
+  max-width:900px;
+  margin:0 auto 22px;
+  padding:14px 18px;
+  border-radius:14px;
+  border:1px solid rgba(0,245,255,0.45);
+  background:linear-gradient(90deg,rgba(0,245,255,0.12),rgba(123,47,247,0.18));
+  color:#fff;
+  text-decoration:none;
+  text-align:center;
+  box-shadow:0 0 24px rgba(0,245,255,0.12);
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+
+.program-banner:hover{
+  transform:translateY(-1px);
+  box-shadow:0 0 30px rgba(0,245,255,0.25);
+}
+
+.program-banner strong{
+  font-size:1.05rem;
+}
+
+.program-banner-tag{
+  font-size:.75rem;
+  font-weight:700;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  padding:4px 10px;
+  border-radius:999px;
+  background:#00f5ff;
+  color:#0a0a0f;
+}
+
+.program-banner.is-paused{
+  border-color:rgba(250,204,21,0.45);
+  background:linear-gradient(90deg,rgba(250,204,21,0.10),rgba(123,47,247,0.14));
+}
+
+.program-banner.is-paused .program-banner-tag{
+  background:#facc15;
+}
+
+.program-banner-cta{
+  color:#00f5ff;
+  font-weight:600;
+}
+
+.program-banner.is-paused .program-banner-cta{
+  color:#facc15;
+}
+
+/* Menu link: first item, stands out from the rest. */
+.nav-menu a.nav-program{
+  color:#00f5ff;
+  font-weight:700;
+}
+
+.nav-menu a.nav-program .nav-program-dot{
+  display:inline-block;
+  width:8px;
+  height:8px;
+  margin-right:6px;
+  border-radius:50%;
+  background:#22c55e;
+  box-shadow:0 0 8px #22c55e;
+  vertical-align:middle;
+}
+
+.nav-menu a.nav-program.is-paused .nav-program-dot{
+  background:#facc15;
+  box-shadow:none;
+}

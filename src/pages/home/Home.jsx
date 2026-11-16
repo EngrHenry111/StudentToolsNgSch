@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import API from "../../services/api";
 import "./home.css";
+import ProgramBanner from "../../components/programBanner/ProgramBanner";
 
 const Home = () => {
 
@@ -126,6 +127,8 @@ StudentToolsNG - Free CGPA, WAEC & JAMB Calculators Nigeria
 </Helmet> {/* HERO SECTION */}
 
  <section className="hero">
+
+ <ProgramBanner />
 
  <h1>
  StudentToolsNG: Free Academic Tools for Nigerian Students

@@ -302,6 +302,34 @@ async function describe(pathname) {
     };
   }
 
+  // /programs/:slug — training registration page. Shared on WhatsApp and
+  // Facebook, whose link previews read this HTML (they don't run JS).
+  if (parts[0] === "programs" && parts.length === 2) {
+    const { status, data } = await apiGet(`/programs/${encodeURIComponent(parts[1])}`);
+    if (status === 404) return notFound(404);
+    if (status !== 200 || !data?.program) return UNAVAILABLE;
+
+    const p = data.program;
+    const heading = [p.sponsorName, p.title].filter(Boolean).join(" ");
+    const state = {
+      open: `Registration is open for ${p.batch}. Register free.`,
+      paused: p.pausedMessage || "Registration is closed for now and will reopen for the next batch.",
+      closed: "Registration has closed."
+    }[p.status] || "";
+    const details = String(p.details || "").split(/\n+/).map((s) => s.trim()).filter(Boolean);
+    const courses = Array.isArray(p.courses) ? p.courses : [];
+
+    return {
+      status: 200,
+      title: `${heading}: Registration | StudentToolsNG`,
+      description: `${p.tagline ? `${p.tagline}. ` : ""}${state}`.replace(/\.\./g, ".").slice(0, 160),
+      canonical: `${SITE}/programs/${p.slug}`,
+      ...(p.status === "closed" ? { robots: "noindex, follow" } : {}),
+      image: p.sponsorLogoUrl || undefined,
+      body: `<main>${p.sponsorName ? `<p><strong>${escapeHtml(p.sponsorName)}</strong></p>` : ""}<h1>${escapeHtml(heading)}</h1>${p.tagline ? `<p>${escapeHtml(p.tagline)}</p>` : ""}<p>${escapeHtml(state)}</p>${paragraphs(p.description)}${details.length ? `<ul>${details.map((d) => `<li>${escapeHtml(d)}</li>`).join("")}</ul>` : ""}${courses.length ? `<h2>Class videos for accepted students</h2><ul>${courses.map((c) => `<li>${link(`/courses/${c.slug}`, escapeHtml(c.title))}</li>`).join("")}</ul>` : ""}</main>`
+    };
+  }
+
   // /courses/:slug — course page with its lesson outline
   if (parts[0] === "courses" && parts.length === 2) {
     const { status, data } = await apiGet(`/courses/${encodeURIComponent(parts[1])}`);
