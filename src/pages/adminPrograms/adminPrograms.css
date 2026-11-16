@@ -83,6 +83,30 @@
   gap:6px;
 }
 
+.prog-lga-admin{
+  display:grid;
+  gap:10px;
+  padding:12px;
+  border:1px solid rgba(250,204,21,.4);
+  border-radius:10px;
+}
+
+.prog-lga-head{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  margin-bottom:8px;
+  font-size:13px;
+}
+
+.prog-lga-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(170px,1fr));
+  gap:6px 12px;
+}
+
 /* Plain links were browser-default dark blue on the dark admin background. */
 .prog-admin a:not(.course-btn){
   color:#00f5ff;

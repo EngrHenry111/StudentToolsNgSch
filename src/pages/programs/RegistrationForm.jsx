@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { lgaList, lgaPhrase } from "./lga";
+import { lgasOfState } from "./nigeriaLgas";
 
 const OPTIONS = {
   gender: ["Female", "Male"],
@@ -14,8 +16,11 @@ const OPTIONS = {
 const EMPTY = {
   fullName: "", email: "", phone: "", gender: "", ageRange: "", location: "",
   educationLevel: "", occupation: "", hasLaptop: "", experience: "", howHeard: "",
-  motivation: "", password: "", confirm: "", website: ""
+  motivation: "", password: "", confirm: "", website: "",
+  lgaOfOrigin: "", hometown: "", lgaDeclaration: false
 };
+
+const OTHER_LGA = "__other";
 
 const Select = ({ name, label, value, onChange, required }) => (
   <label className="prog-field">
@@ -29,17 +34,27 @@ const Select = ({ name, label, value, onChange, required }) => (
 
 // accountEmail: set when the visitor is logged in — the registration uses
 // that account, so no email/password fields. disabled: admin preview.
-export default function RegistrationForm({ accountEmail, onSubmit, loginHref, disabled = false }) {
+// program.eligibleLgas: when set, only indigenes of those Local Government
+// Areas can register (the server checks too).
+export default function RegistrationForm({ program, accountEmail, onSubmit, loginHref, disabled = false }) {
   const [f, setF] = useState(EMPTY);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(null);
-  const on = (e) => setF({ ...f, [e.target.name]: e.target.value });
+  const on = (e) => setF({ ...f, [e.target.name]: e.target.type === "checkbox" ? e.target.checked : e.target.value });
   const newAccount = !accountEmail;
+  // lgas: the ones the admin approved. choices: what the student picks from —
+  // every LGA in the state when we have its list, so choosing an unapproved
+  // one is refused right here (and again by the server).
+  const lgas = lgaList(program?.eligibleLgas);
+  const allowed = new Set(lgas.map((l) => l.toLowerCase()));
+  const choices = lgasOfState(program?.eligibleState) || lgas;
+  const notEligible = f.lgaOfOrigin === OTHER_LGA || (f.lgaOfOrigin !== "" && !allowed.has(f.lgaOfOrigin.toLowerCase()));
 
   const submit = async (e) => {
     e.preventDefault();
     if (disabled) return;
     setError(null);
+    if (notEligible) return;
     if (newAccount && f.password !== f.confirm) {
       setError({ message: "The two passwords don't match." });
       return;
@@ -58,6 +73,45 @@ export default function RegistrationForm({ accountEmail, onSubmit, loginHref, di
     <form className="prog-card prog-form" onSubmit={submit} noValidate={false}>
       <h2>Registration form</h2>
       <p className="prog-muted">Fields marked * are required. It takes about 2 minutes.</p>
+
+      {lgas.length > 0 && (
+        <fieldset className="prog-lga">
+          <legend>Eligibility</legend>
+          <p>This training is only for indigenes (citizens) of <strong>{lgaPhrase(program)}</strong>.</p>
+          <div className="prog-fields">
+            <label className="prog-field">
+              <span>Your Local Government Area of origin<em> *</em></span>
+              <select name="lgaOfOrigin" value={f.lgaOfOrigin} onChange={on} required>
+                <option value="">Choose…</option>
+                {choices.map((l) => <option key={l} value={l}>{l}</option>)}
+                <option value={OTHER_LGA}>
+                  {lgasOfState(program?.eligibleState) ? `I'm not from ${program.eligibleState} State` : "Another LGA"}
+                </option>
+              </select>
+            </label>
+            {!notEligible && (
+              <label className="prog-field">
+                <span>Ward / village / community<em> *</em></span>
+                <input name="hometown" value={f.hometown} onChange={on} required minLength={2} placeholder="e.g. Ikot Abia, Ward 3" />
+              </label>
+            )}
+          </div>
+          {notEligible ? (
+            <div className="prog-alert error" role="alert">
+              Registration denied: this training is only for indigenes of {lgaPhrase(program)}. You can still learn for free
+              with the tutorials and tools on StudentToolsNG below.
+            </div>
+          ) : (
+            <label className="prog-declare">
+              <input type="checkbox" name="lgaDeclaration" checked={f.lgaDeclaration} onChange={on} required />
+              <span>
+                I declare that I am an indigene of {f.lgaOfOrigin || "this"} Local Government Area and can show proof
+                (e.g. a certificate of origin) if asked.
+              </span>
+            </label>
+          )}
+        </fieldset>
+      )}
 
       <div className="prog-fields">
         <label className="prog-field wide">
@@ -128,7 +182,7 @@ export default function RegistrationForm({ accountEmail, onSubmit, loginHref, di
         </div>
       )}
 
-      <button className="prog-submit" disabled={busy || disabled}>
+      <button className="prog-submit" disabled={busy || disabled || notEligible}>
         {disabled ? "Preview: form is not live" : busy ? "Submitting…" : "Submit registration"}
       </button>
     </form>

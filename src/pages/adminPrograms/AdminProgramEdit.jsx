@@ -10,6 +10,8 @@ import {
 import { adminListCourses } from "../../apiCourses/adminCourseApi";
 import { StatusBadge, CopyLink } from "./programAdminUi";
 import ProgramView from "../programs/ProgramView";
+import { lgaList } from "../programs/lga";
+import { lgasOfState, statesWithLgas } from "../programs/nigeriaLgas";
 import { ProgramBody } from "../programs/ProgramPage";
 import "../courses/courses.css";
 import "../programs/programs.css";
@@ -67,8 +69,9 @@ function StatusPanel({ program, onChange }) {
 // ---------------------------------------------------------------- registrations
 const csvCell = (v) => `"${String(v ?? "").replace(/"/g, '""')}"`;
 const COLUMNS = [
-  ["fullName", "Name"], ["email", "Email"], ["phone", "Phone"], ["gender", "Gender"], ["ageRange", "Age"],
-  ["location", "Location"], ["educationLevel", "Education"], ["occupation", "Occupation"], ["hasLaptop", "Laptop"],
+  ["fullName", "Name"], ["email", "Email"], ["phone", "Phone"], ["lgaOfOrigin", "LGA of origin"],
+  ["hometown", "Ward / village"], ["gender", "Gender"], ["ageRange", "Age"],
+  ["location", "Lives in"], ["educationLevel", "Education"], ["occupation", "Occupation"], ["hasLaptop", "Laptop"],
   ["experience", "Experience"], ["howHeard", "Heard via"], ["motivation", "Why join"], ["batch", "Batch"],
   ["status", "Status"], ["createdAt", "Registered"]
 ];
@@ -109,7 +112,7 @@ function RegistrationsTab({ program }) {
       const r = await adminDecideApplications(program._id, ids, action, sendEmail);
       setNotice(
         action === "accept"
-          ? `${r.changed} accepted — they can watch the class videos now.${sendEmail ? ` ${r.emailed} email(s) sent.` : ""}`
+          ? `${r.changed} accepted — they can watch the class videos now.${r.emailing ? ` Sending ${r.emailing} welcome email(s).` : ""}`
           : `${r.changed} updated.`
       );
       load();
@@ -194,7 +197,7 @@ function RegistrationsTab({ program }) {
             <thead>
               <tr>
                 <th><input type="checkbox" aria-label="Select all" checked={allSelected} onChange={() => setSelected(allSelected ? new Set() : new Set(apps.map((a) => a._id)))} /></th>
-                <th>Name</th><th>Contact</th><th>Laptop</th><th>Registered</th><th>Status</th><th />
+                <th>Name</th><th>Contact</th><th>LGA / ward</th><th>Laptop</th><th>Registered</th><th>Status</th><th />
               </tr>
             </thead>
             <tbody>
@@ -231,6 +234,7 @@ function FragmentRow({ a, open, onOpen, checked, onCheck, onDecide, onResend, bu
           <div className="small">{a.email}</div>
           <div className="small">{a.phone}{wa && <> · <a href={wa} target="_blank" rel="noreferrer">WhatsApp</a></>}</div>
         </td>
+        <td className="small">{a.lgaOfOrigin || "—"}{a.hometown && <div className="course-muted">{a.hometown}</div>}</td>
         <td>{a.hasLaptop || "—"}</td>
         <td className="small">{new Date(a.createdAt).toLocaleDateString()}<div className="course-muted">{a.batch}</div></td>
         <td>{APP_BADGE[a.status]}</td>
@@ -245,7 +249,7 @@ function FragmentRow({ a, open, onOpen, checked, onCheck, onDecide, onResend, bu
       {open && (
         <tr className="prog-app-detail">
           <td />
-          <td colSpan={6}>
+          <td colSpan={7}>
             <dl>
               {COLUMNS.filter(([k]) => !["fullName", "email", "phone", "status", "createdAt"].includes(k)).map(([k, h]) => (
                 <FragmentDetail key={k} label={h} value={a[k]} />
@@ -267,7 +271,75 @@ const FragmentDetail = ({ label, value }) => (
 );
 
 // ---------------------------------------------------------------- settings
-const FIELDS = ["sponsorName", "title", "sponsorLogoUrl", "tagline", "description", "details", "batch", "pausedMessage", "slug"];
+const FIELDS = ["sponsorName", "title", "sponsorLogoUrl", "tagline", "description", "details", "eligibleLgas", "eligibleState", "batch", "pausedMessage", "slug"];
+
+// Who may register. Pick the state, then tick the approved LGAs; students
+// see every LGA of that state and anyone choosing an unticked one is denied.
+// "Anyone" leaves both empty. States without a built-in list: type them.
+const OTHER_STATE = "__other";
+
+function LgaPicker({ state, lgas, onChange }) {
+  const builtIn = lgasOfState(state);
+  const [mode, setMode] = useState(() => (!state && !lgas ? "" : builtIn ? state : OTHER_STATE));
+  const ticked = new Set(lgaList(lgas).map((l) => l.toLowerCase()));
+
+  const pickMode = (m) => {
+    setMode(m);
+    if (m === "") onChange("", "");
+    else if (m === OTHER_STATE) onChange(builtIn ? "" : state, builtIn ? "" : lgas);
+    else onChange(m, "");
+  };
+  const set = (list) => onChange(state, list.join(", "));
+  const toggle = (l) => set(builtIn.filter((x) => (x === l ? !ticked.has(x.toLowerCase()) : ticked.has(x.toLowerCase()))));
+
+  return (
+    <div className="prog-lga-admin">
+      <label>Who can register?
+        <select value={mode} onChange={(e) => pickMode(e.target.value)}>
+          <option value="">Anyone (no LGA restriction)</option>
+          {statesWithLgas.map((s) => <option key={s} value={s}>Indigenes of selected LGAs in {s} State</option>)}
+          <option value={OTHER_STATE}>Indigenes of LGAs in another state (type them)</option>
+        </select>
+      </label>
+
+      {builtIn && mode !== OTHER_STATE && mode !== "" && (
+        <div>
+          <div className="prog-lga-head">
+            <strong>Tick the approved LGAs ({ticked.size} of {builtIn.length})</strong>
+            <span className="adm-inline-actions">
+              <button type="button" className="course-btn secondary" onClick={() => set(builtIn)}>Tick all</button>
+              <button type="button" className="course-btn secondary" onClick={() => set([])}>Clear</button>
+            </span>
+          </div>
+          <div className="prog-lga-grid">
+            {builtIn.map((l) => (
+              <label key={l} className="adm-check">
+                <input type="checkbox" checked={ticked.has(l.toLowerCase())} onChange={() => toggle(l)} />
+                {l}
+              </label>
+            ))}
+          </div>
+          {ticked.size === 0 && (
+            <p className="course-notice error" style={{ margin: "8px 0 0" }}>
+              Tick at least one LGA, or choose "Anyone" above. With none ticked the form has no restriction.
+            </p>
+          )}
+        </div>
+      )}
+
+      {mode === OTHER_STATE && (
+        <div className="adm-row">
+          <label>State
+            <input value={state} onChange={(e) => onChange(e.target.value, lgas)} placeholder="e.g. Cross River" />
+          </label>
+          <label>Approved LGAs (comma-separated)
+            <input value={lgas} onChange={(e) => onChange(state, e.target.value)} placeholder="e.g. Calabar Municipal, Odukpani" />
+          </label>
+        </div>
+      )}
+    </div>
+  );
+}
 
 function SettingsTab({ program, courses, onSaved }) {
   const [f, setF] = useState(() => ({
@@ -318,6 +390,11 @@ function SettingsTab({ program, courses, onSaved }) {
       <label>Key details (one per line: dates, venue, requirements)
         <textarea value={f.details} onChange={on("details")} placeholder={"Starts: 6 January 2027\nVenue: Uyo, Akwa Ibom (and online)\nBring a laptop"} />
       </label>
+      <LgaPicker
+        state={f.eligibleState}
+        lgas={f.eligibleLgas}
+        onChange={(eligibleState, eligibleLgas) => setF({ ...f, eligibleState, eligibleLgas })}
+      />
       <div className="adm-row">
         <label>Current batch
           <input value={f.batch} onChange={on("batch")} placeholder="Batch 1" />

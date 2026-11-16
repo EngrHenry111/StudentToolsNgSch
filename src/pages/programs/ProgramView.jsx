@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { lgaPhrase } from "./lga";
 
 // The programme's public look — header with the sponsor's name, what the
 // training is, the linked courses and an introduction to StudentToolsNG.
@@ -41,6 +42,9 @@ export default function ProgramView({ program, children }) {
           {program.batch && <span className="prog-badge">{program.batch}</span>}
         </div>
         {program.tagline && <p className="prog-tagline">{program.tagline}</p>}
+        {lgaPhrase(program) && (
+          <p className="prog-eligible">For indigenes of {lgaPhrase(program)}</p>
+        )}
       </header>
 
       <div className="prog-grid">

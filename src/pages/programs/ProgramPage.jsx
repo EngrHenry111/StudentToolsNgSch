@@ -76,6 +76,7 @@ export function ProgramBody({ program, myApplication, accountEmail, onSubmit, pr
 
   return (
     <RegistrationForm
+      program={program}
       accountEmail={accountEmail}
       onSubmit={onSubmit}
       loginHref={`/login?next=${encodeURIComponent(path)}`}
