@@ -1,14 +1,9 @@
 import { Link } from "react-router-dom";
 import EngLayout, { FaqList } from "../engineering/EngLayout";
 import { ScaleConverter, CourseConverter } from "./ConverterTools";
+import { CGPA_SECTION as SECTION, CGPA_TOOLS as TOOLS } from "./cgpaTools";
 
 const PATH = "/cgpa-converter";
-const SECTION = { name: "CGPA Tools", path: "/cgpa-calculator" };
-const TOOLS = [
-  { path: "/cgpa-calculator", name: "CGPA Calculator", short: "CGPA Calculator" },
-  { path: PATH, name: "CGPA Converter", short: "CGPA Converter" },
-  { path: "/gpa-class-calculator", name: "Class of Degree", short: "Class of Degree" }
-];
 
 const faq = [
   {

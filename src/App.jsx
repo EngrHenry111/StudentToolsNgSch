@@ -52,6 +52,7 @@ const BatteryBackup = lazy(() => import("./pages/engineering/BatteryBackup"));
 const AggregateHub = lazy(() => import("./pages/aggregate/AggregateHub"));
 const UniversityAggregate = lazy(() => import("./pages/aggregate/UniversityAggregate"));
 const CgpaConverter = lazy(() => import("./pages/cgpaConverter/CgpaConverter"));
+const NounCgpa = lazy(() => import("./pages/nounCgpa/NounCgpa"));
 const CbtHub = lazy(() => import("./pages/cbt/CbtHub"));
 const CbtSubject = lazy(() => import("./pages/cbt/CbtSubject"));
 const ProjectTopicsHub = lazy(() => import("./pages/projectTopics/ProjectTopicsHub"));
@@ -183,6 +184,7 @@ function App() {
     <Route path="/aggregate-score-calculator" element={<AggregateHub />} />
     <Route path="/aggregate-score-calculator/:slug" element={<UniversityAggregate />} />
     <Route path="/cgpa-converter" element={<CgpaConverter />} />
+    <Route path="/noun-cgpa-calculator" element={<NounCgpa />} />
     <Route path="/jamb-cbt-practice" element={<CbtHub />} />
     <Route path="/jamb-cbt-practice/:subject" element={<CbtSubject />} />
     <Route path="/project-topics" element={<ProjectTopicsHub />} />

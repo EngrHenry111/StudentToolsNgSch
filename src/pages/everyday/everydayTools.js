@@ -18,6 +18,7 @@ export const CALCULATOR_GROUPS = [
     links: [
       ["/cgpa-calculator", "CGPA Calculator", "Work out your university CGPA from your grades and credit units."],
       ["/gpa-class-calculator", "GPA Class of Degree Calculator", "See whether your CGPA is First Class, Second Class Upper or Lower."],
+      ["/noun-cgpa-calculator", "NOUN CGPA Calculator", "Get your NOUN GPA and CGPA from TMA and exam scores."],
       ["/cgpa-converter", "CGPA Converter", "Convert a 5.0 CGPA to the 4.0 scale and to a percentage."],
       ["/jamb-score-calculator", "JAMB Score Calculator", "Add up your four UTME subject scores out of 400."],
       ["/aggregate-score-calculator", "Post-UTME Aggregate Calculator", "Combine UTME, post-UTME and O'level grades for your university."],

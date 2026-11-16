@@ -1,0 +1,38 @@
+/* Five columns of inputs have to fit a phone screen without sideways
+   scrolling (most visitors are on mobile). */
+.noun-table th,
+.noun-table td{
+  padding:6px 3px;
+}
+
+.noun-table input,
+.noun-table select{
+  min-width:0;
+  padding:7px 5px;
+  -moz-appearance:textfield;
+}
+
+.noun-table input::-webkit-outer-spin-button,
+.noun-table input::-webkit-inner-spin-button{
+  -webkit-appearance:none;
+  margin:0;
+}
+
+.noun-table .noun-code{ width:68px; }
+.noun-table .noun-num{ width:44px; }
+
+.noun-table input.is-bad{
+  border-color:#f87171;
+}
+
+.noun-grade b{
+  display:block;
+}
+
+.noun-grade small{
+  opacity:0.7;
+}
+
+.noun-table td .eng-btn-ghost{
+  padding:6px 8px;
+}

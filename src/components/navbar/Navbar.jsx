@@ -10,6 +10,7 @@ const GROUPS = {
     label: "Calculators",
     links: [
       ["/cgpa-calculator", "CGPA Calculator"],
+      ["/noun-cgpa-calculator", "NOUN CGPA Calculator"],
       ["/cgpa-converter", "CGPA Converter (5.0 to 4.0)"],
       ["/gpa-class-calculator", "GPA Class of Degree"],
       ["/waec-grade-calculator", "WAEC Grade Calculator"],

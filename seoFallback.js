@@ -89,6 +89,7 @@ const HOME_BODY = `<main>
 <li><a href="/bmi-calculator">BMI Calculator</a></li>
 <li><a href="/ovulation-calculator">Ovulation and Period Calculator</a></li>
 <li><a href="/pregnancy-due-date-calculator">Pregnancy Due Date Calculator</a></li>
+<li><a href="/noun-cgpa-calculator">NOUN CGPA Calculator</a></li>
 <li><a href="/cgpa-converter">CGPA Converter: 5.0 to 4.0 Scale and Percentage</a></li>
 <li><a href="/engineering-tools/solar-system-calculator">Solar, Inverter and Battery Calculator</a></li>
 <li><a href="/engineering-tools">Engineering Tools: Resistor Colour Code, Capacitor Code and Circuit Calculators</a></li>

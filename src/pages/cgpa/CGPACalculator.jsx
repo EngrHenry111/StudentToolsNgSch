@@ -84,6 +84,10 @@ const CGPACalculator = () => {
    a: "There's no single official cutoff, but as a general guide: 4.50–5.00 is First Class, 3.50–4.49 is Second Class Upper, and anything from 3.00 and above is usually considered a strong CGPA for job and postgraduate applications."
   },
   {
+   q: "How do I calculate my CGPA for 100 level?",
+   a: "Add the grade points (grade point × credit units) from both 100 level semesters, then divide by the total credit units of both semesters. Don't average the two semester GPAs, because semesters with more units count for more."
+  },
+  {
    q: "What's a common mistake when calculating CGPA by hand?",
    a: "The most common one is averaging the grade points directly instead of weighting them by credit unit — a 5-unit course and a 2-unit course don't count equally. This calculator applies the credit-unit weighting automatically so a manual slip doesn't throw off your result."
   },
@@ -271,9 +275,9 @@ const CGPACalculator = () => {
     more semesters — and more total credit units — are added to the average.
   </p>
 
-  <h2>How CGPA is calculated in Nigeria</h2>
+  <h2>How to calculate CGPA in university (step by step)</h2>
   <p>
-    Most Nigerian universities calculate CGPA using this formula:
+    Nigerian universities calculate CGPA with this formula:
   </p>
   <p>
     <strong>
@@ -281,16 +285,35 @@ const CGPACalculator = () => {
       all Credit Units)
     </strong>
   </p>
+  <ol>
+    <li>
+      Write down every course you have taken, with its credit units (for
+      example 2, 3 or 4 units) and the grade you got.
+    </li>
+    <li>
+      Change each grade to its grade point: A = 5, B = 4, C = 3, D = 2,
+      E = 1, F = 0.
+    </li>
+    <li>
+      Multiply each course's grade point by its credit units. The result is
+      the grade points (also called quality points) for that course.
+    </li>
+    <li>
+      Add up the grade points of all the courses, then add up all the credit
+      units.
+    </li>
+    <li>
+      Divide the total grade points by the total credit units. For one
+      semester the answer is your GPA. For all your semesters together it is
+      your CGPA.
+    </li>
+  </ol>
   <p>
-    In practice: for each course, multiply the credit unit (e.g. 2, 3, or 4
-    units) by the grade point earned (A=5, B=4, C=3, D=2, E=1, F=0). Add up
-    those totals for every course you've ever taken, then divide by the
-    total number of credit units. That single number is your CGPA. This
-    calculator performs that exact calculation for you — just enter each
-    course's unit and grade above.
+    The calculator above does these steps for you. Enter each course's unit
+    and grade, then press Calculate CGPA.
   </p>
 
-  <h2>Worked example</h2>
+  <h2>Worked example (one semester)</h2>
   <p>
     Say a student took four courses in a semester:
   </p>
@@ -305,6 +328,23 @@ const CGPACalculator = () => {
     10. GPA for that semester = 41 ÷ 10 = <strong>4.10</strong>. To get your
     CGPA, you carry this same running total (grade points and units) into
     the next semester instead of starting over.
+  </p>
+
+  <h2>Worked example: CGPA after two semesters (100 level)</h2>
+  <p>
+    Say the same student's second semester had 20 units and 66 grade points
+    (a GPA of 3.30). Do not average the two GPAs. Add the totals instead:
+  </p>
+  <ul>
+    <li>Total grade points = 41 (first semester) + 66 (second semester) = 107</li>
+    <li>Total units = 10 + 20 = 30</li>
+    <li>100 level CGPA = 107 ÷ 30 = <strong>3.57</strong></li>
+  </ul>
+  <p>
+    Averaging the two GPAs, (4.10 + 3.30) ÷ 2 = 3.70, gives the wrong answer
+    because the second semester had twice as many units. At 200 level and
+    beyond, keep adding each new semester's grade points and units to the
+    running totals.
   </p>
 
   <h2>The Nigerian university grading scale</h2>
@@ -353,7 +393,9 @@ const CGPACalculator = () => {
   You can also check our{" "}
   <Link to="/waec-grade-calculator">WAEC Calculator</Link>{" "}
   and{" "}
-  <Link to="/jamb-score-calculator">JAMB Calculator</Link>.
+  <Link to="/jamb-score-calculator">JAMB Calculator</Link>. NOUN student?
+  Use the <Link to="/noun-cgpa-calculator">NOUN CGPA Calculator</Link>,
+  which works from your TMA and exam scores.
 </p>
 
 <MarketplacePromo

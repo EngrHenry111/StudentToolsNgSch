@@ -57,6 +57,7 @@ const PAGES = {
   "/ovulation-calculator": "src/pages/everyday/OvulationCalculator.jsx",
   "/pregnancy-due-date-calculator": "src/pages/everyday/PregnancyCalculator.jsx",
   "/cgpa-converter": "src/pages/cgpaConverter/CgpaConverter.jsx",
+  "/noun-cgpa-calculator": "src/pages/nounCgpa/NounCgpa.jsx",
   "/jamb-cbt-practice": "src/pages/cbt/CbtHub.jsx",
   "/study-planner": "src/pages/studyPlanner/StudyPlanner.jsx",
   "/scholarships": "src/pages/scholarships/Scholarships.jsx",
