@@ -237,7 +237,16 @@ function FragmentRow({ a, open, onOpen, checked, onCheck, onDecide, onResend, bu
         <td className="small">{a.lgaOfOrigin || "—"}{a.hometown && <div className="course-muted">{a.hometown}</div>}</td>
         <td>{a.hasLaptop || "—"}</td>
         <td className="small">{new Date(a.createdAt).toLocaleDateString()}<div className="course-muted">{a.batch}</div></td>
-        <td>{APP_BADGE[a.status]}</td>
+        <td>
+          {APP_BADGE[a.status]}
+          {a.status === "accepted" && (
+            a.acceptedEmailAt
+              ? <div className="course-muted small">Email sent ✓</div>
+              : a.emailError
+                ? <div className="small" style={{ color: "#f87171" }} title={a.emailError}>Email failed</div>
+                : <div className="course-muted small">Email sending…</div>
+          )}
+        </td>
         <td>
           <div className="adm-inline-actions">
             {a.status !== "accepted" && <button className="course-btn" disabled={busy} onClick={() => onDecide("accept")}>Accept</button>}

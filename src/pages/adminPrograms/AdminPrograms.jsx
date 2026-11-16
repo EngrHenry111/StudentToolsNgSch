@@ -1,11 +1,62 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { adminListPrograms, adminCreateProgram } from "../../apiPrograms/adminProgramApi";
+import { adminListPrograms, adminCreateProgram, adminTestEmail } from "../../apiPrograms/adminProgramApi";
 import { StatusBadge, CopyLink } from "./programAdminUi";
 import "../courses/courses.css";
 import "./adminPrograms.css";
 
 const errMsg = (e) => e.response?.data?.message || e.message;
+
+// Sends a real email through the server's mail setup and shows exactly what
+// happened, so "students didn't get the email" can be fixed, not guessed.
+function EmailTest() {
+  const [to, setTo] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [r, setR] = useState(null);
+
+  const send = async (e) => {
+    e.preventDefault();
+    setBusy(true);
+    setR(null);
+    try {
+      setR(await adminTestEmail(to));
+    } catch (e2) {
+      setR({ ok: false, error: errMsg(e2) });
+    }
+    setBusy(false);
+  };
+
+  return (
+    <form className="adm-card adm-form" onSubmit={send}>
+      <strong>Check student emails</strong>
+      <span className="course-muted small">
+        Students get an email when you accept them. Send yourself a test to make sure it arrives (check Spam too).
+      </span>
+      <div className="adm-row" style={{ alignItems: "end" }}>
+        <label>Send a test email to
+          <input type="email" value={to} onChange={(e) => setTo(e.target.value)} placeholder="your email address" required />
+        </label>
+        <div><button className="course-btn" disabled={busy}>{busy ? "Sending… (up to 25s)" : "Send test email"}</button></div>
+      </div>
+      {r && (
+        <div className={`course-notice ${r.ok ? "success" : "error"}`}>
+          {r.ok ? "Sent. If it isn't in your inbox or Spam within a few minutes, see the note below." : <>Failed: {r.error}</>}
+          {r.provider && (
+            <div className="small" style={{ marginTop: 6 }}>
+              Mail service: <strong>{r.provider === "resend" ? "Resend" : "Gmail"}</strong> · from: {r.from}
+              {r.provider === "gmail" && !r.configured && " · EMAIL_USER / EMAIL_PASS are not set on the server"}
+            </div>
+          )}
+          {!r.ok && r.provider === "gmail" && (
+            <div className="small" style={{ marginTop: 6 }}>
+              Render's servers usually can't send through Gmail. Switch to Resend: add RESEND_API_KEY and EMAIL_FROM in Render.
+            </div>
+          )}
+        </div>
+      )}
+    </form>
+  );
+}
 
 const AdminPrograms = () => {
   const navigate = useNavigate();
@@ -57,6 +108,8 @@ const AdminPrograms = () => {
         </p>
         <div><button className="course-btn" disabled={creating}>{creating ? "Creating…" : "Create form"}</button></div>
       </form>
+
+      <EmailTest />
 
       {!list && !error && <p className="course-muted">Loading…</p>}
 
