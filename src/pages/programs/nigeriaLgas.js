@@ -17,3 +17,11 @@ export const lgasOfState = (state) => {
   const key = statesWithLgas.find((s) => s.toLowerCase() === String(state || "").trim().toLowerCase());
   return key ? STATE_LGAS[key] : null;
 };
+
+// All 36 states + FCT, for "State of origin" when the form has no LGA rule.
+export const NIGERIA_STATES = [
+  "Abia", "Adamawa", "Akwa Ibom", "Anambra", "Bauchi", "Bayelsa", "Benue", "Borno", "Cross River",
+  "Delta", "Ebonyi", "Edo", "Ekiti", "Enugu", "FCT (Abuja)", "Gombe", "Imo", "Jigawa", "Kaduna", "Kano",
+  "Katsina", "Kebbi", "Kogi", "Kwara", "Lagos", "Nasarawa", "Niger", "Ogun", "Ondo", "Osun", "Oyo",
+  "Plateau", "Rivers", "Sokoto", "Taraba", "Yobe", "Zamfara"
+];

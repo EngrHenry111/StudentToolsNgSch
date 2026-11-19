@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { lgaList, lgaPhrase } from "./lga";
-import { lgasOfState } from "./nigeriaLgas";
+import { lgasOfState, NIGERIA_STATES } from "./nigeriaLgas";
 
 const OPTIONS = {
   gender: ["Female", "Male"],
@@ -17,7 +17,7 @@ const EMPTY = {
   fullName: "", email: "", phone: "", gender: "", ageRange: "", location: "",
   educationLevel: "", occupation: "", hasLaptop: "", experience: "", howHeard: "",
   motivation: "", password: "", confirm: "", website: "",
-  lgaOfOrigin: "", hometown: "", lgaDeclaration: false
+  stateOfOrigin: "", lgaOfOrigin: "", hometown: "", lgaDeclaration: false
 };
 
 const OTHER_LGA = "__other";
@@ -48,7 +48,12 @@ export default function RegistrationForm({ program, accountEmail, onSubmit, logi
   const lgas = lgaList(program?.eligibleLgas);
   const allowed = new Set(lgas.map((l) => l.toLowerCase()));
   const choices = lgasOfState(program?.eligibleState) || lgas;
-  const notEligible = f.lgaOfOrigin === OTHER_LGA || (f.lgaOfOrigin !== "" && !allowed.has(f.lgaOfOrigin.toLowerCase()));
+  const notEligible = lgas.length > 0 &&
+    (f.lgaOfOrigin === OTHER_LGA || (f.lgaOfOrigin !== "" && !allowed.has(f.lgaOfOrigin.toLowerCase())));
+  // No LGA rule: still ask where they're from, so the admin can decide.
+  const originLgas = lgasOfState(f.stateOfOrigin);
+  // Changing state clears the LGA picked for the old one.
+  const onState = (e) => setF({ ...f, stateOfOrigin: e.target.value, lgaOfOrigin: "" });
 
   const submit = async (e) => {
     e.preventDefault();
@@ -110,6 +115,37 @@ export default function RegistrationForm({ program, accountEmail, onSubmit, logi
               </span>
             </label>
           )}
+        </fieldset>
+      )}
+
+      {lgas.length === 0 && (
+        <fieldset className="prog-lga">
+          <legend>Where are you from?</legend>
+          <div className="prog-fields">
+            <label className="prog-field">
+              <span>State of origin<em> *</em></span>
+              <select name="stateOfOrigin" value={f.stateOfOrigin} onChange={onState} required>
+                <option value="">Choose…</option>
+                {NIGERIA_STATES.map((s) => <option key={s} value={s}>{s}</option>)}
+              </select>
+            </label>
+            <label className="prog-field">
+              <span>Local Government Area of origin<em> *</em></span>
+              {originLgas ? (
+                <select name="lgaOfOrigin" value={f.lgaOfOrigin} onChange={on} required>
+                  <option value="">Choose…</option>
+                  {originLgas.map((l) => <option key={l} value={l}>{l}</option>)}
+                </select>
+              ) : (
+                <input name="lgaOfOrigin" value={f.lgaOfOrigin} onChange={on} required minLength={2}
+                  disabled={!f.stateOfOrigin} placeholder={f.stateOfOrigin ? "Type your LGA" : "Choose your state first"} />
+              )}
+            </label>
+            <label className="prog-field wide">
+              <span>Ward / village / community<em> *</em></span>
+              <input name="hometown" value={f.hometown} onChange={on} required minLength={2} placeholder="e.g. Ikot Abia, Ward 3" />
+            </label>
+          </div>
         </fieldset>
       )}
 

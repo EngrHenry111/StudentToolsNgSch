@@ -5,7 +5,8 @@ import {
   adminUpdateProgram,
   adminListApplications,
   adminDecideApplications,
-  adminResendAccepted
+  adminResendAccepted,
+  adminUploadLogo
 } from "../../apiPrograms/adminProgramApi";
 import { adminListCourses } from "../../apiCourses/adminCourseApi";
 import { StatusBadge, CopyLink } from "./programAdminUi";
@@ -69,7 +70,7 @@ function StatusPanel({ program, onChange }) {
 // ---------------------------------------------------------------- registrations
 const csvCell = (v) => `"${String(v ?? "").replace(/"/g, '""')}"`;
 const COLUMNS = [
-  ["fullName", "Name"], ["email", "Email"], ["phone", "Phone"], ["lgaOfOrigin", "LGA of origin"],
+  ["fullName", "Name"], ["email", "Email"], ["phone", "Phone"], ["stateOfOrigin", "State of origin"], ["lgaOfOrigin", "LGA of origin"],
   ["hometown", "Ward / village"], ["gender", "Gender"], ["ageRange", "Age"],
   ["location", "Lives in"], ["educationLevel", "Education"], ["occupation", "Occupation"], ["hasLaptop", "Laptop"],
   ["experience", "Experience"], ["howHeard", "Heard via"], ["motivation", "Why join"], ["batch", "Batch"],
@@ -92,6 +93,7 @@ function RegistrationsTab({ program }) {
   const [open, setOpen] = useState(null);
   const [busy, setBusy] = useState(false);
   const [sendEmail, setSendEmail] = useState(true);
+  const [lga, setLga] = useState("all");
 
   const load = useCallback(() => {
     adminListApplications(program._id, { status, batch })
@@ -101,7 +103,20 @@ function RegistrationsTab({ program }) {
 
   useEffect(() => { load(); }, [load]);
 
-  const apps = useMemo(() => data?.applications || [], [data]);
+  const allApps = useMemo(() => data?.applications || [], [data]);
+  // LGAs present in this list, with counts, for the "Filter by LGA" menu.
+  const lgaCounts = useMemo(() => {
+    const m = new Map();
+    for (const a of allApps) {
+      const k = a.lgaOfOrigin || "";
+      m.set(k, (m.get(k) || 0) + 1);
+    }
+    return [...m.entries()].sort((x, y) => (x[0] || "~").localeCompare(y[0] || "~"));
+  }, [allApps]);
+  const apps = useMemo(
+    () => (lga === "all" ? allApps : allApps.filter((a) => (a.lgaOfOrigin || "") === lga)),
+    [allApps, lga]
+  );
 
   const decide = async (ids, action) => {
     if (!ids.length) return;
@@ -138,7 +153,7 @@ function RegistrationsTab({ program }) {
     const blob = new Blob(["﻿", rows.join("\n")], { type: "text/csv;charset=utf-8" });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
-    link.download = `${program.slug}-${batch}-${status}.csv`.replace(/\s+/g, "-");
+    link.download = `${program.slug}-${batch}-${status}${lga !== "all" ? `-${lga || "no-lga"}` : ""}.csv`.replace(/\s+/g, "-");
     link.click();
     URL.revokeObjectURL(link.href);
   };
@@ -170,6 +185,11 @@ function RegistrationsTab({ program }) {
         <select value={batch} onChange={(e) => setBatch(e.target.value)} aria-label="Batch">
           {(data?.batches || [program.batch]).map((b) => <option key={b} value={b}>{b}</option>)}
           <option value="all">All batches</option>
+        </select>
+        <select value={lga} onChange={(e) => { setLga(e.target.value); setSelected(new Set()); }} aria-label="Filter by LGA">
+          <option value="all">All LGAs ({allApps.length})</option>
+          {lgaCounts.map(([l, n]) => <option key={l || "none"} value={l}>{l || "No LGA given"} ({n})</option>)}
+          {lga !== "all" && !lgaCounts.some(([l]) => l === lga) && <option value={lga}>{lga || "No LGA given"} (0)</option>}
         </select>
         <label className="adm-check" style={{ fontSize: 13 }}>
           <input type="checkbox" checked={sendEmail} onChange={(e) => setSendEmail(e.target.checked)} />
@@ -234,7 +254,7 @@ function FragmentRow({ a, open, onOpen, checked, onCheck, onDecide, onResend, bu
           <div className="small">{a.email}</div>
           <div className="small">{a.phone}{wa && <> · <a href={wa} target="_blank" rel="noreferrer">WhatsApp</a></>}</div>
         </td>
-        <td className="small">{a.lgaOfOrigin || "—"}{a.hometown && <div className="course-muted">{a.hometown}</div>}</td>
+        <td className="small">{a.lgaOfOrigin || "—"}{a.stateOfOrigin && <span className="course-muted">, {a.stateOfOrigin}</span>}{a.hometown && <div className="course-muted">{a.hometown}</div>}</td>
         <td>{a.hasLaptop || "—"}</td>
         <td className="small">{new Date(a.createdAt).toLocaleDateString()}<div className="course-muted">{a.batch}</div></td>
         <td>
@@ -350,6 +370,45 @@ function LgaPicker({ state, lgas, onChange }) {
   );
 }
 
+// Sponsor logo: upload an image (goes to Cloudinary) or paste a link.
+function LogoField({ value, onChange }) {
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState(null);
+  const pick = async (e) => {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+    if (!file.type.startsWith("image/")) return setErr("Choose an image file (PNG, JPG, WebP, GIF or SVG).");
+    if (file.size > 3 * 1024 * 1024) return setErr("Logo is too big. Use an image under 3 MB.");
+    setErr(null);
+    setBusy(true);
+    try {
+      onChange((await adminUploadLogo(file)).url);
+    } catch (e2) {
+      setErr(errMsg(e2));
+    }
+    setBusy(false);
+  };
+  return (
+    <div className="prog-logo-field">
+      <span>Sponsor logo (optional)</span>
+      <div className="prog-logo-row">
+        {value && <img src={value} alt="Sponsor logo preview" className="prog-logo-preview" />}
+        <label className="course-btn secondary prog-logo-upload">
+          {busy ? "Uploading…" : value ? "Change image" : "Upload image"}
+          <input type="file" accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml" onChange={pick} disabled={busy} hidden />
+        </label>
+        {value && !busy && (
+          <button type="button" className="course-btn secondary" onClick={() => onChange("")}>Remove</button>
+        )}
+      </div>
+      <input value={value} onChange={(e) => onChange(e.target.value)} placeholder="…or paste a link: https://…/logo.png" />
+      {err && <div className="course-notice error">{err}</div>}
+      {value && !busy && <p className="course-muted small">Click "Save changes" below to keep this logo.</p>}
+    </div>
+  );
+}
+
 function SettingsTab({ program, courses, onSaved }) {
   const [f, setF] = useState(() => ({
     ...Object.fromEntries(FIELDS.map((k) => [k, program[k] || ""])),
@@ -387,9 +446,7 @@ function SettingsTab({ program, courses, onSaved }) {
           <input value={f.title} onChange={on("title")} required />
         </label>
       </div>
-      <label>Sponsor logo URL (optional)
-        <input value={f.sponsorLogoUrl} onChange={on("sponsorLogoUrl")} placeholder="https://…/logo.png" />
-      </label>
+      <LogoField value={f.sponsorLogoUrl} onChange={(url) => setF({ ...f, sponsorLogoUrl: url })} />
       <label>One-line tagline
         <input value={f.tagline} onChange={on("tagline")} placeholder="Free fullstack web development training for young people" />
       </label>

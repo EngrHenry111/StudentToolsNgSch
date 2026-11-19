@@ -111,3 +111,9 @@
 .prog-admin a:not(.course-btn){
   color:#00f5ff;
 }
+
+/* Sponsor logo: upload or paste link */
+.prog-logo-field{display:flex;flex-direction:column;gap:8px}
+.prog-logo-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.prog-logo-preview{width:64px;height:64px;object-fit:contain;border-radius:10px;background:#fff;padding:4px;border:1px solid rgba(148,163,184,.35)}
+.prog-logo-upload{cursor:pointer}

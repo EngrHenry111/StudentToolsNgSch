@@ -14,3 +14,9 @@ export const adminDecideApplications = (id, ids, action, sendEmail = true) =>
 export const adminTestEmail = (to) => d(API.post("/programs/admin/email-test", { to }));
 export const adminResendAccepted = (id, appId) =>
   d(API.post(`/programs/admin/${id}/applications/${appId}/resend`));
+// Sponsor logo image → { url } (Cloudinary). Saved with the settings form.
+export const adminUploadLogo = (file) => {
+  const fd = new FormData();
+  fd.append("logo", file);
+  return d(API.post("/programs/admin/logo", fd));
+};
