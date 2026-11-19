@@ -48,6 +48,21 @@
       "permanent": true
     },
     {
+      "source": "/tutorials/jamb%20tutorials",
+      "destination": "/tutorials",
+      "permanent": true
+    },
+    {
+      "source": "/tutorials/programming%20tutorials",
+      "destination": "/tutorials",
+      "permanent": true
+    },
+    {
+      "source": "/tutorials/cgpa%20calculation",
+      "destination": "/cgpa-calculator",
+      "permanent": true
+    },
+    {
       "source": "/tutorials/waec%20tutorials",
       "destination": "/tutorials",
       "permanent": true
