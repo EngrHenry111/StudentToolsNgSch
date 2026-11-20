@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { lgaList, lgaPhrase } from "./lga";
 import { lgasOfState, NIGERIA_STATES } from "./nigeriaLgas";
+import { naira } from "./money";
 
 const OPTIONS = {
   gender: ["Female", "Male"],
@@ -78,6 +79,12 @@ export default function RegistrationForm({ program, accountEmail, onSubmit, logi
     <form className="prog-card prog-form" onSubmit={submit} noValidate={false}>
       <h2>Registration form</h2>
       <p className="prog-muted">Fields marked * are required. It takes about 2 minutes.</p>
+      {program?.fee > 0 && (
+        <div className="prog-alert" role="note">
+          Training fee: <strong>{naira(program.fee)}</strong>. You pay only <strong>after</strong> you're accepted, on this
+          page. Registering is free.
+        </div>
+      )}
 
       {lgas.length > 0 && (
         <fieldset className="prog-lga">

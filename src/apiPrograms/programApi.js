@@ -9,3 +9,6 @@ export const getActiveProgram = () => apiRequest("/programs/active", { auth: fal
 export const getProgram = (slug) => apiRequest(`/programs/${enc(slug)}`);
 export const applyToProgram = (slug, body) =>
   apiRequest(`/programs/${enc(slug)}/apply`, { method: "POST", body });
+// Accepted student on a paid form: start the Paystack checkout.
+export const payProgramFee = (slug) =>
+  apiRequest(`/programs/${enc(slug)}/pay`, { method: "POST" });

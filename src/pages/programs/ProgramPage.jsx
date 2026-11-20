@@ -2,7 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../contextQuiz/AuthContext";
-import { getProgram, applyToProgram } from "../../apiPrograms/programApi";
+import { getProgram, applyToProgram, payProgramFee } from "../../apiPrograms/programApi";
+import { naira } from "./money";
 import ProgramView from "./ProgramView";
 import RegistrationForm from "./RegistrationForm";
 import "./programs.css";
@@ -10,17 +11,62 @@ import "./programs.css";
 const SITE = "https://studenttoolsng.com";
 const heading = (p) => [p.sponsorName, p.title].filter(Boolean).join(" ");
 
+// Accepted on a paid form: pay the fee here, then the videos open.
+function PayCard({ program, myApplication }) {
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState(null);
+  const returned = typeof window !== "undefined" && new URLSearchParams(window.location.search).has("paid");
+  const pay = async () => {
+    setBusy(true);
+    setError(null);
+    try {
+      const { authorization_url } = await payProgramFee(program.slug);
+      window.location.href = authorization_url;
+    } catch (e) {
+      setError(e.message || "Couldn't start the payment. Please try again.");
+      setBusy(false);
+    }
+  };
+  return (
+    <div className="prog-card prog-state is-ok">
+      <h2>You've been accepted 🎉</h2>
+      <p>
+        Your registration for {myApplication.batch} has been accepted. To start, pay the training fee of{" "}
+        <strong>{naira(myApplication.fee)}</strong>. Your class videos open automatically as soon as the payment goes through.
+      </p>
+      {returned && (
+        <div className="prog-alert" role="status">
+          We haven't received confirmation of your payment yet. If you've paid, wait a minute and{" "}
+          <a href={`/programs/${program.slug}`}>refresh this page</a>. If not, tap the button below.
+        </div>
+      )}
+      {error && <div className="prog-alert error" role="alert">{error}</div>}
+      <button type="button" className="prog-submit" onClick={pay} disabled={busy}>
+        {busy ? "Opening payment…" : `Pay ${naira(myApplication.fee)} now`}
+      </button>
+      <p className="prog-muted">Secure payment by Paystack: card, bank transfer or USSD.</p>
+    </div>
+  );
+}
+
 // What sits where the form goes, for every state the page can be in.
 export function ProgramBody({ program, myApplication, accountEmail, onSubmit, preview = false }) {
   const path = `/programs/${program.slug}`;
   const sameBatch = myApplication && myApplication.batch === program.batch;
   const firstCourse = program.courses?.[0];
 
+  if (myApplication?.status === "accepted" && myApplication.awaitingPayment) {
+    return <PayCard program={program} myApplication={myApplication} />;
+  }
+
   if (myApplication?.status === "accepted") {
     return (
       <div className="prog-card prog-state is-ok">
         <h2>You're in 🎉</h2>
-        <p>Your registration for {myApplication.batch} has been accepted. Your class videos are ready.</p>
+        <p>
+          Your registration for {myApplication.batch} has been accepted
+          {myApplication.paid ? " and your payment is confirmed" : ""}. Your class videos are ready.
+        </p>
         {firstCourse
           ? <Link className="prog-submit" to={`/courses/${firstCourse.slug}`}>Start watching</Link>
           : <Link className="prog-submit" to="/courses">Go to courses</Link>}
@@ -33,8 +79,10 @@ export function ProgramBody({ program, myApplication, accountEmail, onSubmit, pr
       <div className="prog-card prog-state is-ok">
         <h2>Registration received ✅</h2>
         <p>
-          Thank you. Your registration for {myApplication.batch} is being reviewed. When you're accepted,
-          we'll email you and your class videos will unlock on this same account. Nothing else to do.
+          Thank you. Your registration for {myApplication.batch} is being reviewed.{" "}
+          {program.fee > 0
+            ? <>When you're accepted, we'll email you and you can pay the training fee of <strong>{naira(program.fee)}</strong> on this page. Your class videos unlock right after.</>
+            : <>When you're accepted, we'll email you and your class videos will unlock on this same account. Nothing else to do.</>}
         </p>
         <p className="prog-muted">While you wait, explore the free tutorials and tools below.</p>
       </div>

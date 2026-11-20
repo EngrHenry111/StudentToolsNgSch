@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import API from "../../services/api";
 import Logo from "../logo/Logo";
-import useActiveProgram from "../../hooks/useActiveProgram";
+import useActivePrograms, { programHeading, programMenuLabel } from "../../hooks/useActiveProgram";
 import "../programBanner/programBanner.css";
 import "./navbar.css";
 
@@ -38,11 +38,12 @@ const GROUPS = {
 };
 
 // A dropdown: hover or click on desktop, tap to expand inside the mobile menu.
-const NavGroup = ({ id, open, setOpen, onPick }) => {
-  const g = GROUPS[id];
+// `group` overrides GROUPS[id] (used for the training-registration links).
+const NavGroup = ({ id, open, setOpen, onPick, group, className = "" }) => {
+  const g = group || GROUPS[id];
   const isOpen = open === id;
   return (
-    <li className={`nav-group ${isOpen ? "open" : ""}`}>
+    <li className={`nav-group ${className} ${isOpen ? "open" : ""}`}>
       <button
         type="button"
         className="nav-group-btn"
@@ -64,7 +65,7 @@ const NavGroup = ({ id, open, setOpen, onPick }) => {
 const Navbar = () => {
   
 
- const program = useActiveProgram();
+ const programs = useActivePrograms();
  const [menuOpen,setMenuOpen] = useState(false);
   const [openGroup,setOpenGroup] = useState(null);
   const navRef = useRef(null);
@@ -192,19 +193,35 @@ const handleChange = (e)=>{
 
         </form>
 
-        {program && (
-          <li>
+        {programs.length > 1 && (
+          <NavGroup
+            id="register"
+            className="nav-program-group"
+            open={openGroup}
+            setOpen={setOpenGroup}
+            onPick={closeMenu}
+            group={{
+              label: <><span className="nav-program-dot" aria-hidden="true" />Register</>,
+              links: programs.map((p) => [
+                `/programs/${p.slug}`,
+                `${programMenuLabel(p, programs)}${p.status === "open" ? "" : " (paused)"}`
+              ])
+            }}
+          />
+        )}
+        {programs.length === 1 && programs.map((program) => (
+          <li key={program.slug}>
             <Link
               to={`/programs/${program.slug}`}
               onClick={closeMenu}
               className={`nav-program ${program.status === "open" ? "" : "is-paused"}`}
-              title={[program.sponsorName, program.title].filter(Boolean).join(" ")}
+              title={programHeading(program)}
             >
               <span className="nav-program-dot" aria-hidden="true" />
-              {program.status === "open" ? `Register: ${program.title}` : program.title}
+              {program.status === "open" ? `Register: ${programMenuLabel(program, programs)}` : programMenuLabel(program, programs)}
             </Link>
           </li>
-        )}
+        ))}
         <li><Link to="/" onClick={closeMenu}>Home</Link></li>
         <NavGroup id="calculators" open={openGroup} setOpen={setOpenGroup} onPick={closeMenu} />
         <NavGroup id="practice" open={openGroup} setOpen={setOpenGroup} onPick={closeMenu} />

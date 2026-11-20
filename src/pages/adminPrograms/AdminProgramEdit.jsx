@@ -12,6 +12,7 @@ import { adminListCourses } from "../../apiCourses/adminCourseApi";
 import { StatusBadge, CopyLink } from "./programAdminUi";
 import ProgramView from "../programs/ProgramView";
 import { lgaList } from "../programs/lga";
+import { naira } from "../programs/money";
 import { lgasOfState, statesWithLgas } from "../programs/nigeriaLgas";
 import { ProgramBody } from "../programs/ProgramPage";
 import "../courses/courses.css";
@@ -74,8 +75,12 @@ const COLUMNS = [
   ["hometown", "Ward / village"], ["gender", "Gender"], ["ageRange", "Age"],
   ["location", "Lives in"], ["educationLevel", "Education"], ["occupation", "Occupation"], ["hasLaptop", "Laptop"],
   ["experience", "Experience"], ["howHeard", "Heard via"], ["motivation", "Why join"], ["batch", "Batch"],
-  ["status", "Status"], ["createdAt", "Registered"]
+  ["status", "Status"], ["payment", "Payment"], ["createdAt", "Registered"]
 ];
+
+// "Paid ₦15,000" / "Awaiting ₦15,000" / "" (free form).
+const paymentText = (a) =>
+  a.paidAt ? `Paid ${naira(a.amountPaid || a.feeKobo)}` : a.status === "accepted" && a.feeKobo > 0 ? `Awaiting ${naira(a.feeKobo)}` : "";
 
 const waLink = (phone) => {
   let d = String(phone || "").replace(/\D/g, "");
@@ -120,14 +125,20 @@ function RegistrationsTab({ program }) {
 
   const decide = async (ids, action) => {
     if (!ids.length) return;
-    if (action === "reject" && !window.confirm(`Reject ${ids.length} registration(s)? Anyone already accepted loses access.`)) return;
+    const paidCount = apps.filter((a) => ids.includes(a._id) && a.paidAt).length;
+    if (action === "reject" && !window.confirm(
+      `Reject ${ids.length} registration(s)? Anyone already accepted loses access.` +
+      (paidCount ? `\n\n${paidCount} of them already paid: refund them yourself from Paystack if needed.` : "")
+    )) return;
     setBusy(true);
     setError(null);
     try {
       const r = await adminDecideApplications(program._id, ids, action, sendEmail);
       setNotice(
         action === "accept"
-          ? `${r.changed} accepted — they can watch the class videos now.${r.emailing ? ` Sending ${r.emailing} welcome email(s).` : ""}`
+          ? program.fee > 0
+            ? `${r.changed} accepted. They'll see "Pay ${naira(program.fee)}" on the form page; videos open once they pay.${r.emailing ? ` Sending ${r.emailing} email(s) with the payment link.` : ""}`
+            : `${r.changed} accepted — they can watch the class videos now.${r.emailing ? ` Sending ${r.emailing} welcome email(s).` : ""}`
           : `${r.changed} updated.`
       );
       load();
@@ -148,7 +159,11 @@ function RegistrationsTab({ program }) {
 
   const exportCsv = () => {
     const rows = [COLUMNS.map(([, h]) => h).map(csvCell).join(",")];
-    for (const a of apps) rows.push(COLUMNS.map(([k]) => csvCell(k === "createdAt" ? new Date(a[k]).toLocaleString() : a[k])).join(","));
+    for (const a of apps) {
+      rows.push(COLUMNS.map(([k]) => csvCell(
+        k === "createdAt" ? new Date(a[k]).toLocaleString() : k === "payment" ? paymentText(a) : a[k]
+      )).join(","));
+    }
     // Leading BOM so Excel opens the CSV as UTF-8 (names with accents etc.).
     const blob = new Blob(["﻿", rows.join("\n")], { type: "text/csv;charset=utf-8" });
     const link = document.createElement("a");
@@ -259,6 +274,11 @@ function FragmentRow({ a, open, onOpen, checked, onCheck, onDecide, onResend, bu
         <td className="small">{new Date(a.createdAt).toLocaleDateString()}<div className="course-muted">{a.batch}</div></td>
         <td>
           {APP_BADGE[a.status]}
+          {paymentText(a) && (
+            <div className="small" style={{ color: a.paidAt ? "#22c55e" : "#f59e0b" }}>
+              {a.paidAt ? "✓ " : "⏳ "}{paymentText(a)}
+            </div>
+          )}
           {a.status === "accepted" && (
             a.acceptedEmailAt
               ? <div className="course-muted small">Email sent ✓</div>
@@ -280,7 +300,7 @@ function FragmentRow({ a, open, onOpen, checked, onCheck, onDecide, onResend, bu
           <td />
           <td colSpan={7}>
             <dl>
-              {COLUMNS.filter(([k]) => !["fullName", "email", "phone", "status", "createdAt"].includes(k)).map(([k, h]) => (
+              {COLUMNS.filter(([k]) => !["fullName", "email", "phone", "status", "payment", "createdAt"].includes(k)).map(([k, h]) => (
                 <FragmentDetail key={k} label={h} value={a[k]} />
               ))}
               {a.status === "accepted" && a.decidedAt && <FragmentDetail label="Accepted" value={new Date(a.decidedAt).toLocaleString()} />}
@@ -412,6 +432,7 @@ function LogoField({ value, onChange }) {
 function SettingsTab({ program, courses, onSaved }) {
   const [f, setF] = useState(() => ({
     ...Object.fromEntries(FIELDS.map((k) => [k, program[k] || ""])),
+    feeNaira: program.fee ? String(program.fee / 100) : "0",
     courses: program.courses.map(String)
   }));
   const [busy, setBusy] = useState(false);
@@ -455,6 +476,14 @@ function SettingsTab({ program, courses, onSaved }) {
       </label>
       <label>Key details (one per line: dates, venue, requirements)
         <textarea value={f.details} onChange={on("details")} placeholder={"Starts: 6 January 2027\nVenue: Uyo, Akwa Ibom (and online)\nBring a laptop"} />
+      </label>
+      <label>Training fee (₦) — 0 = free
+        <input type="number" min="0" step="100" inputMode="numeric" value={f.feeNaira} onChange={on("feeNaira")} placeholder="0" />
+        <span className="course-muted small">
+          {Number(f.feeNaira) > 0
+            ? `Accepted students pay ${naira(Number(f.feeNaira) * 100)} by Paystack on the form page; their videos open after payment.`
+            : "Free: accepted students get the videos straight away."}
+        </span>
       </label>
       <LgaPicker
         state={f.eligibleState}

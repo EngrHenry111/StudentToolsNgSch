@@ -1,3 +1,23 @@
+.program-banners{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  max-width:900px;
+  margin:0 auto 22px;
+}
+
+.program-banners .program-banner{
+  margin:0;
+  width:100%;
+  box-sizing:border-box;
+}
+
+.program-banner-audience{
+  flex-basis:100%;
+  font-size:.85rem;
+  opacity:.85;
+}
+
 .program-banner{
   display:flex;
   flex-wrap:wrap;
@@ -61,7 +81,8 @@
   font-weight:700;
 }
 
-.nav-menu a.nav-program .nav-program-dot{
+.nav-menu a.nav-program .nav-program-dot,
+.nav-program-group > .nav-group-btn .nav-program-dot{
   display:inline-block;
   width:8px;
   height:8px;
@@ -75,4 +96,15 @@
 .nav-menu a.nav-program.is-paused .nav-program-dot{
   background:#facc15;
   box-shadow:none;
+}
+
+/* Two or more open forms: one "Register" dropdown in the menu. */
+.nav-program-group > .nav-group-btn{
+  color:#00f5ff;
+  font-weight:700;
+}
+.nav-program-group > .nav-group-btn .nav-program-dot{
+  display:inline-block;
+  margin-right:6px;
+  vertical-align:middle;
 }
