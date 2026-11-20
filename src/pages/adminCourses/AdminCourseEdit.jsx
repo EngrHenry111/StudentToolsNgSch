@@ -14,7 +14,8 @@ import {
   adminAddApprovals,
   adminResendApproval,
   adminRemoveApproval,
-  adminListOrders
+  adminListOrders,
+  adminSetLiveClass
 } from "../../apiCourses/adminCourseApi";
 import { formatDuration } from "../courses/courseFormat";
 import "../courses/courses.css";
@@ -477,8 +478,72 @@ const PaymentsTab = ({ course }) => {
 
 // ---------------------------------------------------------------- Page
 
+// ---------------------------------------------------------------- Live class
+
+const fmtTime = (d) => (d ? new Date(d).toLocaleString(undefined, { weekday: "short", hour: "numeric", minute: "2-digit", day: "numeric", month: "short" }) : "");
+
+const LiveTab = ({ course, onSaved }) => {
+  const live = course.live || {};
+  const [url, setUrl] = useState(live.url || "");
+  const [note, setNote] = useState(live.note || "");
+  const [busy, setBusy] = useState(false);
+  const [msg, setMsg] = useState(null);
+
+  const send = async (body, ok) => {
+    setBusy(true);
+    setMsg(null);
+    try {
+      const c = await adminSetLiveClass(course._id, body);
+      onSaved(c);
+      setMsg({ type: "success", text: ok });
+    } catch (e) {
+      setMsg({ type: "error", text: errMsg(e) });
+    }
+    setBusy(false);
+  };
+
+  const start = () => send({ url, note, active: true }, "Live class started. Students with access now see a Join button on the course page.");
+  const end = () => {
+    if (!window.confirm("End the live class? The Join button disappears for everyone.")) return;
+    send({ active: false }, "Live class ended. The link is hidden again.");
+  };
+  const save = () => send({ url, note }, "Saved.");
+
+  return (
+    <div className="adm-card adm-form">
+      <div className={`adm-live-status ${live.active ? "on" : ""}`}>
+        {live.active
+          ? <><span className="course-live-dot" aria-hidden="true" /> <strong>LIVE NOW</strong> · started {fmtTime(live.startedAt)}</>
+          : <>Not live{live.endedAt ? ` · last class ended ${fmtTime(live.endedAt)}` : ""}</>}
+      </div>
+      <label>Meeting link (Google Meet, Zoom…)
+        <input value={url} onChange={(e) => setUrl(e.target.value)} placeholder="https://meet.google.com/abc-defg-hij" />
+      </label>
+      <label>Class title (optional, shown to students)
+        <input value={note} onChange={(e) => setNote(e.target.value)} maxLength={200} placeholder="Week 3: React hooks" />
+      </label>
+      <div className="adm-inline-actions">
+        {live.active ? (
+          <>
+            <button type="button" className="course-btn danger" disabled={busy} onClick={end}>End live class</button>
+            <button type="button" className="course-btn secondary" disabled={busy} onClick={save}>Update link / title</button>
+          </>
+        ) : (
+          <button type="button" className="course-btn" disabled={busy || !url.trim()} onClick={start}>Start live class</button>
+        )}
+      </div>
+      {msg && <div className={`course-notice ${msg.type}`}>{msg.text}</div>}
+      <div className="course-muted small">
+        <p><strong>Who can join:</strong> only logged-in students who have access to this course (approved emails, accepted and paid registrations, and buyers). Everyone else never sees the link.</p>
+        <p><strong>Keep it safe:</strong> use a <strong>new meeting link for each class</strong>, and turn on the waiting room (Zoom) or keep "ask to join" on (Google Meet) so you admit people yourself. End the live class here when you finish.</p>
+      </div>
+    </div>
+  );
+};
+
 const TABS = [
   ["lessons", "Lessons"],
+  ["live", "Live class"],
   ["students", "Approved students"],
   ["payments", "Payments"],
   ["details", "Course details"]
@@ -504,6 +569,7 @@ const AdminCourseEdit = () => {
       <div className="adm-inline-actions">
         {course.isPublished ? <span className="adm-badge ok">Published</span> : <span className="adm-badge">Draft — not visible to students</span>}
         <span className="adm-badge">{course.price > 0 ? `₦${course.price.toLocaleString()}` : "Not for sale"}</span>
+        {course.live?.active && <span className="adm-badge bad">● Live now</span>}
       </div>
       {!course.bunnyConfigured && (
         <div className="course-notice error">Bunny Stream isn't connected on the server yet, so uploads are disabled.</div>
@@ -519,6 +585,7 @@ const AdminCourseEdit = () => {
       {tab === "lessons" && <LessonsTab course={course} />}
       {tab === "students" && <StudentsTab course={course} />}
       {tab === "payments" && <PaymentsTab course={course} />}
+      {tab === "live" && <LiveTab course={course} onSaved={(c) => setCourse({ ...c, bunnyConfigured: course.bunnyConfigured })} />}
     </div>
   );
 };

@@ -72,3 +72,6 @@ export const setLessonComplete = (slug, lessonId, completed) =>
   apiRequest(`/courses/${slug}/lessons/${lessonId}/complete`, { method: "POST", body: { completed }, auth: true });
 
 export const getMyCourses = () => apiRequest("/courses/me/enrolled", { auth: true });
+
+// Live class link: only answers for students with access, only while live.
+export const getLiveClass = (slug) => apiRequest(`/courses/${slug}/live`, { auth: true });

@@ -14,6 +14,7 @@ import {
 import { AuthContext } from "../../contextQuiz/AuthContext";
 import NotFound from "../notFound/NotFound";
 import { formatDuration } from "./courseFormat";
+import LiveClassPanel from "./LiveClassPanel";
 import { courseDescription, courseJsonLd } from "../../utils/courseSeo";
 import "./courses.css";
 
@@ -296,6 +297,8 @@ const CoursePage = () => {
           Confirming your payment with Paystack… <button className="link-btn" onClick={() => setReloadKey((k) => k + 1)}>Refresh</button>
         </div>
       )}
+
+      <LiveClassPanel course={course} hasAccess={hasAccess} isAuthenticated={isAuthenticated} here={here} />
 
       <div className="course-layout">
         <section className="course-player-col">

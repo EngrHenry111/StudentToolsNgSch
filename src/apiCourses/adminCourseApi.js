@@ -24,3 +24,6 @@ export const adminRemoveApproval = (id, approvalId) =>
   d(API.delete(`/courses/admin/${id}/approvals/${approvalId}`));
 
 export const adminListOrders = (id) => d(API.get(`/courses/admin/${id}/orders`));
+
+// Live class: { active?, url?, note? }
+export const adminSetLiveClass = (id, body) => d(API.put(`/courses/admin/${id}/live`, body));
